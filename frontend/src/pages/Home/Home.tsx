@@ -12,7 +12,6 @@ import FavoriteAlbums from '../../components/Home/FavoriteAlbums/FavoriteAlbums'
 import OutstandingArtist from '../../components/Home/OutstandingArtist/OutstandingArtist';
 import CustomerReview from '../../components/Home/CustomerReview/CustomerReview';
 import OurBlogs from '../../components/Home/OurBlogs/OurBlogs';
-import ForSwipe from '../../components/forSwipe/forSwipe';
 
 function Home() {
 
