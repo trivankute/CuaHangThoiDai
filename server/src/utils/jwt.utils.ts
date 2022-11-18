@@ -15,7 +15,7 @@ export const signJwt = (payload: Object, options?: jwt.SignOptions | undefined):
 export const verifyJwt = (token: string) => {
     const publicKey = process.env.PUBLIC_KEY as string
     try {
-        const decoded = jwt.verify(token, publicKey);
+        const decoded = jwt.verify(token, publicKey) as Object;
         return {
             decoded,
             expired: false,
