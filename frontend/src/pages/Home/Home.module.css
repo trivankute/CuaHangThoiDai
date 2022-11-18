@@ -1,0 +1,39 @@
+.container {
+    margin:0;
+    padding:0;
+    min-height:500px;
+    width:100%;
+    background-color:violet;
+}
+
+.carousel {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+.heading{
+    text-align: center;
+    padding:20px 0;
+    padding-bottom: 30px;
+    font-size: 35px;
+    font-weight:500;
+    color:var(--black);
+}
+
+.heading span{
+    background: var(--orange);
+    color:#fff;
+    display: inline-block;
+    padding:5px 30px;
+    clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
+}
+
+.section {
+    padding-top: var(--header-height);
+}
+
+@media (max-width:450px){
+    .section{
+        padding-top:var(--header-height-400);
+    }
+}

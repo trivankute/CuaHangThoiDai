@@ -1,0 +1,156 @@
+.footer{
+    background: var(--footer-backgroundColor);
+    width:100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap:15px;
+    padding:50px;
+}
+
+.footer .box h3{
+    font-size: 25px;
+    color:var(--black);
+    padding:10px 0;
+}
+
+.box > h3{
+    display:flex;
+}
+
+.box > h3 > .icon {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding-top:5px;
+}
+
+.icon{
+    color:var(--orange);
+    padding-left:10px;
+}
+
+.brand_icon {
+    padding:0;
+}
+
+.share {
+    display:flex;
+}
+
+
+.footer .box .links{
+    display: block;
+    font-size: 15px;
+    color:var(--light-color);
+    padding:10px 0;
+}
+
+.footer .box .links .icon{
+    color:var(--orange);
+    padding-right: 5px;
+}
+
+.footer .box .links:hover .icon{
+    padding-right: 20px;
+}
+
+
+.footer .box p{
+    line-height: 1.8;
+    font-size: 15px;
+    color:var(--light-color);
+    padding:10px 0;
+}
+
+.footer .box .share a{
+    height:40px;
+    width:40px;
+    line-height:40px;
+    border-radius: 5px;
+    font-size: 20px;
+    color:var(--black);
+    margin-right: 2px;
+    background: #eee;
+    text-align: center;
+}
+
+.footer .box .share a:hover{
+    background: var(--orange);
+    color: #fff;
+}
+
+
+
+.footer .box .email{
+    width: 100%;
+    margin:7px 0;
+    padding:10px;
+    border-radius: 5px;
+    background: #eee;
+    font-size: 16px;
+    color:var(--black);
+    text-transform: none;
+}
+
+.footer .box .payment-img{
+    margin-top: 20px;
+    height: 30px;
+    display: block;
+}
+
+.footer .credit{
+    text-align: center;
+    margin-top: 20px;
+    padding:10px;
+    padding-top: 25px;
+    font-size: 20px;
+    color:var(--black);
+    border-top: var(--border);
+}
+
+.footer .credit span{
+    color:var(--orange);
+}
+
+
+.share_a {
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    background: #eee;
+    color:var(--black);
+    font-size: 25px;
+    margin-right: 5px;
+    cursor: pointer;
+    text-align: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.share_a:hover {
+    background-color:var(--orange);
+    color:white;
+}
+
+.box {
+    display:flex;
+    flex-direction: column;
+    min-height:200px;
+}
+
+.box > input[type="submit"] {
+    width:100px;
+    margin:10px 0 ;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:var(--outline-hover);
+}
+.box > input[type="email"] {
+    background-color:#eee;
+    border-radius:0.5rem;
+    padding:10px;
+}
+

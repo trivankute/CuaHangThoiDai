@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sofia&display=swap');
+:root{
+    --orange:#ff7800;
+    --black:#130f40;
+    --light-color:#666;
+    --box-shadow:0 5px 15px rgba(0,0,0,.1);
+    --border:2px solid rgba(0,0,0,.1);
+    --outline:1px solid rgba(0,0,0,.1);
+    --outline-hover:2px solid var(--black);
+    /* header */
+    --header-height:112.5px;
+    --header-height-400:97.5px;
+    --header-padding:25px 30px;
+    --header-padding-400:25px 10px;
+    --header-navbar_brand_size: 35px;
+    --header-navbar_brand_size-400: 25px;
+    /* footer */
+    --footer-backgroundColor: white;
+}
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin:0; padding:0;
+    box-sizing: border-box;
+    outline: none; border:none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all 0.2s linear;
+}
+body{
+    background:#eee;
+}
+
+a{
+    text-decoration:none;
+}
+
+.btn_custom{
+    margin-top: 10px;
+    display: inline-block;
+    padding:8px 30px;
+    font-size: 17px;
+    border-radius: 5px;
+    border:2px solid var(--black);
+    color:var(--black);
+    cursor: pointer;
+    background: none;
+}
+
+.btn_custom:hover{
+    background: var(--orange);
+    color:#fff;
+}
