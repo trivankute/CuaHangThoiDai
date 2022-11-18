@@ -3,7 +3,7 @@ class config_default {
     private $key = 'trivandeptrai';
     private $accessTokenTtl = 60; // seconds
     private $refreshTokenTtl = 120; // seconds
-    private $cookiePath = "/Learning/project/api";
+    private $cookiePath = "/";
     private $domain = "localhost";
 
     public function getKey() {
@@ -14,7 +14,17 @@ class config_default {
         return $this->accessTokenTtl;
     }
 
-    public function 
+    public function getRefreshTokenTtl() {
+        return $this->refreshTokenTtl;
+    }
+
+    public function getCookiePath() {
+        return $this->cookiePath;
+    }
+
+    public function getDomain() {
+        return $this->domain;
+    }
 }
 
 ?>

@@ -2,18 +2,29 @@
         use Firebase\JWT\JWT;
         use Firebase\JWT\Key;
     class User {
-        public $userId;
-        public $username;
-        public $password;
-        public $conn;
+        private $userId;
+        private $email;
+        private $username;
+        private $password;
+        private $role;
+        private $conn;
 
         public function __construct($conn = null)
         {
             $this->conn = $conn;
         }
-        public function create_user()
+
+        public function setInformation($email, $username, $password, $role)
         {
-            $query = "INSERT INTO user (username, password) VALUES (:username, :password)"; 
+            $this->email = $email;
+            $this->username = $username;
+            $this->password = $password;
+            $this->role = $role;
+        }
+
+        public function register()
+        {
+            $query = "INSERT INTO user (email, username, password) VALUES (:username, :password)"; 
             $stmt = $this->conn->prepare($query);
             $stmt->bindParam(":username", $this->username);
             $options = [
