@@ -13,20 +13,16 @@
 }
 
 .logo {
-    color: #ffccaa;
     margin-right:20px;
 }
 
 .navbar_brand{
-    font-size: var(--header-navbar_brand_size);
-    color:var(--black);
-    font-family: 'Sofia', cursive;
 }
 
 .navbar_item{
-    font-size: 20px;
+    font-size: 18px;
     color:var(--black);
-    font-family: 'Sofia', cursive;
+    font-family: var(--navbar-logo-content-font-family);
     text-shadow: 2px 2px 4px #989898;
 }
 
@@ -38,9 +34,15 @@
     display:flex;
 }
 
-.service_icons div{
+.search{
+    width:100%;
+    display:flex;
+    padding-top:var(--navbar-search-padding-top);
+}
+
+.icon_box{
     height: 50px;
-    width: 50px;
+    width: 50px!important;
     line-height: 50px;
     border-radius: 5px;
     background: #eee;
@@ -50,7 +52,7 @@
     cursor: pointer;
     text-align: center;
 }
-.service_icons div:hover{
+.icon_box:hover{
     background: var(--orange);
     color:#fff;
 }
