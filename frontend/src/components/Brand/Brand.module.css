@@ -1,0 +1,16 @@
+.logo {
+    color: var(--navbar-logo-color);
+    margin-right:20px;
+}
+.brand{
+    font-size: var(--header-navbar_brand_size);
+    color:var(--black);
+    font-family: var(--navbar-logo-content-font-family);
+    display:flex;
+    align-items:center;
+}
+.logo_content{
+    color:var(--black);
+    font-family: var(--navbar-logo-content-font-family);
+    margin-bottom:0;
+}
