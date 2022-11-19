@@ -9,14 +9,30 @@
     --outline:1px solid rgba(0,0,0,.1);
     --outline-hover:2px solid var(--black);
     /* header */
-    --header-height:112.5px;
-    --header-height-400:97.5px;
-    --header-padding:25px 30px;
-    --header-padding-400:25px 10px;
+    --header-height:169px;
+    --header-height-400:95px;
+    --header-height-990:100.78px;
+    --header-padding:25px 30px 25px 30px;
+    --header-padding-400:25px 10px 25px 10px;
     --header-navbar_brand_size: 35px;
     --header-navbar_brand_size-400: 25px;
+    --navbar-logo-color:#ffccaa;
+    --navbar-logo-content-font-family:'Sofia', cursive;
+    --navbar-search-padding-top:38px;
     /* footer */
     --footer-backgroundColor: white;
+    --footer-height: 413px;
+    --footer-height-1090: 693px;
+    --footer-height-800: 656px;
+    --footer-height-610: 1151px;
+
+    /* page not found and maintenance */
+    --pageNotFound-MainteNance-padding-top: 50px;
+    --pageNotFound-MainteNance-padding-top-400: 20px;
+    --pageNotFound-MainteNance-font-size: 40px;
+    --pageNotFound-MainteNance-font-size-400: 30px;
+    --pageNotFound-MainteNance-logo-width-height: 100px;
+    --pageNotFound-MainteNance-logo-width-height-400: 50px;
 }
 
 *{
@@ -26,7 +42,7 @@
     outline: none; border:none;
     text-decoration: none;
     text-transform: capitalize;
-    transition: all 0.2s linear;
+    transition: all 0.05s linear;
 }
 body{
     background:#eee;
