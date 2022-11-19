@@ -7,6 +7,12 @@
 .box_container:first-child{
     margin-bottom: 20px;
 }
+
+.swiper{
+    overflow:hidden;
+    width:80%;
+}
+
 .box{
     background: #fff;
     border-radius: 5px;
@@ -15,7 +21,6 @@
     outline-offset: -10px;
     outline: var(--outline);
     box-shadow: var(--box-shadow);
-    transition: .2s linear;
 }
 .box:hover{
     outline-offset: 0px;

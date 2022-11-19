@@ -7,20 +7,25 @@ import image1 from "./cd.png"
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
+import "swiper/css/pagination";
+import { Pagination } from "swiper";
+import clsx from "clsx"
 
 function FavoriteAlbums() {
     return (
         <>
             <Swiper
-                spaceBetween={20}
-                slidesPerView={4}
-                style={{padding: "20px 9%"}}
+                slidesPerView={1}
+                spaceBetween={30}
                 pagination={{
-                  dynamicBullets: true,
+                clickable: true,
                 }}
+                modules={[Pagination]}
+                className={clsx("mySwiper", styles.swiper)}
+                style={{padding:"20px 9%"}}
             >
                 <div className={styles.box_container}>
-                <SwiperSlide>
+                <SwiperSlide style={{}}>
                     <div className={styles.box}>
                         <img src={image1} alt=""></img>
                         <h3 >1989</h3>
