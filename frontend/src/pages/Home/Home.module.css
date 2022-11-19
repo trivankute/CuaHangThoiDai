@@ -13,8 +13,7 @@
 }
 .heading{
     text-align: center;
-    padding:20px 0;
-    padding-bottom: 30px;
+    padding-top:20px;
     font-size: 35px;
     font-weight:500;
     color:var(--black);
@@ -28,8 +27,21 @@
     clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
 }
 
-.section {
+.heading_box{
+}
+
+.section:first-child {
     padding-top: var(--header-height);
+}
+
+.section {
+    padding-top: 150px;
+}
+
+@media (max-width:990px){
+    .section{
+        padding-top:var(--header-height-990);
+    }
 }
 
 @media (max-width:450px){

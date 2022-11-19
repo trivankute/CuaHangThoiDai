@@ -18,6 +18,8 @@ import Footer from "./components/Footer/Footer"
 
 // for pages
 import Home from './pages/Home/Home'
+import PageNotFound from './pages/PageNotFound/PageNotFound'
+import Maintenance from './pages/Maintenance/Maintenance'
 function App() {
   const dispatch = useDispatch();
   return (
@@ -25,6 +27,9 @@ function App() {
       <Flash></Flash>
       <Header></Header>
       <Home/>
+      {/* <PageNotFound></PageNotFound> */}
+      
+       {/* <Maintenance></Maintenance> */}
       <Footer></Footer>
 
       {/* <Routes> */}

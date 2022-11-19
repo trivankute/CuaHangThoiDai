@@ -12,6 +12,9 @@ import FavoriteAlbums from '../../components/Home/FavoriteAlbums/FavoriteAlbums'
 import OutstandingArtist from '../../components/Home/OutstandingArtist/OutstandingArtist';
 import CustomerReview from '../../components/Home/CustomerReview/CustomerReview';
 import OurBlogs from '../../components/Home/OurBlogs/OurBlogs';
+import More from '../../components/More/More';
+
+import clsx from "clsx"
 
 function Home() {
 
@@ -53,10 +56,11 @@ function Home() {
       </section>
 
       <section id="service" className={styles.section}>
-      <h1 className={styles.heading}>
-        Our <span>Service</span>
-      </h1>
-      <ServiceCards/>
+        <h1 className={styles.heading}>
+          Our <span>Service</span>
+        </h1>
+        <ServiceCards/> 
+        <More/>
       </section>
 
       <section id="products" className={styles.section}>
@@ -64,6 +68,7 @@ function Home() {
         Favorite <span>Album</span>
       </h1>
       <FavoriteAlbums/>
+        <More/>
       </section>
 
       <section id="categories" className={styles.section}>
@@ -71,6 +76,7 @@ function Home() {
         Outstanding <span>Artist</span>
       </h1>
       <OutstandingArtist/>
+        <More/>
       </section>
 
       <section id="review" className={styles.section}>
@@ -78,13 +84,15 @@ function Home() {
         Customer's <span>Review</span>
       </h1>
       <CustomerReview/>
+        <More/>
       </section>
 
-      <section id="blogs" className={styles.section}>
+      <section id="blogs" className={clsx(styles.section, "pb-3")}>
       <h1 className={styles.heading}>
         Our <span>Blogs</span>
       </h1>
       <OurBlogs/>
+        <More/>
       </section>
     </Container>
     </div>
