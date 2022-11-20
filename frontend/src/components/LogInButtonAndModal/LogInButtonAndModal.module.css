@@ -1,0 +1,17 @@
+.title{
+    font-size: 25px;
+    text-transform: uppercase;
+    color: var(--black);
+}
+
+
+.link_note{
+    font-size: 14px;
+    padding:5px 0;
+    color:var(--light-color);
+}
+
+.link{
+    color:var(--orange);
+    text-decoration: underline;
+}

@@ -15,6 +15,8 @@ import Flash from "./components/Flash/Flash"
 import Layout from "./components/Layout/Layout"
 import Header from "./components/Header/Header"
 import Footer from "./components/Footer/Footer"
+import ChatAppHome from './components/ChatAppHome/ChatAppHome'
+
 
 // for pages
 import Home from './pages/Home/Home'
@@ -30,6 +32,7 @@ function App() {
       {/* <PageNotFound></PageNotFound> */}
       
        {/* <Maintenance></Maintenance> */}
+      <ChatAppHome/>
       <Footer></Footer>
 
       {/* <Routes> */}

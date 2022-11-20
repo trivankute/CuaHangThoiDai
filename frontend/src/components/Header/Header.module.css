@@ -16,8 +16,6 @@
     margin-right:20px;
 }
 
-.navbar_brand{
-}
 
 .navbar_item{
     font-size: 18px;
@@ -49,12 +47,84 @@
     color:var(--black);
     font-size: 25px;
     margin-right: 5px;
-    cursor: pointer;
     text-align: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 .icon_box:hover{
     background: var(--orange);
     color:#fff;
+}
+
+.search_box {
+    margin-top:var(--navbar-search-padding-top);
+    cursor:pointer;
+}
+
+.login_box {
+    border-radius:25px;
+    position:relative;
+    margin-left:auto;
+}
+
+.login_box h3 {
+    margin-top:8px;
+    
+}
+
+.login_box_hover{
+    display:none;
+}
+
+.login_box_hover::before{
+    content:"";
+    position:absolute;
+    height:5px;
+    top:-20px;
+    right:10px;
+    border-top:10px solid transparent;
+    border-bottom:10px solid white;
+    border-left:14px solid transparent;
+    border-right:14px solid transparent;
+}
+
+.login_box:hover .login_box_hover{
+    position:absolute;
+    top:calc(100% + 15px);
+    right:0;
+    width:200px;
+    background-color:white;
+    border-radius:5px;
+    box-shadow: var(--box-shadow);
+    padding:10px;
+    z-index:2;
+    color:var(--black);
+    font-size:15px;
+    display:flex;
+    justify-content:space-around;
+}
+
+.login_box_hover_link{
+    cursor:pointer;
+    text-shadow: var(--box-shadow);
+    color: var(--black);
+}
+
+.login_box_hover_link:hover{
+    color:var(--orange);
+}
+
+.loggedIn{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+@media (max-width:990px){
+    .navbar{
+        padding:var(--header-padding-990);
+    }
 }
 
 @media (max-width:450px){
@@ -65,3 +135,4 @@
         font-size: var(--header-navbar_brand_size-400);
     }
 }
+

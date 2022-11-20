@@ -27,25 +27,30 @@
     clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
 }
 
-.heading_box{
-}
-
 .section:first-child {
     padding-top: var(--header-height);
 }
 
 .section {
-    padding-top: 150px;
+    padding-top: 140px;
 }
 
 @media (max-width:990px){
+    .section:first-child{
+        padding-top:var(--header-height-990);
+    }
     .section{
         padding-top:var(--header-height-990);
+
     }
 }
 
 @media (max-width:450px){
+    .section:first-child{
+        padding-top:var(--header-height-400);
+    }
     .section{
         padding-top:var(--header-height-400);
+
     }
 }

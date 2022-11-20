@@ -9,11 +9,12 @@
     --outline:1px solid rgba(0,0,0,.1);
     --outline-hover:2px solid var(--black);
     /* header */
-    --header-height:169px;
+    --header-height:144px;
     --header-height-400:95px;
-    --header-height-990:100.78px;
-    --header-padding:25px 30px 25px 30px;
+    --header-height-990:95px;
+    --header-padding:0px 30px 25px 30px;
     --header-padding-400:25px 10px 25px 10px;
+    --header-padding-990:25px 10px 25px 10px;
     --header-navbar_brand_size: 35px;
     --header-navbar_brand_size-400: 25px;
     --navbar-logo-color:#ffccaa;
@@ -33,6 +34,27 @@
     --pageNotFound-MainteNance-font-size-400: 30px;
     --pageNotFound-MainteNance-logo-width-height: 100px;
     --pageNotFound-MainteNance-logo-width-height-400: 50px;
+
+    /* chat app home */
+    --title-chatAppHome-font-size: 18px;
+    --title-chatAppHome-font-size-990: 16px;
+    --title-chatAppHome-font-size-400: 14px;
+    --title-chatAppHome-width-size: 76px;
+    --title-chatAppHome-width-size-990: 64px;
+    --title-chatAppHome-width-size-400: 52px;
+    --title-chatAppHome-height-size: 24px;
+    --title-chatAppHome-height-size-400: 20px;
+    --title-chatAppHome-height-size-990: 16px;
+    --chatAppHome_right: 80px;
+    --chatAppHome_right-990: 60px;
+    --chatAppHome_right-400: 40px;
+
+    --chatAppHome_open_width:400px;
+    --chatAppHome_open_width-990:350px;
+    --chatAppHome_open_width-400:80%;
+    --chatAppHome_open_right:80px;
+    --chatAppHome_open_right-990:60px;
+    --chatAppHome_open_right-400:20px;
 }
 
 *{
