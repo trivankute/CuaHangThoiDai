@@ -22,13 +22,13 @@ function RegisterButtonAndModal({ linkStyle, showRegister, handleShowRegister, h
                 <Modal.Body >
 
                 <Form.Label>Email:</Form.Label>
-                    <Form.Control type="email" placeholder="your email" className={clsx(styles.box, "mb-3")} />
+                    <Form.Control type="email" placeholder="Your email" className={clsx(styles.box, "mb-3")} />
                 <Form.Label>Username:</Form.Label>
-                    <Form.Control type="text" placeholder="your username" className={clsx(styles.box, "mb-3")} />
+                    <Form.Control type="text" placeholder="Your username" className={clsx(styles.box, "mb-3")} />
                 <Form.Label>Password:</Form.Label>
-                    <Form.Control type="password" placeholder="your password" className={clsx(styles.box, "mb-3")} />
+                    <Form.Control type="password" placeholder="Your password" className={clsx(styles.box, "mb-3")} />
                 <Form.Label>Confirm password:</Form.Label>
-                    <Form.Control type="password" placeholder="your confirm password" className={clsx(styles.box, "mb-3")} />
+                    <Form.Control type="password" placeholder="Your confirm password" className={clsx(styles.box, "mb-3")} />
                     <Form.Label className={styles.link_note}>Have an account? <a
                     onClick={()=>{handleCloseRegister(); handleShowLogin();}}
                     className={styles.link} href="#">Log In</a></Form.Label>

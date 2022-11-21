@@ -1,4 +1,6 @@
-
+.box{
+    text-transform: none;
+}
 .title{
     font-size: 25p;
     text-transform: uppercase;
