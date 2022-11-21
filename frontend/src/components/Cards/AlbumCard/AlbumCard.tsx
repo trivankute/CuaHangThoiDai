@@ -1,0 +1,24 @@
+import {memo} from 'react';
+
+import styles from './AlbumCard.module.css';
+
+import CreateStars from "../../CreateStars/CreateStars"
+
+function AlbumCard({image, title, price, rating}:{image:any, title:any, price:any, rating:any}) {
+    
+    return (
+        <>
+        <div className={styles.box}>
+            <img src={image} alt=""></img>
+            <h3 >{title}</h3>
+            <div > ${price} </div>
+            <div className={styles.stars}>
+                {CreateStars(rating)}
+            </div>
+            <button type="button" className="btn btn_custom" name="button">Add To Cart</button>
+        </div>
+        </>
+    )
+}
+
+export default memo(AlbumCard)
