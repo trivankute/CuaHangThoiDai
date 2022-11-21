@@ -71,9 +71,11 @@ function ProductsLayout() {
                         showCate ?
                         <FontAwesomeIcon className={styles.icon} icon={faArrowLeft as IconProp} />
                         :
-                        <FontAwesomeIcon className={styles.icon} icon={faArrowRight as IconProp} />
+                        <div style={{fontSize:12, display:"flex", justifyContent: "center", alignItems: "center"}}>
+                        {currentPath} <FontAwesomeIcon className={styles.icon} icon={faArrowRight as IconProp} />
+                        </div>
                     }
-                </div>
+                    </div>
 
                 <Offcanvas show={show} onHide={handleClose}>
                     <Offcanvas.Header closeButton>
