@@ -1,0 +1,32 @@
+.container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap:15px;
+    padding: 10px 3%;
+}
+.box{   
+    min-width:50px;
+    min-height:20px;
+    max-width:150px;
+    border-radius:5px;
+    padding:10px;
+    background:white;
+    /* box-shadow */
+    box-shadow: 0 0 0 0 rgba(0,0,0,0.2);
+    word-wrap: break-word;
+}
+.box p{
+    color:var(--black);
+    font-size:12px;
+    margin-bottom:0px;
+}
+.ofUser{
+    width:100%;
+    display:flex;
+    justify-content: flex-end;
+}
+.notOfUser{
+    width:100%;
+    display:flex;
+    justify-content: flex-start;
+}

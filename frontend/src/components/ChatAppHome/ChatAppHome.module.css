@@ -57,10 +57,9 @@
     border-radius: 5px 5px 0 0;
     display:flex;
     justify-content:space-between;
-    cursor:pointer;
     flex-direction: column;
     width:var(--chatAppHome_open_width);
-    height:384px;
+    height:var(--chatAppHome_open_height);
     /* add shadow box */
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
     z-index:2;
@@ -92,6 +91,7 @@
     width:20px;
     height:20px;
     border-radius:8px;
+    cursor: pointer;
 }
 
 .box_open_icon:hover{
@@ -115,6 +115,39 @@
     height:calc(100% - 100px);
     overflow-x:scroll;  
     width:100%;
+}
+
+.box_open_for_bg{
+    position:relative;
+    /* height for scroll ling */
+    height:275px;
+}
+
+.box_open_body{
+    overflow-y:auto;
+    height:100%;
+}
+
+.brand{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    /* make it stay like a background when scroll is enabled */
+    /* make it like a background */
+    background-color:var(--orange);
+    color:white;
+    font-size:12px;
+    padding:12px;
+    width:100%;
+    height:100%;
+    /* add shadow box */
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    z-index:-1;
+
 }
 
 @media (max-width:990px) {
