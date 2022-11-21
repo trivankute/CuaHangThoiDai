@@ -24,6 +24,7 @@ import PageNotFound from './pages/PageNotFound/PageNotFound'
 import Maintenance from './pages/Maintenance/Maintenance'
 import ProductsLayout from './pages/ProductsLayout/ProductsLayout'
 import Albums from './pages/Albums/Albums'
+import Album from './pages/Album/Album'
 function App() {
   const dispatch = useDispatch();
   return (
@@ -44,8 +45,10 @@ function App() {
         <Route path='/products' element={<ProductsLayout />}>
           {/* Albums route */}
           <Route path='albums' element={<Albums />}>
+              {/* album name route */}
             </Route>
         </Route>
+        <Route path='/products/albums/:albumName' element={<Album />}/>
         <Route path="/*" element={<PageNotFound />}></Route>
         {/* <Route path='/logout' element={<Logout/>}/>
             <Route path='/todo' element={<Todo/>}/>

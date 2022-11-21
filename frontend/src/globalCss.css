@@ -58,6 +58,9 @@
     --chatAppHome_open_right:80px;
     --chatAppHome_open_right-990:60px;
     --chatAppHome_open_right-400:20px;
+
+    /* Album css */
+    --album-font-family:'Sofia', cursive;
 }
 
 *{

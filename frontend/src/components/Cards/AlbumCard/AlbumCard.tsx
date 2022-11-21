@@ -1,11 +1,12 @@
-import {memo} from 'react';
+import {memo, } from 'react';
+import {useNavigate} from "react-router-dom"
 
 import styles from './AlbumCard.module.css';
 
 import CreateStars from "../../CreateStars/CreateStars"
 
 function AlbumCard({image, title, price, rating}:{image:any, title:any, price:any, rating:any}) {
-    
+    const navigate = useNavigate();
     return (
         <>
         <div className={styles.box}>
@@ -15,7 +16,7 @@ function AlbumCard({image, title, price, rating}:{image:any, title:any, price:an
             <div className={styles.stars}>
                 {CreateStars(rating)}
             </div>
-            <button type="button" className="btn btn_custom" name="button">Add To Cart</button>
+            <button onClick={()=>{navigate('/products/albums/1')}} type="button" className="btn btn_custom" name="button">Click To See</button>
         </div>
         </>
     )
