@@ -60,7 +60,7 @@ function Home() {
           Our <span>Service</span>
         </h1>
         <ServiceCards/> 
-        <More/>
+        <More urlDirection="services" />
       </section>
 
       <section id="products" className={styles.section}>
@@ -68,7 +68,7 @@ function Home() {
         Favorite <span>Album</span>
       </h1>
       <FavoriteAlbums/>
-        <More/>
+        <More urlDirection="albums"/>
       </section>
 
       <section id="categories" className={styles.section}>
@@ -76,7 +76,7 @@ function Home() {
         Outstanding <span>Artist</span>
       </h1>
       <OutstandingArtist/>
-        <More/>
+        <More urlDirection="artists"/>
       </section>
 
       <section id="review" className={styles.section}>
@@ -84,7 +84,6 @@ function Home() {
         Customer's <span>Review</span>
       </h1>
       <CustomerReview/>
-        <More/>
       </section>
 
       <section id="blogs" className={clsx(styles.section, "pb-3")}>
@@ -92,7 +91,7 @@ function Home() {
         Our <span>Blogs</span>
       </h1>
       <OurBlogs/>
-        <More/>
+        <More urlDirection="blogs"/>
       </section>
     </Container>
     </div>

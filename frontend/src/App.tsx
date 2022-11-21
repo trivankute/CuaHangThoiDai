@@ -1,13 +1,13 @@
 // for react 
-import {Routes, Route} from 'react-router-dom'
-import {useState} from "react"
+import { Routes, Route } from 'react-router-dom'
+import { useState } from "react"
 
 // for boot strap
-import {Container} from 'react-bootstrap'
-import {Card, Form, Button} from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
+import { Card, Form, Button } from 'react-bootstrap'
 
 // for redux
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux"
 import FlashSlice from './redux/slices/FlashSlice'
 
 // for components
@@ -22,28 +22,32 @@ import ChatAppHome from './components/ChatAppHome/ChatAppHome'
 import Home from './pages/Home/Home'
 import PageNotFound from './pages/PageNotFound/PageNotFound'
 import Maintenance from './pages/Maintenance/Maintenance'
+import ProductsLayout from './pages/ProductsLayout/ProductsLayout'
+import Albums from './pages/Albums/Albums'
 function App() {
   const dispatch = useDispatch();
   return (
-    <Container style={{ minHeight:"100vh", margin:0, padding:0}} fluid>
+    <Container style={{ minHeight: "100vh", margin: 0, padding: 0 }} fluid>
       <Flash></Flash>
-      <Header></Header>
-      <Home/>
-      {/* <PageNotFound></PageNotFound> */}
-      
-       {/* <Maintenance></Maintenance> */}
-      <ChatAppHome/>
-      <Footer></Footer>
+      {/* <ProductsLayout/> */}
 
-      {/* <Routes> */}
+      {/* <Maintenance></Maintenance> */}
+
+      <Header></Header>
+      <Routes>
         {/* <Route path='/' element={<GetUser/>}>
         {
           user.mainData ?
           <> */}
-          {/* <Route path='/' element={<Layout/>}>
-            <Route index element={<Home/>}/>
-          </Route> */}
-            {/* <Route path='/logout' element={<Logout/>}/>
+        <Route path='/' element={<Home />}>
+        </Route>
+        <Route path='/products' element={<ProductsLayout />}>
+          {/* Albums route */}
+          <Route path='albums' element={<Albums />}>
+            </Route>
+        </Route>
+        <Route path="/*" element={<PageNotFound />}></Route>
+        {/* <Route path='/logout' element={<Logout/>}/>
             <Route path='/todo' element={<Todo/>}/>
           </>
           :
@@ -62,7 +66,9 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/*' element={<Error/>}/>
         </Route> */}
-      {/* </Routes> */}
+      </Routes>
+      <ChatAppHome />
+      <Footer></Footer>
     </Container>
   );
 }

@@ -1,4 +1,5 @@
 import { memo, useState } from 'react';
+import {useNavigate} from "react-router-dom"
 import styles from './Header.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -13,6 +14,9 @@ import LogInButtonAndModal from "../LogInButtonAndModal/LogInButtonAndModal"
 import RegisterButtonAndModal from '../RegisterButtonAndModal/RegisterButtonAndModal';
 
 function Header() {
+    // navigate
+    const navigate = useNavigate();
+
   const [showLogin, setShowLogin] = useState(false);
 
   const handleCloseLogin = () => setShowLogin(false);
@@ -28,7 +32,9 @@ function Header() {
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className={styles.navbar}>
         <Container>
           {/* <div className="w-100 d-flex justify-content-between align-items-center"> */}
-            <Navbar.Brand href="#home">
+            <Navbar.Brand
+              onClick={() => {navigate("/")}}
+             href="#home">
               <Brand brand_style={styles.navbar_brand} logo_style={styles.logo_style} />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -41,7 +47,7 @@ function Header() {
                     placeholder="Search"
                     className="me-2"
                     aria-label="Search"
-                    style={{ margin: "0px" }}
+                    style={{ margin: "0px", textTransform:"none"}}
                   />
                 </Form>
                 <div id="search-btn" className={clsx(styles.icon_box, styles.search_box)}>
@@ -49,12 +55,19 @@ function Header() {
                 </div>
                 </div>
                 <Nav className="w-100 d-flex justify-content-center">
-                  <Nav.Link className={styles.navbar_item} href="#home">Home</Nav.Link>
-                  <Nav.Link className={styles.navbar_item} href="#service">Service</Nav.Link>
-                  <Nav.Link className={styles.navbar_item} href="#products">Products</Nav.Link>
-                  <Nav.Link className={styles.navbar_item} href="#categories">Categories</Nav.Link>
-                  <Nav.Link className={styles.navbar_item} href="#review">Review</Nav.Link>
-                  <Nav.Link className={styles.navbar_item} href="#blogs">Blogs</Nav.Link>
+                  <Nav.Link
+                  onClick={()=>{navigate('/')}} 
+                  className={styles.navbar_item} href="#home">Home</Nav.Link>
+                  <Nav.Link
+                  onClick={()=>{navigate('/')}}  className={styles.navbar_item} href="#service">Service</Nav.Link>
+                  <Nav.Link
+                  onClick={()=>{navigate('/')}}  className={styles.navbar_item} href="#products">Products</Nav.Link>
+                  <Nav.Link
+                  onClick={()=>{navigate('/')}}  className={styles.navbar_item} href="#categories">Categories</Nav.Link>
+                  <Nav.Link
+                  onClick={()=>{navigate('/')}}  className={styles.navbar_item} href="#review">Review</Nav.Link>
+                  <Nav.Link
+                  onClick={()=>{navigate('/')}}  className={styles.navbar_item} href="#blogs">Blogs</Nav.Link>
                 </Nav>
               </div>
               <div className={styles.service_icons}>

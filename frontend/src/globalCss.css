@@ -8,8 +8,9 @@
     --border:2px solid rgba(0,0,0,.1);
     --outline:1px solid rgba(0,0,0,.1);
     --outline-hover:2px solid var(--black);
+    --light-gray:#f5f5f5;
     /* header */
-    --header-height:144px;
+    --header-height:156px;
     --header-height-400:95px;
     --header-height-990:95px;
     --header-padding:0px 30px 25px 30px;
@@ -52,6 +53,8 @@
     --chatAppHome_open_width:400px;
     --chatAppHome_open_width-990:350px;
     --chatAppHome_open_width-400:80%;
+    --chatAppHome_open_height:384px;
+
     --chatAppHome_open_right:80px;
     --chatAppHome_open_right-990:60px;
     --chatAppHome_open_right-400:20px;

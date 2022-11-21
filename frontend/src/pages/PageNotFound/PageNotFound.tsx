@@ -1,9 +1,12 @@
-import {memo} from 'react'
+import {memo, useEffect} from 'react'
 import {Container, Row, Col} from "react-bootstrap"
 import styles from "./PageNotFound.module.css"
 import Brand from "../../components/Brand/Brand"
 
 function PageNotFound() {
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
     return (
         <>
         <Container fluid className={styles.container}>

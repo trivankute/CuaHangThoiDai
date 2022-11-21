@@ -1,9 +1,12 @@
-import {memo} from 'react'
+import {memo, useEffect} from 'react'
 import {Container, Row, Col} from "react-bootstrap"
 import Brand from "../../components/Brand/Brand"
 import styles from "./Maintenance.module.css"
 
 function Maintenance() {
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
     return (
         <>
         <Container fluid className={styles.container}>
