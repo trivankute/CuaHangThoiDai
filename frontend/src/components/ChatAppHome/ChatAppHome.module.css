@@ -11,6 +11,7 @@
     cursor:pointer;
     justify-content:space-between;
     align-items:center;
+    z-index:2;
 }
 
 .box:hover{
@@ -62,6 +63,7 @@
     height:384px;
     /* add shadow box */
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    z-index:2;
 }
 .box_open_header{
     display:flex;
