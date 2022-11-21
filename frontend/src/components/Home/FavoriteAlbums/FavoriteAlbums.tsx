@@ -1,16 +1,15 @@
 import { memo } from 'react'
 import styles from "./FavoriteAlbums.module.css"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'
-import image1 from "./cd.png"
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import clsx from "clsx"
+// import album Card
+import AlbumCard from "../../Cards/AlbumCard/AlbumCard"
 
+import image from "./cd.png"
 function FavoriteAlbums() {
     return (
         <>
@@ -26,64 +25,16 @@ function FavoriteAlbums() {
             >
                 <div className={styles.box_container}>
                 <SwiperSlide style={{}}>
-                    <div className={styles.box}>
-                        <img src={image1} alt=""></img>
-                        <h3 >1989</h3>
-                        <div > $6.99 </div>
-                        <div className={styles.stars}>
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStarHalfAlt as IconProp} />
-                        </div>
-                        <button type="button" className="btn btn_custom" name="button">Add To Cart</button>
-                    </div>
+                    <AlbumCard image={image} title={"trivan"} price={"9.99"} rating={4.5}/>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className={styles.box}>
-                        <img src={image1} alt=""></img>
-                        <h3 >1989</h3>
-                        <div > $6.99 </div>
-                        <div className={styles.stars}>
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStarHalfAlt as IconProp} />
-                        </div>
-                        <button type="button" className="btn btn_custom" name="button">Add To Cart</button>
-                    </div>
+                    <AlbumCard image={image} title={"trivan"} price={"9.99"} rating={4}/>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className={styles.box}>
-                        <img src={image1} alt=""></img>
-                        <h3 >1989</h3>
-                        <div > $6.99 </div>
-                        <div className={styles.stars}>
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStarHalfAlt as IconProp} />
-                        </div>
-                        <button type="button" className="btn btn_custom" name="button">Add To Cart</button>
-                    </div>
+                    <AlbumCard image={image} title={"trivan"} price={"9.99"} rating={4}/>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className={styles.box}>
-                        <img src={image1} alt=""></img>
-                        <h3 >1989</h3>
-                        <div > $6.99 </div>
-                        <div className={styles.stars}>
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStar as IconProp} />
-                            <FontAwesomeIcon className={styles.icon} icon={faStarHalfAlt as IconProp} />
-                        </div>
-                        <button type="button" className="btn btn_custom" name="button">Add To Cart</button>
-                    </div>
+                    <AlbumCard image={image} title={"trivan"} price={"9.99"} rating={4}/>
                 </SwiperSlide>
                 </div>
             </Swiper>   

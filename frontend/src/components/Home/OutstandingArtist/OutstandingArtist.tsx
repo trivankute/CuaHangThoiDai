@@ -1,29 +1,14 @@
 import { memo } from 'react'
 import styles from "./OutstandingArtist.module.css"
-import image1 from "./cd.png"
-import clsx from 'clsx'
+import image from "./cd.png"
+import ArtistCard from "../../Cards/ArtistCard/ArtistCard"
 function OutstandingArtist() {
     return (
         <>
             <div className={styles.box_container}>
-                <div className={styles.box}>
-                    <img src={image1} alt=""></img>
-                        <h3>Taylor Swift</h3>
-                        <p></p>
-                        <a href="#" className="btn btn_custom">shop now</a>
-                </div>
-                <div className={styles.box}>
-                    <img src={image1} alt=""></img>
-                        <h3>Taylor Swift</h3>
-                        <p></p>
-                        <a href="#" className="btn btn_custom">shop now</a>
-                </div>
-                <div className={styles.box}>
-                    <img src={image1} alt=""></img>
-                        <h3>Taylor Swift</h3>
-                        <p></p>
-                        <a href="#" className="btn btn_custom">shop now</a>
-                </div>
+                <ArtistCard image={image} name={"Trivan"} description={"rat dep trai"}/>
+                <ArtistCard image={image} name={"Trivan"} description={"rat dep trai"}/>
+                <ArtistCard image={image} name={"Trivan"} description={"rat dep trai"}/>
             </div>
         </>
     )

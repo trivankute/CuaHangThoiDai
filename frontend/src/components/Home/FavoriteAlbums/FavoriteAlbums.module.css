@@ -12,36 +12,3 @@
     overflow:hidden;
     width:80%;
 }
-
-.box{
-    background: #fff;
-    border-radius: 5px;
-    text-align: center;
-    padding:30px 20px;
-    outline-offset: -10px;
-    outline: var(--outline);
-    box-shadow: var(--box-shadow);
-}
-.box:hover{
-    outline-offset: 0px;
-    outline: var(--outline-hover);
-}
-.box h3{
-    font-size: 25px;
-    color:var(--black);
-}
-.box .price{
-    font-size: 20px;
-    color:var(--light-color);
-    padding:5px 0;
-}
-.box .stars .icon{
-    font-size: 17px;
-    color:var(--orange);
-    padding:5px 0;
-}
-.box img {
-    margin:10px 0;
-    height: 150px;
-    border-radius:5px;
-}
