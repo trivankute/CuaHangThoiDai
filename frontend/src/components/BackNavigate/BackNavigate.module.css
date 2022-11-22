@@ -7,9 +7,13 @@
     display:flex;
     justify-content:flex-end;
     align-items:center;
-    margin-left:-20px;
+    margin-left:-50px;
     transition:all 0.1s linear;
     z-index:2;
+}
+
+.box:hover{
+    margin-left:-20px;
 }
 
 .box .icon {
@@ -19,6 +23,10 @@
 @media (max-width:450px){
     .box{
         margin-left:-35px;
+        bottom:16px;
+    }
+    .box:hover{
+        margin-left:-50px;
         bottom:16px;
     }
 }
