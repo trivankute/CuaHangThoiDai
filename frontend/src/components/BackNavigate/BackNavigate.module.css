@@ -1,0 +1,16 @@
+.box {
+    position:fixed;
+    width:150px;
+    bottom:50px;
+    left:0;
+    background-color:white;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    margin-left:-20px;
+    transition:all 0.1s linear;
+}
+
+.box .icon {
+    margin-left:5px;
+}
