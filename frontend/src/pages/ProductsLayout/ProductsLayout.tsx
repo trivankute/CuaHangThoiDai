@@ -9,10 +9,11 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
     faList, faCompactDisc, faMusic, faBlog, faLayerGroup, faArrowLeft, faArrowRight,
 } from '@fortawesome/free-solid-svg-icons'
+import clsx from "clsx"
+
 
 import ListItem from "../../components/ProductsLayout/ListItem/ListItem"
-
-import clsx from "clsx"
+import BackNavigate from '../../components/BackNavigate/BackNavigate';
 
 function ProductsLayout() {
     const navigate = useNavigate();
@@ -54,7 +55,7 @@ function ProductsLayout() {
         const path = window.location.pathname;
         const pathArray = path.split("/");
         setCurrentPath(pathArray[2])
-    }, [currentPath])
+    }, [window.location.pathname])
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -63,9 +64,11 @@ function ProductsLayout() {
         <Container fluid className={styles.container}>
             {/* create lay out with col-2 and col-10 */}
             <Row className={styles.row}>
+            <BackNavigate backPath="/" backPage="Home" currentPage="Products" />
                 {res ?
                     <>
-                        <div onClick={handleShow} onMouseEnter={() => setShowCate(true)}
+                        <div onClick={handleShow} 
+                            onMouseEnter={() => setShowCate(true)}
                             onMouseLeave={() => setShowCate(false)}
                             className={clsx(styles.col_3_header, "btn btn_custom", styles.offcanvas_button)}>
                             <div className="w-100 d-flex justify-content-start align-items-center">
@@ -90,10 +93,14 @@ function ProductsLayout() {
                                 </Offcanvas.Title>
                             </Offcanvas.Header>
                             <Offcanvas.Body className={styles.offcanvas_body}>
-                                <ListItem button_style={currentPath == 'albums' ? styles.cate_button_style : ""} title={"Albums"} icon={faCompactDisc}></ListItem>
-                                <ListItem button_style={currentPath == 'services' ? styles.cate_button_style : ""} title={"Services"} icon={faLayerGroup}></ListItem>
-                                <ListItem button_style={currentPath == 'artists' ? styles.cate_button_style : ""} title={"Artists"} icon={faMusic}></ListItem>
-                                <ListItem button_style={currentPath == 'blogs' ? styles.cate_button_style : ""} title={"Blogs"} icon={faBlog}></ListItem>
+                                <ListItem onClick={()=>{handleClose();
+                                    navigate('/products/albums')}} button_style={currentPath == 'albums' ? styles.cate_button_style : ""} title={"Albums"} icon={faCompactDisc}></ListItem>
+                                <ListItem onClick={()=>{handleClose();
+                                    navigate('/products/services')}} button_style={currentPath == 'services' ? styles.cate_button_style : ""} title={"Services"} icon={faLayerGroup}></ListItem>
+                                <ListItem onClick={()=>{handleClose();
+                                    navigate('/products/artists')}} button_style={currentPath == 'artists' ? styles.cate_button_style : ""} title={"Artists"} icon={faMusic}></ListItem>
+                                <ListItem onClick={()=>{handleClose();
+                                    navigate('/products/blogs')}} button_style={currentPath == 'blogs' ? styles.cate_button_style : ""} title={"Blogs"} icon={faBlog}></ListItem>
                             </Offcanvas.Body>
                         </Offcanvas>
                     </>
@@ -105,10 +112,14 @@ function ProductsLayout() {
                                 <FontAwesomeIcon className={styles.icon} icon={faList as IconProp} />
                                 <h4>Categories</h4>
                             </div>
-                            <ListItem button_style={currentPath == 'albums' ? styles.cate_button_style : ""} title={"Albums"} icon={faCompactDisc}></ListItem>
-                            <ListItem button_style={currentPath == 'services' ? styles.cate_button_style : ""} title={"Services"} icon={faLayerGroup}></ListItem>
-                            <ListItem button_style={currentPath == 'artists' ? styles.cate_button_style : ""} title={"Artists"} icon={faMusic}></ListItem>
-                            <ListItem button_style={currentPath == 'blogs' ? styles.cate_button_style : ""} title={"Blogs"} icon={faBlog}></ListItem>
+                            <ListItem onClick={()=>{handleClose();
+                                navigate('/products/albums')}} button_style={currentPath == 'albums' ? styles.cate_button_style : ""} title={"Albums"} icon={faCompactDisc}></ListItem>
+                            <ListItem onClick={()=>{handleClose();
+                                navigate('/products/services')}} button_style={currentPath == 'services' ? styles.cate_button_style : ""} title={"Services"} icon={faLayerGroup}></ListItem>
+                            <ListItem onClick={()=>{handleClose();
+                                navigate('/products/artists')}} button_style={currentPath == 'artists' ? styles.cate_button_style : ""} title={"Artists"} icon={faMusic}></ListItem>
+                            <ListItem onClick={()=>{handleClose();
+                                navigate('/products/blogs')}} button_style={currentPath == 'blogs' ? styles.cate_button_style : ""} title={"Blogs"} icon={faBlog}></ListItem>
 
                         </div>
                     </Col>

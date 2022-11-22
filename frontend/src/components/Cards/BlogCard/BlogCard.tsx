@@ -1,5 +1,5 @@
 import { memo } from 'react';
-
+import {useNavigate} from 'react-router-dom'
 import styles from './BlogCard.module.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +7,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faCalendar} from '@fortawesome/free-solid-svg-icons'
 
 function BlogCard({image, title, description}:{image:any, title:string, description:string}) {
+    const navigate = useNavigate()
     return (
         <>
             <div className={styles.box}>
@@ -20,7 +21,7 @@ function BlogCard({image, title, description}:{image:any, title:string, descript
                     </div>
                     <h3>{title}</h3>
                     <p>{description}</p>
-                    <a href="#" className="btn btn_custom">read more</a>
+                    <a onClick={()=>{navigate('/products/blogs/1')}}className="btn btn_custom">read more</a>
                 </div>
             </div>
         </>

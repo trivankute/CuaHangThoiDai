@@ -27,9 +27,9 @@
 .box .content .icons a:hover{
     color:var(--black);
 }
-.box .content .icons a i{
+.box .content .icons a .icon{
     color:var(--orange);
-    padding-right: 5px;
+    padding-right: 2px;
 }
 .box .content h3{
     line-height: 1.8;
@@ -42,4 +42,5 @@
     color:var(--light-color);
     font-size: 15px;
     padding:5px 0;
+
 }

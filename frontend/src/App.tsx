@@ -12,7 +12,6 @@ import FlashSlice from './redux/slices/FlashSlice'
 
 // for components
 import Flash from "./components/Flash/Flash"
-import Layout from "./components/Layout/Layout"
 import Header from "./components/Header/Header"
 import Footer from "./components/Footer/Footer"
 import ChatAppHome from './components/ChatAppHome/ChatAppHome'
@@ -25,6 +24,10 @@ import Maintenance from './pages/Maintenance/Maintenance'
 import ProductsLayout from './pages/ProductsLayout/ProductsLayout'
 import Albums from './pages/Albums/Albums'
 import Album from './pages/Album/Album'
+import Services from './pages/Services/Services'
+import Artists from './pages/Artists/Artists'
+import Blogs from './pages/Blogs/Blogs'
+import Blog from './pages/Blog/Blog'
 function App() {
   const dispatch = useDispatch();
   return (
@@ -45,10 +48,24 @@ function App() {
         <Route path='/products' element={<ProductsLayout />}>
           {/* Albums route */}
           <Route path='albums' element={<Albums />}>
-              {/* album name route */}
-            </Route>
+          </Route>
+          <Route path='services' element={<Services />}>
+
+          </Route>
+          <Route path='artists' element={<Artists />}>
+
+          </Route>
+          <Route path='blogs' element={<Blogs />}>
+
+          </Route>
+          <Route path='blogs/:blogId' element={<Blog />}>
+
+          </Route>
         </Route>
-        <Route path='/products/albums/:albumName' element={<Album />}/>
+        <Route path='/products/albums?service=:service' element={<Album />} />
+        <Route path='/products/albums?artist=:artist' element={<Album />} />
+        {/* album name route */}
+        <Route path='/products/albums/:albumName' element={<Album />} />
         <Route path="/*" element={<PageNotFound />}></Route>
         {/* <Route path='/logout' element={<Logout/>}/>
             <Route path='/todo' element={<Todo/>}/>

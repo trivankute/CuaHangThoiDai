@@ -9,6 +9,7 @@
     --outline:1px solid rgba(0,0,0,.1);
     --outline-hover:2px solid var(--black);
     --light-gray:#f5f5f5;
+    --font-family:'Sofia', cursive;
     /* header */
     --header-height:156px;
     --header-height-400:95px;

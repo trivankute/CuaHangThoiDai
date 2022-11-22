@@ -22,7 +22,7 @@ function BackNavigate({ backPath, backPage, currentPage }: { backPath: string, b
                         </div>
                         :
                         <div style={{ fontSize: 12, display: "flex", justifyContent: "center", alignItems: "center" }}>
-                            {currentPage}
+                             <FontAwesomeIcon className={styles.icon} icon={faArrowLeft as IconProp} /> {currentPage}
                         </div>
                 }
             </div>
