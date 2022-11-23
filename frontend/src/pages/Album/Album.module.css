@@ -159,6 +159,11 @@
     padding: 20px 4%;
 }
 
+.row_3 {
+    background-color:white;
+    min-height:200px;
+}
+
 @media (max-width:990px) {
     .container{
         margin-top:var(--header-height-990);

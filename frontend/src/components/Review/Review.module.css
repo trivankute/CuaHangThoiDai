@@ -1,0 +1,66 @@
+.box{
+    width:90%;
+    /* little border-top */
+    border-top: 1px solid var(--light-gray);
+    padding-top:20px;
+}
+.reviewerInformation{
+    display:flex;
+
+}
+.reviewerImage img{
+    border-radius:100%;
+    width:50px;
+    height:50px;
+    margin:5px 20px;
+
+}
+.reviewerNameAndDate{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+}
+.name{
+    cursor:pointer;
+    line-height: 1.8;
+    font-size: 15px;
+    color:var(--light-color);
+    text-transform:none;
+
+}
+.name:hover{
+    color:var(--orange);
+
+}
+.name .icon{
+    
+    color:var(--orange);
+    padding-right: 2px;
+}
+.date{
+    line-height: 1.8;
+    font-size: 15px;
+    color:var(--light-color);
+    text-transform:none;
+
+}
+.date .icon{
+    
+    color:var(--orange);
+    padding-right: 2px;
+}
+
+.review{
+    padding:20px;
+
+
+}
+.rating{
+
+}
+.reviewText{
+    text-transform:none;
+    /* end line */
+    word-break: break-all;
+}

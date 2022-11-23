@@ -8,6 +8,8 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import AlbumCard from "../../components/Cards/AlbumCard/AlbumCard"
 import BackNavigate from "../../components/BackNavigate/BackNavigate"
+import Reviews from "../../components/Reviews/Reviews"
+import WriteReview from "../../components/WriteReview/WriteReview"
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
@@ -146,6 +148,14 @@ function Album() {
                         </Swiper>
                     </div>
                 </Col>
+            </Row>
+            <Row className={styles.row_3}>
+                <div style={{width:"100%"}}>
+                    <WriteReview/>
+                </div>
+                <div style={{width:"100%"}}>
+                    <Reviews/>
+                </div>
             </Row>
         </Container>
     )

@@ -1,0 +1,22 @@
+.box{
+    padding:20px;
+    /* border top */
+    border-top: 1px solid var(--light-gray);
+
+}
+
+.title{
+    
+    font-size:24px;
+    font-family: var(--album-font-family);
+    letter-spacing:4px;
+    line-height:30px;
+    margin-top:20px;
+    margin-bottom:20px;
+    padding-left:10px;
+}
+
+.pagination{
+    display:flex;
+    justify-content:flex-end;
+}
