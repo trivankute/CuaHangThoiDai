@@ -7,7 +7,12 @@
     cursor:pointer;
 }
 
+.box:hover {
+    color: var(--orange);
+}
+
 .icon {
     font-size:20px;
     padding-left:10px;
 }
+
