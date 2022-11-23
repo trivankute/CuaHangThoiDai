@@ -73,6 +73,9 @@
     color:var(--light-color);
     font-size: 15px;
     padding:5px 0;
+    /* end line */
+    word-break: break-all;
+    
 
 }
 

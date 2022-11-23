@@ -46,6 +46,7 @@ function ProductsLayout() {
     const [showCate, setShowCate] = useState(false)
     /////////////////////////////////////////////////////////////////////
     // for navigate application
+    const [forBackNavigate, setForBackNavigate] = useState(["/","Home","Products"])
     const [currentPath, setCurrentPath] = useState<string>(() => {
         const path = window.location.pathname;
         const pathArray = path.split("/");
@@ -64,7 +65,8 @@ function ProductsLayout() {
         <Container fluid className={styles.container}>
             {/* create lay out with col-2 and col-10 */}
             <Row className={styles.row}>
-            <BackNavigate backPath="/" backPage="Home" currentPage="Products" />
+            <BackNavigate backPath={forBackNavigate[0]} backPage={forBackNavigate[1]}
+             currentPage={forBackNavigate[2]}/>
                 {res ?
                     <>
                         <div onClick={handleShow} 
@@ -127,7 +129,7 @@ function ProductsLayout() {
                 <Col xs={res ? 12 : 9} className={styles.col_9}>
                     {/* create a box with 100% height */}
                     <div className={styles.box}>
-                        <Outlet></Outlet>
+                        <Outlet/>
                     </div>
                 </Col>
             </Row>

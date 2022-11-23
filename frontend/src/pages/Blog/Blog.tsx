@@ -3,7 +3,6 @@ import {useNavigate} from 'react-router-dom'
 import styles from './Blog.module.css'
 import { Container, Row } from "react-bootstrap"
 import image from "./cd.png"
-import BackNavigate from "../../components/BackNavigate/BackNavigate"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faArrowLeft, faUser, faCalendar} from '@fortawesome/free-solid-svg-icons'
 import {IconProp} from '@fortawesome/fontawesome-svg-core'
@@ -18,7 +17,6 @@ function Blog() {
     }, [])
     return (<>
         <Container fluid className={styles.container}>
-            <BackNavigate backPath="/products/blogs" backPage="Products" currentPage="Blog"/>
             <Row >
                 {/* faLeft */}
                 <div onClick={()=>{navigate('/products/blogs')}} className={styles.turnBack}>

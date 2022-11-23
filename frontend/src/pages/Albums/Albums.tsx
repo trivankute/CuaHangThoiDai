@@ -1,5 +1,5 @@
 import {memo, useEffect} from 'react';
-import {useNavigate, useSearchParams} from 'react-router-dom'
+import {useSearchParams} from 'react-router-dom'
 
 import styles from './Albums.module.css';
 import {Container, Row, Pagination} from "react-bootstrap"
@@ -13,6 +13,8 @@ function Albums() {
     function checkIfSearched(){
         if(url.get('service')!==null)
             return 'service'
+        else if( url.get('artist')!==null)
+            return 'artist'
         else return false
     }
     // scroll to top

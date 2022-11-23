@@ -82,7 +82,7 @@ h4{
 .offcanvas_button{
     position:fixed;
     top:calc(var(--header-height) - 65px);
-    left:0;
+    left:0px;
     background-color:white;
     display:flex;
     justify-content:space-between;
