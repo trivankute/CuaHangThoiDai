@@ -1,12 +1,14 @@
 <?php
     include_once __DIR__ .'/../../global/index.php';
     include_once __DIR__ .'/../../middlewares/registerValidation.php';
+    include_once __DIR__ .'/../../middlewares/deserializeUser.php';
+    include_once __DIR__ .'/../../middlewares/requireAdmin.php';
     $user_request_method = $_SERVER['REQUEST_METHOD'];
     switch ($user_request_method) {
         case 'POST':    
             $body = file_get_contents('php://input');
             $body = json_decode($body);
-            if($body->role != "customer") {
+            if($body->role != "employee") {
                 echo json_encode(['status'=>'error', 'data'=>['msg'=>'Invalid role']]);
                 exit();
             }
@@ -30,8 +32,6 @@
             }
         default:
             echo json_encode(['status'=>'error', 'data'=>['msg'=>'Method not allowed']]);
-            exit();
             break;
     }
-
 ?>

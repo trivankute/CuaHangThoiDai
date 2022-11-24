@@ -32,6 +32,9 @@ function getBearerToken() {
             return $matches[1];
         }
     }
-    return null;
+    else {
+        echo json_encode(['status'=>'error', 'data'=>['msg'=>'Unauthorized']]);
+        exit();
+    }
 }
 ?>
