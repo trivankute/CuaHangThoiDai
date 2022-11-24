@@ -13,13 +13,28 @@ include_once __DIR__ . "/../config/default.php";
 include_once __DIR__ . "/../global/index.php";
 
 class jwt_functions {
+    private $exp;
+    private $payload;
+    private $iat;
+    private $accessTokenTtl = 20; // seconds
+
     private $default;
     // constructor
     public function __construct() {
         $this->default = new config_default();
+        $this->iat = time();
+        $this->exp = $this->iat + $this->accessTokenTtl;
+    }
+    public function createPayload($data){
+        $this->payload = array(
+            "iat" => $this->iat,
+            "exp" => $this->exp,
+            "data" => $data
+        );
+        return $this->payload;
     }
     public function createToken($data){
-        $token = JWT::encode($this->default->createPayload($data), $this->default->getPrivateKey(), 'RS256');
+        $token = JWT::encode($this->createPayload($data), $this->default->getPrivateKey(), 'RS256');
         return $token;
     }
     public function decodeToken($token){

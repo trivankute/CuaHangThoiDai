@@ -26,19 +26,9 @@ class config_default {
     -----END PUBLIC KEY-----
     EOD;
 
-    private $iat;
-    private $accessTokenTtl = 20; // seconds
-    private $exp;
-    private $payload;
-    private $refreshTokenTtl = 120; // seconds
-    private $cookiePath = "/";
-    private $domain = "localhost";
 
     // constructor
-    public function __construct() {
-        $this->iat = time();
-        $this->exp = $this->iat + $this->accessTokenTtl;
-    }
+
     public function getPrivateKey() {
         return $this->privateKey;
     }
@@ -62,14 +52,7 @@ class config_default {
     public function getDomain() {
         return $this->domain;
     }
-    public function createPayload($data){
-        $this->payload = array(
-            "iat" => $this->iat,
-            "exp" => $this->exp,
-            "data" => $data
-        );
-        return $this->payload;
-    }
+
 
 }
 ?>
