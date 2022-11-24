@@ -1,26 +1,9 @@
 <?php
-///////////////////////////////////////////////////////
-    // database link and defaults
-    require_once("./config/db.php");
-    require_once("./config/default.php");
-///////////////////////////////////////////////////////
-    // composer
-    require_once("./vendor/autoload.php");
-///////////////////////////////////////////////////////
-    // models
-    include_once("../../model/user.php");
-///////////////////////////////////////////////////////
-// for composer ** must import in each file 
-    // use Firebase\JWT\JWT;
-    // use Firebase\JWT\Key;
-// for dbs
-    $global_db = new db();
-    $global_conn = $global_db->connect();
-// for model
-    $global_user = new User($conn);
-    // $question = new Question($conn);
-// for Tokens
-    // $accessToken = false;
-    // $refreshToken = false;
+    include_once "./utils/jwt_functions.php";
+    $jwt = new jwt_functions();
+    $token = $jwt->createToken(['data'=>["username" => "admin"]]);
+
+    $decode = $jwt->decodeToken($token);
+    echo json_encode(['token'=>$token, 'decode'=>$decode]);
 
 ?>
