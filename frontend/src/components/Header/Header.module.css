@@ -126,6 +126,9 @@
     border-radius:100%;
     cursor:pointer;
 }
+.icon_cart{
+    cursor:pointer;
+}
 
 @media (max-width:990px){
     .navbar{

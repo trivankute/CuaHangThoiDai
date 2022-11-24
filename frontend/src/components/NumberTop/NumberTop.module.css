@@ -1,0 +1,28 @@
+.box {
+    position:absolute;
+    top:-10px;
+    width:25px;
+    height:20px;
+    background-color:white;
+    color:var(--orange);
+    border:2px solid var(--orange);
+    border-radius:9px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:12px;
+}
+
+.left{
+    left:-10px;
+}
+
+.right{
+    right:-10px;
+}
+
+.box:hover {
+    background-color:var(--orange);
+    color:white;
+    border:1px solid white;
+}

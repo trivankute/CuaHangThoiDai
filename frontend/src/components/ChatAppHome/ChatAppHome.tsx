@@ -9,6 +9,7 @@ import clsx from "clsx"
 
 import Brand from '../Brand/Brand'
 import ChatBox from "./ChatBox"
+import NumberTop from '../NumberTop/NumberTop'
 
 function ChatAppHome() {
     const [open, setOpen] = useState(false);
@@ -22,7 +23,7 @@ function ChatAppHome() {
             <div className={styles.box_open_header}>
                 <div >
                     <h4 className={styles.box_open_title}>Chat</h4>
-                    <span className={styles.box_open_number}>2</span>
+                    <NumberTop position='right' number={2}/>
                 </div>
                 <FontAwesomeIcon onClick={handleClose} className={styles.box_open_icon} icon={faArrowDown as IconProp} />
             </div>
@@ -43,7 +44,7 @@ function ChatAppHome() {
         </div>
          : 
             <div onClick={handleOpen} className={styles.box}>
-            <span className={styles.number}>2</span>
+                    <NumberTop position='right' number={2}/>
             <FontAwesomeIcon  className={clsx(styles.icon,"me-3")} icon={faComments as IconProp} />
             <h4 className={styles.title}>Chat</h4>
             </div>
