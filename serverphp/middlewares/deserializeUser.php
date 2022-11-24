@@ -7,7 +7,7 @@
     catch (Exception $e) {
         echo json_encode(['status'=>"error", ["data"=>$e->getMessage()]]);
     }
-    // get access token from bearer authorization header
+    // // get access token from bearer authorization header
     $token = getBearerToken();
     echo json_encode(['token'=>$token]);
     // $jwt = new jwt_functions();

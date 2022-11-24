@@ -1,7 +1,7 @@
 <?php
 ///////////////////////////////////////////////////////
     // database link and defaults
-    require_once("./config/db.php");
+    include_once __DIR__ . "/../config/db.php";
     // require_once("./config/default.php");
 ///////////////////////////////////////////////////////
     // composer
