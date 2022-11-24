@@ -21,8 +21,8 @@
             $this->email = $email;
             $this->username = $username;
             $this->password = $password;
-            $this->avt = $avt;
             $this->role = $role;
+            $this->avt = $avt;
         }
         public function getInformation()
         {
@@ -88,6 +88,28 @@
                 }
             }
             catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
+        public function setAvatar($avt) {
+            $this->avt = $avt;
+            $this->updateAvatar();
+        }
+        public function updateAvatar() {
+            $sql = "UPDATE account SET avatar = :avt WHERE email = :email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':avt', $this->avt);
+            $stmt->bindParam(':email', $this->email);
+            try {
+                if($stmt->execute())
+                {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            } catch (PDOException $e) {
                 echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
                 exit();
             }

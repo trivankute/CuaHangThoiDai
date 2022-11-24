@@ -15,6 +15,7 @@
 // for composer ** must import in each file 
     // use Firebase\JWT\JWT;
     // use Firebase\JWT\Key;
+    use Cloudinary\Configuration\Configuration;
 // for dbs
     $global_db = new db();
     $global_conn = $global_db->connect();
@@ -24,5 +25,10 @@
 // for Tokens
     // $accessToken = false;
     // $refreshToken = false;
+    $config = Configuration::instance();
+    $config->cloud->cloudName = 'dotr7u5kq';
+    $config->cloud->apiKey = '134487557496353';
+    $config->cloud->apiSecret = 'zMIHrTp6nE36mC6J6bcRDXcKg8o';
+    $config->url->secure = true;
     $token;
 ?>
