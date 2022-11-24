@@ -31,7 +31,6 @@ function Header() {
     <div>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className={styles.navbar}>
         <Container>
-          {/* <div className="w-100 d-flex justify-content-between align-items-center"> */}
             <Navbar.Brand
               onClick={() => {navigate("/")}}
              href="#home">
@@ -71,11 +70,11 @@ function Header() {
                 </Nav>
               </div>
               <div className={styles.service_icons}>
-                {/* <div id="cart-btn" className={styles.icon_box}>
+                <div id="cart-btn" className={styles.icon_box}>
           <FontAwesomeIcon className={styles.icon} icon={faShoppingCart as IconProp}/>
-        </div> */}
+        </div>
                 <div id="login-btn" className={clsx(styles.icon_box, styles.login_box)}>
-                  <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} />
+                  {/* <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} />
                   <div className={styles.login_box_hover}>
                     <RegisterButtonAndModal linkStyle={styles.login_box_hover_link}
                      showRegister={showRegister} handleShowRegister={handleShowRegister}
@@ -85,19 +84,18 @@ function Header() {
                     <LogInButtonAndModal showLogin={showLogin} handleShowLogin={handleShowLogin}
                      handleCloseLogin={handleCloseLogin} handleShowRegister={handleShowRegister}
                       linkStyle={styles.login_box_hover_link} />
-                  </div>
-
-                  {/* log in r */}
-                  {/* <h3 className={styles.icon}>TV</h3>
+                  </div> */}
+          <img className={styles.icon_loggedIn} src="https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c" alt="" />
           <div className={clsx(styles.login_box_hover, styles.loggedIn)}>
           <a className={styles.login_box_hover_link}>Profile</a>
           <a className={styles.login_box_hover_link}> Transaction history</a>
           <a className={styles.login_box_hover_link}> Log out</a>
-          </div> */}
+          </div>
                 </div>
+
+                  {/* log in r */}
               </div>
             </Navbar.Collapse>
-          {/* </div> */}
         </Container>
       </Navbar>
     </div>
