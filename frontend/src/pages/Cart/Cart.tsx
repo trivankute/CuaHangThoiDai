@@ -1,4 +1,5 @@
 import { memo, useEffect } from 'react'
+import { useNavigate} from 'react-router-dom'
 
 import styles from './Cart.module.css'
 import "../../globalCss.css"
@@ -9,6 +10,7 @@ import CartItem from '../../components/CartItem/CartItem'
 import BackNavigate from '../../components/BackNavigate/BackNavigate'
 
 function Cart() {
+    const navigate = useNavigate()
     useEffect(() => {
         // scroll to top of cart
         window.scrollTo(0, 0)
@@ -49,7 +51,7 @@ function Cart() {
                         <div className={styles.totalPrice}>
                             Total: $ 27.96
                         </div>
-                        <button className={clsx('btn', 'btn_custom')}>Buy</button>
+                        <button onClick={()=>{navigate('/checkout')}} className={clsx('btn', 'btn_custom')}>Buy</button>
                     </div>
                 </div>
             </div>

@@ -29,6 +29,7 @@ import Artists from './pages/Artists/Artists'
 import Blogs from './pages/Blogs/Blogs'
 import Blog from './pages/Blog/Blog'
 import Cart from './pages/Cart/Cart'
+import Checkout from './pages/Checkout/Checkout'
 function App() {
   const dispatch = useDispatch();
   useEffect(()=>{
@@ -73,6 +74,7 @@ function App() {
         <Route path='/products/albums/:albumName' element={<Album />} />
         {/* cart route */}
         <Route path='/cart' element={<Cart />} />
+        <Route path='/checkout' element={<Checkout />} />
         <Route path="/*" element={<PageNotFound />}></Route>
         {/* <Route path='/logout' element={<Logout/>}/>
             <Route path='/todo' element={<Todo/>}/>
