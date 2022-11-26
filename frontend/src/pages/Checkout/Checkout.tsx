@@ -1,4 +1,5 @@
 import { memo, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {Form} from 'react-bootstrap'
 
@@ -9,6 +10,7 @@ import {axiosForProvince, getProvincesArray, getWards, getDistricts} from "../..
 import BackNavigate from '../../components/BackNavigate/BackNavigate';
 
 function Checkout() {
+    const navigate = useNavigate()
     const [provinces, setProvinces] = useState(()=>{return getProvincesArray()})
     const [districts, setDistricts] = useState([])
     const [wards, setWards] = useState([])
@@ -16,7 +18,7 @@ function Checkout() {
     const [district, setDistrict] = useState<any>(null)
     const [ward, setWard] = useState<any>(null)
     const [address, setAddress] = useState<any>(null)
-    
+
     // scroll to top
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -42,6 +44,9 @@ function Checkout() {
             district:district,
             ward:ward
         })
+        navigate('/notification', {state:{state:"success",
+            title:"Your order has been placed",
+         description:"Thank you for shopping with us"}})
     }
     return (
         <div className={styles.container}>

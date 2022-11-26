@@ -30,6 +30,8 @@ import Blogs from './pages/Blogs/Blogs'
 import Blog from './pages/Blog/Blog'
 import Cart from './pages/Cart/Cart'
 import Checkout from './pages/Checkout/Checkout'
+import PageForNotification from './pages/PageForNotification/PageForNotification'
+import Profile from './pages/Profile/Profile'
 function App() {
   const dispatch = useDispatch();
   useEffect(()=>{
@@ -75,6 +77,8 @@ function App() {
         {/* cart route */}
         <Route path='/cart' element={<Cart />} />
         <Route path='/checkout' element={<Checkout />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/notification' element={<PageForNotification />} />
         <Route path="/*" element={<PageNotFound />}></Route>
         {/* <Route path='/logout' element={<Logout/>}/>
             <Route path='/todo' element={<Todo/>}/>

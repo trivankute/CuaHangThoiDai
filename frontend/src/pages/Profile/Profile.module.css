@@ -1,0 +1,22 @@
+.container {
+    margin:0;
+    padding:20px 80px;
+    min-height:500px;
+    width:100%;
+    background-color:white;
+    margin-top:var(--header-height);
+}
+
+
+@media (max-width:990px) {
+    .container {
+        margin-top:var(--header-height-990);
+    }
+}
+
+@media (max-width:450px) {
+    .container {
+        margin-top:var(--header-height-400);
+        padding:20px;
+    }
+}

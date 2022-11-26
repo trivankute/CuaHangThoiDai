@@ -10,7 +10,7 @@
     margin-left:-50px;
     transition:all 0.1s linear;
     z-index:calc(2 + 3);
-    padding-right:15px;
+    padding-right:10px;
 }
 
 .box:hover{
