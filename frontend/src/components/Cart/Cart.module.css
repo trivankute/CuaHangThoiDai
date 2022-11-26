@@ -36,7 +36,7 @@
     border-radius:5px;
     box-shadow: var(--box-shadow);
     padding:10px;
-    z-index:2;
+    z-index:calc(2 + 3);
     color:var(--black);
     font-size:15px;
     display:flex;

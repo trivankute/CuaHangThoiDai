@@ -17,6 +17,10 @@
     margin-top:10px;
 }
 
+.page-link{
+    z-index:0;
+}
+
 @media (max-width:450px) {
     .container{
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
