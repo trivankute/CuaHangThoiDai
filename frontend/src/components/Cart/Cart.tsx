@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import styles from './Cart.module.css'
 
@@ -10,6 +11,7 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import CartItem from '../CartItem/CartItem'
 
 function Cart() {
+    const navigate = useNavigate()
     return (
         <>
             <div id="cart-btn" className={styles.icon_box} style={{ position: 'relative' }}>
@@ -25,7 +27,7 @@ function Cart() {
                     <CartItem />
                     <CartItem />
                     </div>
-                    <div className={styles.footer}>
+                    <div onClick={()=>{navigate("/cart")}} className={styles.footer}>
                         Click to see all
                     </div>
                 </div>

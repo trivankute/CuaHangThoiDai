@@ -1,6 +1,6 @@
 // for react 
 import { Routes, Route } from 'react-router-dom'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 // for boot strap
 import { Container } from 'react-bootstrap'
@@ -28,8 +28,13 @@ import Services from './pages/Services/Services'
 import Artists from './pages/Artists/Artists'
 import Blogs from './pages/Blogs/Blogs'
 import Blog from './pages/Blog/Blog'
+import Cart from './pages/Cart/Cart'
 function App() {
   const dispatch = useDispatch();
+  useEffect(()=>{
+    // change app title to 
+    document.title = "TimesRecord"
+  },[])
   return (
     <Container style={{ minHeight: "100vh", margin: 0, padding: 0 }} fluid>
       <Flash></Flash>
@@ -66,6 +71,8 @@ function App() {
         <Route path='/products/albums?artist=:artist' element={<Album />} />
         {/* album name route */}
         <Route path='/products/albums/:albumName' element={<Album />} />
+        {/* cart route */}
+        <Route path='/cart' element={<Cart />} />
         <Route path="/*" element={<PageNotFound />}></Route>
         {/* <Route path='/logout' element={<Logout/>}/>
             <Route path='/todo' element={<Todo/>}/>

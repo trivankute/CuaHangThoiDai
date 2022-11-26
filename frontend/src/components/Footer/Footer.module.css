@@ -5,6 +5,8 @@
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap:15px;
     padding:50px;
+    /* make a little border top */
+    border-top:1px solid var(--light-gray);
 }
 
 .footer .box h3{

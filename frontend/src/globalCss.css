@@ -99,3 +99,22 @@ a{
 }
 
 
+
+/* make scroll bar y smaller */
+::-webkit-scrollbar {
+    width: 5px;
+}
+/* make scroll bar exist */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+/* make scroll bar thumb */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+/* make scroll bar thumb hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
