@@ -1,8 +1,5 @@
 <?php
 function cors() {
-    foreach (getallheaders() as $name => $value) {
-        echo "$name: $value\n";
-    }
     // Allow from any origin
     if (isset($_SERVER['HTTP_ORIGIN'])) {
         // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
@@ -24,8 +21,6 @@ function cors() {
     
         exit(0);
     }
-    
-    echo "You have CORS!";
 }
 cors();
 ?>

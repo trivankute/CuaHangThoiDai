@@ -16,7 +16,7 @@ class jwt_functions {
     private $exp;
     private $payload;
     private $iat;
-    private $accessTokenTtl = 20; // seconds
+    private $accessTokenTtl = 3600; // seconds
 
     private $default;
     // constructor
@@ -55,7 +55,8 @@ class jwt_functions {
             // provided JWT is trying to be used before "iat" claim.
         } catch (ExpiredException $e) {
             // provided JWT is trying to be used after "exp" claim.'
-            echo json_encode(['status'=>"error", ["data"=>$e->getMessage()]]);
+            echo json_encode(['status'=>"error", 'data'=>['msg'=>"Token expired"]]);
+            exit();
         } catch (UnexpectedValueException $e) {
             // provided JWT is malformed OR
             // provided JWT is missing an algorithm / using an unsupported algorithm OR

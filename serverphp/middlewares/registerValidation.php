@@ -1,9 +1,12 @@
 <?php
-    $password = $_SERVER['POST']['password'];
-    $confirmPassword = $_SERVER['POST']['confirmPassword'];
+    $body = file_get_contents('php://input');
+    $body = json_decode($body);
+    $password = $body->password;
+    $confirmPassword = $body->confirmPassword;
     if($password !== $confirmPassword)
     {
-        echo json_encode(["status"=>"error","data"=>["msg"=>"Passwords do not match"]])
+        echo json_encode(["status"=>"error","data"=>["msg"=>"Passwords do not match"]]);
+        exit();
     }
 
 ?>
