@@ -65,7 +65,7 @@
 .login_box {
     border-radius:25px;
     position:relative;
-    margin-left:auto;
+    /* margin-left:auto; */
 }
 
 .login_box h3 {
@@ -126,13 +126,19 @@
     border-radius:100%;
     cursor:pointer;
 }
-.icon_cart{
-    cursor:pointer;
-}
+
 
 @media (max-width:990px){
     .navbar{
         padding:var(--header-padding-990);
+    }
+    .navbar_brand{
+        width:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        margin-bottom:-40px;
+        font-size: var(--header-navbar_brand_size-400);
     }
 }
 
@@ -140,8 +146,6 @@
     .navbar{
         padding:var(--header-padding-400);
     }
-    .navbar_brand{
-        font-size: var(--header-navbar_brand_size-400);
-    }
+
 }
 
