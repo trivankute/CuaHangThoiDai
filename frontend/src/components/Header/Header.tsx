@@ -54,7 +54,6 @@ function Header() {
           {res ? <>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <div className={styles.service_icons}>
-              <Cart />
               <div id="login-btn" className={clsx(styles.icon_box, styles.login_box)}>
                 {/* <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} />
                   <div className={styles.login_box_hover}>
@@ -74,7 +73,7 @@ function Header() {
                   <a className={styles.login_box_hover_link}> Log out</a>
                 </div>
               </div>
-
+              <Cart />
               {/* log in r */}
             </div>
             <Navbar.Collapse id="responsive-navbar-nav" >

@@ -59,6 +59,42 @@
     border-right:14px solid transparent;
 }
 
+.header{
+    width:100%;
+    height:30px;
+    background-color:white;
+    font-size:18px;
+    font-weight:500px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--font-family);
+    margin-bottom:10px;
+}
+
+.footer{
+    width:100%;
+    height:30px;
+    background-color: white;
+    margin-top:20px;
+    font-size:18px;
+    font-weight:500px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--font-family);
+    outline-offset: -1px;
+    outline: var(--outline);
+    cursor:pointer;
+}
+
+/* add hover to footer */
+.footer:hover{
+    outline-offset:0px;
+    outline:var(--outline-hover);
+
+}
+
 @media (max-width:990px){
     .icon_box{
         margin-left:auto;

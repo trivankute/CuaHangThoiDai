@@ -16,11 +16,17 @@ function Cart() {
                 <FontAwesomeIcon className={clsx(styles.icon,styles.icon_cart)} icon={faShoppingCart as IconProp} />
                 <NumberTop position={'left'} number={2} />
                 <div className={clsx(styles.box_hover)}>
+                    <div className={styles.header}>
+                        Your cart
+                    </div>
                     <div style={{maxHeight:300, overflowY:"auto"}}>
                     <CartItem />
                     <CartItem />
                     <CartItem />
                     <CartItem />
+                    </div>
+                    <div className={styles.footer}>
+                        Click to see all
                     </div>
                 </div>
             </div>
