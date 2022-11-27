@@ -31,6 +31,7 @@ import Blog from './pages/Blog/Blog'
 import Cart from './pages/Cart/Cart'
 import Checkout from './pages/Checkout/Checkout'
 import PageForNotification from './pages/PageForNotification/PageForNotification'
+import User from './pages/User/User'
 import Profile from './pages/Profile/Profile'
 function App() {
   const dispatch = useDispatch();
@@ -77,7 +78,9 @@ function App() {
         {/* cart route */}
         <Route path='/cart' element={<Cart />} />
         <Route path='/checkout' element={<Checkout />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/user' element={<User />}>
+          <Route path='profile' element={<Profile />}/>
+        </Route>
         <Route path='/notification' element={<PageForNotification />} />
         <Route path="/*" element={<PageNotFound />}></Route>
         {/* <Route path='/logout' element={<Logout/>}/>

@@ -1,21 +1,22 @@
 import { memo, useState, useEffect } from 'react';
-import { Outlet, useNavigate } from "react-router-dom"
 
-import styles from './ProductsLayout.module.css';
+import styles from './User.module.css';
 
-import { Container, Col, Row, Offcanvas } from 'react-bootstrap'
+import clsx from 'clsx';
+
+import { useNavigate, Outlet } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
-    faList, faCompactDisc, faMusic, faBlog, faLayerGroup, faArrowLeft, faArrowRight,
+    faList, faArrowLeft, faArrowRight,faUser, faWallet, faBell, faTicket
 } from '@fortawesome/free-solid-svg-icons'
-import clsx from "clsx"
 
-
-import ListItem from "../../components/ProductsLayout/ListItem/ListItem"
+import { Container, Row, Col, Offcanvas } from 'react-bootstrap'
 import BackNavigate from '../../components/BackNavigate/BackNavigate';
+import ListItem from '../../components/ProductsLayout/ListItem/ListItem';
 
-function ProductsLayout() {
+function User() {
     const navigate = useNavigate();
     // for offcanvas
     const [show, setShow] = useState(false);
@@ -44,9 +45,31 @@ function ProductsLayout() {
         }
     }, [])
     const [showCate, setShowCate] = useState(false)
+    function ListItemsFunction() {
+        return (
+            <>
+            <ListItem onClick={() => {
+                handleClose();
+                navigate('/user/profile')
+            }} button_style={currentPath == 'profile' ? styles.cate_button_style : ""} title={"Profile"} icon={faUser}></ListItem>
+            <ListItem onClick={() => {
+                handleClose();
+                navigate('/user/purchase')
+            }} button_style={currentPath == 'purchase' ? styles.cate_button_style : ""} title={"Purchase"} icon={faWallet}></ListItem>
+            <ListItem onClick={() => {
+                handleClose();
+                navigate('/user/notifications')
+            }} button_style={currentPath == 'notifications' ? styles.cate_button_style : ""} title={"Notifications"} icon={faBell}></ListItem>
+            <ListItem onClick={() => {
+                handleClose();
+                navigate('/user/vouchers')
+            }} button_style={currentPath == 'vouchers' ? styles.cate_button_style : ""} title={"Vouchers"} icon={faTicket}></ListItem>
+            </>
+        )
+    }
     /////////////////////////////////////////////////////////////////////
     // for navigate application
-    const [forBackNavigate, setForBackNavigate] = useState(["/","Home","Products"])
+    const [forBackNavigate, setForBackNavigate] = useState(["/", "Home", "Products"])
     const [currentPath, setCurrentPath] = useState<string>(() => {
         const path = window.location.pathname;
         const pathArray = path.split("/");
@@ -61,29 +84,15 @@ function ProductsLayout() {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
-    
-    function ListItemsFunction() {
-        return (
-            <>
-            <ListItem onClick={()=>{handleClose();
-                navigate('/products/albums')}} button_style={currentPath == 'albums' ? styles.cate_button_style : ""} title={"Albums"} icon={faCompactDisc}></ListItem>
-            <ListItem onClick={()=>{handleClose();
-                navigate('/products/services')}} button_style={currentPath == 'services' ? styles.cate_button_style : ""} title={"Services"} icon={faLayerGroup}></ListItem>
-            <ListItem onClick={()=>{handleClose();
-                navigate('/products/artists')}} button_style={currentPath == 'artists' ? styles.cate_button_style : ""} title={"Artists"} icon={faMusic}></ListItem>
-            <ListItem onClick={()=>{handleClose();
-                navigate('/products/blogs')}} button_style={currentPath == 'blogs' ? styles.cate_button_style : ""} title={"Blogs"} icon={faBlog}></ListItem>
-            </>
-        )}
+
     return (
-        <Container fluid className={styles.container}>
+        <><Container fluid className={styles.container}>
             {/* create lay out with col-2 and col-10 */}
             <Row className={styles.row}>
-            <BackNavigate backPath={forBackNavigate[0]} backPage={forBackNavigate[1]}
-             currentPage={forBackNavigate[2]}/>
+                <BackNavigate backPath="/" backPage="Home" currentPage="Profile"></BackNavigate>
                 {res ?
                     <>
-                        <div onClick={handleShow} 
+                        <div onClick={handleShow}
                             onMouseEnter={() => setShowCate(true)}
                             onMouseLeave={() => setShowCate(false)}
                             className={clsx(styles.col_3_header, "btn btn_custom", styles.offcanvas_button)}>
@@ -121,20 +130,20 @@ function ProductsLayout() {
                                 <FontAwesomeIcon className={styles.icon} icon={faList as IconProp} />
                                 <h4>Categories</h4>
                             </div>
-                           {ListItemsFunction()}
-
+                            {ListItemsFunction()}
                         </div>
                     </Col>
                 }
                 <Col xs={res ? 12 : 9} className={styles.col_9}>
                     {/* create a box with 100% height */}
                     <div className={styles.box}>
-                        <Outlet/>
+                        <Outlet />
                     </div>
                 </Col>
             </Row>
         </Container>
+        </>
     )
 }
 
-export default memo(ProductsLayout)
+export default memo(User);
