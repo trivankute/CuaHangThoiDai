@@ -33,6 +33,7 @@ import Checkout from './pages/Checkout/Checkout'
 import PageForNotification from './pages/PageForNotification/PageForNotification'
 import User from './pages/User/User'
 import Profile from './pages/Profile/Profile'
+import Transaction from './pages/Transaction/Transaction'
 function App() {
   const dispatch = useDispatch();
   useEffect(()=>{
@@ -80,10 +81,10 @@ function App() {
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/user' element={<User />}>
           <Route path='profile' element={<Profile />}/>
+          <Route path='transactions' element={<PageForNotification />} />
         </Route>
+        <Route path='/transactions/:id' element={<Transaction />} />
         <Route path='/notification' element={<PageForNotification />} />
-        <Route path='/transactions' element={<PageForNotification />} />
-        <Route path='/transactions/:id' element={<PageForNotification />} />
         <Route path="/*" element={<PageNotFound />}></Route>
         {/* <Route path='/logout' element={<Logout/>}/>
             <Route path='/todo' element={<Todo/>}/>
