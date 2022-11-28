@@ -1,0 +1,20 @@
+.header {
+    width:100%;
+    /* little border bottom */
+    border-bottom: 1px solid var(--light-gray);
+    /* padding */
+    padding: 10px 0px;
+}
+
+.header .title {
+    
+    line-height: 1.8;
+    font-size: 18px;
+    color:var(--black);
+}
+
+.header span {
+    font-size: 15px;
+    color:var(--light-color);
+}
+

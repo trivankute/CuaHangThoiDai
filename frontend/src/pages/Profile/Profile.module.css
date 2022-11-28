@@ -5,25 +5,6 @@
     background-color: white;
 }
 
-.header {
-    width:100%;
-    /* little border bottom */
-    border-bottom: 1px solid var(--light-gray);
-    /* padding */
-    padding: 10px 0px;
-}
-
-.header .title {
-    
-    line-height: 1.8;
-    font-size: 18px;
-    color:var(--black);
-}
-
-.header span {
-    font-size: 15px;
-    color:var(--light-color);
-}
 
 .body{
     width:100%;
@@ -99,6 +80,15 @@
     padding-top:10px;
     font-size:15px;
     color:var(--light-color);
+}
+
+.input {
+    border:1px solid var(--light-gray);
+    text-transform :none;
+}
+
+.upper_none {
+    text-transform: none;
 }
 
 @media (max-width:450px) {

@@ -34,6 +34,8 @@ import PageForNotification from './pages/PageForNotification/PageForNotification
 import User from './pages/User/User'
 import Profile from './pages/Profile/Profile'
 import Transaction from './pages/Transaction/Transaction'
+import Password from './pages/Password/Password'
+import Manager from './pages/Manager/Manager'
 function App() {
   const dispatch = useDispatch();
   useEffect(()=>{
@@ -81,30 +83,13 @@ function App() {
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/user' element={<User />}>
           <Route path='profile' element={<Profile />}/>
+          <Route path='password' element={<Password />}/>
+          <Route path='manager' element={<Manager />}/>
           <Route path='transactions' element={<PageForNotification />} />
         </Route>
         <Route path='/transactions/:id' element={<Transaction />} />
         <Route path='/notification' element={<PageForNotification />} />
         <Route path="/*" element={<PageNotFound />}></Route>
-        {/* <Route path='/logout' element={<Logout/>}/>
-            <Route path='/todo' element={<Todo/>}/>
-          </>
-          :
-          localStorage.getItem('todoapp') ?
-          <>
-            <Route index element={<Loading/>}/>
-            <Route path='/logout' element={<Loading/>}/>
-            <Route path='/todo' element={<Loading/>}/>
-          </> 
-          :
-          <>
-            <Route index element={<Home/>}/>
-          </>
-        }
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/*' element={<Error/>}/>
-        </Route> */}
       </Routes>
       <ChatAppHome />
       <Footer></Footer>

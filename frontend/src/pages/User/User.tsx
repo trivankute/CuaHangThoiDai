@@ -151,7 +151,7 @@ function User() {
                                 </Offcanvas.Title>
                             </Offcanvas.Header>
                             <Offcanvas.Body className={styles.offcanvas_body}>
-                                {ListItemsFunction("user")}
+                                {ListItemsFunction("employee")}
                             </Offcanvas.Body>
                         </Offcanvas>
                     </>
