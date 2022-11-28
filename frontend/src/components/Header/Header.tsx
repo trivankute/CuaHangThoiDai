@@ -55,7 +55,7 @@ function Header() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <div className={styles.service_icons}>
               <div id="login-btn" className={clsx(styles.icon_box, styles.login_box)}>
-                {/* <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} />
+                <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} />
                   <div className={styles.login_box_hover}>
                     <RegisterButtonAndModal linkStyle={styles.login_box_hover_link}
                      showRegister={showRegister} handleShowRegister={handleShowRegister}
@@ -65,13 +65,13 @@ function Header() {
                     <LogInButtonAndModal showLogin={showLogin} handleShowLogin={handleShowLogin}
                      handleCloseLogin={handleCloseLogin} handleShowRegister={handleShowRegister}
                       linkStyle={styles.login_box_hover_link} />
-                  </div> */}
-                <img className={styles.icon_loggedIn} src="https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c" alt="" />
+                  </div>
+                {/* <img className={styles.icon_loggedIn} src="https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c" alt="" />
                 <div className={clsx(styles.login_box_hover, styles.loggedIn)}>
                   <a onClick={()=>{navigate('/user/profile')}} className={styles.login_box_hover_link}>Profile</a>
                   <a onClick={()=>{navigate('/user/transactions')}} className={styles.login_box_hover_link}> Transaction history</a>
                   <a className={styles.login_box_hover_link}> Log out</a>
-                </div>
+                </div> */}
               </div>
               <Cart />
               {/* log in r */}
@@ -159,7 +159,7 @@ function Header() {
               <div className={styles.service_icons}>
                 <Cart />
                 <div id="login-btn" className={clsx(styles.icon_box, styles.login_box)}>
-                  {/* <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} />
+                  <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} />
                   <div className={styles.login_box_hover}>
                     <RegisterButtonAndModal linkStyle={styles.login_box_hover_link}
                      showRegister={showRegister} handleShowRegister={handleShowRegister}
@@ -169,13 +169,13 @@ function Header() {
                     <LogInButtonAndModal showLogin={showLogin} handleShowLogin={handleShowLogin}
                      handleCloseLogin={handleCloseLogin} handleShowRegister={handleShowRegister}
                       linkStyle={styles.login_box_hover_link} />
-                  </div> */}
-                  <img className={styles.icon_loggedIn} src="https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c" alt="" />
+                  </div>
+                  {/* <img className={styles.icon_loggedIn} src="https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c" alt="" />
                   <div className={clsx(styles.login_box_hover, styles.loggedIn)}>
                     <a onClick={()=>{navigate('/user/profile')}} className={styles.login_box_hover_link}>Profile</a>
                     <a onClick={()=>{navigate('/user/transactions')}} className={styles.login_box_hover_link}> Transaction history</a>
                     <a className={styles.login_box_hover_link}> Log out</a>
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* log in r */}

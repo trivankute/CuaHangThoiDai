@@ -1,0 +1,11 @@
+.container{
+    width:100%;
+    min-height:500px;
+    padding:20px;
+}
+.pagination {
+    width:100%;
+    display:flex;
+    justify-content:flex-end;
+    margin-top:20px;
+}
