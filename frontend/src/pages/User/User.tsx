@@ -9,7 +9,7 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
-    faList, faArrowLeft, faArrowRight,faUser, faWallet, faBell, faTicket, faKey, faUsers
+    faList, faArrowLeft, faArrowRight,faUser, faWallet, faBell, faKey, faUsers
     ,faUpload, faStore, faBlog
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -85,10 +85,10 @@ function User() {
                         handleClose();
                         navigate('/user/notifications')
                     }} button_style={currentPath == 'notifications' ? styles.cate_button_style : ""} title={"Notifications"} icon={faBell}></ListItem>
-                    <ListItem onClick={() => {
+                    {/* <ListItem onClick={() => {
                         handleClose();
                         navigate('/user/vouchers')
-                    }} button_style={currentPath == 'vouchers' ? styles.cate_button_style : ""} title={"Vouchers"} icon={faTicket}></ListItem>
+                    }} button_style={currentPath == 'vouchers' ? styles.cate_button_style : ""} title={"Vouchers"} icon={faTicket}></ListItem> */}
                     </>
                 );
             case "employee":
