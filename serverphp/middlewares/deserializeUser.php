@@ -17,7 +17,7 @@
         $global_user->setInformation(
             $decoded->data->email,
             $decoded->data->username,
-            $decoded->data->password,
+            null,
             $decoded->data->role,
             $decoded->data->avatar,
         );

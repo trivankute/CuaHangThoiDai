@@ -16,7 +16,7 @@
             $this->conn = $conn;
         }
 
-        public function setInformation($email, $username, $password,$role,$avt = 'https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c')
+        public function setInformation($email, $username, $password=null,$role,$avt = 'https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c')
         {
             $this->email = $email;
             $this->username = $username;
