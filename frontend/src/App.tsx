@@ -82,6 +82,8 @@ function App() {
           <Route path='profile' element={<Profile />}/>
         </Route>
         <Route path='/notification' element={<PageForNotification />} />
+        <Route path='/transactions' element={<PageForNotification />} />
+        <Route path='/transactions/:id' element={<PageForNotification />} />
         <Route path="/*" element={<PageNotFound />}></Route>
         {/* <Route path='/logout' element={<Logout/>}/>
             <Route path='/todo' element={<Todo/>}/>
