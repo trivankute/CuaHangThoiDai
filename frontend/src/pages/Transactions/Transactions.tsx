@@ -8,7 +8,21 @@ function Transactions() {
     return (
         <>
             <div className={styles.container}>
-              <TransactionItem onClick={()=>{navigate('/transactions/1')}} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"}/>
+              <TransactionItem type="ordered online" onClick={()=>{navigate('/transactions/1',{ state:{
+                type:"order_online"
+              }})}} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"}/>
+              <TransactionItem type="ordered online" onClick={()=>{navigate('/transactions/1',{ state:{
+                type:"order_online"
+              }})}} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"}/>
+              <TransactionItem type="Picked up at store" onClick={()=>{navigate('/transactions/1',{ state:{
+                type:"pickup_at_store"
+              }})}} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"}/>
+              <TransactionItem type="Picked up at store" onClick={()=>{navigate('/transactions/1',{ state:{
+                type:"pickup_at_store"
+              }})}} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"}/>
+              <TransactionItem type="ordered online" onClick={()=>{navigate('/transactions/1',{ state:{
+                type:"order_online"
+              }})}} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"}/>
             </div>
         </>
     )

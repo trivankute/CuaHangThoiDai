@@ -1,14 +1,17 @@
 import {memo, useEffect, useState} from 'react'
-import {useLocation} from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 import BackNavigate from '../../components/BackNavigate/BackNavigate'
 
 import styles from './PageForNotification.module.css'
 import clsx from 'clsx'
 function PageForNotification() {
+    const navigate = useNavigate();
     const location = useLocation()
     const [state, setState] = useState("")
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const [btnTitle, setBtnTitle] = useState("")
+    const [btnPath, setBtnPath] = useState("")
         // scroll to top
         useEffect(() => {
             window.scrollTo(0, 0)
@@ -18,6 +21,8 @@ function PageForNotification() {
                 setTitle(data.title)
                 setDescription(data.description)
                 setState(data.state)
+                setBtnTitle(data.btn_title)
+                setBtnPath(data.btn_path)
             }
 
         }, [])
@@ -40,6 +45,11 @@ function PageForNotification() {
                     <div className={styles.content_description}>
                         {description?description:""}
                     </div>
+                </div>
+                <div onClick={()=>{navigate(btnPath?btnPath:"/",{state:{
+                    type:btnPath?"order_online":"pickup_at_store"
+                }})}} className={clsx("btn btn_custom", styles.btn)}>
+                    {btnTitle?btnTitle:"Please go back"}
                 </div>
                 </div>
             </div>

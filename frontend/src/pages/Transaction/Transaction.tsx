@@ -1,4 +1,6 @@
-import { memo } from 'react'
+import { memo, useEffect } from 'react'
+
+import {useLocation} from 'react-router-dom'
 
 import styles from "./Transaction.module.css"
 
@@ -7,6 +9,15 @@ import note_content from '../../components/CartItem/CartItem'
 import BackNavigate from '../../components/BackNavigate/BackNavigate'
 
 function Transaction() {
+  // type 1 is order_online, type 2 is pickup_at_store
+  const location = useLocation()
+  // get data from navigate
+  const type = location.state.type
+  console.log(type)
+  // scroll to top
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
 
@@ -15,38 +26,38 @@ function Transaction() {
 
         <p className={styles.note_title}>Order Summary</p>
         <p>Transaction ID: 222333</p>
-        <p>Name: Trinh Tri Van</p>
-        <p>Phone: 113</p>
-        <p>Address: Hoa Lo prison</p>
+        {
+          type === "order_online" ? (
+            <>
+          <p>Name: Trinh Tri Van</p>
+          <p>Phone: 113</p>
+          <p>Address: Hoa Lo prison</p>
+            </>
+          ) : (
+          <p>Guest picked up at store</p>
+          )
+        }
         <p>Time: 19:43 22/12/2022</p>
 
-        <CartItem />
-        <div className={styles.note}>
-          <div className={styles.note_title}>
-            Note:
-                    </div>
-          <div className={styles.note_content}>
+        <CartItem type="transaction_history"/>
+        {
+          type === "order_online" &&
+          <div className={styles.note}>
+            <div className={styles.note_title}>
+              Note:
+                      </div>
+            <div className={styles.note_content}>
 
+            </div>
           </div>
-        </div>
+        }
         <div className={styles.buy}>
           <div className={styles.totalPrice}>
             <p>Subtotal: $ 27.99</p>
             <p>Shipping: $ 0</p>
             <p>Total to pay : $ 27.99</p>
-                    </div>
-          <div className={styles.icons}>
-            Choose your payment method
-                  <div>
-                      <img src="https://img.icons8.com/color/48/000000/visa.png"></img>
-                      <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png"></img>
-                      <img src="https://img.icons8.com/color/48/000000/maestro.png"></img>
-                  </div>
-
-          </div>
         </div>
-        <button className={styles.btn}>Place order</button>
-        <button className={styles.btn}>Update</button>
+        </div>
       </div>
     </>
   )

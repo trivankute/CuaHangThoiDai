@@ -1,0 +1,20 @@
+.container{
+    width:100%;
+    min-height:500px;
+    padding:20px;
+    background-color: white;
+}
+.searchResults {
+    margin-top:20px;
+    max-height:300px;
+    overflow-y:auto;
+}
+.totalPrice{
+    margin-top:20px;
+
+}
+.btn{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}

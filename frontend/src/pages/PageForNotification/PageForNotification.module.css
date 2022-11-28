@@ -76,6 +76,10 @@
     color:var(--red);
 }
 
+.btn{
+    margin-bottom:20px;
+}
+
 @media (max-width:990px) {
     .container {
         margin-top:var(--header-height-990);

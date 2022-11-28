@@ -11,7 +11,7 @@ function Customers() {
             <div className={styles.container}>
                 <Header title="Manages your customers" content="Here you can manage your customers." />
                 <div>
-                    <Form className="d-flex">
+                    <Form className="d-flex mt-3">
                         <Form.Control
                             type="search"
                             placeholder="Search"

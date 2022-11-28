@@ -22,6 +22,16 @@
   font-size: 18px;
 }
 
+.box2 {
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.box2 span {
+  color:var(--orange)
+}
+
 .id{
   text-decoration: underline;
 

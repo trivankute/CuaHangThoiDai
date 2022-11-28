@@ -3,8 +3,8 @@ import {memo} from 'react';
 import styles from "./TransactionItem.module.css"
 
 
-function TransactionItem({state,transaction_id, delivery_parner, time,onClick}:{onClick:any,state:any,transaction_id:any,delivery_parner:any,time:any}) {
-
+function TransactionItem({type, state,transaction_id, delivery_parner, time,onClick}:{type:any,onClick:any,state:any,transaction_id:any,delivery_parner:any,time:any}) {
+// type1 is order_online, type2 is pickup_at_store
     return (
         <>
             <div className={styles.box}>
@@ -15,6 +15,9 @@ function TransactionItem({state,transaction_id, delivery_parner, time,onClick}:{
               </div>
               <div className={styles.box2}>
                   <button onClick={onClick} className="btn btn_custom ">View more</button>
+                  <span>
+                  {type}
+                  </span>
               </div>
 
 

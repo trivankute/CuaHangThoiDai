@@ -23,19 +23,19 @@ function Cart() {
                     Your cart:
                 </div>
                 <div className={styles.cartItems}>
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
 
                 </div>
                 <div className={styles.footer}>

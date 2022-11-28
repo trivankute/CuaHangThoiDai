@@ -39,14 +39,17 @@ function Checkout() {
     }
 
     function handleSubmit(){
-        console.log({
-            province:province.data.name,
-            district:district,
-            ward:ward
-        })
+        // console.log({
+        //     province:province.data.name,
+        //     district:district,
+        //     ward:ward
+        // })
         navigate('/notification', {state:{state:"success",
-            title:"Your order has been placed",
-         description:"Thank you for shopping with us"}})
+        title:"Your order has been placed",
+        description:"Thank you for shopping with us",
+        btn_title:"See your order",
+        btn_path:"/transactions/1"
+        }})
     }
     return (
         <div className={styles.container}>

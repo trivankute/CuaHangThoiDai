@@ -22,10 +22,10 @@ function Cart() {
                         Your cart
                     </div>
                     <div style={{maxHeight:300, overflowY:"auto"}}>
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
-                    <CartItem />
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
+                    <CartItem type="in_cart"/>
                     </div>
                     <div onClick={()=>{navigate("/cart")}} className={styles.footer}>
                         Click to see all

@@ -9,8 +9,8 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
-    faList, faArrowLeft, faArrowRight,faUser, faWallet, faBell, faKey, faUsers
-    ,faUpload, faStore, faBlog
+    faList, faArrowLeft, faArrowRight, faUser, faBell, faKey, faUsers, faHelmetSafety
+    , faUpload, faStore, faBlog, faMoneyBill, faClockRotateLeft
 } from '@fortawesome/free-solid-svg-icons'
 
 import { Container, Row, Col, Offcanvas } from 'react-bootstrap'
@@ -64,60 +64,107 @@ function User() {
         }
     }, [])
     const [showCate, setShowCate] = useState(false)
-    function ListItemsFunction(type:any) {
+    function ListItemsFunction(type: any) {
         switch (type) {
             case "user":
                 return (
                     <>
-                    <ListItem onClick={() => {
-                        handleClose();
-                        navigate('/user/profile')
-                    }} button_style={currentPath == 'profile' ? styles.cate_button_style : ""} title={"Profile"} icon={faUser}></ListItem>
-                    <ListItem onClick={() => {
-                        handleClose();
-                        navigate('/user/password')
-                    }} button_style={currentPath == 'password' ? styles.cate_button_style : ""} title={"Password"} icon={faKey}></ListItem>
-                    <ListItem onClick={() => {
-                        handleClose();
-                        navigate('/user/transactions')
-                    }} button_style={currentPath == 'transactions' ? styles.cate_button_style : ""} title={"Transactions"} icon={faWallet}></ListItem>
-                    <ListItem onClick={() => {
-                        handleClose();
-                        navigate('/user/notifications')
-                    }} button_style={currentPath == 'notifications' ? styles.cate_button_style : ""} title={"Notifications"} icon={faBell}></ListItem>
-                    {/* <ListItem onClick={() => {
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/profile')
+                        }} button_style={currentPath == 'profile' ? styles.cate_button_style : ""} title={"Profile"} icon={faUser}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/password')
+                        }} button_style={currentPath == 'password' ? styles.cate_button_style : ""} title={"Password"} icon={faKey}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/transactions')
+                        }} button_style={currentPath == 'transactions' ? styles.cate_button_style : ""} title={"Transactions"} icon={faClockRotateLeft}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/notifications')
+                        }} button_style={currentPath == 'notifications' ? styles.cate_button_style : ""} title={"Notifications"} icon={faBell}></ListItem>
+                        {/* <ListItem onClick={() => {
                         handleClose();
                         navigate('/user/vouchers')
                     }} button_style={currentPath == 'vouchers' ? styles.cate_button_style : ""} title={"Vouchers"} icon={faTicket}></ListItem> */}
                     </>
                 );
             case "employee":
-            return (
-                <>
-                <ListItem onClick={() => {
-                    handleClose();
-                    navigate('/user/manager')
-                }} button_style={currentPath == 'manager' ? styles.cate_button_style : ""} title={"Manager"} icon={faStore}></ListItem>
-                <ListItem onClick={() => {
-                    handleClose();
-                    navigate('/user/profile')
-                }} button_style={currentPath == 'profile' ? styles.cate_button_style : ""} title={"Profile"} icon={faUser}></ListItem>
-                <ListItem onClick={() => {
-                    handleClose();
-                    navigate('/user/customers')
-                }} button_style={currentPath == 'customers' ? styles.cate_button_style : ""} title={"Customers"} icon={faUsers}></ListItem>
-                <ListItem onClick={() => {
-                    handleClose();
-                    navigate('/user/upload')
-                }} button_style={currentPath == 'upload' ? styles.cate_button_style : ""} title={"Upload"} icon={faUpload}></ListItem>
-                <ListItem onClick={() => {
-                    handleClose();
-                    navigate('/user/writeblog')
-                }} button_style={currentPath == 'writeblog' ? styles.cate_button_style : ""} title={"Write Blog"} icon={faBlog}></ListItem>
-                </>
-            )
-            default:break;
-    }}
+                return (
+                    <>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/sell')
+                        }} button_style={currentPath == 'sell' ? styles.cate_button_style : ""} title={"Sell"} icon={faMoneyBill}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/manager')
+                        }} button_style={currentPath == 'manager' ? styles.cate_button_style : ""} title={"Manager"} icon={faStore}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/profile')
+                        }} button_style={currentPath == 'profile' ? styles.cate_button_style : ""} title={"Profile"} icon={faUser}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/customers')
+                        }} button_style={currentPath == 'customers' ? styles.cate_button_style : ""} title={"Customers"} icon={faUsers}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/upload')
+                        }} button_style={currentPath == 'upload' ? styles.cate_button_style : ""} title={"Upload"} icon={faUpload}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/writeblog')
+                        }} button_style={currentPath == 'writeblog' ? styles.cate_button_style : ""} title={"Write Blog"} icon={faBlog}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/transactions')
+                        }} button_style={currentPath == 'transactions' ? styles.cate_button_style : ""} title={"Transactions"} icon={faClockRotateLeft}></ListItem>
+                    </>
+                )
+            case "admin":
+                return (
+                    <>
+
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/sell')
+                        }} button_style={currentPath == 'sell' ? styles.cate_button_style : ""} title={"Sell"} icon={faMoneyBill}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/manager')
+                        }} button_style={currentPath == 'manager' ? styles.cate_button_style : ""} title={"Manager"} icon={faStore}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/profile')
+                        }} button_style={currentPath == 'profile' ? styles.cate_button_style : ""} title={"Profile"} icon={faUser}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/customers')
+                        }} button_style={currentPath == 'customers' ? styles.cate_button_style : ""} title={"Customers"} icon={faUsers}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/employees')
+                        }} button_style={currentPath == 'employees' ? styles.cate_button_style : ""} title={"Employees"} icon={faHelmetSafety}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/upload')
+                        }} button_style={currentPath == 'upload' ? styles.cate_button_style : ""} title={"Upload"} icon={faUpload}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/writeblog')
+                        }} button_style={currentPath == 'writeblog' ? styles.cate_button_style : ""} title={"Write Blog"} icon={faBlog}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/transactions')
+                        }} button_style={currentPath == 'transactions' ? styles.cate_button_style : ""} title={"Transactions"} icon={faClockRotateLeft}></ListItem>
+                    </>
+                )
+            default: break;
+        }
+    }
     return (
         <><Container fluid className={styles.container}>
             {/* create lay out with col-2 and col-10 */}
@@ -151,7 +198,7 @@ function User() {
                                 </Offcanvas.Title>
                             </Offcanvas.Header>
                             <Offcanvas.Body className={styles.offcanvas_body}>
-                                {ListItemsFunction("employee")}
+                                {ListItemsFunction("admin")}
                             </Offcanvas.Body>
                         </Offcanvas>
                     </>
@@ -163,7 +210,7 @@ function User() {
                                 <FontAwesomeIcon className={styles.icon} icon={faList as IconProp} />
                                 <h4>Categories</h4>
                             </div>
-                            {ListItemsFunction("employee")}
+                            {ListItemsFunction("admin")}
                         </div>
                     </Col>
                 }

@@ -6,10 +6,11 @@ import clsx from 'clsx'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons'
 import image from './cd.png'
 
-function CartItem() {
+function CartItem({type}:{type:string}) {
+    // type 1 in_cart, type 2 is in transaction_history, type3 is in sell_mode
     const [quantity, setQuantity] = useState(1)
     const [price, setPrice] = useState(6.99)
     function handleMinusQuanity() {
@@ -33,6 +34,7 @@ function CartItem() {
         setPrice(quantity * 6.99)
     }, [quantity])
     
+
     return (
         <>
         <div className={styles.box}>
@@ -40,13 +42,29 @@ function CartItem() {
             <div className={styles.content}>
                 <h3>1989</h3>
                 <span>${price}</span>
-                <div className={styles.quantity}>
-                    <div onClick={handleMinusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>-</div>
-                    <div className={styles.quantity_box}>{quantity}</div>
-                    <div onClick={handlePlusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>+</div>
-                </div>
+                {
+                    type=='transaction_history'?
+                    <span>Quantity: 2</span>
+                    :
+                    <div className={styles.quantity}>
+                        <div onClick={handleMinusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>-</div>
+                        <div className={styles.quantity_box}>{quantity}</div>
+                        <div onClick={handlePlusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>+</div>
+                    </div>
+                }
             </div>
-            <FontAwesomeIcon className={clsx(styles.icon, "ms-3")} icon={faTrash as IconProp} />
+            {
+                type=="in_cart"&&
+                <FontAwesomeIcon className={clsx(styles.icon, "ms-3")} icon={faTrash as IconProp} />
+            }
+            {
+                type=='transaction_history' && <></>
+            }
+            {
+                type=='sell_mode' && <>
+                <FontAwesomeIcon className={clsx(styles.icon, "ms-3")} icon={faPlus as IconProp} />
+                </>
+            }
         </div>
         </>
     )
