@@ -89,6 +89,7 @@ function App() {
           <Route path='password' element={<Password />}/>
           <Route path='manager' element={<Manager />}/>
           <Route path='transactions' element={<Transactions />} />
+          <Route path='upload' element={<Upload />} />
         </Route>
         <Route path='/transactions/:id' element={<Transaction />} />
         <Route path='/notification' element={<PageForNotification />} />

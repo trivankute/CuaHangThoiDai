@@ -151,7 +151,7 @@ function User() {
                                 </Offcanvas.Title>
                             </Offcanvas.Header>
                             <Offcanvas.Body className={styles.offcanvas_body}>
-                                {ListItemsFunction("user")}
+                                {ListItemsFunction("employee")}
                             </Offcanvas.Body>
                         </Offcanvas>
                     </>
@@ -163,7 +163,7 @@ function User() {
                                 <FontAwesomeIcon className={styles.icon} icon={faList as IconProp} />
                                 <h4>Categories</h4>
                             </div>
-                            {ListItemsFunction("user")}
+                            {ListItemsFunction("employee")}
                         </div>
                     </Col>
                 }
