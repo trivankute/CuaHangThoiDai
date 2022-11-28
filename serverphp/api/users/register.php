@@ -11,7 +11,7 @@
                 'username' => $_POST['username'],
                 'password' => $_POST['password'],
                 'role' => $_POST['role'],
-            ];
+        ];
             if($body['role'] != "customer") {
                 echo json_encode(['status'=>'error', 'data'=>['msg'=>'Invalid role']]);
                 exit();

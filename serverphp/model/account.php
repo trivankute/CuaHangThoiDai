@@ -36,9 +36,24 @@
         }
         public function register()
         {
-            //SELECT insert_account('giaphong@a.com','123124','','gia Phong','admin');
-            $sql = "SELECT insert_account(:email,:password,:avt,:username,:role)";
+            // check if email exist 
+            $sql = "SELECT email FROM account WHERE email = :email";
             $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':email', $this->email);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($result) {
+                    echo json_encode(['status' => 'error', 'data' => ['msg' => 'Email already exist']]);
+                    exit();
+                }
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+                exit();
+            }
+            $insertSql = "SELECT insert_account(:email,:password,:avt,:username,:role)";
+            $stmt = $this->conn->prepare($insertSql);
             $stmt->bindParam(':email', $this->email);
             $stmt->bindParam(':username', $this->username);
             // hash password
