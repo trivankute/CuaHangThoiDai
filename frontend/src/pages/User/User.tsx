@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
     faList, faArrowLeft, faArrowRight,faUser, faWallet, faBell, faTicket, faKey, faUsers
-    ,faUpload, faStore
+    ,faUpload, faStore, faBlog
 } from '@fortawesome/free-solid-svg-icons'
 
 import { Container, Row, Col, Offcanvas } from 'react-bootstrap'
@@ -113,7 +113,7 @@ function User() {
                 <ListItem onClick={() => {
                     handleClose();
                     navigate('/user/writeblog')
-                }} button_style={currentPath == 'upload' ? styles.cate_button_style : ""} title={"Upload"} icon={faUpload}></ListItem>
+                }} button_style={currentPath == 'writeblog' ? styles.cate_button_style : ""} title={"Write Blog"} icon={faBlog}></ListItem>
                 </>
             )
             default:break;

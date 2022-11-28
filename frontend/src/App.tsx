@@ -36,6 +36,8 @@ import Profile from './pages/Profile/Profile'
 import Transaction from './pages/Transaction/Transaction'
 import Password from './pages/Password/Password'
 import Manager from './pages/Manager/Manager'
+import Upload from './pages/Upload/Upload'
+
 function App() {
   const dispatch = useDispatch();
   useEffect(()=>{
