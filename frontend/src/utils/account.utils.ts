@@ -11,6 +11,9 @@ export const registerCustomer = async (input : any) => {
         if(data.status === "success") {
             return data.data.msg;
         }
+        else {
+            return data.data.msg;
+        }
     }
     catch (error : any) {
         console.log(error);

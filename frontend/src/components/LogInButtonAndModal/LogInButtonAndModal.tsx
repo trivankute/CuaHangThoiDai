@@ -6,6 +6,7 @@ import styles from './LogInButtonAndModal.module.css'
 import { Button, Modal, Form } from "react-bootstrap"
 
 import clsx from "clsx"
+import { login } from '../../utils/account.utils'
 
 function LogInButtonAndModal({ linkStyle, showLogin, handleShowLogin, handleCloseLogin, handleShowRegister }: {
     linkStyle: any, showLogin: any, handleShowLogin: any,
@@ -13,9 +14,11 @@ function LogInButtonAndModal({ linkStyle, showLogin, handleShowLogin, handleClos
 }) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const handleSubmit = (event:any) => {
-        console.log(email);
-        console.log(password);
+    const handleSubmit = async (event:any) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const result = await login({ email, password });
+        console.log(result);
     }
     return (
         <>

@@ -13,6 +13,7 @@ import Brand from '../Brand/Brand';
 import LogInButtonAndModal from "../LogInButtonAndModal/LogInButtonAndModal"
 import RegisterButtonAndModal from '../RegisterButtonAndModal/RegisterButtonAndModal';
 import Cart from '../Cart/Cart';
+import { logout } from '../../utils/account.utils';
 
 function Header() {
   // navigate
@@ -47,6 +48,10 @@ function Header() {
 
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+  const handleLogout = async  () => {
+    const result = await logout();
+    console.log(result);
+  }
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className={styles.navbar}>
@@ -70,8 +75,9 @@ function Header() {
                 <div className={clsx(styles.login_box_hover, styles.loggedIn)}>
                   <a onClick={()=>{navigate('/user/profile')}} className={styles.login_box_hover_link}>Profile</a>
                   <a onClick={()=>{navigate('/user/transactions')}} className={styles.login_box_hover_link}> Transaction history</a>
-                  <a className={styles.login_box_hover_link}> Log out</a>
+                  <a className={styles.login_box_hover_link} onClick = {handleLogout} > Log out</a>
                 </div> */}
+
               </div>
               <Cart />
               {/* log in r */}
@@ -174,7 +180,7 @@ function Header() {
                   <div className={clsx(styles.login_box_hover, styles.loggedIn)}>
                     <a onClick={()=>{navigate('/user/profile')}} className={styles.login_box_hover_link}>Profile</a>
                     <a onClick={()=>{navigate('/user/transactions')}} className={styles.login_box_hover_link}> Transaction history</a>
-                    <a className={styles.login_box_hover_link}> Log out</a>
+                    <a className={styles.login_box_hover_link} onClick = {handleLogout} > Log out</a>
                   </div> */}
                 </div>
 
