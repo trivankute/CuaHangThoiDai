@@ -4,12 +4,15 @@ import styles from "./Transaction.module.css"
 
 import CartItem from '../../components/CartItem/CartItem'
 import note_content from '../../components/CartItem/CartItem'
+import BackNavigate from '../../components/BackNavigate/BackNavigate'
 
 function Transaction() {
   return (
     <>
 
       <div className={styles.container}>
+        <BackNavigate backPath="/user/transactions" backPage="Transactions" currentPage="Summary"/>
+
         <p className={styles.note_title}>Order Summary</p>
         <p>Transaction ID: 222333</p>
         <p>Name: Trinh Tri Van</p>

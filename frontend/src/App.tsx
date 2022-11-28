@@ -1,4 +1,4 @@
-// for react 
+// for react
 import { Routes, Route } from 'react-router-dom'
 import { useState, useEffect } from "react"
 
@@ -43,7 +43,7 @@ import Customers from './pages/Customers/Customers'
 function App() {
   const dispatch = useDispatch();
   useEffect(()=>{
-    // change app title to 
+    // change app title to
     document.title = "TimesRecord"
   },[])
   return (
