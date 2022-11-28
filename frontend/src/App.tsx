@@ -37,6 +37,7 @@ import Transaction from './pages/Transaction/Transaction'
 import Password from './pages/Password/Password'
 import Manager from './pages/Manager/Manager'
 import Upload from './pages/Upload/Upload'
+import Transactions from './pages/Transactions/Transactions'
 
 function App() {
   const dispatch = useDispatch();
@@ -87,7 +88,7 @@ function App() {
           <Route path='profile' element={<Profile />}/>
           <Route path='password' element={<Password />}/>
           <Route path='manager' element={<Manager />}/>
-          <Route path='transactions' element={<PageForNotification />} />
+          <Route path='transactions' element={<Transactions />} />
         </Route>
         <Route path='/transactions/:id' element={<Transaction />} />
         <Route path='/notification' element={<PageForNotification />} />

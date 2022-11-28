@@ -69,7 +69,7 @@ function Header() {
                 <img className={styles.icon_loggedIn} src="https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c" alt="" />
                 <div className={clsx(styles.login_box_hover, styles.loggedIn)}>
                   <a onClick={()=>{navigate('/user/profile')}} className={styles.login_box_hover_link}>Profile</a>
-                  <a className={styles.login_box_hover_link}> Transaction history</a>
+                  <a onClick={()=>{navigate('/user/transactions')}} className={styles.login_box_hover_link}> Transaction history</a>
                   <a className={styles.login_box_hover_link}> Log out</a>
                 </div>
               </div>
@@ -173,7 +173,7 @@ function Header() {
                   <img className={styles.icon_loggedIn} src="https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c" alt="" />
                   <div className={clsx(styles.login_box_hover, styles.loggedIn)}>
                     <a onClick={()=>{navigate('/user/profile')}} className={styles.login_box_hover_link}>Profile</a>
-                    <a className={styles.login_box_hover_link}> Transaction history</a>
+                    <a onClick={()=>{navigate('/user/transactions')}} className={styles.login_box_hover_link}> Transaction history</a>
                     <a className={styles.login_box_hover_link}> Log out</a>
                   </div>
                 </div>
