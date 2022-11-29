@@ -1,3 +1,4 @@
+import {useEffect} from 'react'
 import {Toast} from 'react-bootstrap'
 import {FlashStore} from '../../redux/selectors'
 import {useDispatch, useSelector} from 'react-redux'
@@ -7,11 +8,20 @@ export default function FlashBox()
 {
     const dispatch = useDispatch()
     const flash = useSelector(FlashStore)
+    // handle close after 5s
+    useEffect(() => {
+        if(flash.flashOpen)
+        {
+            setTimeout(() => {
+                dispatch(FlashSlice.actions.handleClose(""))
+            }, 2000);
+        }
+    }, [flash.flashOpen])
     return (
         <>
         {flash.flashOpen && 
-        <div style={{display:'flex', justifyContent: 'center', position:'absolute',
-        zIndex:"2", top:'10px', left:'50%', transform:'translateX(-50%)'}}>
+        <div style={{display:'flex', justifyContent: 'center', position:'fixed',
+        zIndex:"9999", top:'10px', left:'50%', transform:'translateX(-50%)'}}>
 
         <Toast onClose = {()=>{dispatch(FlashSlice.actions.handleClose(""))}}
           className="d-inline-block m-1"
@@ -24,8 +34,7 @@ export default function FlashBox()
               className="rounded me-2"
               alt=""
             />
-            <strong className="me-auto">Flash</strong>
-            <small>11 mins ago</small>
+            <strong className="me-auto">Notification</strong>
           </Toast.Header>
           <Toast.Body>
             {flash.flashMessage}

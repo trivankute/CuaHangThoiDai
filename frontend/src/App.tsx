@@ -7,7 +7,6 @@ import { Container } from 'react-bootstrap'
 import { Card, Form, Button } from 'react-bootstrap'
 
 // for redux
-import { useDispatch } from "react-redux"
 import FlashSlice from './redux/slices/FlashSlice'
 
 // for components
@@ -43,7 +42,6 @@ import WriteBlog from './pages/WriteBlog/WriteBlog'
 import Sell from './pages/Sell/Sell'
 
 function App() {
-  const dispatch = useDispatch();
   useEffect(()=>{
     // change app title to
     document.title = "TimesRecord"

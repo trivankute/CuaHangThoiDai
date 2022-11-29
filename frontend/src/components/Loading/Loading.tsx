@@ -4,14 +4,20 @@ import styles from './Loading.module.css';
 
 import Spinner from 'react-bootstrap/Spinner';
 
-function Loading(
-) {
+function Loading({small}:{small?:boolean}) {
     return (
         <>
             <div className={styles.container}>
-            <Spinner animation="border" role="status">
+            {
+                small?
+                <Spinner size="sm" animation="border" role="status">
                 <span className="visually-hidden">Loading...</span>
-            </Spinner>
+                </Spinner>
+                :
+                <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+                </Spinner>
+            }
             </div>
         </>
     )

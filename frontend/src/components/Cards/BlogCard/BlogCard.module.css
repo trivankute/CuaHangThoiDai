@@ -3,6 +3,7 @@
     border-radius: 5px;
     box-shadow: var(--box-shadow);
     background:#fff;
+    position:relative;
 }
 .box img{
     height:250px;

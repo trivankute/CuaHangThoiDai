@@ -13,9 +13,15 @@ import Brand from '../Brand/Brand';
 import LogInButtonAndModal from "../LogInButtonAndModal/LogInButtonAndModal"
 import RegisterButtonAndModal from '../RegisterButtonAndModal/RegisterButtonAndModal';
 import Cart from '../Cart/Cart';
-import { logout } from '../../utils/account.utils';
+
+import {useSelector, useDispatch} from 'react-redux'
+import {UserStore} from '../../redux/selectors';
+import {logout} from '../../redux/slices/UserSlice'
+import FlashSlice from '../../redux/slices/FlashSlice'
 
 function Header() {
+  const dispatch = useDispatch<any>();
+  const user = useSelector(UserStore)
   // navigate
   const navigate = useNavigate();
 
@@ -49,8 +55,14 @@ function Header() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
   const handleLogout = async  () => {
-    const result = await logout();
-    console.log(result);
+    dispatch(logout())
+      .then((res:any)=>{
+        if(res.payload.status === "success")
+        {
+          dispatch(FlashSlice.actions.handleOpen({message:"Logout successfully", type:"success"}))
+          navigate('/')
+        }
+      })
   }
   return (
     <div>
@@ -60,26 +72,34 @@ function Header() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <div className={styles.service_icons}>
               <div id="login-btn" className={clsx(styles.icon_box, styles.login_box)}>
-                <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} />
-                  <div className={styles.login_box_hover}>
-                    <RegisterButtonAndModal linkStyle={styles.login_box_hover_link}
-                     showRegister={showRegister} handleShowRegister={handleShowRegister}
-                     handleCloseRegister={handleCloseRegister} handleShowLogin={handleShowLogin}
-                     />
-                    <div className={styles.seperate}>|</div>
-                    <LogInButtonAndModal showLogin={showLogin} handleShowLogin={handleShowLogin}
-                     handleCloseLogin={handleCloseLogin} handleShowRegister={handleShowRegister}
-                      linkStyle={styles.login_box_hover_link} />
-                  </div>
-                {/* <img className={styles.icon_loggedIn} src="https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c" alt="" />
-                <div className={clsx(styles.login_box_hover, styles.loggedIn)}>
-                  <a onClick={()=>{navigate('/user/profile')}} className={styles.login_box_hover_link}>Profile</a>
-                  <a onClick={()=>{navigate('/user/transactions')}} className={styles.login_box_hover_link}> Transaction history</a>
-                  <a className={styles.login_box_hover_link} onClick = {handleLogout} > Log out</a>
-                </div> */}
+              {
+                    user.data ? 
+                    <>
+                    <img className={styles.icon_loggedIn} src="https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c" alt="" />
+                    <div className={clsx(styles.login_box_hover, styles.loggedIn)}>
+                      <a onClick={()=>{navigate('/user/profile')}} className={styles.login_box_hover_link}>Profile</a>
+                      <a onClick={()=>{navigate('/user/transactions')}} className={styles.login_box_hover_link}> Transaction history</a>
+                      <a className={styles.login_box_hover_link} onClick = {handleLogout} > Log out</a>
+                    </div>
+                    </>
+                    :
+                    <>
+                    <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} />
+                    <div className={styles.login_box_hover}>
+                      <RegisterButtonAndModal linkStyle={styles.login_box_hover_link}
+                      showRegister={showRegister} handleShowRegister={handleShowRegister}
+                      handleCloseRegister={handleCloseRegister} handleShowLogin={handleShowLogin}
+                      />
+                      <div className={styles.seperate}>|</div>
+                      <LogInButtonAndModal showLogin={showLogin} handleShowLogin={handleShowLogin}
+                      handleCloseLogin={handleCloseLogin} handleShowRegister={handleShowRegister}
+                        linkStyle={styles.login_box_hover_link} />
+                    </div>
+                    </>
+                  }
 
               </div>
-              <Cart />
+              {user.data && <Cart />}
               {/* log in r */}
             </div>
             <Navbar.Collapse id="responsive-navbar-nav" >
@@ -163,25 +183,33 @@ function Header() {
                 </div>
               </Navbar.Collapse>
               <div className={styles.service_icons}>
-                <Cart />
+                {user.data && <Cart />}
                 <div id="login-btn" className={clsx(styles.icon_box, styles.login_box)}>
-                  <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} />
-                  <div className={styles.login_box_hover}>
-                    <RegisterButtonAndModal linkStyle={styles.login_box_hover_link}
-                     showRegister={showRegister} handleShowRegister={handleShowRegister}
-                     handleCloseRegister={handleCloseRegister} handleShowLogin={handleShowLogin}
-                     />
-                    <div className={styles.seperate}>|</div>
-                    <LogInButtonAndModal showLogin={showLogin} handleShowLogin={handleShowLogin}
-                     handleCloseLogin={handleCloseLogin} handleShowRegister={handleShowRegister}
-                      linkStyle={styles.login_box_hover_link} />
-                  </div>
-                  {/* <img className={styles.icon_loggedIn} src="https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c" alt="" />
-                  <div className={clsx(styles.login_box_hover, styles.loggedIn)}>
-                    <a onClick={()=>{navigate('/user/profile')}} className={styles.login_box_hover_link}>Profile</a>
-                    <a onClick={()=>{navigate('/user/transactions')}} className={styles.login_box_hover_link}> Transaction history</a>
-                    <a className={styles.login_box_hover_link} onClick = {handleLogout} > Log out</a>
-                  </div> */}
+                  {
+                    user.data ? 
+                    <>
+                    <img className={styles.icon_loggedIn} src="https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c" alt="" />
+                    <div className={clsx(styles.login_box_hover, styles.loggedIn)}>
+                      <a onClick={()=>{navigate('/user/profile')}} className={styles.login_box_hover_link}>Profile</a>
+                      <a onClick={()=>{navigate('/user/transactions')}} className={styles.login_box_hover_link}> Transaction history</a>
+                      <a className={styles.login_box_hover_link} onClick = {handleLogout} > Log out</a>
+                    </div>
+                    </>
+                    :
+                    <>
+                    <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} />
+                    <div className={styles.login_box_hover}>
+                      <RegisterButtonAndModal linkStyle={styles.login_box_hover_link}
+                      showRegister={showRegister} handleShowRegister={handleShowRegister}
+                      handleCloseRegister={handleCloseRegister} handleShowLogin={handleShowLogin}
+                      />
+                      <div className={styles.seperate}>|</div>
+                      <LogInButtonAndModal showLogin={showLogin} handleShowLogin={handleShowLogin}
+                      handleCloseLogin={handleCloseLogin} handleShowRegister={handleShowRegister}
+                        linkStyle={styles.login_box_hover_link} />
+                    </div>
+                    </>
+                  }
                 </div>
 
                 {/* log in r */}

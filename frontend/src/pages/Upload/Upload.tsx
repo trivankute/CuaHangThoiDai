@@ -12,7 +12,6 @@ function Upload() {
     const [albumType, setAlbumType] = useState("")
     const [price, setPrice] = useState("")
     const [albumImage, setAlbumImage] = useState({files:[], img:""}) 
-    const [page, setPage] = useState("")
     const [artistName, setArtistName] = useState("");
     const [artistAvatar, setArtistAvatar] = useState({files:[], img:""})
 
@@ -26,7 +25,6 @@ function Upload() {
         const data = new FormData();
         data.append("title", title);
         data.append("price", price);
-        data.append("page", page);
         data.append("artistName", artistName);
         data.append("albumType", albumType);
         data.append("artistAvatar", artistAvatar.files[0]);
@@ -52,10 +50,6 @@ function Upload() {
                                 <InputGroup.Text>Đ</InputGroup.Text>
                                 <Form.Control required type="number" aria-label="Amount (to the nearest dollar)" onChange={(e) => { setPrice(e.target.value) }} />
                             </InputGroup>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Page:</Form.Label>
-                            <Form.Control required type="text" placeholder="Album's page" onChange={(e) => { setPage(e.target.value) }} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Artist name:</Form.Label>

@@ -5,12 +5,14 @@ import styles from './BlogCard.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faCalendar} from '@fortawesome/free-solid-svg-icons'
+import Loading from '../../Loading/Loading'
 
 function BlogCard({image, title, description}:{image:any, title:string, description:string}) {
     const navigate = useNavigate()
     return (
         <>
             <div className={styles.box}>
+            <Loading/>
                 <img src={image} alt=""></img>
                 <div className={styles.content}>
                     <div className={styles.icons}>

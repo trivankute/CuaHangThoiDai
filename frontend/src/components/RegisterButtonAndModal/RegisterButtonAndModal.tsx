@@ -5,11 +5,18 @@ import styles from './RegisterButtonAndModal.module.css'
 
 import { Button, Modal, Form } from "react-bootstrap"
 
+import {useDispatch, useSelector} from 'react-redux'
+import {UserStore} from '../../redux/selectors'
+import {register} from '../../redux/slices/UserSlice'
+import FlashSlice from '../../redux/slices/FlashSlice'
+
 import clsx from "clsx"
-import { registerCustomer } from '../../utils/account.utils';
+import Loading from '../Loading/Loading'
 
 function RegisterButtonAndModal({ linkStyle, showRegister, handleShowRegister, handleCloseRegister, handleShowLogin }
     : { linkStyle: any, showRegister: any, handleShowRegister: any, handleCloseRegister: any, handleShowLogin: any }) {
+    const dispatch = useDispatch<any>()
+    const user = useSelector(UserStore)
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
@@ -23,8 +30,18 @@ function RegisterButtonAndModal({ linkStyle, showRegister, handleShowRegister, h
         data.append("username", username);
         data.append("avatar", avatar.files[0]);
         data.append("role", "customer");
-        const result = await registerCustomer(data);
-        console.log(result);
+        dispatch(register(data))
+            .then((res: any) => {
+                if (res.payload.status === "success") {
+                    handleCloseRegister();
+                    handleShowLogin();
+                    dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "success" }))
+                }
+                else {
+                    dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "danger" }))
+                }
+            })
+        // console.log(result);
         //revoke image url
         URL.revokeObjectURL(avatar.img);
         //reset state
@@ -60,13 +77,17 @@ function RegisterButtonAndModal({ linkStyle, showRegister, handleShowRegister, h
                         <div className="d-flex w-100 mb-3" style={{ height: 100 }}>
                             <img src={avatar.img} />
                         </div>}
-                    <Form.Label className={styles.link_note}>Have an account? <a
+                    <Form.Label className={clsx(styles.link_note, 'mt-3')}>Have an account? <a
                         onClick={() => { handleCloseRegister(); handleShowLogin(); }}
                         className={styles.link} href="#">Log In</a>
                     </Form.Label>
                 </Modal.Body>
                 <Modal.Footer className="d-flex justify-content-center">
-                    <Button variant="secondary" className="btn btn_custom" onClick={(e) => { handleRegisterCustomer(e) }}>
+                    <Button variant="secondary" className="btn btn_custom position-relative" onClick={(e) => { handleRegisterCustomer(e) }}>
+                        {
+                            user.loading && 
+                            <Loading small/>
+                        }
                         Sign up
                     </Button>
                 </Modal.Footer>

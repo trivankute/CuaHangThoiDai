@@ -1,6 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit'
 
-import UserSlice from './slices/UserSlide'
+import UserSlice from './slices/UserSlice'
 import FlashSlice from './slices/FlashSlice'
 
 const store = configureStore({

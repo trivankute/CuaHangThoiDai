@@ -7,6 +7,7 @@
     outline-offset: -10px;
     outline: var(--outline);
     box-shadow: var(--box-shadow);
+    position:relative;
 }
 .box:hover{
     outline-offset: 10px;
