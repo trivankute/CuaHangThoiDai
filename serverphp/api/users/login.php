@@ -1,5 +1,6 @@
 <?php
     include_once __DIR__ .'/../../global/index.php';
+    include_once __DIR__ .'/../../middlewares/loginValidation.php';
     $user_request_method = $_SERVER['REQUEST_METHOD'];
     switch ($user_request_method) {
         case 'POST':

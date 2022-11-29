@@ -136,5 +136,26 @@
                 exit();
             }
         }
+        public function updateAccount($id, $email, $password, $avatar, $username, $role) {
+            $this->email = $email;
+            // hash password
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            $sql = "SELECT `update_account`(:id, :email, :password, :avatar, :username, :role) as `update_account`";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $hash);
+            $stmt->bindParam(':avatar', $avatar);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':role', $role);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $result['update_account'];
+            } catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
     }
 ?>
