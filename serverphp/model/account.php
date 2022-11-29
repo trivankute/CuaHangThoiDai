@@ -16,17 +16,19 @@
             $this->conn = $conn;
         }
 
-        public function setInformation($email, $username, $password=null,$role,$avt = 'https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c')
+        public function setInformation($email, $username, $password=null,$role,$avt = 'https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c',$id = 0)
         {
             $this->email = $email;
             $this->username = $username;
             $this->password = $password;
             $this->role = $role;
             $this->avt = $avt;
+            $this->id = $id;
         }
         public function getInformation()
         {
             return [
+                'id' => $this->id,
                 'email' => $this->email,
                 'username' => $this->username,
                 'password' => $this->password,

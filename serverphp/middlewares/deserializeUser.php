@@ -20,6 +20,7 @@
             null,
             $decoded->data->role,
             $decoded->data->avatar,
+            $decoded->data->user_id
         );
     }
     else {

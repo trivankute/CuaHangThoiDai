@@ -1,5 +1,6 @@
 <?php 
     include_once __DIR__ .'/../../global/index.php';
+    include_once __DIR__ . '/../../middlewares/requireEmployee.php';
     $user_request_method = $_SERVER['REQUEST_METHOD'];
     if ($user_request_method == "DELETE") {
         // get album id via /api/albums/delete.php?id=1

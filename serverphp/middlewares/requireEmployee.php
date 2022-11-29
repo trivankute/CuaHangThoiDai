@@ -1,5 +1,6 @@
 <?php
     include_once __DIR__ .'/../global/index.php';
+    include_once __DIR__ .'/deserializeUser.php';
 
     $info = $global_user->getInformation();
     if($info['role'] == 'employee' || $info['role'] == 'admin') {

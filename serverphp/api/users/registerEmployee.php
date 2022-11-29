@@ -1,7 +1,6 @@
 <?php
     include_once __DIR__ .'/../../global/index.php';
     include_once __DIR__ .'/../../middlewares/registerValidation.php';
-    include_once __DIR__ .'/../../middlewares/deserializeUser.php';
     include_once __DIR__ .'/../../middlewares/requireAdmin.php';
     use Cloudinary\Api\Upload\UploadApi;
     $user_request_method = $_SERVER['REQUEST_METHOD'];

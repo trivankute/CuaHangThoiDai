@@ -41,5 +41,8 @@
                 exit();
             }
         }
+        
+        public function getBlogByPageId($id) {
+        }
     }
 ?>
