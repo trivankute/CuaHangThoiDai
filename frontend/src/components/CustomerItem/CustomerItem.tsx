@@ -3,9 +3,9 @@ import { memo } from 'react'
 import styles from "./CustomerItem.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faUser, faCalendar, faMessage, faTrash, faBan } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faCalendar, faMessage, faTrash, faBan, faEye } from '@fortawesome/free-solid-svg-icons'
 
-function CustomerItem() {
+function CustomerItem({handleWarningShow}:{handleWarningShow?:any}) {
     return (
         <>
             <div className={styles.box}>
@@ -27,7 +27,8 @@ function CustomerItem() {
                 <div className={styles.serviceIcons}>
                     <FontAwesomeIcon className={styles.icon} icon={faMessage as IconProp} />
                     <FontAwesomeIcon className={styles.icon} icon={faBan as IconProp} />
-                    <FontAwesomeIcon className={styles.icon} icon={faTrash as IconProp} />
+                    <FontAwesomeIcon onClick={handleWarningShow} className={styles.icon} icon={faTrash as IconProp} />
+                    <FontAwesomeIcon className={styles.icon} icon={faEye as IconProp} />
                 </div>
 
             </div>

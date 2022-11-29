@@ -1,14 +1,25 @@
-import { memo } from 'react'
+import {memo, useState} from 'react';
 import CustomerItem from '../../components/CustomerItem/CustomerItem'
 import Header from '../../components/User/Header/Header'
 
 import styles from "./Customers.module.css"
 import {Form, Button, Pagination} from 'react-bootstrap'
 
+import Warning from '../../components/Warning/Warning'
+
 function Customers() {
+  const [isWarning, setIsWarning] = useState(false)
+  function handleWarningShow() {
+    setIsWarning(true);
+  }
+  function handleWarningClose() {
+    setIsWarning(false);
+  }
     return (
+
         <>
             <div className={styles.container}>
+              <Warning show={isWarning} handleShow={handleWarningShow} handleClose={handleWarningClose}/>
                 <Header title="Manages your customers" content="Here you can manage your customers." />
                 <div>
                     <Form className="d-flex mt-3">
@@ -22,11 +33,11 @@ function Customers() {
                     </Form>
                 </div>
                 <div>
-                    <CustomerItem />
-                    <CustomerItem />
-                    <CustomerItem />
+                  <CustomerItem handleWarningShow={handleWarningShow}/>
+                  <CustomerItem handleWarningShow={handleWarningShow}/>
+                  <CustomerItem handleWarningShow={handleWarningShow}/>
                 </div>
-                
+
 
                 <Pagination className={styles.pagination}>
                     <Pagination.First />
