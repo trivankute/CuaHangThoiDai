@@ -1,5 +1,5 @@
 
-import { memo, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 import styles from './LogInButtonAndModal.module.css'
 
@@ -21,9 +21,9 @@ function LogInButtonAndModal({ linkStyle, showLogin, handleShowLogin, handleClos
     const dispatch = useDispatch<any>()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const handleSubmit = async (event: any) => {
-        event.preventDefault();
-        event.stopPropagation();
+    const handleSubmit = async (event?: any) => {
+            event.preventDefault();
+            event.stopPropagation();
         dispatch(login({ email, password }))
             .then((res: any) => {
                 if (res.payload.status === "success") {
@@ -36,6 +36,7 @@ function LogInButtonAndModal({ linkStyle, showLogin, handleShowLogin, handleClos
                 }
             })
     }
+
     return (
         <>
             <a onClick={handleShowLogin} className={linkStyle}>
@@ -46,6 +47,7 @@ function LogInButtonAndModal({ linkStyle, showLogin, handleShowLogin, handleClos
                 <Modal.Header closeButton>
                     <Modal.Title className={styles.title}>login now</Modal.Title>
                 </Modal.Header>
+                    <Form>
                 <Modal.Body >
                     <Form.Label>Email:</Form.Label>
                     <Form.Control value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Your email" className={clsx(styles.box, "mb-3")} />
@@ -57,7 +59,7 @@ function LogInButtonAndModal({ linkStyle, showLogin, handleShowLogin, handleClos
                         className={styles.link} href="#">create now</a></Form.Label>
                 </Modal.Body>
                 <Modal.Footer className="d-flex justify-content-center">
-                    <Button variant="secondary" className="btn btn_custom position-relative" onClick={(e: any) => { handleSubmit(e); }}>
+                    <Button type="submit" variant="secondary" className="btn btn_custom position-relative" onClick={(e: any) => { handleSubmit(e); }}>
                         {
                             user.loading &&
                             <Loading small />
@@ -65,6 +67,7 @@ function LogInButtonAndModal({ linkStyle, showLogin, handleShowLogin, handleClos
                         Login Now
                     </Button>
                 </Modal.Footer>
+                        </Form>
             </Modal>
         </>
     )

@@ -89,6 +89,7 @@ h4{
     align-items:center;
     margin-left:-200px;
     transition:all 0.1s linear;
+    z-index:1000;
 }
 
 .offcanvas_button .icon{

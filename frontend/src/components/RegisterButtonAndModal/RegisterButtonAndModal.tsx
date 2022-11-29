@@ -56,6 +56,7 @@ function RegisterButtonAndModal({ linkStyle, showRegister, handleShowRegister, h
                 <Modal.Header closeButton>
                     <Modal.Title className={styles.title}>register now</Modal.Title>
                 </Modal.Header>
+                <Form>
                 <Modal.Body >
                     <Form.Label>Email:</Form.Label>
                     <Form.Control type="email" placeholder="Your email" className={clsx(styles.box, "mb-3")} onChange={(e) => setEmail(e.target.value)} />
@@ -83,7 +84,7 @@ function RegisterButtonAndModal({ linkStyle, showRegister, handleShowRegister, h
                     </Form.Label>
                 </Modal.Body>
                 <Modal.Footer className="d-flex justify-content-center">
-                    <Button variant="secondary" className="btn btn_custom position-relative" onClick={(e) => { handleRegisterCustomer(e) }}>
+                    <Button type="submit" variant="secondary" className="btn btn_custom position-relative" onClick={(e) => { handleRegisterCustomer(e) }}>
                         {
                             user.loading && 
                             <Loading small/>
@@ -91,6 +92,7 @@ function RegisterButtonAndModal({ linkStyle, showRegister, handleShowRegister, h
                         Sign up
                     </Button>
                 </Modal.Footer>
+                </Form>
             </Modal>
         </>
     )

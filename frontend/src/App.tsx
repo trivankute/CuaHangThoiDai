@@ -94,6 +94,7 @@ function App() {
           <Route path='upload' element={<Upload />} />
           <Route path='customers' element={<Customers />} />
           <Route path='writeblog' element={<WriteBlog />} />
+          <Route path='writeblog/preview' element={<Blog />} />
           <Route path='sell' element={<Sell />} />
           <Route path='employees' element={<Employees />} />
         </Route>

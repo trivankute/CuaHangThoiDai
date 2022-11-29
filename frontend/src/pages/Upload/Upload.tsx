@@ -75,7 +75,7 @@ function Upload() {
                             />
                         </Form.Group>
                         {albumImage.img &&
-                            <div className="d-flex w-100 mb-3" style={{ height: 100 }}>
+                            <div className="d-flex w-100 mt-3 mb-3" style={{ height: 100 }}>
                                 <img src={albumImage.img} />
                         </div>}
                         <Form.Group className="position-relative mb-3">
@@ -89,7 +89,7 @@ function Upload() {
                             />
                         </Form.Group>
                         {artistAvatar.img &&
-                            <div className="d-flex w-100 mb-3" style={{ height: 100 }}>
+                            <div className="d-flex w-100 mt-3 mb-3" style={{ height: 100 }}>
                                 <img src={artistAvatar.img} />
                         </div>}
                         <Button variant="primary" type="submit">
