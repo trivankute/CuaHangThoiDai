@@ -108,5 +108,36 @@
                 exit();
             }
         }
+        public function updateBlog($id, $topic, $headline, $content) {
+            $sql = "SELECT `update_blog`(:id,:topic,:headline,:content) AS `update_blog`";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':topic', $topic);
+            $stmt->bindParam(':headline', $headline);
+            $stmt->bindParam(':content', $content);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $result['update_blog'];
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+                exit();
+            }
+        }
+        public function deleteBlog($id) {
+            $sql = "SELECT `delete_blog`(:id) AS `delete_blog`";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $result['delete_blog'];
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+                exit();
+            }
+        }
     }
 ?>

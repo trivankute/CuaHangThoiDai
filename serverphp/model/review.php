@@ -34,5 +34,37 @@
                 exit();
             }
         }
+        
+        public function deleteReview($id) {
+            $sql = "SELECT `delete_review`(:id) AS `delete_review`";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $result['delete_review'];
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+                exit();
+            }
+        }
+
+        public function updateReview($id,$content,$score) {
+            $sql = "SELECT `update_review`(:content,:score,:id) AS `update_review`";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':content', $content);
+            $stmt->bindParam(':score', $score);
+            $stmt->bindParam(':id', $id);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $result['update_review'];
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+                exit();
+            }
+        }
     }
 ?>

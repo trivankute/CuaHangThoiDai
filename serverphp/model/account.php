@@ -123,5 +123,18 @@
                 exit();
             }
         }
+        public function deleteAccount($id) {
+            $sql = "SELECT `delete_account`(:id) as `delete_account`";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $result['delete_account'];
+            } catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
     }
 ?>

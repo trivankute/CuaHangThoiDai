@@ -2,13 +2,15 @@
     include_once __DIR__ .'/../global/index.php';
     class Page {
         private $id;
-
+        private $albumCount = 8;
+        private $blogCount = 4;
         public function __construct($conn = null) {
             $this->conn = $conn;
         }
 
         public function getAlbumByPageId($id) {
-            $sql = "SELECT * FROM album WHERE page = $id";
+            $offset = ($id-1) * $this->albumCount;
+            $sql = "SELECT * FROM `album` LIMIT $offset, $this->albumCount";
             $stmt = $this->conn->prepare($sql);
             try {
                 $albums = [];
@@ -59,7 +61,8 @@
         }
         
         public function getBlogByPageId($id) {
-            $sql = "SELECT * FROM blog WHERE page = $id";
+            $offset = ($id-1) * $this->blogCount;
+            $sql = "SELECT * FROM `blog` LIMIT $offset, $this->blogCount";
             $stmt = $this->conn->prepare($sql);
             try {
                 $blogs = [];

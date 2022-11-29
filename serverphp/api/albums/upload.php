@@ -1,6 +1,6 @@
 <?php 
     include_once __DIR__ .'/../../global/index.php';
-    include_once __DIR__ . '/../../middlewares/requireEmployee.php';
+    include_once __DIR__ .'/../../middlewares/requireEmployee.php';
     use Cloudinary\Api\Upload\UploadApi;
     $user_request_method = $_SERVER['REQUEST_METHOD'];
     if ($user_request_method == 'POST') {
