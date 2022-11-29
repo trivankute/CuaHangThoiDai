@@ -2,7 +2,7 @@
     include_once __DIR__ .'/../global/index.php';
     include_once __DIR__ .'/deserializeUser.php';
 
-    $info = $global_user->getInformation();
+    $info = $global_account->getInformation();
     if($info) {
         //next();
     }

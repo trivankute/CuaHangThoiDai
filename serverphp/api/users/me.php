@@ -8,7 +8,7 @@
                 'status'=>'success',
                 'data'=>[
                     'msg'=>'Get user success',
-                    'user'=>$global_user->getInformation()
+                    'user'=>$global_account->getInformation()
                 ]
             ]);
             break;

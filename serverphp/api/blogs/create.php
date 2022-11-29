@@ -8,7 +8,7 @@
         $headline = $_POST['headline'];
         $content = $_POST['content'];
         $avatar = $_FILES['image'];
-        $employee_id = $global_user->getInformation()['id'];
+        $employee_id = $global_account->getInformation()['id'];
         $global_blog->setInformation($topic, $headline,$content, $employee_id);
         if($global_blog->create()) {
             $uploader = new UploadApi();

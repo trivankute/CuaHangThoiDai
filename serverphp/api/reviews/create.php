@@ -7,7 +7,7 @@
         $content = $body->content;
         $score = $body->score;
         $album_id = $_GET['albumId'];
-        $user_id = $global_user->getInformation()['id'];
+        $user_id = $global_account->getInformation()['id'];
         $global_review->setInformation($score, $content, $album_id, $user_id);
         $result = $global_review->createReview(); 
         if ($result) {

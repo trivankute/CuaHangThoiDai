@@ -14,7 +14,7 @@
     // if token is valid
     if($decoded) {
         // stored decoded data in res.locals
-        $global_user->setInformation(
+        $global_account->setInformation(
             $decoded->data->email,
             $decoded->data->username,
             null,

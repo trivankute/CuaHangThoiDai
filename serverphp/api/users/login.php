@@ -7,7 +7,7 @@
             $body = json_decode($body);
             $email = $body->email;
             $password = $body->password;
-            $token = $global_user->login($email,$password);
+            $token = $global_account->login($email,$password);
             if(!$token) {
                 echo json_encode(['status'=>'error', 'data'=>['msg'=>'Invalid credentials']]);
             }
