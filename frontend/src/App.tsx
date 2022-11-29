@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 
 // for boot strap
 import { Container } from 'react-bootstrap'
-import { Card, Form, Button } from 'react-bootstrap'
 
 // for redux
 import FlashSlice from './redux/slices/FlashSlice'
@@ -41,6 +40,8 @@ import Customers from './pages/Customers/Customers'
 import WriteBlog from './pages/WriteBlog/WriteBlog'
 import Sell from './pages/Sell/Sell'
 import Employees from './pages/Employees/Employees'
+import RegisterEmployee from './pages/RegisterEmployee/RegisterEmployee'
+
 
 function App() {
   useEffect(()=>{
@@ -97,6 +98,7 @@ function App() {
           <Route path='writeblog/preview' element={<Blog />} />
           <Route path='sell' element={<Sell />} />
           <Route path='employees' element={<Employees />} />
+          <Route path='registerEmployee' element={<RegisterEmployee />} />
         </Route>
         <Route path='/transactions/:id' element={<Transaction />} />
         <Route path='/notification' element={<PageForNotification />} />
