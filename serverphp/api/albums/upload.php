@@ -8,14 +8,12 @@
         $body = [
             'title' => $_POST['title'],
             'price' => $_POST['price'],
-            'page' => $_POST['page'],
             'artistName' => $_POST['artistName'],
             'albumType' => $_POST['albumType'],
         ];
         $global_album->setInformation(
             $body['title'],
             $body['price'],
-            $body['page'],
             $body['artistName'],
             $body['albumType']
         );

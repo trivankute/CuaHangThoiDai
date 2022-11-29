@@ -62,15 +62,12 @@
             $stmt->bindParam(':avt', $this->avt);
             $stmt->bindParam(':role', $this->role);
             try {
-                if($stmt->execute())
-                {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            } catch (PDOException $e) {
+                $stmt->execute();
+                return true;
+            }
+            catch (PDOException $e) {
                 echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
             }
         }
         public function login($email, $password)
@@ -117,13 +114,8 @@
             $stmt->bindParam(':avt', $this->avt);
             $stmt->bindParam(':email', $this->email);
             try {
-                if($stmt->execute())
-                {
-                    return true;
-                }
-                else {
-                    return false;
-                }
+                $stmt->execute();
+                return true;
             } catch (PDOException $e) {
                 echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
                 exit();

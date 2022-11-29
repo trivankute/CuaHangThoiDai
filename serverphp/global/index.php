@@ -10,6 +10,7 @@
     // models
     include_once __DIR__ . "/../model/account.php";
     include_once __DIR__ . "/../model/album.php";
+    include_once __DIR__ . "/../model/page.php";
     // cors
     include_once __DIR__ . "/../middlewares/cors.php";
 ///////////////////////////////////////////////////////
@@ -23,6 +24,7 @@
 // for model
     $global_user = new Account($global_conn);
     $global_album = new Album($global_conn);
+    $global_page = new Page($global_conn);
     // $question = new Question($conn);
 // for Tokens
     // $accessToken = false;
