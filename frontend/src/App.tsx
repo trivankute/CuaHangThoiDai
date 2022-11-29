@@ -40,6 +40,7 @@ import Transactions from './pages/Transactions/Transactions'
 import Customers from './pages/Customers/Customers'
 import WriteBlog from './pages/WriteBlog/WriteBlog'
 import Sell from './pages/Sell/Sell'
+import Employees from './pages/Employees/Employees'
 
 function App() {
   useEffect(()=>{
@@ -94,6 +95,7 @@ function App() {
           <Route path='customers' element={<Customers />} />
           <Route path='writeblog' element={<WriteBlog />} />
           <Route path='sell' element={<Sell />} />
+          <Route path='employees' element={<Employees />} />
         </Route>
         <Route path='/transactions/:id' element={<Transaction />} />
         <Route path='/notification' element={<PageForNotification />} />

@@ -59,7 +59,7 @@ function RegisterButtonAndModal({ linkStyle, showRegister, handleShowRegister, h
                 <Modal.Body >
                     <Form.Label>Email:</Form.Label>
                     <Form.Control type="email" placeholder="Your email" className={clsx(styles.box, "mb-3")} onChange={(e) => setEmail(e.target.value)} />
-                    <Form.Label>Username:</Form.Label>
+                    <Form.Label>Fullname:</Form.Label>
                     <Form.Control type="text" placeholder="Your username" className={clsx(styles.box, "mb-3")} onChange={(e) => setUsername(e.target.value)} />
                     <Form.Label>Password:</Form.Label>
                     <Form.Control type="password" placeholder="Your password" className={clsx(styles.box, "mb-3")} onChange={(e) => setPassword(e.target.value)} />
