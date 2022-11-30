@@ -20,7 +20,7 @@ function Review() {
                     </div>
                     <div className={styles.reviewerNameAndDate}>
                         <div className={styles.name}>
-                            <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} /> by user
+                            <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} /> by
                             Trivan
                         </div>
                         <div className={styles.date}>

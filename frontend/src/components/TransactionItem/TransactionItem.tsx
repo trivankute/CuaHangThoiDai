@@ -20,7 +20,6 @@ function TransactionItem({type, state,transaction_id, delivery_parner, time,onCl
                   </span>
               </div>
 
-
             </div>
         </>
     )

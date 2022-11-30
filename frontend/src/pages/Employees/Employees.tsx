@@ -58,7 +58,7 @@ function Employees() {
                     {/* filter */}
                     <div className="d-flex justify-content-between mt-3 mb-3">
                         <div className="d-flex">
-                            <Form.Select aria-label="Default select example" className="me-2">
+                            <Form.Select style={{cursor:"pointer"}} aria-label="Default select example" className="me-2">
                                 <option>Sort by state</option>
                                 <option value="1">In used</option>
                                 <option value="2">Not in used</option>
@@ -69,10 +69,7 @@ function Employees() {
                         showRegister={showRegister} handleShowRegister={handleShowRegister}
                         handleCloseRegister={handleCloseRegister} 
                     />
-
-
                 </div>
-
         <div>
           Search for "trivan":
         </div>
