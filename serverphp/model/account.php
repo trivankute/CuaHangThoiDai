@@ -65,7 +65,14 @@
             $stmt->bindParam(':role', $this->role);
             try {
                 $stmt->execute();
-                return true;
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                if ($result) {
+                    return true;
+                }
+                else {
+                    echo json_encode(['status' => 'error', 'data' => ['msg' => 'Register failed']]);
+                    exit();
+                }
             }
             catch (PDOException $e) {
                 echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);

@@ -26,7 +26,13 @@
                 if($global_account->register())
                 {
                     $uploader = new UploadApi();
-                    $result = (new UploadApi())->upload($_FILES['avatar']["tmp_name"],["folder" => "cuahangthoidai/"]);
+                    try {
+                        $result = (new UploadApi())->upload($_FILES['avatar']["tmp_name"],["folder" => "cuahangthoidai/"]);
+                    }
+                    catch(Exception $e) {
+                        echo json_encode(['status'=>'error', 'data'=>['msg'=>'Update load image onto cloudinary failed']]);
+                        exit();
+                    }
                     $global_account->setAvatar($result["secure_url"]);
                     echo json_encode(['status'=>'success', 'data'=>['msg'=>'Register success']]);
                     exit();

@@ -12,7 +12,13 @@
         $global_blog->setInformation($topic, $headline,$content, $employee_id);
         if($global_blog->create()) {
             $uploader = new UploadApi();
-            $result = (new UploadApi())->upload($avatar["tmp_name"],["folder" => "cuahangthoidai/"]);
+            try {
+                $result = (new UploadApi())->upload($avatar["tmp_name"],["folder" => "cuahangthoidai/"]);
+            }
+            catch(Exception $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>'Update load image onto cloudinary failed']]);
+                exit();
+            }
             $global_blog->setAvatar($result["secure_url"]);
             echo json_encode(['status'=>'success', 'data'=>['msg'=>'Create blog success']]);
             exit();

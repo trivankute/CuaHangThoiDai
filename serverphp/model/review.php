@@ -51,7 +51,7 @@
         }
 
         public function updateReview($id,$content,$score) {
-            $sql = "SELECT `update_review`(:content,:score,:id) AS `update_review`";
+            $sql = "SELECT `update_review`(:id,:content,:score) AS `update_review`";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':content', $content);
             $stmt->bindParam(':score', $score);

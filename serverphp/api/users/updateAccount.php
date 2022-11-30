@@ -6,13 +6,6 @@
     $user_request_method = $_SERVER['REQUEST_METHOD'];
     switch ($user_request_method) {
         case 'POST':
-            // get form-data from request body
-            // $body = [
-            //     'email' => $_POST['email'],
-            //     'username' => $_POST['username'],
-            //     'password' => $_POST['password'],
-            //     'role' => $_POST['role'],
-            // ];
             $email = $_POST['email'];
             $username = $_POST['username'];
             $password = $_POST['password'];
@@ -30,9 +23,21 @@
                 if($result)
                 {
                     $uploader = new UploadApi();
-                    $result = (new UploadApi())->upload($_FILES['avatar']["tmp_name"],["folder" => "cuahangthoidai/"]);
+                    try {
+                        $result = (new UploadApi())->upload($_FILES['avatar']["tmp_name"],["folder" => "cuahangthoidai/"]);
+                    }
+                    catch(Exception $e) {
+                        echo json_encode(['status'=>'error', 'data'=>['msg'=>'Update load image onto cloudinary failed','token' => '']]);
+                        exit();
+                    }
                     $global_account->setAvatar($result["secure_url"]);
-                    echo json_encode(['status'=>'success', 'data'=>['msg'=>'Update account success']]);
+                    echo json_encode([
+                        'status'=>'success', 
+                        'data'=>[
+                            'msg'=>'Update account success',
+                            'token' => ''
+                        ]
+                    ]);
                     exit();
                 }
                 else {

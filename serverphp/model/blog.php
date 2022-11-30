@@ -4,8 +4,6 @@
         private $headline;
         private $content;
         private $employeeId;
-        private $page;
-        private $pageSize = 4;
         private $avatar;
         private $conn;
 
@@ -34,27 +32,13 @@
             }
         }
         public function create() {
-            $sql = "SELECT `insert_blog`(:topic,:headline,:content,:employeeId,:page,:avatar) AS `insert_blog`";
+            $sql = "SELECT `insert_blog`(:topic,:headline,:content,:employeeId,:avatar) AS `insert_blog`";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':topic', $this->topic);
             $stmt->bindParam(':headline', $this->headline);
             $stmt->bindParam(':content', $this->content);
             $stmt->bindParam(':employeeId', $this->employeeId);
             $stmt->bindParam(':avatar', $this->avatar);
-            // pagination
-            $count = $this->blogsCount();
-            if($count == 0) {
-                $this->page = 1;
-            }
-            else {
-                if($count % $this->pageSize == 0) {
-                    $this->page = $count / $this->pageSize + 1;
-                }
-                else {
-                    $this->page = floor($count / $this->pageSize) + 1;
-                }
-            }
-            $stmt->bindParam(':page', $this->page);
             try {
                 $stmt->execute();
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
