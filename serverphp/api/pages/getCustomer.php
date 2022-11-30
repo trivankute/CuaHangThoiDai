@@ -3,7 +3,8 @@
     $user_request_method = $_SERVER['REQUEST_METHOD'];
     if ($user_request_method == 'GET') {
         $id = $_GET['id'];
-        $result = $global_page->getCustomerByPageId($id);
+        $customerCount = $_GET['customerCount'];
+        $result = $global_page->getCustomerByPageId($id,$customerCount);
         echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get albums by page id success', 'customers'=>$result]]);
     }
     else {
