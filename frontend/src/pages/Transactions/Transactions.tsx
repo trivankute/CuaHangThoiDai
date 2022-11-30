@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import clsx from 'clsx';
-import { Form } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 function Transactions() {
-  const [seeTotalPriceMode, setSeeTotalPriceMode] = useState(true)
+  const [seeTotalPriceMode, setSeeTotalPriceMode] = useState(false)
   const navigate = useNavigate();
 
   // scroll to top
@@ -22,11 +22,11 @@ function Transactions() {
         {
           seeTotalPriceMode ?
             <>
-              <div onClick={() => {
+              <Button onClick={() => {
                 setSeeTotalPriceMode(false)
               }}>
-                <FontAwesomeIcon icon={faArrowLeft as IconProp} className={clsx(styles.icon, 'btn btn_custom')} />
-              </div>
+                <FontAwesomeIcon icon={faArrowLeft as IconProp}/>
+              </Button>
               <div className="d-flex justify-content-between mt-3">
                         <div className="d-flex">
                             <Form.Select style={{cursor:"pointer"}} aria-label="Default select example" className="me-2">
@@ -51,9 +51,9 @@ function Transactions() {
             </>
             :
             <>
-              <div onClick={()=>{setSeeTotalPriceMode(true)}} className="btn btn_custom">
+              <Button onClick={()=>{setSeeTotalPriceMode(true)}}>
                 Statistics
-              </div>
+              </Button>
               <div className="d-flex justify-content-between mt-3 mb-3">
                         <div className="d-flex">
                             <Form.Select aria-label="Default select example" className="me-2">
