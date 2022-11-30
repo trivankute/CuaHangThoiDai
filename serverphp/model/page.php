@@ -6,6 +6,7 @@
         private $blogCount = 4;
         private $customerCount = 6;
         private $employeeCount = 6;
+        private $transactionCount = 10;
         public function __construct($conn = null) {
             $this->conn = $conn;
         }
@@ -152,7 +153,35 @@
                 exit();
             }
         }
-        public function getTotalPageAlbum() {
+        public function getTransactionByPageId($id,$transactionCount) {
+            $this->transactionCount = $transactionCount;
+            $offset = ($id-1) * $this->transactionCount;
+            $sql = "SELECT * FROM `transaction` LIMIT $offset, $this->transactionCount";
+            $stmt = $this->conn->prepare($sql);
+            try {
+                $transactions = [];
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach($result as $transaction) {
+                    $sql = "SELECT * FROM account WHERE user_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $transaction['customer_id']);
+                    $stmt->execute();
+                    $account = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $transaction['account'] = $account;
+                    //omit password
+                    unset($transaction['account']['password']);
+                    array_push($transactions, $transaction);
+                }
+                return $transactions;
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
+        public function getTotalPageAlbum($albumCount) {
+            $this->albumCount = $albumCount;
             $sql = "SELECT COUNT(*) AS total FROM album";
             $stmt = $this->conn->prepare($sql);
             try {
@@ -164,7 +193,8 @@
                 exit();
             }
         }
-        public function getTotalPageBlog() {
+        public function getTotalPageBlog($blogCount) {
+            $this->blogCount = $blogCount;
             $sql = "SELECT COUNT(*) AS total FROM blog";
             $stmt = $this->conn->prepare($sql);
             try {
@@ -176,7 +206,8 @@
                 exit();
             }
         }
-        public function getTotalPageCustomer() {
+        public function getTotalPageCustomer($customerCount) {
+            $this->customerCount = $customerCount;
             $sql = "SELECT COUNT(*) AS total FROM customer";
             $stmt = $this->conn->prepare($sql);
             try {
@@ -188,13 +219,27 @@
                 exit();
             }
         }
-        public function getTotalPageEmployee() {
+        public function getTotalPageEmployee($employeeCount) {
+            $this->employeeCount = $employeeCount;
             $sql = "SELECT COUNT(*) AS total FROM employee";
             $stmt = $this->conn->prepare($sql);
             try {
                 $stmt->execute();
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 return ceil($result['total'] / $this->employeeCount);
+            } catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
+        public function getTotalPageTransaction($transactionCount) {
+            $this->transactionCount = $transactionCount;
+            $sql = "SELECT COUNT(*) AS total FROM transaction";
+            $stmt = $this->conn->prepare($sql);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return ceil($result['total'] / $this->transactionCount);
             } catch (PDOException $e) {
                 echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
                 exit();

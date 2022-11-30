@@ -4,11 +4,14 @@
     $user_request_method = $_SERVER['REQUEST_METHOD'];
     switch ($user_request_method) {
         case 'GET':
+            $result = $global_account->getInformation();
+            // omit password 
+            unset($result['password']);
             echo json_encode([
                 'status'=>'success',
                 'data'=>[
-                    'msg'=>'Get user success',
-                    'user'=>$global_account->getInformation()
+                    'msg'=>'Get account success',
+                    'user'=>$result
                 ]
             ]);
             break;
