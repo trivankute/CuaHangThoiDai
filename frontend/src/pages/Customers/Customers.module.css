@@ -9,3 +9,9 @@
     justify-content:flex-end;
     margin-top:20px;
 }
+
+@media (min-width: 450px) {
+    .container{
+        padding:20px 0;
+    }
+}

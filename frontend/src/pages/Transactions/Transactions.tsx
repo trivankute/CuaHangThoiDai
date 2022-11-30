@@ -1,10 +1,15 @@
-import {memo} from 'react';
+import {memo, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom'
 import styles from "./Transactions.module.css"
 
 import TransactionItem from '../../components/TransactionItem/TransactionItem'
 function Transactions() {
     const navigate = useNavigate();
+    
+  // scroll to top
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
     return (
         <>
             <div className={styles.container}>

@@ -71,6 +71,16 @@
     cursor:pointer;
 }
 
-.serviceIcons .icon:hover{
-    color:var(--orange);
+
+.icon_trash:hover {
+    color:var(--red)
+}
+.icon_eye:hover {
+    color:var(--green)
+}
+.icon_ban:hover {
+    color:var(--orange)
+}
+.icon_chat:hover {
+    color:var(--blue)
 }

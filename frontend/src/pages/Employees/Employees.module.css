@@ -9,3 +9,17 @@
     justify-content:flex-end;
     margin-top:20px;
 }
+
+.register_btn {
+    margin-bottom:10px;
+    display:flex;
+    justify-content:content;
+    align-items:center;
+
+}
+
+@media (max-width:450px){
+    .container {
+        padding:20px 0px;
+    }
+}

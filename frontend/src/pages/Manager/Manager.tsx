@@ -48,12 +48,10 @@ function Manager() {
                     </Form>
                 </div>
                 <div>
-                    <Form.Select aria-label="Default select example">
-                        <option>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </Form.Select>
+                    Search for "trivan":
+                </div>
+                <div className="mt-3" style={{ color: "var(--light-color)" }}>
+                    Nothing
                 </div>
                 <div>
                     <ProductItem handleWarningShow={handleWarningShow} handleEditShow={handleEditShow} />
@@ -61,8 +59,6 @@ function Manager() {
                     <ProductItem handleWarningShow={handleWarningShow} handleEditShow={handleEditShow} />
                     <ProductItem handleWarningShow={handleWarningShow} handleEditShow={handleEditShow} />
                 </div>
-                <Header title="Searching results:" content="0" />
-
             </div>
         </>
     )
