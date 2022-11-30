@@ -47,35 +47,35 @@ function Transactions() {
               <div style={{padding:10, width:"100%"}}>
 
               </div>
-              <TransactionItem type="ordered online" onClick={() => {
+              <TransactionItem total_amount={"123.000"} type="ordered online" onClick={() => {
                 navigate('/transactions/1', {
                   state: {
                     type: "order_online"
                   }
                 })
               }} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"} />
-              <TransactionItem type="ordered online" onClick={() => {
+              <TransactionItem total_amount={"123.000"} type="ordered online" onClick={() => {
                 navigate('/transactions/1', {
                   state: {
                     type: "order_online"
                   }
                 })
               }} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"} />
-              <TransactionItem type="Picked up at store" onClick={() => {
+              <TransactionItem total_amount={"123.000"} type="Picked up at store" onClick={() => {
                 navigate('/transactions/1', {
                   state: {
                     type: "pickup_at_store"
                   }
                 })
               }} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"} />
-              <TransactionItem type="Picked up at store" onClick={() => {
+              <TransactionItem total_amount={"123.000"} type="Picked up at store" onClick={() => {
                 navigate('/transactions/1', {
                   state: {
                     type: "pickup_at_store"
                   }
                 })
               }} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"} />
-              <TransactionItem type="ordered online" onClick={() => {
+              <TransactionItem total_amount={"123.000"} type="ordered online" onClick={() => {
                 navigate('/transactions/1', {
                   state: {
                     type: "order_online"
