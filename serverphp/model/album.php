@@ -168,6 +168,21 @@ class Album {
                     $stmt->bindParam(':review_id', $review_id);
                     $stmt->execute();
                     $review = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $sql = "SELECT * FROM write_review WHERE review_id = :review_id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':review_id', $review_id);
+                    $stmt->execute();
+                    $write_review = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    // echo json_encode($write_review);
+                    $sql = "SELECT * FROM account WHERE user_id = :user_id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':user_id', $write_review[0]['customer_id']);
+                    $stmt->execute();
+                    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $review['username'] = $user['username'];
+                    $review['avatar'] = $user['avatar'];
+                    $review['date'] = $write_review[0]['date'];
+                    $review['time'] = $write_review[0]['time'];
                     array_push($reviews, $review);
                 }
                 $album['reviews'] = $reviews;
@@ -231,6 +246,21 @@ class Album {
                 $stmt->bindParam(':review_id', $review_id);
                 $stmt->execute();
                 $review = $stmt->fetch(PDO::FETCH_ASSOC);
+                $sql = "SELECT * FROM write_review WHERE review_id = :review_id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':review_id', $review_id);
+                $stmt->execute();
+                $write_review = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                // echo json_encode($write_review);
+                $sql = "SELECT * FROM account WHERE user_id = :user_id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':user_id', $write_review[0]['customer_id']);
+                $stmt->execute();
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                $review['username'] = $user['username'];
+                $review['avatar'] = $user['avatar'];
+                $review['date'] = $write_review[0]['date'];
+                $review['time'] = $write_review[0]['time'];
                 array_push($reviews, $review);
             }
             $album['reviews'] = $reviews;
