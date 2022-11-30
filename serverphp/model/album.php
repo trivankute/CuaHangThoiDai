@@ -7,6 +7,7 @@ class Album {
     private $albumType;
     private $albumAvatar;
     private $artistAvatar;
+    private $quantity;
     private $conn;
     private $page;
     private $pageSize = 8;
