@@ -4,14 +4,14 @@
 
     $user_request_method = $_SERVER['REQUEST_METHOD'];
     if($user_request_method == 'GET') {
-        $customerCount = $_GET['customerCount'];
-        $result = $global_page->getTotalPageCustomer($customerCount);
+        $transactionCount = $_GET['transactionCount'];
+        $result = $global_page->getTotalPageTransaction($transactionCount);
         if($result) {
-            echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get total page customer success', 'totalPage'=>$result]]);
+            echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get total page employee success', 'totalPage'=>$result]]);
             exit();
         }
         else {
-            echo json_encode(['status'=>'error', 'data'=>['msg'=>'Get total page customer failed']]);
+            echo json_encode(['status'=>'error', 'data'=>['msg'=>'Get total page employee failed']]);
             exit();
         }
         exit();

@@ -192,5 +192,46 @@
                 exit();
             }
         }
+        public function updatePassword($oldPassword, $newPassword) {
+            $sql = "SELECT * FROM account WHERE user_id = :user_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':user_id', $this->id);
+            try {
+                $stmt->execute();
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                if($user)
+                {
+                    // check password
+                    if(password_verify($oldPassword, $user['password']))
+                    {
+                        // hash password
+                        $hash = password_hash($newPassword, PASSWORD_DEFAULT);
+                        $sql = "UPDATE account SET password = :password WHERE user_id = :user_id";
+                        $stmt = $this->conn->prepare($sql);
+                        $stmt->bindParam(':password', $hash);
+                        $stmt->bindParam(':user_id', $this->id);
+                        try {
+                            $stmt->execute();
+                            return true;
+                        } catch (PDOException $e) {
+                            echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                            exit();
+                        }
+                    }
+                    else {
+                        echo json_encode(['status'=>'error', 'data'=>['msg'=>'Old password is incorrect']]);
+                        exit();
+                    }
+                }
+                else {
+                    echo json_encode(['status'=>'error', 'data'=>['msg'=>'User not found']]);
+                    exit();
+                }
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
     }
 ?>
