@@ -20,13 +20,13 @@ const navigate = useNavigate();
             <Modal size="lg" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                      <label style={{paddingRight:10}} htmlFor="">Username: </label>
+
                       {changeMode ? <input className={styles.input} type="text" onChange={(e: any) => { setPhone(e.target.value) }} value={username}></input> : <>{username}</>}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
                   <div style={{paddingBottom:10, paddingLeft:30}}>
-                    <label style={{paddingRight:5}} htmlFor="">Username: </label>
+                    <label style={{paddingRight:5}} htmlFor="">Full Name: </label>
                     {changeMode ? <input className={styles.input} type="text" onChange={(e: any) => { setPhone(e.target.value) }} value={username}></input> : <>{username}</>}
                   </div>
                   <div style={{paddingBottom:10, paddingLeft:30}}>

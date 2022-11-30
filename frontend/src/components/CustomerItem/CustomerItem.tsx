@@ -16,7 +16,7 @@ function CustomerItem({handleWarningShow, handleSeeDetailShow}:{handleWarningSho
                     </div>
                     <div className={styles.userNameAndDate}>
                         <div className={styles.name}>
-                            <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} /> username:
+                            <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} /> Full Name:
                             Trivan
                         </div>
                         <div className={styles.date}>
