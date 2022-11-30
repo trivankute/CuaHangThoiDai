@@ -10,8 +10,15 @@
         $address = $body->address;
         $bdate = $body->bdate;
         $global_user->setInformation($user_id, $gender, $phone, $address, $bdate);
-        $global_user->updateInformation();
-        echo json_encode(['status' => 'success', 'data' => ['msg' => 'Update information successfully']]);
+        $result = $global_user->updateInformation();
+        if ($result) {
+            echo json_encode(['status'=>'success', 'data'=>['msg'=>'Update user information success']]);
+            exit();
+        }
+        else {
+            echo json_encode(['status'=>'error', 'data'=>['msg'=>'Update user information failed']]);
+            exit();
+        }
     }
     else {
         echo json_encode(['status'=>'error', 'data'=>['msg'=>'Method not allowed']]);

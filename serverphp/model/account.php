@@ -164,5 +164,33 @@
                 exit();
             }
         }
+        public function updateCustomerState($id, $state) {
+            $sql = "SELECT `update_customer`(:id, :state) as `update_customer`";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':state', $state);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $result['update_customer'];
+            } catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
+        public function updateEmployeeState($id, $state) {
+            $sql = "SELECT `update_employee`(:id, :state) as `update_employee`";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':state', $state);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $result['update_employee'];
+            } catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
     }
 ?>
