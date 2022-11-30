@@ -9,9 +9,18 @@ import { Form, Button, Pagination } from 'react-bootstrap'
 import RegisterButtonAndModal from '../../components/RegisterButtonAndModal/RegisterButtonAndModal';
 import clsx from 'clsx';
 import EmployeeItem from '../../components/EmployeeItem/EmployeeItem';
+import EmployeeModal from '../../components/EmployeeModal/EmployeeModal';
 function Employees() {
   const [isWarning, setIsWarning] = useState(false)
   const [showRegister, setShowRegister] = useState(false)
+  const [seeDetail, setSeeDetail] = useState(false)
+
+  function handleSeeDetailShow() {
+    setSeeDetail(true);
+  }
+  function handleSeeDetailClose() {
+    setSeeDetail(false);
+  }
   function handleWarningShow() {
     setIsWarning(true);
   }
@@ -32,6 +41,7 @@ function Employees() {
     <>
       <div className={styles.container}>
         <Warning show={isWarning} handleShow={handleWarningShow} handleClose={handleWarningClose} />
+        <EmployeeModal show={seeDetail} handleShow={handleSeeDetailShow} handleClose={handleSeeDetailClose} />
         <Header title="Manages your employee" content="Here you can manage your employees." />
         <div>
           <Form className="d-flex mt-3 mb-3">
@@ -71,9 +81,9 @@ function Employees() {
           Nothing
         </div>
         <div>
-          <EmployeeItem handleWarningShow={handleWarningShow} />
-          <EmployeeItem handleWarningShow={handleWarningShow} />
-          <EmployeeItem handleWarningShow={handleWarningShow} />
+          <EmployeeItem handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} />
+          <EmployeeItem handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} />
+          <EmployeeItem handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} />
         </div>
 
 

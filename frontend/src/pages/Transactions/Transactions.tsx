@@ -26,7 +26,7 @@ function Transactions() {
               }} className={styles.turnBack}>
                 <FontAwesomeIcon icon={faArrowLeft as IconProp} className={clsx(styles.icon, 'btn btn_custom')} />
               </div>
-              <div style={{padding:10, width:"100%"}}>
+              <div style={{padding:10}}>
 
               </div>
               <div className={styles.font}>
@@ -44,7 +44,7 @@ function Transactions() {
               <div onClick={()=>{setSeeTotalPriceMode(true)}} className="btn btn_custom">
                 Statistics
               </div>
-              <div style={{padding:10, width:"100%"}}>
+              <div style={{padding:10}}>
 
               </div>
               <TransactionItem total_amount={"123.000"} type="ordered online" onClick={() => {

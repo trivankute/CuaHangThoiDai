@@ -7,7 +7,7 @@ import { faUser, faCalendar, faMessage, faTrash, faBan, faEye } from '@fortaweso
 
 import clsx from 'clsx'
 
-function EmployeeItem({handleWarningShow}:{handleWarningShow?:any}) {
+function EmployeeItem({handleWarningShow, handleSeeDetailShow}:{handleWarningShow?:any, handleSeeDetailShow?:any}) {
     return(
         <>
         <div className={styles.box}>
@@ -31,7 +31,7 @@ function EmployeeItem({handleWarningShow}:{handleWarningShow?:any}) {
                 <FontAwesomeIcon className={clsx(styles.icon, styles.icon_chat)} icon={faMessage as IconProp} />
                 <FontAwesomeIcon className={clsx(styles.icon, styles.icon_ban)} icon={faBan as IconProp} />
                 <FontAwesomeIcon onClick={handleWarningShow} className={clsx(styles.icon, styles.icon_trash)} icon={faTrash as IconProp} />
-                    <FontAwesomeIcon className={clsx(styles.icon, styles.icon_eye)} icon={faEye as IconProp} />
+                <FontAwesomeIcon onClick={handleSeeDetailShow} className={clsx(styles.icon, styles.icon_eye)} icon={faEye as IconProp} />
             </div>
             <div className={clsx(styles.status, styles.notUsed)}>
                 In used
