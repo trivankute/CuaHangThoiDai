@@ -31,7 +31,7 @@ function Profile() {
                     <div className={styles.box1}>
                         <div className={styles.fullname}>
                             <div className={clsx(styles.firstName, styles.upper_none)}>
-                                <label htmlFor="">Username: </label>
+                                <label htmlFor="">Full name: </label>
                                 {changeMode ? <input className={styles.input} type="text" onChange={(e: any) => { setUsername(e.target.value) }} value={username}></input> : <>{username}</>}
                             </div>
                         </div>

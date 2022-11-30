@@ -15,6 +15,14 @@ function TransactionItem({type, state,transaction_id, delivery_parner, time,onCl
               </div>
               <div className={styles.box2}>
                   <button onClick={onClick} className="btn btn_custom ">View more</button>
+                  <div className={styles.actionLinks}>
+                    <a href="">
+                      Cancel
+                    </a>
+                    <a href="">
+                      Done
+                    </a>
+                  </div>
                   <span>
                   {type}
                   </span>

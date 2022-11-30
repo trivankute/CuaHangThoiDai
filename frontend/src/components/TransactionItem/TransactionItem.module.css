@@ -32,6 +32,27 @@
   color:var(--orange)
 }
 
+.actionLinks{
+  display:flex;
+  justify-content:space-between;
+}
+
+.actionLinks a:first-child{
+  color:var(--red);
+}
+
+.actionLinks a:last-child{
+  color:var(--green);
+}
+
+.actionLinks a:first-child:hover{
+  text-decoration:underline;
+}
+
+.actionLinks a:last-child:hover{
+  text-decoration:underline;
+}
+
 .id{
   text-decoration: underline;
 

@@ -15,6 +15,29 @@
     font-size:24px;
 }
 
+.box{
+    width:100%;
+    height:100%;
+    /* padding */
+    padding: 10px 0px;
+    background-color: white;
+    display:flex;
+    flex-direction: column;
+
+}
+
+.box label {
+    font-size: 15px;
+    color:var(--light-color);
+    margin-right:10px;
+    padding:10px;
+}
+
+
+.upper_none {
+    text-transform: none;
+}
+
 @media (max-width:990px) {
     .container {
         margin-top:var(--header-height-990);
