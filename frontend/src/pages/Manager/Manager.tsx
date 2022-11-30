@@ -1,4 +1,4 @@
-import {memo, useEffect, useState} from 'react'
+import { memo, useEffect, useState } from 'react'
 
 import styles from "./Manager.module.css"
 
@@ -32,9 +32,10 @@ function Manager() {
     return (
         <>
             <div className={styles.container}>
-                <Header title="Store Manager" content="Manage your products"/>
+                <Header title="Store Manager" content="Manage your products" />
                 <Warning show={isWarning} handleShow={handleWarningShow} handleClose={handleWarningClose} />
-                <ProductModal show={editMode} handleClose={handleEditClose}/>
+                <ProductModal show={editMode}
+                    handleClose={handleEditClose} />
                 <div>
                     <Form className="d-flex mt-3 mb-3">
                         <Form.Control
@@ -47,11 +48,21 @@ function Manager() {
                     </Form>
                 </div>
                 <div>
-                <ProductItem handleWarningShow={handleWarningShow} handleEditShow={handleEditShow}/>
-                <ProductItem handleWarningShow={handleWarningShow} handleEditShow={handleEditShow}/>
-                <ProductItem handleWarningShow={handleWarningShow} handleEditShow={handleEditShow}/>
-                <ProductItem handleWarningShow={handleWarningShow} handleEditShow={handleEditShow}/>
+                    <Form.Select aria-label="Default select example">
+                        <option>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </Form.Select>
                 </div>
+                <div>
+                    <ProductItem handleWarningShow={handleWarningShow} handleEditShow={handleEditShow} />
+                    <ProductItem handleWarningShow={handleWarningShow} handleEditShow={handleEditShow} />
+                    <ProductItem handleWarningShow={handleWarningShow} handleEditShow={handleEditShow} />
+                    <ProductItem handleWarningShow={handleWarningShow} handleEditShow={handleEditShow} />
+                </div>
+                <Header title="Searching results:" content="0" />
+
             </div>
         </>
     )

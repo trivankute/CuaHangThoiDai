@@ -98,7 +98,7 @@ function Header() {
                 }
 
               </div>
-              {user.data && <Cart />}
+              <Cart />
               {/* log in r */}
             </div>
             <Navbar.Collapse id="responsive-navbar-nav" >
@@ -182,7 +182,7 @@ function Header() {
                 </div>
               </Navbar.Collapse>
               <div className={styles.service_icons}>
-                {user.data && <Cart />}
+                <Cart />
                 <div id="login-btn" className={clsx(styles.icon_box, styles.login_box)}>
                   {
                     user.data ?

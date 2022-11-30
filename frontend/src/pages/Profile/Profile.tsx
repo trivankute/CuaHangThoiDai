@@ -10,11 +10,12 @@ import Header from "../../components/User/Header/Header"
 
 function Profile() {
     const [changeMode, setChangeMode] = useState(false)
-    const [fname, setFname] = useState("Van")
-    const [lname, setLname] = useState("Trinh Tri")
+    const [username, setUsername] = useState("Van")
     const [email, setEmail] = useState("blabla@gmail.com")
     const [phone, setPhone] = useState("0123456789")
     const [gender, setGender] = useState("female")
+    const [birthday, setBirthday] = useState("2022-10-30")
+    const [address, setAddress] = useState("Ha Noi")
     const [file, setFile] = useState({file:"", img:"https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c"})
 
     // scroll to top
@@ -30,21 +31,17 @@ function Profile() {
                     <div className={styles.box1}>
                         <div className={styles.fullname}>
                             <div className={clsx(styles.firstName, styles.upper_none)}>
-                                <label htmlFor="">First name: </label>
-                                {changeMode ? <input className={styles.input} type="text" onChange={(e: any) => { setFname(e.target.value) }} value={fname}></input> : <>{fname}</>}
-                            </div>
-                            <div className={clsx(styles.lastName, styles.upper_none)}>
-                                <label htmlFor="">Last name: </label>
-                                {changeMode ? <input type="text" onChange={(e: any) => { setLname(e.target.value) }} value={lname}></input> : <>{lname} </>}
+                                <label htmlFor="">Username: </label>
+                                {changeMode ? <input className={styles.input} type="text" onChange={(e: any) => { setUsername(e.target.value) }} value={username}></input> : <>{username}</>}
                             </div>
                         </div>
                         <div className={clsx(styles.email, styles.upper_none)}>
                             <label htmlFor="">Email: </label>
-                            {changeMode ? <input type="text" onChange={(e: any) => { setEmail(e.target.value) }} value={email}></input> : <>{email}</>}
+                            {changeMode ? <input className={styles.input} type="text" onChange={(e: any) => { setEmail(e.target.value) }} value={email}></input> : <>{email}</>}
                         </div>
                         <div className={clsx(styles.phone, styles.upper_none)}>
                             <label htmlFor="">Phone: </label>
-                            {changeMode ? <input type="text" onChange={(e: any) => { setPhone(e.target.value) }} value={phone}></input> : <>{phone}</>}
+                            {changeMode ? <input className={styles.input} type="text" onChange={(e: any) => { setPhone(e.target.value) }} value={phone}></input> : <>{phone}</>}
                         </div>
                         <div className={styles.gender}>
                             <label htmlFor="">Gender: </label>
@@ -63,6 +60,14 @@ function Profile() {
                                     {gender}
                                 </>
                             }
+                        </div>
+                        <div className={clsx(styles.birthday, styles.upper_none)}>
+                            <label htmlFor="">Birthday: </label>
+                            {changeMode ? <input className={styles.input} type="text" onChange={(e: any) => { setBirthday(e.target.value) }} value={birthday}></input> : <>{birthday}</>}
+                        </div>
+                        <div className={clsx(styles.birthday, styles.upper_none)}>
+                            <label htmlFor="">Address: </label>
+                            {changeMode ? <input className={styles.input} type="text" onChange={(e: any) => { setAddress(e.target.value) }} value={address}></input> : <>{address}</>}
                         </div>
                         <div className={styles.role}>
                             <label htmlFor="">Role: </label> Customer
