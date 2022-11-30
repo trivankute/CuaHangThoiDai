@@ -15,6 +15,7 @@
     include_once __DIR__ . "/../model/blog.php";
     include_once __DIR__ . "/../model/user.php";
     include_once __DIR__ . "/../model/artist.php";
+    include_once __DIR__ . "/../model/transaction.php";
     // cors
     include_once __DIR__ . "/../middlewares/cors.php";
 ///////////////////////////////////////////////////////
@@ -33,6 +34,7 @@
     $global_review = new Review($global_conn);
     $global_user = new User($global_conn);
     $global_artist = new Artist($global_conn);
+    $global_transaction = new Transaction($global_conn);
     // $question = new Question($conn);
 // for Tokens
     // $accessToken = false;
