@@ -16,21 +16,7 @@ function Manager() {
     return (
         <>
             <div className={styles.container}>
-                <Header title="Store Manager" content="Manage your products, orders, coupons"/>
-                <div className={styles.brand_box}>
-                <Brand brand_style={styles.brand_style}/>
-                </div>
-                <div className={styles.btn_box}>
-                <div className={clsx("btn btn_custom",styles.btn)}>
-                    Manager Products
-                </div>
-                <div className={clsx("btn btn_custom",styles.btn)}>
-                    Manager Orders
-                </div>
-                <div className={clsx("btn btn_custom",styles.btn)}>
-                    Manager Vouchers
-                </div>
-                </div>
+                <Header title="Store Manager" content="Manage your products"/>
 
             </div>
         </>

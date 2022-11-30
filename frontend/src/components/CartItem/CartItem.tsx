@@ -37,35 +37,35 @@ function CartItem({type}:{type:string}) {
 
     return (
         <>
-        <div className={styles.box}>
-            <img src={image} alt=""></img>
-            <div className={styles.content}>
-                <h3>1989</h3>
-                <span>${price}</span>
+            <div className={styles.box}>
+                <img src={image} alt=""></img>
+                <div className={styles.content}>
+                    <h3>1989</h3>
+                    <span>${price}</span>
+                    {
+                        type=='transaction_history'?
+                        <span>Quantity: 2</span>
+                        :
+                        <div className={styles.quantity}>
+                            <div onClick={handleMinusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>-</div>
+                            <div className={styles.quantity_box}>{quantity}</div>
+                            <div onClick={handlePlusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>+</div>
+                        </div>
+                    }
+                </div>
                 {
-                    type=='transaction_history'?
-                    <span>Quantity: 2</span>
-                    :
-                    <div className={styles.quantity}>
-                        <div onClick={handleMinusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>-</div>
-                        <div className={styles.quantity_box}>{quantity}</div>
-                        <div onClick={handlePlusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>+</div>
-                    </div>
+                    type=="in_cart"&&
+                    <FontAwesomeIcon className={clsx(styles.icon, "ms-3")} icon={faTrash as IconProp} />
+                }
+                {
+                    type=='transaction_history' && <></>
+                }
+                {
+                    type=='sell_mode' && <>
+                    <FontAwesomeIcon className={clsx(styles.icon, "ms-3")} icon={faPlus as IconProp} />
+                    </>
                 }
             </div>
-            {
-                type=="in_cart"&&
-                <FontAwesomeIcon className={clsx(styles.icon, "ms-3")} icon={faTrash as IconProp} />
-            }
-            {
-                type=='transaction_history' && <></>
-            }
-            {
-                type=='sell_mode' && <>
-                <FontAwesomeIcon className={clsx(styles.icon, "ms-3")} icon={faPlus as IconProp} />
-                </>
-            }
-        </div>
         </>
     )
 }

@@ -9,11 +9,13 @@ class Album {
     private $artistAvatar;
     private $quantity;
     private $conn;
+    private $page;
+    private $pageSize = 8;
     public function __construct($conn = null)
     {
         $this->conn = $conn;
     }
-    public function setInformation($title, $price, $artistName, $albumType, $albumQuantity, $albumAvatar ='' , $artistAvatar = '')
+    public function setInformation($title, $price, $quantity, $artistName, $albumType, $albumAvatar ='' , $artistAvatar = '')
     {
         $this->title = $title;
         $this->price = $price;
@@ -21,7 +23,6 @@ class Album {
         $this->albumType = $albumType;
         $this->albumAvatar = $albumAvatar;
         $this->artistAvatar = $artistAvatar;
-        $this->quantity = $albumQuantity;
     }
     public function albumsCount() {
         $sql = "SELECT COUNT(*) FROM album";
@@ -41,7 +42,7 @@ class Album {
         return [
             'title' => $this->title,
             'price' => $this->price,
-            'quantity' => $this->quantity,
+            'page' => $this->page,
             'artistName' => $this->artistName,
             'albumType' => $this->albumType,
             'albumAvatar' => $this->albumAvatar,
@@ -50,15 +51,29 @@ class Album {
     }
 
     public function create() {
-        $sql = "SELECT `insert_album`(:title,:price,:artistName,:albumAvatar,:albumQuantity,:albumType,:artistAvatar) AS `insert_album`";
+        $sql = "SELECT `insert_album`(:title,:price,:page,:quantity,:artistName,:albumAvatar,:albumType,:artistAvatar) AS `insert_album`";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':title', $this->title);
         $stmt->bindParam(':price', $this->price);
+        $stmt->bindParam(':quantity', $this->quantity);
         $stmt->bindParam(':artistName', $this->artistName);
         $stmt->bindParam(':albumAvatar', $this->albumAvatar);
         $stmt->bindParam(':albumType', $this->albumType);
         $stmt->bindParam(':artistAvatar', $this->artistAvatar);
-        $stmt->bindParam(':albumQuantity', $this->quantity);
+        $count = $this->albumsCount();
+        // pagination 
+        if($count ==0) {
+            $this->page = 1;
+        }
+        else {
+            if($count % $this->pageSize == 0) {
+                $this->page = $count / $this->pageSize + 1;
+            }
+            else {
+                $this->page = floor($count / $this->pageSize) + 1;
+            }
+        }
+        $stmt->bindParam(':page', $this->page);
         try {
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -69,7 +84,7 @@ class Album {
                 return false;
             }
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
             echo json_encode(['status'=>'error', 'data'=>['msg'=>'Create album failed']]);
             exit();
         }
@@ -98,12 +113,6 @@ class Album {
             echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
             exit();
         }
-    }
-    public function setAlbumAvatarForUpdate($title, $albumType, $albumAvatar) {
-        $this->title = $title;
-        $this->albumType = $albumType;
-        $this->albumAvatar = $albumAvatar;
-        $this->updateAlbumAvatar();
     }
     public function updateAlbumAvatar() {
         $sql = "UPDATE album SET avatar = :albumAvatar WHERE title = :title AND album_type = :albumType";
@@ -160,6 +169,21 @@ class Album {
                     $stmt->bindParam(':review_id', $review_id);
                     $stmt->execute();
                     $review = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $sql = "SELECT * FROM write_review WHERE review_id = :review_id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':review_id', $review_id);
+                    $stmt->execute();
+                    $write_review = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    // echo json_encode($write_review);
+                    $sql = "SELECT * FROM account WHERE user_id = :user_id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':user_id', $write_review[0]['customer_id']);
+                    $stmt->execute();
+                    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $review['username'] = $user['username'];
+                    $review['avatar'] = $user['avatar'];
+                    $review['date'] = $write_review[0]['date'];
+                    $review['time'] = $write_review[0]['time'];
                     array_push($reviews, $review);
                 }
                 $album['reviews'] = $reviews;
@@ -223,29 +247,25 @@ class Album {
                 $stmt->bindParam(':review_id', $review_id);
                 $stmt->execute();
                 $review = $stmt->fetch(PDO::FETCH_ASSOC);
+                $sql = "SELECT * FROM write_review WHERE review_id = :review_id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':review_id', $review_id);
+                $stmt->execute();
+                $write_review = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                // echo json_encode($write_review);
+                $sql = "SELECT * FROM account WHERE user_id = :user_id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':user_id', $write_review[0]['customer_id']);
+                $stmt->execute();
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                $review['username'] = $user['username'];
+                $review['avatar'] = $user['avatar'];
+                $review['date'] = $write_review[0]['date'];
+                $review['time'] = $write_review[0]['time'];
                 array_push($reviews, $review);
             }
             $album['reviews'] = $reviews;
             return $album;
-        } catch (PDOException $e) {
-            echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
-            exit();
-        }
-    }
-
-    public function updateAlbumById($albumId, $title, $price, $avatar, $albumType, $quantity) {
-        $sql = "SELECT `update_album`(:album_id, :title, :price, :avatar, :album_type, :quantity) AS `update_album`";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':album_id', $albumId);
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':price', $price);
-        $stmt->bindParam(':avatar', $avatar);
-        $stmt->bindParam(':album_type', $albumType);
-        $stmt->bindParam(':quantity', $quantity);
-        try {
-            $stmt->execute();
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $result['update_album'];
         } catch (PDOException $e) {
             echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
             exit();

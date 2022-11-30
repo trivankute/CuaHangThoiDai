@@ -7,27 +7,21 @@
         $body = [
             'title' => $_POST['title'],
             'price' => $_POST['price'],
+            'quantity' => $_POST['quantity'],
             'artistName' => $_POST['artistName'],
             'albumType' => $_POST['albumType'],
-            'quantity' => $_POST['quantity'],
         ];
         $global_album->setInformation(
             $body['title'],
             $body['price'],
+            $body['quantity'],
             $body['artistName'],
             $body['albumType'],
-            $body['quantity']
         );
         if($global_album->create()) {
             $uploader = new UploadApi();
-            try {
-                $artistAvt = (new UploadApi())->upload($_FILES['artistAvatar']["tmp_name"],["folder" => "cuahangthoidai/"]);
+            $artistAvt = (new UploadApi())->upload($_FILES['artistAvatar']["tmp_name"],["folder" => "cuahangthoidai/"]);
             $albumAvt = (new UploadApi())->upload($_FILES['albumAvatar']["tmp_name"],["folder" => "cuahangthoidai/"]);
-            }
-            catch(Exception $e) {
-                echo json_encode(['status'=>'error', 'data'=>['msg'=>'Update load image onto cloudinary failed']]);
-                exit();
-            }
             $global_album->setAvatar($albumAvt["secure_url"], $artistAvt["secure_url"]);
             echo json_encode(['status'=>'success', 'data'=>['msg'=>'Create album success']]);
             exit();
