@@ -4,6 +4,8 @@
         private $id;
         private $albumCount = 8;
         private $blogCount = 4;
+        private $customerCount = 6;
+        private $employeeCount = 6;
         public function __construct($conn = null) {
             $this->conn = $conn;
         }
@@ -90,6 +92,106 @@
                 return $blogs;
             }
             catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
+        public function getCustomerByPageId($id) {
+            $offset = ($id-1) * $this->customerCount;
+            $sql = "SELECT * FROM `customer` LIMIT $offset, $this->customerCount";
+            $stmt = $this->conn->prepare($sql);
+            try {
+                $customers = [];
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach($result as $customer) {
+                    $sql = "SELECT * FROM account WHERE user_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $customer['customer_id']);
+                    $stmt->execute();
+                    $account = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $customer['account'] = $account;
+                    //omit password
+                    unset($customer['account']['password']);
+                    array_push($customers, $customer);
+                }
+                return $customers;
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
+        public function getEmployeeByPageId($id) {
+            $offset = ($id-1) * $this->employeeCount;
+            $sql = "SELECT * FROM `employee` LIMIT $offset, $this->employeeCount";
+            $stmt = $this->conn->prepare($sql);
+            try {
+                $employees = [];
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach($result as $employee) {
+                    $sql = "SELECT * FROM account WHERE user_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $employee['employee_id']);
+                    $stmt->execute();
+                    $account = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $employee['account'] = $account;
+                    //omit password
+                    unset($employee['account']['password']);
+                    array_push($employees, $employee);
+                }
+                return $employees;
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
+        public function getTotalPageAlbum() {
+            $sql = "SELECT COUNT(*) AS total FROM album";
+            $stmt = $this->conn->prepare($sql);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return ceil($result['total'] / $this->albumCount);
+            } catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
+        public function getTotalPageBlog() {
+            $sql = "SELECT COUNT(*) AS total FROM blog";
+            $stmt = $this->conn->prepare($sql);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return ceil($result['total'] / $this->blogCount);
+            } catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
+        public function getTotalPageCustomer() {
+            $sql = "SELECT COUNT(*) AS total FROM customer";
+            $stmt = $this->conn->prepare($sql);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return ceil($result['total'] / $this->customerCount);
+            } catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
+        public function getTotalPageEmployee() {
+            $sql = "SELECT COUNT(*) AS total FROM employee";
+            $stmt = $this->conn->prepare($sql);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return ceil($result['total'] / $this->employeeCount);
+            } catch (PDOException $e) {
                 echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
                 exit();
             }
