@@ -3,6 +3,7 @@ class Album {
     private $id;
     private $title;
     private $price;
+    private $quantity;
     private $artistName;
     private $albumType;
     private $albumAvatar;
@@ -13,10 +14,11 @@ class Album {
     {
         $this->conn = $conn;
     }
-    public function setInformation($title, $price, $artistName, $albumType, $albumQuantity, $albumAvatar ='' , $artistAvatar = '')
+    public function setInformation($title, $price, $artistName, $albumType, $albumAvatar ='' , $artistAvatar = '')
     {
         $this->title = $title;
         $this->price = $price;
+        $this->quantity = $quantity;
         $this->artistName = $artistName;
         $this->albumType = $albumType;
         $this->albumAvatar = $albumAvatar;
@@ -50,10 +52,11 @@ class Album {
     }
 
     public function create() {
-        $sql = "SELECT `insert_album`(:title,:price,:artistName,:albumAvatar,:albumQuantity,:albumType,:artistAvatar) AS `insert_album`";
+        $sql = "SELECT `insert_album`(:title,:price,:page,:artistName,:albumAvatar,:albumType,:artistAvatar) AS `insert_album`";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':title', $this->title);
         $stmt->bindParam(':price', $this->price);
+        $stmt->bindParam(':quantity', $this->quantity);
         $stmt->bindParam(':artistName', $this->artistName);
         $stmt->bindParam(':albumAvatar', $this->albumAvatar);
         $stmt->bindParam(':albumType', $this->albumType);
@@ -69,7 +72,6 @@ class Album {
                 return false;
             }
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
             echo json_encode(['status'=>'error', 'data'=>['msg'=>'Create album failed']]);
             exit();
         }

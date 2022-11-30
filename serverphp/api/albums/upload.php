@@ -7,6 +7,7 @@
         $body = [
             'title' => $_POST['title'],
             'price' => $_POST['price'],
+            'quantity' => $_POST['quantity'],
             'artistName' => $_POST['artistName'],
             'albumType' => $_POST['albumType'],
             'quantity' => $_POST['quantity'],
@@ -14,9 +15,9 @@
         $global_album->setInformation(
             $body['title'],
             $body['price'],
+            $body['quantity'],
             $body['artistName'],
-            $body['albumType'],
-            $body['quantity']
+            $body['albumType']
         );
         if($global_album->create()) {
             $uploader = new UploadApi();
