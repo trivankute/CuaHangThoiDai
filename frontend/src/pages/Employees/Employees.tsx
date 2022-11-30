@@ -21,7 +21,7 @@ function Employees() {
           <Warning show={isWarning} handleShow={handleWarningShow} handleClose={handleWarningClose}/>
             <Header title="Manages your employee" content="Here you can manage your employees." />
             <div>
-                <Form className="d-flex mt-3">
+                <Form className="d-flex mt-3 mb-3">
                     <Form.Control
                         type="search"
                         placeholder="Search"
@@ -30,6 +30,14 @@ function Employees() {
                     />
                     <Button variant="outline-success">Search</Button>
                 </Form>
+            </div>
+            <div>
+              {/* filter select*/}
+              <select className={styles.select}>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+              </select>
             </div>
             <div>
                 <CustomerItem handleWarningShow={handleWarningShow}/>

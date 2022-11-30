@@ -108,6 +108,10 @@ function User() {
                         }} button_style={currentPath == 'profile' ? styles.cate_button_style : ""} title={"Profile"} icon={faUser}></ListItem>
                         <ListItem onClick={() => {
                             handleClose();
+                            navigate('/user/password')
+                        }} button_style={currentPath == 'password' ? styles.cate_button_style : ""} title={"Password"} icon={faKey}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
                             navigate('/user/customers')
                         }} button_style={currentPath == 'customers' ? styles.cate_button_style : ""} title={"Customers"} icon={faUsers}></ListItem>
                         <ListItem onClick={() => {
@@ -140,6 +144,10 @@ function User() {
                             handleClose();
                             navigate('/user/profile')
                         }} button_style={currentPath == 'profile' ? styles.cate_button_style : ""} title={"Profile"} icon={faUser}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/password')
+                        }} button_style={currentPath == 'password' ? styles.cate_button_style : ""} title={"Password"} icon={faKey}></ListItem>
                         <ListItem onClick={() => {
                             handleClose();
                             navigate('/user/customers')

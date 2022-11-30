@@ -59,7 +59,7 @@ function Checkout() {
             </div>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Full Name:</Form.Label>
+                    <Form.Label>Receiver's full name:</Form.Label>
                     <Form.Control type="text" placeholder="Enter your full name" />
                 </Form.Group>
 

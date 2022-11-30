@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faCalendar, faMessage, faTrash, faBan, faEye } from '@fortawesome/free-solid-svg-icons'
 
-function CustomerItem({handleWarningShow}:{handleWarningShow?:any}) {
+function CustomerItem({handleWarningShow, handleSeeDetailShow}:{handleWarningShow?:any, handleSeeDetailShow?:any}) {
     return (
         <>
             <div className={styles.box}>
@@ -28,7 +28,7 @@ function CustomerItem({handleWarningShow}:{handleWarningShow?:any}) {
                     <FontAwesomeIcon className={styles.icon} icon={faMessage as IconProp} />
                     <FontAwesomeIcon className={styles.icon} icon={faBan as IconProp} />
                     <FontAwesomeIcon onClick={handleWarningShow} className={styles.icon} icon={faTrash as IconProp} />
-                    <FontAwesomeIcon className={styles.icon} icon={faEye as IconProp} />
+                    <FontAwesomeIcon onClick={handleSeeDetailShow}className={styles.icon} icon={faEye as IconProp} />
                 </div>
 
             </div>
