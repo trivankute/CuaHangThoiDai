@@ -10,7 +10,8 @@
             $this->conn = $conn;
         }
 
-        public function getAlbumByPageId($id) {
+        public function getAlbumByPageId($id,$albumCount) {
+            $this->albumCount = $albumCount;
             $offset = ($id-1) * $this->albumCount;
             $sql = "SELECT * FROM `album` LIMIT $offset, $this->albumCount";
             $stmt = $this->conn->prepare($sql);
@@ -62,7 +63,8 @@
             }
         }
         
-        public function getBlogByPageId($id) {
+        public function getBlogByPageId($id,$blogCount) {
+            $this->blogCount = $blogCount;
             $offset = ($id-1) * $this->blogCount;
             $sql = "SELECT * FROM `blog` LIMIT $offset, $this->blogCount";
             $stmt = $this->conn->prepare($sql);
@@ -96,7 +98,8 @@
                 exit();
             }
         }
-        public function getCustomerByPageId($id) {
+        public function getCustomerByPageId($id,$customerCount) {
+            $this->customerCount = $customerCount;
             $offset = ($id-1) * $this->customerCount;
             $sql = "SELECT * FROM `customer` LIMIT $offset, $this->customerCount";
             $stmt = $this->conn->prepare($sql);
@@ -122,7 +125,8 @@
                 exit();
             }
         }
-        public function getEmployeeByPageId($id) {
+        public function getEmployeeByPageId($id,$employeeCount) {
+            $this->employeeCount = $employeeCount;
             $offset = ($id-1) * $this->employeeCount;
             $sql = "SELECT * FROM `employee` LIMIT $offset, $this->employeeCount";
             $stmt = $this->conn->prepare($sql);

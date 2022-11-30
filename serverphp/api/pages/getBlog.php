@@ -3,7 +3,8 @@
     $user_request_method = $_SERVER['REQUEST_METHOD'];
     if ($user_request_method == 'GET') {
         $id = $_GET['id'];
-        $result = $global_page->getBlogByPageId($id);
+        $blogCount = $_GET['blogCount'];
+        $result = $global_page->getBlogByPageId($id,$blogCount);
         echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get albums by page id success', 'albums'=>$result]]);
     }
     else {
