@@ -1,36 +1,92 @@
-import {memo, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom'
+import { memo, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
 import styles from "./Transactions.module.css"
 
 import TransactionItem from '../../components/TransactionItem/TransactionItem'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import clsx from 'clsx';
 function Transactions() {
-    const navigate = useNavigate();
-    
+  const [seeTotalPriceMode, setSeeTotalPriceMode] = useState(true)
+  const navigate = useNavigate();
+
   // scroll to top
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
-    return (
-        <>
-            <div className={styles.container}>
-              <TransactionItem type="ordered online" onClick={()=>{navigate('/transactions/1',{ state:{
-                type:"order_online"
-              }})}} state={"on the go"} transaction_id={"1212121"} total_amount={"155.000"} delivery_parner={"Grab"} time={"11:22 12/12/2012"}/>
-              <TransactionItem type="ordered online" onClick={()=>{navigate('/transactions/1',{ state:{
-                type:"order_online"
-              }})}} state={"on the go"} transaction_id={"1212121"} total_amount={"155.000"} delivery_parner={"Grab"} time={"11:22 12/12/2012"}/>
-              <TransactionItem type="Picked up at store" onClick={()=>{navigate('/transactions/1',{ state:{
-                type:"pickup_at_store"
-              }})}} state={"on the go"} transaction_id={"1212121"} total_amount={"155.000"} delivery_parner={"Grab"} time={"11:22 12/12/2012"}/>
-              <TransactionItem type="Picked up at store" onClick={()=>{navigate('/transactions/1',{ state:{
-                type:"pickup_at_store"
-              }})}} state={"on the go"} transaction_id={"1212121"} total_amount={"155.000"} delivery_parner={"Grab"} time={"11:22 12/12/2012"}/>
-              <TransactionItem type="ordered online" onClick={()=>{navigate('/transactions/1',{ state:{
-                type:"order_online"
-              }})}} state={"on the go"} transaction_id={"1212121"} total_amount={"155.000"} delivery_parner={"Grab"} time={"11:22 12/12/2012"}/>
-            </div>
-        </>
-    )
+  return (
+    <>
+      <div className={styles.container}>
+        {
+          seeTotalPriceMode ?
+            <>
+              <div onClick={() => {
+                setSeeTotalPriceMode(false)
+              }} className={styles.turnBack}>
+                <FontAwesomeIcon icon={faArrowLeft as IconProp} className={clsx(styles.icon, 'btn btn_custom')} />
+              </div>
+              <div style={{padding:10, width:"100%"}}>
+
+              </div>
+              <div className={styles.font}>
+                From 10/10/2022 to 30/10/2022
+              </div>
+              <div className={styles.font}>
+                Total transactions: 3
+              </div>
+              <div className={styles.font}>
+                Total money: 3.000.000d
+              </div>
+            </>
+            :
+            <>
+              <div onClick={()=>{setSeeTotalPriceMode(true)}} className="btn btn_custom">
+                Statistics
+              </div>
+              <div style={{padding:10, width:"100%"}}>
+
+              </div>
+              <TransactionItem type="ordered online" onClick={() => {
+                navigate('/transactions/1', {
+                  state: {
+                    type: "order_online"
+                  }
+                })
+              }} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"} />
+              <TransactionItem type="ordered online" onClick={() => {
+                navigate('/transactions/1', {
+                  state: {
+                    type: "order_online"
+                  }
+                })
+              }} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"} />
+              <TransactionItem type="Picked up at store" onClick={() => {
+                navigate('/transactions/1', {
+                  state: {
+                    type: "pickup_at_store"
+                  }
+                })
+              }} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"} />
+              <TransactionItem type="Picked up at store" onClick={() => {
+                navigate('/transactions/1', {
+                  state: {
+                    type: "pickup_at_store"
+                  }
+                })
+              }} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"} />
+              <TransactionItem type="ordered online" onClick={() => {
+                navigate('/transactions/1', {
+                  state: {
+                    type: "order_online"
+                  }
+                })
+              }} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"} />
+            </>
+        }
+      </div>
+    </>
+  )
 }
 
 export default memo(Transactions)
