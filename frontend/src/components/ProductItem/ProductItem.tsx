@@ -22,8 +22,8 @@ function ProductItem({handleWarningShow, handleEditShow}:{handleWarningShow?:any
                     <span>${price}</span>
                     <span>Quantity: {quantity}</span>
                 </div>
-                <FontAwesomeIcon onClick={()=>{handleWarningShow();}}className={clsx(styles.icon, "ms-3")} icon={faTrash as IconProp} />
-                <FontAwesomeIcon onClick={()=>{handleEditShow(true)}} className={clsx(styles.icon, "ms-3")} icon={faPenSquare as IconProp} />
+                <FontAwesomeIcon onClick={()=>{handleWarningShow();}}className={clsx(styles.icon, styles.icon_trash, "ms-3")} icon={faTrash as IconProp} />
+                <FontAwesomeIcon onClick={()=>{handleEditShow(true)}} className={clsx(styles.icon, styles.icon_edit, "ms-3")} icon={faPenSquare as IconProp} />
             </div>
         </>
     )

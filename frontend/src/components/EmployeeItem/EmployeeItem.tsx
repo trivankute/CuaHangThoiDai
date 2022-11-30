@@ -1,11 +1,13 @@
 import {memo} from 'react';
 
-import styles from "./Employees.module.css"
+import styles from "./EmployeeItem.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faUser, faCalendar, faMessage, faTrash, faBan } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faCalendar, faMessage, faTrash, faBan, faEye } from '@fortawesome/free-solid-svg-icons'
 
-function EmployeeItem() {
+import clsx from 'clsx'
+
+function EmployeeItem({handleWarningShow}:{handleWarningShow?:any}) {
     return(
         <>
         <div className={styles.box}>
@@ -24,10 +26,16 @@ function EmployeeItem() {
                     </div>
                 </div>
             </div>
+            <div className="d-flex flex-column justify-content-between">
             <div className={styles.serviceIcons}>
-                <FontAwesomeIcon className={styles.icon} icon={faMessage as IconProp} />
-                <FontAwesomeIcon className={styles.icon} icon={faBan as IconProp} />
-                <FontAwesomeIcon className={styles.icon} icon={faTrash as IconProp} />
+                <FontAwesomeIcon className={clsx(styles.icon, styles.icon_chat)} icon={faMessage as IconProp} />
+                <FontAwesomeIcon className={clsx(styles.icon, styles.icon_ban)} icon={faBan as IconProp} />
+                <FontAwesomeIcon onClick={handleWarningShow} className={clsx(styles.icon, styles.icon_trash)} icon={faTrash as IconProp} />
+                    <FontAwesomeIcon className={clsx(styles.icon, styles.icon_eye)} icon={faEye as IconProp} />
+            </div>
+            <div className={clsx(styles.status, styles.notUsed)}>
+                In used
+            </div>
             </div>
 
         </div>

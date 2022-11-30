@@ -14,7 +14,7 @@ import clsx from "clsx"
 import Loading from '../Loading/Loading'
 
 function RegisterButtonAndModal({ linkStyle, showRegister, handleShowRegister, handleCloseRegister, handleShowLogin }
-    : { linkStyle: any, showRegister: any, handleShowRegister: any, handleCloseRegister: any, handleShowLogin: any }) {
+    : { linkStyle: any, showRegister: any, handleShowRegister: any, handleCloseRegister: any, handleShowLogin?: any }) {
     const dispatch = useDispatch<any>()
     const user = useSelector(UserStore)
     const [email, setEmail] = useState("");

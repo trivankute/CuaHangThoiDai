@@ -4,6 +4,7 @@ import styles from "./CustomerItem.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faCalendar, faMessage, faTrash, faBan, faEye } from '@fortawesome/free-solid-svg-icons'
+import clsx from 'clsx';
 
 function CustomerItem({handleWarningShow, handleSeeDetailShow}:{handleWarningShow?:any, handleSeeDetailShow?:any}) {
     return (
@@ -25,10 +26,10 @@ function CustomerItem({handleWarningShow, handleSeeDetailShow}:{handleWarningSho
                     </div>
                 </div>
                 <div className={styles.serviceIcons}>
-                    <FontAwesomeIcon className={styles.icon} icon={faMessage as IconProp} />
-                    <FontAwesomeIcon className={styles.icon} icon={faBan as IconProp} />
-                    <FontAwesomeIcon onClick={handleWarningShow} className={styles.icon} icon={faTrash as IconProp} />
-                    <FontAwesomeIcon onClick={handleSeeDetailShow}className={styles.icon} icon={faEye as IconProp} />
+                    <FontAwesomeIcon className={clsx(styles.icon, styles.icon_chat)} icon={faMessage as IconProp} />
+                    <FontAwesomeIcon className={clsx(styles.icon, styles.icon_ban)} icon={faBan as IconProp} />
+                    <FontAwesomeIcon onClick={handleWarningShow} className={clsx(styles.icon, styles.icon_trash)} icon={faTrash as IconProp} />
+                    <FontAwesomeIcon onClick={handleSeeDetailShow}className={clsx(styles.icon, styles.icon_eye)} icon={faEye as IconProp} />
                 </div>
 
             </div>
