@@ -18,6 +18,7 @@ function Checkout() {
     const [district, setDistrict] = useState<any>(null)
     const [ward, setWard] = useState<any>(null)
     const [address, setAddress] = useState<any>(null)
+    const [defaultMode, setDefaultMode] = useState(false)
 
     // scroll to top
     useEffect(() => {
