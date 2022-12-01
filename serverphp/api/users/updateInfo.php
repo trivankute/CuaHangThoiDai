@@ -9,9 +9,11 @@
         $phone = $body->phone;
         $address = $body->address;
         $bdate = $body->bdate;
+        $username = $body->username;
         $global_user->setInformation($user_id, $gender, $phone, $address, $bdate);
         $result = $global_user->updateInformation();
-        if ($result) {
+        $result1 = $global_account->updateUsername($username);
+        if ($result && $result1) {
             echo json_encode(['status'=>'success', 'data'=>['msg'=>'Update user information success']]);
             exit();
         }

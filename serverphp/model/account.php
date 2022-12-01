@@ -233,5 +233,19 @@
                 exit();
             }
         }
+        public function updateUsername($username) {
+            $this->username = $username;
+            $sql = "UPDATE account SET username = :username WHERE user_id = :user_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':username', $this->username);
+            $stmt->bindParam(':user_id', $this->id);
+            try {
+                $stmt->execute();
+                return true;
+            } catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
     }
 ?>
