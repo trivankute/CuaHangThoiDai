@@ -5,6 +5,7 @@
     width:100%;
     background-color:white;
     margin-top:var(--header-height);
+    position:relative;
 }
 
 .row{

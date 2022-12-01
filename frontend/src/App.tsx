@@ -1,6 +1,6 @@
 // for react
-import { Routes, Route } from 'react-router-dom'
-import { useState, useEffect } from "react"
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+import { useEffect } from "react"
 
 // for boot strap
 import { Container } from 'react-bootstrap'
@@ -41,28 +41,51 @@ import WriteBlog from './pages/WriteBlog/WriteBlog'
 import Sell from './pages/Sell/Sell'
 import Employees from './pages/Employees/Employees'
 import RegisterEmployee from './pages/RegisterEmployee/RegisterEmployee'
+import { useDispatch, useSelector } from 'react-redux'
+import { checkMe, getMe } from './redux/slices/UserSlice'
+import EmployeeOnly from './middlewares/EmployeeOnly'
+import LoggedIn from './middlewares/LoggedIn'
+import { UserStore } from './redux/selectors'
+import AdminOnly from './middlewares/AdminOnly'
+import AdminAndEmployeeOnly from './middlewares/AdminAndEmployeeOnly'
+
+// Private route
 
 
 function App() {
-  useEffect(()=>{
+  const user = useSelector(UserStore)
+  const dispatch = useDispatch<any>();
+  const navigate = useNavigate()
+  const location = useLocation()
+  useEffect(() => {
     // change app title to
     document.title = "TimesRecord"
-  },[])
+    // check token if success then get Me
+    dispatch(checkMe())
+      .then((res: any) => {
+        if (res.payload.status === 'success') {
+          dispatch(getMe())
+        }
+        else {
+          if (location.pathname.includes("user"))
+            navigate('/notification', {
+              state: {
+                title: "You have to log in first",
+                description: "Please go back to home page",
+                state: "error",
+                btn_title: "Go back",
+                btn_path: "/"
+              }
+            })
+        }
+      })
+  }, [location.pathname])
   return (
     <Container style={{ minHeight: "100vh", margin: 0, padding: 0 }} fluid>
       <Flash></Flash>
-      {/* <ProductsLayout/> */}
-
-      {/* <Maintenance></Maintenance> */}
-
       <Header></Header>
       <Routes>
-        {/* <Route path='/' element={<GetUser/>}>
-        {
-          user.mainData ?
-          <> */}
-        <Route path='/' element={<Home />}>
-        </Route>
+        <Route path='/' element={<Home />} />
         <Route path='/products' element={<ProductsLayout />}>
           {/* Albums route */}
           <Route path='albums' element={<Albums />}>
@@ -87,20 +110,28 @@ function App() {
         {/* cart route */}
         <Route path='/cart' element={<Cart />} />
         <Route path='/checkout' element={<Checkout />} />
-        <Route path='/user' element={<User />}>
-          <Route path='profile' element={<Profile />}/>
-          <Route path='password' element={<Password />}/>
-          <Route path='manager' element={<Manager />}/>
-          <Route path='transactions' element={<Transactions />} />
-          <Route path='upload' element={<Upload />} />
-          <Route path='customers' element={<Customers />} />
-          <Route path='writeblog' element={<WriteBlog />} />
-          <Route path='writeblog/preview' element={<Blog />} />
-          <Route path='sell' element={<Sell />} />
-          <Route path='employees' element={<Employees />} />
-          <Route path='registerEmployee' element={<RegisterEmployee />} />
+        <Route element={<LoggedIn />}>
+          <Route path='/user' element={<User />}>
+            <Route path='profile' element={<Profile />} />
+            <Route path='password' element={<Password />} />
+            <Route path='transactions' element={<Transactions />} />
+            <Route element={<AdminOnly />}>
+              <Route path='employees' element={<Employees />} />
+              <Route path='registerEmployee' element={<RegisterEmployee />} />
+            </Route>
+            <Route element={<AdminAndEmployeeOnly />}>
+              <Route path='upload' element={<Upload />} />
+              <Route path='customers' element={<Customers />} />
+              <Route path='manager' element={<Manager />} />
+              <Route path='sell' element={<Sell />} />
+            </Route>
+            <Route element={<EmployeeOnly />}>
+              <Route path='writeblog' element={<WriteBlog />} />
+              <Route path='writeblog/preview' element={<Blog />} />
+            </Route>
+          </Route>
+          <Route path='/transactions/:id' element={<Transaction />} />
         </Route>
-        <Route path='/transactions/:id' element={<Transaction />} />
         <Route path='/notification' element={<PageForNotification />} />
         <Route path="/*" element={<PageNotFound />}></Route>
       </Routes>

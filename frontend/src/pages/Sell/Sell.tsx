@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useState, useEffect } from 'react'
 
 import {useNavigate} from 'react-router-dom'
 
@@ -12,6 +12,10 @@ import { Form, Button } from 'react-bootstrap'
 
 function Sell() {
     const navigate = useNavigate();
+    // scroll to top
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
     return (
         <>
             <div className={styles.container}>
