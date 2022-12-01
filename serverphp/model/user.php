@@ -22,7 +22,7 @@ class User {
     }
 
     public function updateInformation() {
-        $sql = "SELECT `update_user`(:user_id,:gender,:phone,:address,:bdate)";
+        $sql = "SELECT `update_user`(:user_id,:gender,:phone,:address,:bdate) as `update_user`";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':user_id', $this->user_id);
         $stmt->bindParam(':gender',$this->gender);
@@ -31,7 +31,8 @@ class User {
         $stmt->bindParam(':bdate',$this->bdate);
         try {
             $stmt->execute();
-            return true;
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['update_user'];
         } catch (PDOException $e) {
             echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
             exit();
