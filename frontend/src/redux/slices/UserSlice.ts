@@ -46,19 +46,45 @@ const UserSlice = createSlice({
         .addCase(register.fulfilled, (state,action) => {
             state.loading = false
         })
+        .addCase(checkMe.pending, (state,action) => {
+            state.loading = true
+        })
+        .addCase(checkMe.fulfilled, (state,action) => {
+            state.loading = false
+            const {status, data} = action.payload
+            if(status==="error")
+            state.data = false
+        })
+        .addCase(changePassword.pending, (state,action) => {
+            state.loading = true
+        })
+        .addCase(changePassword.fulfilled, (state,action) => {
+            state.loading = false
+            const {status} = action.payload
+            if(status==="true")
+            state.data = false
+        })
+        .addCase(updateAvatar.pending, (state,action) => {
+            state.loading = true
+        })
+        .addCase(updateAvatar.fulfilled, (state,action) => {
+            state.loading = false
+            // const {status} = action.payload
+            // if(status==="true")
+            // state.data = false
+        })
     },
 })
 
-export const getMe = createAsyncThunk('getMe', async () => {
+export const checkMe = createAsyncThunk('checkMe', async () => {
     //{{host}}/api/users/me.php
     try {
-        const {data} = await axios.get(`${serverUrl}/api/users/me.php`,{
+        const {data} = await axios.get(`${serverUrl}/api/users/meAccount.php`,{
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         });
         if(data.status === 'success'){
-            console.log(data)
             return {status:"success","data":data.data.user, "msg":data.data.msg};
         }
         else {
@@ -70,6 +96,26 @@ export const getMe = createAsyncThunk('getMe', async () => {
     }
 }
 )
+
+export const getMe = createAsyncThunk('getMe', async () => {
+    // {{host}}/api/users/meInfo.php
+    try {
+        const {data} = await axios.get(`${serverUrl}/api/users/meInfo.php`,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        if(data.status === 'success'){
+            return {status:"success","data":data.data.user, "msg":data.data.msg};
+        }
+        else {
+            return {status:"error", "data":data.data.user,"msg":data.data.msg};
+        }
+    }
+    catch (error : any) {
+        return {status:"error","msg":error.response.data.message};
+    }
+})
 
 export const login = createAsyncThunk('login', async (input : any) => {
     //{{host}}/api/users/login.php
@@ -84,7 +130,7 @@ export const login = createAsyncThunk('login', async (input : any) => {
         }
     }
     catch (error : any) {
-        return {status:"error","msg":error};
+        return {status:"error","msg":error.response.data.message};
     }
 })
 
@@ -114,6 +160,50 @@ export const register = createAsyncThunk('register', async (input : any) => {
     try {
         const {data} = await axios.post(`${serverUrl}/api/users/register.php`, input,{
             headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        if(data.status === "success") {
+            return {status:"success","msg":data.data.msg};
+        }
+        else {
+            return {status:"error","msg":data.data.msg};
+        }
+    }
+    catch (error : any) {
+        return{status:"error","msg":error.response.data.message};
+    }
+})
+
+export const changePassword = createAsyncThunk('changePassword', async (input : any) => {
+    // {{host}}/api/users/updatePassword.php
+    try {
+        const {data} = await axios.post(`${serverUrl}/api/users/updatePassword.php`, input,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        if(data.status === "success") {
+            // delete localStorage token
+            localStorage.removeItem('token');
+            return {status:"success","msg":data.data.msg};
+        }
+        else {
+            return {status:"error","msg":data.data.msg};
+        }
+    }
+    catch (error : any) {
+        return{status:"error","msg":error.response.data.message};
+    }
+})
+
+export const updateAvatar = createAsyncThunk('updateAvatar', async (input : any) => {
+    //{{host}}/api/users/updateAvatar.php
+    try {
+        const {data} = await axios.post(`${serverUrl}/api/users/updateAvatar.php`, input,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'multipart/form-data',
             }
         });

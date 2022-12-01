@@ -69,6 +69,15 @@
     justify-content:center;
 }
 
+
+
+.box2 img {
+    width:100px;
+    height:100px;
+    border-radius:100%;
+
+}
+
 .box2 img {
     width:100px;
     height:100px;
@@ -83,6 +92,7 @@
 }
 
 .input {
+    max-width: 200px;
     border:1px solid var(--light-gray);
     text-transform :none;
 }

@@ -26,7 +26,6 @@ function PageForNotification() {
             }
 
         }, [])
-    console.log(state)
     return(
         <>
             <div className={styles.container}>

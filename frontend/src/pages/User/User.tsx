@@ -17,6 +17,11 @@ import { Container, Row, Col, Offcanvas } from 'react-bootstrap'
 import BackNavigate from '../../components/BackNavigate/BackNavigate';
 import ListItem from '../../components/ProductsLayout/ListItem/ListItem';
 
+// ////////////////////////////////////////////////////////fet api
+import {useSelector} from 'react-redux'
+import { UserStore } from '../../redux/selectors';
+import Loading from '../../components/Loading/Loading';
+
 function User() {
     const navigate = useNavigate();
     /////////////////////////////////////////////////////////////////////
@@ -64,9 +69,11 @@ function User() {
         }
     }, [])
     const [showCate, setShowCate] = useState(false)
+    // ///////////////////////////////////////////fet ch api
+    const user = useSelector(UserStore)
     function ListItemsFunction(type: any) {
         switch (type) {
-            case "user":
+            case "customer":
                 return (
                     <>
                         <ListItem onClick={() => {
@@ -160,10 +167,10 @@ function User() {
                             handleClose();
                             navigate('/user/upload')
                         }} button_style={currentPath == 'upload' ? styles.cate_button_style : ""} title={"Upload"} icon={faUpload}></ListItem>
-                        <ListItem onClick={() => {
+                        {/* <ListItem onClick={() => {
                             handleClose();
                             navigate('/user/writeblog')
-                        }} button_style={currentPath == 'writeblog' ? styles.cate_button_style : ""} title={"Write Blog"} icon={faBlog}></ListItem>
+                        }} button_style={currentPath == 'writeblog' ? styles.cate_button_style : ""} title={"Write Blog"} icon={faBlog}></ListItem> */}
                         <ListItem onClick={() => {
                             handleClose();
                             navigate('/user/transactions')
@@ -175,60 +182,60 @@ function User() {
     }
     return (
         <><Container fluid className={styles.container}>
-            {/* create lay out with col-2 and col-10 */}
-            <Row className={styles.row}>
-                <BackNavigate backPath="/" backPage="Home" currentPage="Profile"></BackNavigate>
-                {res ?
-                    <>
-                        <div onClick={handleShow}
-                            onMouseEnter={() => setShowCate(true)}
-                            onMouseLeave={() => setShowCate(false)}
-                            className={clsx(styles.col_3_header, "btn btn_custom", styles.offcanvas_button)}>
-                            <div className="w-100 d-flex justify-content-start align-items-center">
-                                <FontAwesomeIcon className={styles.icon} icon={faList as IconProp} />
-                                <h4>Categories</h4>
-                            </div>
-                            {
-                                showCate ?
-                                    <FontAwesomeIcon className={styles.icon} icon={faArrowLeft as IconProp} />
-                                    :
-                                    <div style={{ fontSize: 12, display: "flex", justifyContent: "center", alignItems: "center" }}>
-                                        {currentPath} <FontAwesomeIcon className={styles.icon} icon={faArrowRight as IconProp} />
+                    {/* create lay out with col-2 and col-10 */}
+                    <Row className={styles.row}>
+                        <BackNavigate backPath="/" backPage="Home" currentPage="Profile"></BackNavigate>
+                        {res ?
+                            <>
+                                <div onClick={handleShow}
+                                    onMouseEnter={() => setShowCate(true)}
+                                    onMouseLeave={() => setShowCate(false)}
+                                    className={clsx(styles.col_3_header, "btn btn_custom", styles.offcanvas_button)}>
+                                    <div className="w-100 d-flex justify-content-start align-items-center">
+                                        <FontAwesomeIcon className={styles.icon} icon={faList as IconProp} />
+                                        <h4>Categories</h4>
                                     </div>
-                            }
-                        </div>
+                                    {
+                                        showCate ?
+                                            <FontAwesomeIcon className={styles.icon} icon={faArrowLeft as IconProp} />
+                                            :
+                                            <div style={{ fontSize: 12, display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                                {currentPath} <FontAwesomeIcon className={styles.icon} icon={faArrowRight as IconProp} />
+                                            </div>
+                                    }
+                                </div>
 
-                        <Offcanvas show={show} onHide={handleClose}>
-                            <Offcanvas.Header closeButton>
-                                <Offcanvas.Title className={styles.offcanvas_header}>
-                                    <FontAwesomeIcon className={styles.icon} icon={faList as IconProp} />
-                                    <h4>Categories</h4>
-                                </Offcanvas.Title>
-                            </Offcanvas.Header>
-                            <Offcanvas.Body className={styles.offcanvas_body}>
-                                {ListItemsFunction("admin")}
-                            </Offcanvas.Body>
-                        </Offcanvas>
-                    </>
-                    :
-                    <Col xs={3} className={styles.col_3}>
-                        {/* create a box with 100% height */}
-                        <div className={styles.box}>
-                            <div className={styles.col_3_header}>
-                                <FontAwesomeIcon className={styles.icon} icon={faList as IconProp} />
-                                <h4>Categories</h4>
+                                <Offcanvas show={show} onHide={handleClose}>
+                                    <Offcanvas.Header closeButton>
+                                        <Offcanvas.Title className={styles.offcanvas_header}>
+                                            <FontAwesomeIcon className={styles.icon} icon={faList as IconProp} />
+                                            <h4>Categories</h4>
+                                        </Offcanvas.Title>
+                                    </Offcanvas.Header>
+                                    <Offcanvas.Body className={styles.offcanvas_body}>
+                                        {ListItemsFunction(user.data?user.data.account.role:"")}
+                                    </Offcanvas.Body>
+                                </Offcanvas>
+                            </>
+                            :
+                            <Col xs={3} className={styles.col_3}>
+                                {/* create a box with 100% height */}
+                                <div className={styles.box}>
+                                    <div className={styles.col_3_header}>
+                                        <FontAwesomeIcon className={styles.icon} icon={faList as IconProp} />
+                                        <h4>Categories</h4>
+                                    </div>
+                                    {ListItemsFunction(user.data?user.data.account.role:"")}
+                                </div>
+                            </Col>
+                        }
+                        <Col xs={res ? 12 : 9} className={styles.col_9}>
+                            {/* create a box with 100% height */}
+                            <div className={styles.box}>
+                                    <Outlet />
                             </div>
-                            {ListItemsFunction("admin")}
-                        </div>
-                    </Col>
-                }
-                <Col xs={res ? 12 : 9} className={styles.col_9}>
-                    {/* create a box with 100% height */}
-                    <div className={styles.box}>
-                        <Outlet />
-                    </div>
-                </Col>
-            </Row>
+                        </Col>
+                    </Row>
         </Container>
         </>
     )

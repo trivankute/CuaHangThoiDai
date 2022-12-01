@@ -14,7 +14,7 @@ export default function FlashBox()
         {
             setTimeout(() => {
                 dispatch(FlashSlice.actions.handleClose(""))
-            }, 2000);
+            }, 5000);
         }
     }, [flash.flashOpen])
     return (
