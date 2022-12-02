@@ -5,3 +5,5 @@ export const AlbumStore = (state:any) => state.album
 export const CartStore = (state:any) => state.cart
 export const TransactionStore = (state:any) => state.transaction
 export const ReviewStore = (state:any) => state.review
+export const BlogStore = (state:any) => state.blog
+export const BlogsStore = (state:any) => state.blogs

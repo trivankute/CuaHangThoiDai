@@ -12,7 +12,7 @@ function BlogCard({image, title, description}:{image:any, title:string, descript
     return (
         <>
             <div className={styles.box}>
-            <Loading/>
+            {/* <Loading/> */}
                 <img src={image} alt=""></img>
                 <div className={styles.content}>
                     <div className={styles.icons}>

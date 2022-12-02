@@ -7,6 +7,8 @@ import AlbumSlice from './slices/AlbumSlice'
 import CartSlice from './slices/CartSlice'
 import TransactionSlice from './slices/TransactionSlice'
 import ReviewSlice from './slices/ReviewSlice'
+import BlogSlice from './slices/BlogSlice'
+import BlogsSlice from './slices/BlogsSlice'
 
 const store = configureStore({
     reducer:{
@@ -17,6 +19,8 @@ const store = configureStore({
         cart:CartSlice.reducer,
         transaction:TransactionSlice.reducer,
         review:ReviewSlice.reducer,
+        blog:BlogSlice.reducer,
+        blogs:BlogsSlice.reducer,
     }
 })
 
