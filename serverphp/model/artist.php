@@ -19,5 +19,19 @@
                 exit();
             }
         }
+
+        public function getAllArtists() {
+            $sql = "SELECT * FROM artist";
+            $stmt = $this->conn->prepare($sql);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+                exit();
+            }
+        }
     }
 ?>
