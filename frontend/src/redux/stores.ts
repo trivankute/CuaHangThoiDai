@@ -9,6 +9,7 @@ import TransactionSlice from './slices/TransactionSlice'
 import ReviewSlice from './slices/ReviewSlice'
 import BlogSlice from './slices/BlogSlice'
 import BlogsSlice from './slices/BlogsSlice'
+import TransactionsSlice from './slices/TransactionsSlice'
 
 const store = configureStore({
     reducer:{
@@ -18,6 +19,7 @@ const store = configureStore({
         album:AlbumSlice.reducer,
         cart:CartSlice.reducer,
         transaction:TransactionSlice.reducer,
+        transactions:TransactionsSlice.reducer,
         review:ReviewSlice.reducer,
         blog:BlogSlice.reducer,
         blogs:BlogsSlice.reducer,
