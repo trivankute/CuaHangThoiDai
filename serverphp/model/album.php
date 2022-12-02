@@ -271,5 +271,67 @@ class Album {
             exit();
         }
     }
+    public function getAlbumByType($type) {
+        $sql = "SELECT * FROM album WHERE album_type = :type";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':type', $type);
+        try {
+            $result = [];
+            $stmt->execute();
+            $albums = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($albums as $album) {
+                $sql = "SELECT * FROM compose WHERE album_id = :id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':id', $album['album_id']);
+                $stmt->execute();
+                $compose = $stmt->fetch(PDO::FETCH_ASSOC);
+                $sql = "SELECT * FROM artist WHERE artist_id = :artist_id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':artist_id', $compose['artist_id']);
+                $stmt->execute();
+                $artist = $stmt->fetch(PDO::FETCH_ASSOC);
+                $album['artist_id'] =  $artist['artist_id'];
+                $album['artistName'] = $artist['name'];
+                $album['artistAvatar'] = $artist['avatar'];
+                $sql = "SELECT * FROM write_review WHERE album_id = :id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':id', $album['album_id']);
+                $stmt->execute();
+                $reviews = [];
+                $reviewsQuery = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($reviewsQuery as $review) {
+                    $review_id = $review['review_id'];
+                    $sql = "SELECT * FROM review WHERE review_id = :review_id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':review_id', $review_id);
+                    $stmt->execute();
+                    $review = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $sql = "SELECT * FROM write_review WHERE review_id = :review_id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':review_id', $review_id);
+                    $stmt->execute();
+                    $write_review = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    // echo json_encode($write_review);
+                    $sql = "SELECT * FROM account WHERE user_id = :user_id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':user_id', $write_review[0]['customer_id']);
+                    $stmt->execute();
+                    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $review['username'] = $user['username'];
+                    $review['avatar'] = $user['avatar'];
+                    $review['date'] = $write_review[0]['date'];
+                    $review['time'] = $write_review[0]['time'];
+                    array_push($reviews, $review);
+                }
+                $album['reviews'] = $reviews;
+                array_push($result, $album);
+            }
+            return $result;
+        }
+        catch (PDOException $e) {
+            echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+            exit();
+        }
+    }
 }
 ?>

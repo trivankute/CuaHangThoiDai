@@ -66,5 +66,18 @@
                 exit();
             }
         }
+        public function getHighestScore($count) {
+            $sql = "SELECT * FROM review ORDER BY score DESC LIMIT $count";
+            $stmt = $this->conn->prepare($sql);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+                exit();
+            }
+        }
     }
 ?>

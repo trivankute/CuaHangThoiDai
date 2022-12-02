@@ -84,7 +84,10 @@
                 $stmt->bindParam(':id', $write_blog['employee_id']);
                 $stmt->execute();
                 $employee = $stmt->fetch(PDO::FETCH_ASSOC);
-                $result['employee'] = $employee;
+                $result['date'] = $write_blog['date'];
+                $result['time'] = $write_blog['time'];
+                $result['employeeName'] = $employee['username'];
+                $result['employeeAvatar'] = $employee['avatar'];
                 return $result;
             }
             catch (PDOException $e) {
@@ -141,6 +144,8 @@
                     $stmt->bindParam(':id', $write_blog['employee_id']);
                     $stmt->execute();
                     $employee = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $blog['date'] = $write_blog['date'];
+                    $blog['time'] = $write_blog['time'];
                     $blog['employeeName'] = $employee['username'];
                     $blog['employeeAvatar'] = $employee['avatar'];
                     array_push($result,$blog);
