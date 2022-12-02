@@ -2,7 +2,6 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 
 import axios from 'axios'
 
-import url from '../../serverUrls'
 import { serverUrl } from '../../utils/config.utils'
 
 const UserSlice = createSlice({

@@ -7,55 +7,64 @@ import clsx from 'clsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons'
-import image from './cd.png'
+import { useDispatch } from 'react-redux';
+import CartSlice from '../../redux/slices/CartSlice';
 
-function CartItem({type}:{type:string}) {
+function CartItem({type, album}:{type:string, album:any}) {
     // type 1 in_cart, type 2 is in transaction_history, type3 is in sell_mode
     const [quantity, setQuantity] = useState(1)
     const [price, setPrice] = useState(6.99)
+    const dispatch = useDispatch<any>()
     function handleMinusQuanity() {
-        setQuantity(prev => {
-            prev--;
-            if (prev < 0)
-                return 0
-            else return prev
-        })
-
+        // setQuantity(prev => {
+        //     prev--;
+        //     if (prev < 0)
+        //         return 0
+        //     else return prev
+        // })
+        dispatch(CartSlice.actions.handleMinusQuantity({id: album.id}))
     }
     function handlePlusQuanity() {
-        setQuantity(prev => {
-            prev++;
-            if (prev > 99)
-                return 99;
-            else return prev
-        })
+        // setQuantity(prev => {
+        //     prev++;
+        //     if (prev > 99)
+        //         return 99;
+        //     else return prev
+        // })
+        dispatch(CartSlice.actions.handleAddToCart({ id: album.id, quantity: 1, price: album.price, title: album.title, image: album.avatar }))
     }
+
+    function handleRemoveCartItem() {
+        dispatch(CartSlice.actions.handleRemoveCartItem({id: album.id}))
+    }
+
+
     useEffect(() => {
         setPrice(quantity * 6.99)
     }, [quantity])
-    
+
 
     return (
         <>
             <div className={styles.box}>
-                <img src={image} alt=""></img>
+                <img src={album.image} alt=""></img>
                 <div className={styles.content}>
-                    <h3>1989</h3>
-                    <span>${price}</span>
+                    <h3>{album.title}</h3>
+                    <span>${album.price*album.quantity}</span>
                     {
                         type=='transaction_history'?
-                        <span>Quantity: 2</span>
+                        <span>Quantity: {album.quantity}</span>
                         :
                         <div className={styles.quantity}>
                             <div onClick={handleMinusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>-</div>
-                            <div className={styles.quantity_box}>{quantity}</div>
+                            <div className={styles.quantity_box}>{album.quantity}</div>
                             <div onClick={handlePlusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>+</div>
                         </div>
                     }
                 </div>
                 {
                     type=="in_cart"&&
-                    <FontAwesomeIcon className={clsx(styles.icon, "ms-3")} icon={faTrash as IconProp} />
+                    <FontAwesomeIcon onClick={handleRemoveCartItem} className={clsx(styles.icon, "ms-3")} icon={faTrash as IconProp} />
                 }
                 {
                     type=='transaction_history' && <></>

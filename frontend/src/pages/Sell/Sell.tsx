@@ -32,23 +32,23 @@ function Sell() {
                     </Form>
                 </div>
                 <div className={styles.searchResults}>
+                    {/* <CartItem type="sell_mode" />
                     <CartItem type="sell_mode" />
                     <CartItem type="sell_mode" />
                     <CartItem type="sell_mode" />
                     <CartItem type="sell_mode" />
                     <CartItem type="sell_mode" />
-                    <CartItem type="sell_mode" />
-                    <CartItem type="sell_mode" />
+                    <CartItem type="sell_mode" /> */}
                 </div>
                 <Header title="Add to order" content="Sell albums for customers picking up at store" />
                 <div className={styles.searchResults}>
+                    {/* <CartItem type="transaction_history" />
                     <CartItem type="transaction_history" />
                     <CartItem type="transaction_history" />
                     <CartItem type="transaction_history" />
                     <CartItem type="transaction_history" />
                     <CartItem type="transaction_history" />
-                    <CartItem type="transaction_history" />
-                    <CartItem type="transaction_history" />
+                    <CartItem type="transaction_history" /> */}
                 </div>
                 <div className={styles.totalPrice}>
                     <p>Subtotal: $ 27.99</p>

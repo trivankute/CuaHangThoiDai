@@ -9,32 +9,32 @@ import { faUser, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
 import clsx from 'clsx'
 
-function Review() {
+function Review({review}:{review:any}) {
     const [rating, setRating] = useState(5);
     return (
         <>
             <div className={styles.box}>
                 <div className={styles.reviewerInformation}>
                     <div className={styles.reviewerImage}>
-                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt=""></img>
+                        <img src={review.avatar} alt=""></img>
                     </div>
                     <div className={styles.reviewerNameAndDate}>
                         <div className={styles.name}>
-                            <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} /> by
-                            Trivan
+                            <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} /> by {" "}
+                            {review.username}
                         </div>
                         <div className={styles.date}>
-                            <FontAwesomeIcon className={styles.icon} icon={faCalendar as IconProp} /> 1st may, 2021
-                            2021-08-01
+                            <FontAwesomeIcon className={styles.icon} icon={faCalendar as IconProp} /> {review.time} {" "}
+                            {review.date}
                         </div>
                     </div>
                 </div>
                 <div className={styles.review}>
                     <div className={styles.rating}>
-                    {CreateStars(5)}
+                    {CreateStars(review.score)}
                     </div>
                     <div className={styles.reviewText}>
-                        ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+                        {review.content}
                     </div>
                 </div>
             </div>

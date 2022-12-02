@@ -39,7 +39,7 @@ function Transaction() {
         }
         <p>Time: 19:43 22/12/2022</p>
 
-        <CartItem type="transaction_history"/>
+        {/* <CartItem type="transaction_history"/> */}
         {
           type === "order_online" &&
           <div className={styles.note}>
