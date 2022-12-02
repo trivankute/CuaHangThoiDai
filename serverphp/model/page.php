@@ -7,6 +7,7 @@
         private $customerCount = 6;
         private $employeeCount = 6;
         private $transactionCount = 10;
+        private $artistCount = 6;
         public function __construct($conn = null) {
             $this->conn = $conn;
         }
@@ -63,7 +64,112 @@
                 exit();
             }
         }
-        
+        public function getAlbumByPageIdAndType($id,$albumCount,$type) {
+            $this->albumCount = $albumCount;
+            $offset = ($id-1) * $this->albumCount;
+            $sql = "SELECT * FROM `album` WHERE album_type = :type LIMIT $offset, $this->albumCount";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':type', $type);
+            try {
+                $albums = [];
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach($result as $album) {
+                    $sql = "SELECT * FROM compose WHERE album_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $album['album_id']);
+                    $stmt->execute();
+                    $composes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $artists = [];
+                    foreach($composes as $compose) {
+                        $sql = "SELECT * FROM artist WHERE artist_id = :id";
+                        $stmt = $this->conn->prepare($sql);
+                        $stmt->bindParam(':id', $compose['artist_id']);
+                        $stmt->execute();
+                        $artist = $stmt->fetch(PDO::FETCH_ASSOC);
+                        array_push($artists, $artist);
+                    }
+                    $album['artist_id'] = $artists[0]['artist_id'];
+                    $album['artistName'] = $artists[0]['name'];
+                    $album['artistAvatar'] = $artists[0]['avatar'];
+                    $sql = "SELECT * FROM write_review WHERE album_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $album['album_id']);
+                    $stmt->execute();
+                    $reviews = [];
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($result as $review) {
+                        $review_id = $review['review_id'];
+                        $sql = "SELECT * FROM review WHERE review_id = :review_id";
+                        $stmt = $this->conn->prepare($sql);
+                        $stmt->bindParam(':review_id', $review_id);
+                        $stmt->execute();
+                        $review = $stmt->fetch(PDO::FETCH_ASSOC);
+                        array_push($reviews, $review);
+                    }
+                    $album['reviews'] = $reviews;
+                    array_push($albums, $album);
+                }
+                return $albums;
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
+        public function getAlbumByPageIdAndArtist($id,$albumCount,$artistId) {
+            $this->albumCount = $albumCount;
+            $offset = ($id-1) * $this->albumCount;
+            $sql = "SELECT * FROM `album` WHERE album_id IN (SELECT album_id FROM compose WHERE artist_id = :artist_id) LIMIT $offset, $this->albumCount";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':artist_id', $artistId);
+            try {
+                $albums = [];
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach($result as $album) {
+                    $sql = "SELECT * FROM compose WHERE album_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $album['album_id']);
+                    $stmt->execute();
+                    $composes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $artists = [];
+                    foreach($composes as $compose) {
+                        $sql = "SELECT * FROM artist WHERE artist_id = :id";
+                        $stmt = $this->conn->prepare($sql);
+                        $stmt->bindParam(':id', $compose['artist_id']);
+                        $stmt->execute();
+                        $artist = $stmt->fetch(PDO::FETCH_ASSOC);
+                        array_push($artists, $artist);
+                    }
+                    $album['artist_id'] = $artists[0]['artist_id'];
+                    $album['artistName'] = $artists[0]['name'];
+                    $album['artistAvatar'] = $artists[0]['avatar'];
+                    $sql = "SELECT * FROM write_review WHERE album_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $album['album_id']);
+                    $stmt->execute();
+                    $reviews = [];
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($result as $review) {
+                        $review_id = $review['review_id'];
+                        $sql = "SELECT * FROM review WHERE review_id = :review_id";
+                        $stmt = $this->conn->prepare($sql);
+                        $stmt->bindParam(':review_id', $review_id);
+                        $stmt->execute();
+                        $review = $stmt->fetch(PDO::FETCH_ASSOC);
+                        array_push($reviews, $review);
+                    }
+                    $album['reviews'] = $reviews;
+                    array_push($albums, $album);
+                }
+                return $albums;
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
         public function getBlogByPageId($id,$blogCount) {
             $this->blogCount = $blogCount;
             $offset = ($id-1) * $this->blogCount;
@@ -180,6 +286,21 @@
                 exit();
             }
         }
+        public function getArtistByPageId($id, $artistCount) {
+            $this->artistCount = $artistCount;
+            $offset = ($id-1) * $this->artistCount;
+            $sql = "SELECT * FROM `artist` LIMIT $offset, $this->artistCount";
+            $stmt = $this->conn->prepare($sql);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
         public function getTotalPageAlbum($albumCount) {
             $this->albumCount = $albumCount;
             $sql = "SELECT COUNT(*) AS total FROM album";
@@ -240,6 +361,19 @@
                 $stmt->execute();
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 return ceil($result['total'] / $this->transactionCount);
+            } catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
+        public function getTotalPageArtist($artistCount) {
+            $this->artistCount = $artistCount;
+            $sql = "SELECT COUNT(*) AS total FROM artist";
+            $stmt = $this->conn->prepare($sql);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return ceil($result['total'] / $this->artistCount);
             } catch (PDOException $e) {
                 echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
                 exit();

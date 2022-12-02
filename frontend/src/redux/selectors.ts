@@ -8,3 +8,6 @@ export const TransactionsStore = (state:any) => state.transactions
 export const ReviewStore = (state:any) => state.review
 export const BlogStore = (state:any) => state.blog
 export const BlogsStore = (state:any) => state.blogs
+export const ArtistsStore = (state:any) => state.artists
+export const CustomersStore = (state:any) => state.customers
+export const EmployeesStore = (state:any) => state.employees
