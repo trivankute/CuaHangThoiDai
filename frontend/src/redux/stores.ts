@@ -10,6 +10,9 @@ import ReviewSlice from './slices/ReviewSlice'
 import BlogSlice from './slices/BlogSlice'
 import BlogsSlice from './slices/BlogsSlice'
 import TransactionsSlice from './slices/TransactionsSlice'
+import CustomersSlice from './slices/CustomersSlice'
+import EmployeesSlice from './slices/EmployeesSlice'
+import ArtistsSlice from './slices/ArtistsSlice'
 
 const store = configureStore({
     reducer:{
@@ -23,6 +26,9 @@ const store = configureStore({
         review:ReviewSlice.reducer,
         blog:BlogSlice.reducer,
         blogs:BlogsSlice.reducer,
+        customers:CustomersSlice.reducer,
+        employees:EmployeesSlice.reducer,
+        artists:ArtistsSlice.reducer,
     }
 })
 
