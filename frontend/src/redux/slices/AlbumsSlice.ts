@@ -32,6 +32,12 @@ const AlbumsSlice = createSlice({
             if(status==="success")
             state.data = data
         })
+        .addCase(getAlbumsAllPages.pending, (state,action) => {
+            state.loading = true
+        })
+        .addCase(getAlbumsAllPages.fulfilled, (state,action) => {
+            state.loading = false
+        })
     }
 })
 
@@ -68,6 +74,27 @@ export const getAllAlbumsByPageId = createAsyncThunk('getAllAlbumsByPageId', asy
         }
         else {
             return {status:"error", "data":data.data.albums,"msg":data.data.msg};
+        }
+    }
+    catch (error : any) {
+        return {status:"error","msg":error.response.data.message};
+    }
+}
+)
+
+export const getAlbumsAllPages = createAsyncThunk('getAlbumsAllPages', async (input:any) => {
+    const {albumCount} = input
+    // {{host}}/api/pages/getTotalPageAlbum.php?albumCount=8
+    try {
+        const {data} = await axios.get(`${serverUrl}/api/pages/getTotalPageAlbum.php?albumCount=${albumCount}`,{
+            headers: {
+            }
+        });
+        if(data.status === 'success'){
+            return {status:"success","totalPage":data.data.totalPage, "msg":data.data.msg};
+        }
+        else {
+            return {status:"error", "totalPage":data.data.totalPage,"msg":data.data.msg};
         }
     }
     catch (error : any) {
