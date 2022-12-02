@@ -5,16 +5,18 @@ import styles from './Reviews.module.css';
 
 import Review from '../Review/Review';
 
-function Reviews() {
+function Reviews({album}:{album:any}) {
     return (
         <>
             <div className={styles.box}>
                 <div className={styles.title}>
                     All reviews
                 </div>
-                <Review />
-                <Review />
-                <Review />
+                {
+                    album.data.reviews.map((review:any, index:any)=>{
+                        return <Review key={index} review={review} />
+                    })
+                }
 
                 <Pagination className={styles.pagination}>
                     <Pagination.First />

@@ -8,13 +8,20 @@ import clsx from 'clsx'
 
 import CartItem from '../../components/CartItem/CartItem'
 import BackNavigate from '../../components/BackNavigate/BackNavigate'
+import { useDispatch, useSelector } from 'react-redux'
+import { CartStore } from '../../redux/selectors'
+import CartSlice from '../../redux/slices/CartSlice'
 
 function Cart() {
     const navigate = useNavigate()
+    const cart = useSelector(CartStore)
+    const dispatch = useDispatch<any>()
     useEffect(() => {
         // scroll to top of cart
         window.scrollTo(0, 0)
-    }, [])
+        // get cart from local storage
+        dispatch(CartSlice.actions.handleLoadCart(""))
+    }, [cart.loading])
     return (
         <>
             <div className={styles.container}>
@@ -23,19 +30,11 @@ function Cart() {
                     Your cart:
                 </div>
                 <div className={styles.cartItems}>
-                    <CartItem type="in_cart"/>
-                    <CartItem type="in_cart"/>
-                    <CartItem type="in_cart"/>
-                    <CartItem type="in_cart"/>
-                    <CartItem type="in_cart"/>
-                    <CartItem type="in_cart"/>
-                    <CartItem type="in_cart"/>
-                    <CartItem type="in_cart"/>
-                    <CartItem type="in_cart"/>
-                    <CartItem type="in_cart"/>
-                    <CartItem type="in_cart"/>
-                    <CartItem type="in_cart"/>
-                    <CartItem type="in_cart"/>
+                    {
+                        cart.data && cart.data.map((album:any, index:any)=>{
+                            return <CartItem key={index} type="in_cart" album={album} />
+                        })
+                    }
 
                 </div>
                 <div className={styles.footer}>

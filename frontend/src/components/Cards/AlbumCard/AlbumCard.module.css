@@ -9,6 +9,9 @@
     outline: var(--outline);
     box-shadow: var(--box-shadow);
     position:relative;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .box:hover{
     outline-offset: 0px;

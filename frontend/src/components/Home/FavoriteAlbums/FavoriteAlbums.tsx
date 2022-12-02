@@ -10,7 +10,13 @@ import clsx from "clsx"
 import AlbumCard from "../../Cards/AlbumCard/AlbumCard"
 
 import image from "./cd.png"
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllAlbums } from '../../../redux/slices/AlbumsSlice';
+import { AlbumsStore } from '../../../redux/selectors';
+import AlbumsLoadingLogic from '../../../middlewares/LoadingLogic/AlbumsLoadingLogic';
 function FavoriteAlbums() {
+    const albums = useSelector(AlbumsStore)
+    const dispatch = useDispatch<any>()
     const [swiperRes, setSwiperRes] = useState(()=>{
         if(window.innerWidth<700)
         {
@@ -36,7 +42,10 @@ function FavoriteAlbums() {
         return () => {
             window.removeEventListener("resize", handleResize)
         }
+    },[])
 
+    useEffect(()=>{
+        dispatch(getAllAlbums())
     },[])
     return (
         <>
@@ -51,18 +60,40 @@ function FavoriteAlbums() {
                 style={{padding:"20px 9%"}}
             >
                 <div className={styles.box_container}>
-                <SwiperSlide style={{}}>
-                    <AlbumCard image={image} title={"trivan"} price={"9.99"} rating={4.5}/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <AlbumCard image={image} title={"trivan"} price={"9.99"} rating={4}/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <AlbumCard image={image} title={"trivan"} price={"9.99"} rating={4}/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <AlbumCard image={image} title={"trivan"} price={"9.99"} rating={4}/>
-                </SwiperSlide>
+                {/* .map 4 first albums of albums.data */}
+                    {
+                        albums.data ?
+                        <>
+                        {albums.data.slice(0,4).map((album:any,index:any)=>{
+                            return (
+                                <SwiperSlide key={index}>
+                                    <AlbumsLoadingLogic>
+                                    <AlbumCard album_id={album.album_id} image={album.avatar} title={album.title} price={album.price} />
+                                    </AlbumsLoadingLogic>
+                                </SwiperSlide>
+                            )
+                        })}
+                        </>
+                        :
+                        <>
+                        <SwiperSlide>
+                            <AlbumsLoadingLogic>
+                            </AlbumsLoadingLogic>
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <AlbumsLoadingLogic>
+                            </AlbumsLoadingLogic>
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <AlbumsLoadingLogic>
+                            </AlbumsLoadingLogic>
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <AlbumsLoadingLogic>
+                            </AlbumsLoadingLogic>
+                        </SwiperSlide>
+                        </>
+                    }
                 </div>
             </Swiper>   
         </>

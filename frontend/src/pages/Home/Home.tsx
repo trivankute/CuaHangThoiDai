@@ -68,7 +68,7 @@ function Home() {
         Favorite <span>Album</span>
       </h1>
       <FavoriteAlbums/>
-        <More urlDirection="albums"/>
+        <More urlDirection="albums?page=1"/>
       </section>
 
       <section id="categories" className={styles.section}>
