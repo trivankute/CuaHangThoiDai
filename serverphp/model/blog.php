@@ -123,5 +123,34 @@
                 exit();
             }
         }
+        public function getAllBlogs() {
+            $sql = "SELECT * FROM blog";
+            $stmt = $this->conn->prepare($sql);
+            try {
+                $result= [];
+                $stmt->execute();
+                $blogs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach($blogs as $blog) {
+                    $sql = "SELECT * FROM write_blog WHERE blog_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $blog['blog_id']);
+                    $stmt->execute();
+                    $write_blog = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $sql = "SELECT * FROM account WHERE user_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $write_blog['employee_id']);
+                    $stmt->execute();
+                    $employee = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $blog['employeeName'] = $employee['username'];
+                    $blog['employeeAvatar'] = $employee['avatar'];
+                    array_push($result,$blog);
+                }
+                return $result;
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+                exit();
+            }
+        }
     }
 ?>
