@@ -7,11 +7,11 @@
         $transactionCount = $_GET['transactionCount'];
         $result = $global_page->getTotalPageTransaction($transactionCount);
         if($result) {
-            echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get total page employee success', 'totalPage'=>$result]]);
+            echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get total page transaction success', 'totalPage'=>$result]]);
             exit();
         }
         else {
-            echo json_encode(['status'=>'error', 'data'=>['msg'=>'Get total page employee failed']]);
+            echo json_encode(['status'=>'error', 'data'=>['msg'=>'Get total page transaction failed']]);
             exit();
         }
         exit();

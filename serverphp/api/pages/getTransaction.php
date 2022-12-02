@@ -6,7 +6,7 @@
         $id = $_GET['id'];
         $transactionCount = $_GET['transactionCount'];
         $result = $global_page->getTransactionByPageId($id,$transactionCount);
-        echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get albums by page id success', 'albums'=>$result]]);
+        echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get transactions by page id success', 'transactions'=>$result]]);
     }
     else {
         echo json_encode(['status'=>'error', 'data'=>['msg'=>'Method not allowed']]);

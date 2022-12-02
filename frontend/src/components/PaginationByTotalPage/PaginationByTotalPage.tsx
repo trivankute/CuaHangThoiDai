@@ -3,7 +3,7 @@ import { Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AlbumsStore } from '../../redux/selectors';
-import { getAlbumsAllPages } from '../../redux/slices/AlbumsSlice';
+import { getAlbumsTotalPages } from '../../redux/slices/AlbumsSlice';
 
 function PaginationByTotalPage({ currPage, basicUrl }: { currPage: any, basicUrl: any }) {
     const navigate = useNavigate();
@@ -57,7 +57,7 @@ function PaginationByTotalPage({ currPage, basicUrl }: { currPage: any, basicUrl
                 }
             }
         }
-        dispatch(getAlbumsAllPages({ albumCount: 8 }))
+        dispatch(getAlbumsTotalPages({ albumCount: 8 }))
             .then((res: any) => {
                 loadToArray(res.payload.totalPage)
             })
