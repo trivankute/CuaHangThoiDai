@@ -91,6 +91,7 @@ class Transaction {
                 foreach($products as $product) {
                     $result = $this->createTransactionDetail($transactionId, $product);
                     if(!$result) {
+                        $this->deleteTransaction($transactionId);
                         return false;
                     }
                 }
@@ -103,15 +104,31 @@ class Transaction {
         }
     }
     public function createTransactionDetail($transactionId,$product) {
-        $sql = "SELECT `insert_transaction_items`(:transactionId, :albumId, :quantity) AS `insert_transaction_items`";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':transactionId', $transactionId);
-        $stmt->bindParam(':albumId', $product->albumId);
-        $stmt->bindParam(':quantity', $product->quantity);
+        $transactionSql = "SELECT `insert_transaction_items`(:transactionId, :albumId, :quantity) AS `insert_transaction_items`";
+        $transactionStmt = $this->conn->prepare($transactionSql);
+        $transactionStmt->bindParam(':transactionId', $transactionId);
+        $transactionStmt->bindParam(':albumId', $product->albumId);
+        $transactionStmt->bindParam(':quantity', $product->quantity);
         try {
+            // Check if quantity is available
+            $albumSql = "SELECT `quanity` FROM `album` WHERE `album_id` = :albumId";
+            $albumStmt = $this->conn->prepare($albumSql);
+            $albumStmt->bindParam(':albumId', $product->albumId);
+            $albumStmt->execute();
+            $albumResult = $albumStmt->fetch(PDO::FETCH_ASSOC);
+            if($albumResult['quanity'] < $product->quantity) {
+                return false;
+            }
+            // minus quantity in album
+            $sql = "UPDATE `album` SET `quanity` = `quanity` - :quantity WHERE `album_id` = :albumId";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':quantity', $product->quantity);
+            $stmt->bindParam(':albumId', $product->albumId);
             $stmt->execute();
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $result['insert_transaction_items'];
+            // insert transaction detail
+            $transactionStmt->execute();
+            $transactionResult = $transactionStmt->fetch(PDO::FETCH_ASSOC);
+            return $transactionResult['insert_transaction_items'];
         }
         catch (PDOException $e) {
             echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
@@ -159,6 +176,38 @@ class Transaction {
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result['update_shipping'];
+        }
+        catch (PDOException $e) {
+            echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+            exit();
+        }
+    }
+    public function deleteTransaction($id) {
+        $sql = "DELETE FROM `transaction` WHERE `transaction_id` = :id";
+        $deleteSqlStmt = $this->conn->prepare($sql);
+        $deleteSqlStmt->bindParam(':id', $id);
+        try {
+            // reset quantity in album
+            $sql = "SELECT `album_id`, `quanity` FROM `transaction_items` WHERE `transaction_id` = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $transactionItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($transactionItems as $transactionItem) {
+                $sql = "UPDATE `album` SET `quanity` = `quanity` + :quantity WHERE `album_id` = :albumId";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':quantity', $transactionItem['quanity']);
+                $stmt->bindParam(':albumId', $transactionItem['album_id']);
+                $stmt->execute();
+            }
+            // delete transaction detail
+            $sql = "DELETE FROM `transaction_items` WHERE `transaction_id` = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            // delete transaction
+            $deleteSqlStmt->execute();
+            return true;
         }
         catch (PDOException $e) {
             echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
