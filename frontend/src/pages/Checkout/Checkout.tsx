@@ -8,9 +8,12 @@ import styles from "./Checkout.module.css"
 import { axiosForProvince, getProvincesArray, getWards, getDistricts } from "../../utils/axiosForProvinces"
 
 import BackNavigate from '../../components/BackNavigate/BackNavigate';
+import { useSelector } from 'react-redux';
+import { UserStore } from '../../redux/selectors';
 
 function Checkout() {
     const navigate = useNavigate()
+    const user = useSelector(UserStore)
     const [provinces, setProvinces] = useState(() => { return getProvincesArray() })
     const [districts, setDistricts] = useState([])
     const [wards, setWards] = useState([])
@@ -25,6 +28,7 @@ function Checkout() {
     const [phone, setPhone] = useState("0123456789")
     const [gender, setGender] = useState("female")
     const [birthday, setBirthday] = useState("2022-10-30")
+    console.log(user.data)
 
     // scroll to top
     useEffect(() => {
@@ -46,20 +50,25 @@ function Checkout() {
     }
 
     function handleSubmit() {
-        // console.log({
-        //     province:province.data.name,
-        //     district:district,
-        //     ward:ward
+        // const input = {
+        //     typeOfTransaction = "payment",
+        //     typeOfShipping = "shipping",
+        //     receiverAddress = "100 da lat",
+        //     deliverPartner = "",
+        //     receiverName,
+        //     receiverPhone,
+        //     totalPrice,
+        //     products
+        // }
+        // navigate('/notification', {
+        //     state: {
+        //         state: "success",
+        //         title: "Your order has been placed",
+        //         description: "Thank you for shopping with us",
+        //         btn_title: "See your order",
+        //         btn_path: "/transactions/1"
+        //     }
         // })
-        navigate('/notification', {
-            state: {
-                state: "success",
-                title: "Your order has been placed",
-                description: "Thank you for shopping with us",
-                btn_title: "See your order",
-                btn_path: "/transactions/1"
-            }
-        })
     }
     return (
         <div className={styles.container}>
@@ -84,34 +93,37 @@ function Checkout() {
                 />
             </Form>
             {defaultMode ?
+                <>
+                {user.data &&
                 <div className={styles.box}>
                     <div className={styles.fullname}>
                         <div className={styles.upper_none}>
                             <label htmlFor="">Username: </label>
-                            {username}
+                            {user.data.account.username}
                         </div>
                     </div>
                     <div className={styles.upper_none}>
                         <label htmlFor="">Email: </label>
-                        {email}
+                        {user.data.account.email}
                     </div>
                     <div className={styles.upper_none}>
                         <label htmlFor="">Phone: </label>
-                        {phone}
+                        {user.data.phone}
                     </div>
                     <div className={styles.gender}>
                         <label htmlFor="">Gender: </label>
-                        {gender}
+                        {user.data.gender}
                     </div>
                     <div className={styles.upper_none}>
                         <label htmlFor="">Birthday: </label>
-                        {birthday}
+                        {user.data.Bdate}
                     </div>
                     <div className={styles.upper_none}>
                         <label htmlFor="">Address: </label>
-                        {address}
+                        {user.data.address}
                     </div>
-                </div>
+                </div>}
+                </>
                 :
                 <>
                     <Form>
@@ -170,15 +182,15 @@ function Checkout() {
 
 
 
+                    </Form>
+                </>
+            }
                         <div className="w-100 d-flex justify-content-center align-items-center">
                             <div onClick={handleSubmit} className='btn btn_custom'>
                                 Submit
                             </div>
 
                         </div>
-                    </Form>
-                </>
-            }
         </div>
     )
 }

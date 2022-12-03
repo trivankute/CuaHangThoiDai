@@ -4,7 +4,8 @@ const CartSlice = createSlice({
     name:"CartSlice",
     initialState:{
         loading:false,
-        data:false
+        data:false,
+        totalPrice:false
     },
     reducers:{
         handleLoadCart: (state,action) => {
@@ -60,6 +61,18 @@ const CartSlice = createSlice({
                 cartItems = cartItems.filter((item:any) => item.id !== id)
                 localStorage.setItem("cart", JSON.stringify(cartItems))
                 state.data = cartItems
+            }
+        },
+        handleTotalPrice: (state, action) => {
+            let cart = localStorage.getItem("cart")
+            if(cart){
+                let cartItems = JSON.parse(cart)
+                let totalPrice = 0
+                cartItems.forEach((item:any) => {
+                    totalPrice = totalPrice + (item.price * item.quantity)
+                })
+                // @ts-ignore
+                state.totalPrice = totalPrice
             }
         }
     }

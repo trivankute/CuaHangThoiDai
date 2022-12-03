@@ -49,7 +49,7 @@ function Albums() {
                     })}
             </Container>
             {/* add pagination */}
-            <PaginationByTotalPage currPage={pageId} basicUrl="/products/albums?page=" />
+            <PaginationByTotalPage type="albums" currPage={pageId} basicUrl="/products/albums?page=" />
 
         </>
     )

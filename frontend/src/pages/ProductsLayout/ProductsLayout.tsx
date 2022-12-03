@@ -66,13 +66,13 @@ function ProductsLayout() {
         return (
             <>
             <ListItem onClick={()=>{handleClose();
-                navigate('/products/albums')}} button_style={currentPath == 'albums' ? styles.cate_button_style : ""} title={"Albums"} icon={faCompactDisc}></ListItem>
+                navigate('/products/albums?page=1')}} button_style={currentPath == 'albums' ? styles.cate_button_style : ""} title={"Albums"} icon={faCompactDisc}></ListItem>
             <ListItem onClick={()=>{handleClose();
                 navigate('/products/services')}} button_style={currentPath == 'services' ? styles.cate_button_style : ""} title={"Services"} icon={faLayerGroup}></ListItem>
             <ListItem onClick={()=>{handleClose();
-                navigate('/products/artists')}} button_style={currentPath == 'artists' ? styles.cate_button_style : ""} title={"Artists"} icon={faMusic}></ListItem>
+                navigate('/products/artists?page=1')}} button_style={currentPath == 'artists' ? styles.cate_button_style : ""} title={"Artists"} icon={faMusic}></ListItem>
             <ListItem onClick={()=>{handleClose();
-                navigate('/products/blogs')}} button_style={currentPath == 'blogs' ? styles.cate_button_style : ""} title={"Blogs"} icon={faBlog}></ListItem>
+                navigate('/products/blogs?page=1')}} button_style={currentPath == 'blogs' ? styles.cate_button_style : ""} title={"Blogs"} icon={faBlog}></ListItem>
             </>
         )}
     return (

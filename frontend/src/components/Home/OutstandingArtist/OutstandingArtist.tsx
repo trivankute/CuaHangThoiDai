@@ -9,8 +9,13 @@ import 'swiper/css';
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import clsx from 'clsx'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllArtists } from '../../../redux/slices/ArtistsSlice';
+import { ArtistsStore } from '../../../redux/selectors';
 
 function OutstandingArtist() {
+    const dispatch = useDispatch<any>()
+    const artists = useSelector(ArtistsStore)
     const [swiperRes, setSwiperRes] = useState(()=>{
         if(window.innerWidth<700)
         {
@@ -38,6 +43,11 @@ function OutstandingArtist() {
         }
 
     },[])
+    useEffect(()=>{
+        dispatch(getAllArtists())
+            .then((res:any)=>{
+            })
+    },[])
     return (
         <>
         <Swiper
@@ -51,17 +61,13 @@ function OutstandingArtist() {
                 style={{padding:"20px 9%"}}
             >
             <div className={styles.box_container}>
-                <SwiperSlide>
-                <ArtistCard image={image} name={"Trivan"} description={"rat dep trai"}/>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                <ArtistCard image={image} name={"Trivan"} description={"rat dep trai"}/>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                <ArtistCard image={image} name={"Trivan"} description={"rat dep trai"}/>
-                </SwiperSlide>
+                {
+                    artists.data && artists.data.slice(0,5).map((artist:any, index:number)=>(
+                        <SwiperSlide key={index}>
+                            <ArtistCard image={artist.avatar} name={artist.name} description="Super famous"/>
+                        </SwiperSlide>
+                    ))
+                }
             </div>
             </Swiper>
         </>
