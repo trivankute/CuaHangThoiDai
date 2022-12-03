@@ -9,7 +9,7 @@ import { Form } from 'react-bootstrap'
 import Header from "../../components/User/Header/Header"
 import { useDispatch, useSelector } from 'react-redux'
 import { UserStore } from '../../redux/selectors'
-import { getMe, updateAvatar } from '../../redux/slices/UserSlice'
+import { getMe, updateAvatar, updateInformation } from '../../redux/slices/UserSlice'
 import FlashSlice from '../../redux/slices/FlashSlice'
 import LoadingLogic from '../../middlewares/LoadingLogic/LoadingLogic'
 
@@ -20,12 +20,12 @@ function Profile() {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
-    const [gender, setGender] = useState("")
+    const [gender, setGender] = useState("Male")
     const [birthday, setBirthday] = useState("")
     const [address, setAddress] = useState("")
     const [file, setFile] = useState({ files: "", img: `https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c` })
     const [changeAvatarMode, setChangeAvatarMode] = useState(false)
-    const [res, setRes] = useState(()=>{
+    const [res, setRes] = useState(() => {
         if (window.innerWidth < 450) {
             return (true)
         }
@@ -54,28 +54,52 @@ function Profile() {
             setUsername(user.data.account.username)
             setEmail(user.data.account.email)
             setPhone(user.data.phone)
-            setGender(user.data.gender)
+            setGender(user.data.gender || "Male")
             setBirthday(user.data.Bdate)
             setAddress(user.data.address)
             setFile({ files: "", img: `${user.data.account.avatar}` })
         }
     }, [])
 
-    function handleUpdateAvatar(e:any) {
+    function handleUpdateAvatar(e: any) {
         const data = new FormData();
         data.append("avatar", file.files[0]);
         dispatch(updateAvatar(data))
-        .then((res:any) => {
-            if(res.payload.status === "success")
-            {
-                dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "success" }))
-                dispatch(getMe())
-            }
-            else {
-                dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "danger" }))
-            }
+            .then((res: any) => {
+                if (res.payload.status === "success") {
+                    dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "success" }))
+                    dispatch(getMe())
+                }
+                else {
+                    dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "danger" }))
+                }
 
-        })
+            })
+    }
+
+    function handleSave() {
+        // if not empty
+        if (username && gender && phone && address && birthday) {
+            dispatch(updateInformation({
+                gender: "Male",
+                phone: "phone",
+                address: "address",
+                bdate: "2002-10-30",
+                username: "username"
+            }))
+        .then((res: any) => {
+                if (res.payload.status === "success") {
+                    dispatch(FlashSlice.actions.handleOpen({ message: "Updated successfully", type: "success" }))
+                    dispatch(getMe())
+                }
+                else {
+                    dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "danger" }))
+                }
+            })
+        }
+        else {
+            dispatch(FlashSlice.actions.handleOpen({ message: "Please fill all fields", type: "danger" }))
+        }
     }
 
     return (
@@ -92,7 +116,7 @@ function Profile() {
                         </div>
                         <div className={clsx(styles.email, styles.upper_none)}>
                             <label htmlFor="">Email: </label>
-                            {changeMode ? <input className={styles.input} type="text" onChange={(e: any) => { setEmail(e.target.value) }} value={email}></input> : <>{email}</>}
+                            <>{email}</>
                         </div>
                         <div className={clsx(styles.phone, styles.upper_none)}>
                             <label htmlFor="">Phone: </label>
@@ -131,17 +155,22 @@ function Profile() {
                     {
                         res &&
                         <>
-                        <div className={clsx(styles.footer, "mb-3")}>
-                            {changeMode ?
-                                <div onClick={() => { setChangeMode(false) }} className="btn btn_custom">
-                                    Save
-                                </div>
-                                :
-                                <div onClick={() => { setChangeMode(true) }} className="btn btn_custom">
-                                    Change
-                                </div>
-                            }
-                        </div>
+                            <div className={clsx(styles.footer, "mb-3")}>
+                                {changeMode ?
+                                    <>
+                                        <div onClick={() => { setChangeMode(false) }} className="btn btn_custom me-3">
+                                            Back
+                                        </div>
+                                        <div onClick={() => { setChangeMode(false); handleSave() }} className="btn btn_custom">
+                                            Save
+                                        </div>
+                                    </>
+                                    :
+                                    <div onClick={() => { setChangeMode(true) }} className="btn btn_custom">
+                                        Change
+                                    </div>
+                                }
+                            </div>
                         </>
                     }
 
@@ -168,8 +197,8 @@ function Profile() {
                             </div>
                         </div>
                         {
-                            !changeAvatarMode && 
-                            <div onClick={()=>{setChangeAvatarMode(true)}} className="btn btn_custom">
+                            !changeAvatarMode &&
+                            <div onClick={() => { setChangeAvatarMode(true) }} className="btn btn_custom">
                                 New avatar
                             </div>
                         }
@@ -177,19 +206,19 @@ function Profile() {
                             <div className="mt-3 d-flex justify-content-between align-items-center">
                                 <div className="d-flex flex-column me-3">
                                     <div className="d-flex w-100 mb-3 me-3" style={{ height: 50, }}>
-                                        <img src={file.img} style={{ height: 50, width:50}} />
+                                        <img src={file.img} style={{ height: 50, width: 50 }} />
                                     </div>
-                                        New avatar
+                                    New avatar
                                 </div>
                                 <div className="d-flex flex-column">
                                     <div onClick={handleUpdateAvatar} className="btn btn_custom d-flex justify-content-center align-items-center position-relative" style={{ height: 50 }}>
                                         <LoadingLogic small>
-                                        Set
+                                            Set
                                         </LoadingLogic>
                                     </div>
                                     <div onClick={handleUpdateAvatar} className="btn btn_custom d-flex justify-content-center align-items-center position-relative" style={{ height: 50 }}>
                                         <LoadingLogic small>
-                                        Back
+                                            Back
                                         </LoadingLogic>
                                     </div>
                                 </div>
@@ -199,17 +228,22 @@ function Profile() {
                 {
                     !res &&
                     <>
-                    <div className={styles.footer}>
-                        {changeMode ?
-                            <div onClick={() => { setChangeMode(false) }} className="btn btn_custom">
-                                Save
-                            </div>
-                            :
-                            <div onClick={() => { setChangeMode(true) }} className="btn btn_custom">
-                                Change
-                            </div>
-                        }
-                    </div>
+                        <div className={styles.footer}>
+                            {changeMode ?
+                                <>
+                                    <div onClick={() => { setChangeMode(false) }} className="btn btn_custom me-3">
+                                        Back
+                                    </div>
+                                    <div onClick={() => { setChangeMode(false); handleSave(); }} className="btn btn_custom">
+                                        Save
+                                    </div>
+                                </>
+                                :
+                                <div onClick={() => { setChangeMode(true) }} className="btn btn_custom">
+                                    Change
+                                </div>
+                            }
+                        </div>
                     </>
                 }
             </div>

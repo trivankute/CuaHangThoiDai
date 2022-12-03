@@ -45,8 +45,6 @@ function OutstandingArtist() {
     useEffect(()=>{
         dispatch(getAllArtists())
             .then((res:any)=>{
-                console.log(res)
-
             })
     },[])
     return (

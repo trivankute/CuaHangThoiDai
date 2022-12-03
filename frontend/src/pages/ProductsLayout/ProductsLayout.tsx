@@ -70,7 +70,7 @@ function ProductsLayout() {
             <ListItem onClick={()=>{handleClose();
                 navigate('/products/services')}} button_style={currentPath == 'services' ? styles.cate_button_style : ""} title={"Services"} icon={faLayerGroup}></ListItem>
             <ListItem onClick={()=>{handleClose();
-                navigate('/products/artists')}} button_style={currentPath == 'artists' ? styles.cate_button_style : ""} title={"Artists"} icon={faMusic}></ListItem>
+                navigate('/products/artists?page=1')}} button_style={currentPath == 'artists' ? styles.cate_button_style : ""} title={"Artists"} icon={faMusic}></ListItem>
             <ListItem onClick={()=>{handleClose();
                 navigate('/products/blogs?page=1')}} button_style={currentPath == 'blogs' ? styles.cate_button_style : ""} title={"Blogs"} icon={faBlog}></ListItem>
             </>

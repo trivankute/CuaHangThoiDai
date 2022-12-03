@@ -2,16 +2,19 @@ import { memo, useEffect, useState } from 'react';
 import { Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { AlbumsStore, BlogsStore } from '../../redux/selectors';
-import { getAlbumsTotalPages } from '../../redux/slices/AlbumsSlice';
-import { getBlogsTotalPage } from '../../redux/slices/BlogsSlice';
-
 function PaginationByTotalPage({ type, currPage, basicUrl }: { type:any, currPage: any, basicUrl: any }) {
+import { AlbumsStore, ArtistsStore, BlogsStore } from '../../redux/selectors';
+import { getAlbumsTotalPages } from '../../redux/slices/AlbumsSlice';
+import { getArtistsTotalPages } from '../../redux/slices/ArtistsSlice';
+import { getBlogsTotalPages } from '../../redux/slices/BlogsSlice';
+
+function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPage: any, basicUrl: any }) {
     const navigate = useNavigate();
     const dispatch = useDispatch<any>();
     const [pageTracking, setPageTracking] = useState<any>(false)
     const albums = useSelector(AlbumsStore)
     const blogs = useSelector(BlogsStore)
+    const artists = useSelector(ArtistsStore)
     useEffect(() => {
         function loadToArray(totalPage: any) {
             if (totalPage) {
@@ -59,17 +62,22 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type:any, currPag
                 }
             }
         }
-        if(type==="albums")
-        dispatch(getAlbumsTotalPages({ albumCount: 8 }))
-            .then((res: any) => {
-                loadToArray(res.payload.totalPage)
-            })
-        if(type==="blogs")
-        dispatch(getBlogsTotalPage({ blogCount: 6 }))
-            .then((res: any) => {
-                loadToArray(res.payload.totalPage)
-            })
 
+        if (type === "albums")
+            dispatch(getAlbumsTotalPages({ albumCount: 8 }))
+                .then((res: any) => {
+                    loadToArray(res.payload.totalPage)
+                })
+        if (type === "blogs")
+            dispatch(getBlogsTotalPages({ blogCount: 6 }))
+                .then((res: any) => {
+                    loadToArray(res.payload.totalPage)
+                })
+        if (type === "artists")
+            dispatch(getArtistsTotalPages({ artistCount: 8 }))
+                .then((res: any) => {
+                    loadToArray(res.payload.totalPage)
+                })
     }, [currPage])
     return (
         <>
@@ -87,7 +95,7 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type:any, currPag
                         pageTracking.length != 1 && currPage != 1
                         &&
                         <>
-                        <Pagination.Prev onClick={() => navigate(`${basicUrl}${parseInt(currPage) - 1}`)} />
+                            <Pagination.Prev onClick={() => navigate(`${basicUrl}${parseInt(currPage) - 1}`)} />
                         </>
                     }
                     {
@@ -100,10 +108,10 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type:any, currPag
                         })
                     }
                     {
-                        pageTracking.length !=1 && currPage != pageTracking.length
+                        pageTracking.length != 1 && currPage != pageTracking.length
                         &&
                         <>
-                        <Pagination.Next onClick={() => navigate(`${basicUrl}${parseInt(currPage) + 1}`)} />
+                            <Pagination.Next onClick={() => navigate(`${basicUrl}${parseInt(currPage) + 1}`)} />
                         </>
                     }
                     {
@@ -111,12 +119,16 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type:any, currPag
                         &&
                         <>
                             {
-                                type==="albums" && 
+                                type === "albums" &&
                                 <Pagination.Last onClick={() => navigate(`${basicUrl}${albums.data.totalPage}`)} />
                             }
                             {
-                                type==="blogs" &&
+                                type === "blogs" &&
                                 <Pagination.Last onClick={() => navigate(`${basicUrl}${blogs.data.totalPage}`)} />
+                            }
+                            {
+                                type === "artists" &&
+                                <Pagination.Last onClick={() => navigate(`${basicUrl}${artists.data.totalPage}`)} />
                             }
                         </>
                     }

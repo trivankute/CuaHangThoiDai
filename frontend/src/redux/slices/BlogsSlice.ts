@@ -75,7 +75,7 @@ export const getAllBlogsByPageId = createAsyncThunk('getAllBlogsByPageId', async
     }
 });
 
-export const getBlogsTotalPage = createAsyncThunk('getBlogsTotalPage', async (input : any) => {
+export const getBlogsTotalPages = createAsyncThunk('getBlogsTotalPages', async (input : any) => {
     try {
         //{{host}}/api/pages/getTotalPageBlog.php?blogCount=4
         const {blogCount} = input
@@ -84,10 +84,10 @@ export const getBlogsTotalPage = createAsyncThunk('getBlogsTotalPage', async (in
             }
         });
         if(data.status === 'success'){
-            return {status:"success","data":data.data.totalPage, "msg":data.data.msg};
+            return {status:"success","totalPage":data.data.totalPage, "msg":data.data.msg};
         }
         else {
-            return {status:"error", "data":data.data.totalPage,"msg":data.data.msg};
+            return {status:"error", "totalPage":data.data.totalPage,"msg":data.data.msg};
         }
     }
     catch (error : any) {

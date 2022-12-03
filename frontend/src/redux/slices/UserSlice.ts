@@ -68,6 +68,12 @@ const UserSlice = createSlice({
         })
         .addCase(updateAvatar.fulfilled, (state,action) => {
             state.loading = false
+        })
+        .addCase(updateInformation.pending, (state,action) => {
+            state.loading = true
+        })
+        .addCase(updateInformation.fulfilled, (state,action) => {
+            state.loading = false
             // const {status} = action.payload
             // if(status==="true")
             // state.data = false
@@ -206,6 +212,28 @@ export const updateAvatar = createAsyncThunk('updateAvatar', async (input : any)
                 'Content-Type': 'multipart/form-data',
             }
         });
+        if(data.status === "success") {
+            return {status:"success","msg":data.data.msg};
+        }
+        else {
+            return {status:"error","msg":data.data.msg};
+        }
+    }
+    catch (error : any) {
+        return{status:"error","msg":error.response.data.message};
+    }
+})
+
+export const updateInformation = createAsyncThunk('updateInformation', async (input : any) => {
+    //{{host}}/api/users/updateInfo.php
+    try {
+        const {data} = await axios.post(`${serverUrl}/api/users/updateInfo.php`, input,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        console.log(data)
         if(data.status === "success") {
             return {status:"success","msg":data.data.msg};
         }
