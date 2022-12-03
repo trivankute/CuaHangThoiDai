@@ -9,8 +9,13 @@ import 'swiper/css';
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import clsx from 'clsx'
+import { useDispatch, useSelector } from 'react-redux';
+import { getReviewsHightScore } from '../../../redux/slices/ReviewsSlice';
+import { ReviewsStore } from '../../../redux/selectors';
 
 function CustomerReview() {
+    const reviews = useSelector(ReviewsStore)
+    const dispatch = useDispatch<any>()
     const [swiperRes, setSwiperRes] = useState(()=>{
         if(window.innerWidth<700)
         {
@@ -38,6 +43,11 @@ function CustomerReview() {
         }
 
     },[])
+
+    useEffect(()=>{
+        dispatch(getReviewsHightScore())
+    },[])
+
     return (
         <>
         <Swiper
@@ -51,7 +61,15 @@ function CustomerReview() {
             style={{padding:"20px 9%"}}
         >
             <div className={styles.box_container}>
-                <SwiperSlide>
+                {/* {
+                    reviews.data && 
+                    reviews.data.map((review, index)=>(
+                        <SwiperSlide key={index}>
+                            <CustomerReviewCard review={review}/>
+                        </SwiperSlide>
+                    ))
+                } */}
+                {/* <SwiperSlide>
                 <CustomerReviewCard image={image} review={"tuyet voi"}  name={"Talor trivan"} rating={4}/>
                 </SwiperSlide>
 
@@ -61,7 +79,7 @@ function CustomerReview() {
 
                 <SwiperSlide>
                 <CustomerReviewCard image={image} review={"tuyet voi"}  name={"Talor trivan"} rating={4}/>
-                </SwiperSlide>
+                </SwiperSlide> */}
             </div>
             </Swiper>
         </>

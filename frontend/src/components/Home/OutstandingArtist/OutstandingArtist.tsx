@@ -1,6 +1,5 @@
 import { memo, useEffect, useState } from 'react'
 import styles from "./OutstandingArtist.module.css"
-import image from "./cd.png"
 import ArtistCard from "../../Cards/ArtistCard/ArtistCard"
 
 import { Swiper, SwiperSlide } from 'swiper/react';

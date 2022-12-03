@@ -30,4 +30,6 @@
     margin:10px 0;
     max-height: 150px;
     border-radius:5px;
+    /* make the image fit */
+    object-fit: cover;
 }

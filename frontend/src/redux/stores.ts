@@ -10,10 +10,10 @@ import TransactionsSlice from './slices/TransactionsSlice'
 import ReviewSlice from './slices/ReviewSlice'
 import BlogSlice from './slices/BlogSlice'
 import BlogsSlice from './slices/BlogsSlice'
+import ReviewsSlice from './slices/ReviewsSlice'
 import CustomersSlice from './slices/CustomersSlice'
 import EmployeesSlice from './slices/EmployeesSlice'
 import ArtistsSlice from './slices/ArtistsSlice'
-
 const store = configureStore({
     reducer:{
         user:UserSlice.reducer,
@@ -27,8 +27,9 @@ const store = configureStore({
         blog:BlogSlice.reducer,
         blogs:BlogsSlice.reducer,
         artists:ArtistsSlice.reducer,
+        reviews:ReviewsSlice.reducer,
         customers:CustomersSlice.reducer,
-        employees:EmployeesSlice.reducer,
+        employees:EmployeesSlice.reducer
     }
 })
 

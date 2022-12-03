@@ -2,6 +2,7 @@ import { memo, useEffect, useState } from 'react';
 import { Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+function PaginationByTotalPage({ type, currPage, basicUrl }: { type:any, currPage: any, basicUrl: any }) {
 import { AlbumsStore, ArtistsStore, BlogsStore } from '../../redux/selectors';
 import { getAlbumsTotalPages } from '../../redux/slices/AlbumsSlice';
 import { getArtistsTotalPages } from '../../redux/slices/ArtistsSlice';
@@ -61,6 +62,7 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPa
                 }
             }
         }
+
         if (type === "albums")
             dispatch(getAlbumsTotalPages({ albumCount: 8 }))
                 .then((res: any) => {
@@ -76,7 +78,6 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPa
                 .then((res: any) => {
                     loadToArray(res.payload.totalPage)
                 })
-
     }, [currPage])
     return (
         <>

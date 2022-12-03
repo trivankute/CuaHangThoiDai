@@ -16,6 +16,8 @@
 .box img{
     margin:10px 0;
     height: 150px;
+    /* make the image fit */
+    object-fit: cover;
 }
 
 .box h3{
