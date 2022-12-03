@@ -11,6 +11,7 @@ function Upload() {
     const [title, setTitle] = useState("");
     const [albumType, setAlbumType] = useState("")
     const [price, setPrice] = useState("")
+    const [quantity, setQuantity] = useState("1")
     const [albumImage, setAlbumImage] = useState({files:[], img:""}) 
     const [artistName, setArtistName] = useState("");
     const [artistAvatar, setArtistAvatar] = useState({files:[], img:""})
@@ -49,6 +50,12 @@ function Upload() {
                             <InputGroup className="mb-3">
                                 <InputGroup.Text>Đ</InputGroup.Text>
                                 <Form.Control required type="number" aria-label="Amount (to the nearest dollar)" onChange={(e) => { setPrice(e.target.value) }} />
+                            </InputGroup>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Quantity:</Form.Label>
+                            <InputGroup className="mb-3">
+                                <Form.Control required type="number" aria-label="Amount (to the nearest dollar)" onChange={(e) => { setQuantity(e.target.value) }} />
                             </InputGroup>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">

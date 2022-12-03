@@ -6,10 +6,10 @@ import AlbumsSlice from './slices/AlbumsSlice'
 import AlbumSlice from './slices/AlbumSlice'
 import CartSlice from './slices/CartSlice'
 import TransactionSlice from './slices/TransactionSlice'
+import TransactionsSlice from './slices/TransactionsSlice'
 import ReviewSlice from './slices/ReviewSlice'
 import BlogSlice from './slices/BlogSlice'
 import BlogsSlice from './slices/BlogsSlice'
-import TransactionsSlice from './slices/TransactionsSlice'
 import CustomersSlice from './slices/CustomersSlice'
 import EmployeesSlice from './slices/EmployeesSlice'
 import ArtistsSlice from './slices/ArtistsSlice'
@@ -26,9 +26,9 @@ const store = configureStore({
         review:ReviewSlice.reducer,
         blog:BlogSlice.reducer,
         blogs:BlogsSlice.reducer,
+        artists:ArtistsSlice.reducer,
         customers:CustomersSlice.reducer,
         employees:EmployeesSlice.reducer,
-        artists:ArtistsSlice.reducer,
     }
 })
 

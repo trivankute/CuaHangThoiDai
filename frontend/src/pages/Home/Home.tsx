@@ -76,7 +76,7 @@ function Home() {
         Outstanding <span>Artist</span>
       </h1>
       <OutstandingArtist/>
-        <More urlDirection="artists"/>
+        <More urlDirection="artists?page=1"/>
       </section>
 
       <section id="review" className={styles.section}>
@@ -91,7 +91,7 @@ function Home() {
         Our <span>Blogs</span>
       </h1>
       <OurBlogs/>
-        <More urlDirection="blogs"/>
+        <More urlDirection="blogs?page=1"/>
       </section>
     </Container>
     </div>

@@ -88,10 +88,10 @@ function User() {
                             handleClose();
                             navigate('/user/transactions')
                         }} button_style={currentPath == 'transactions' ? styles.cate_button_style : ""} title={"Transactions"} icon={faClockRotateLeft}></ListItem>
-                        <ListItem onClick={() => {
+                        {/* <ListItem onClick={() => {
                             handleClose();
                             navigate('/user/notifications')
-                        }} button_style={currentPath == 'notifications' ? styles.cate_button_style : ""} title={"Notifications"} icon={faBell}></ListItem>
+                        }} button_style={currentPath == 'notifications' ? styles.cate_button_style : ""} title={"Notifications"} icon={faBell}></ListItem> */}
                         {/* <ListItem onClick={() => {
                         handleClose();
                         navigate('/user/vouchers')

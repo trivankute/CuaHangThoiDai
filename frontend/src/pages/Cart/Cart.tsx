@@ -21,6 +21,7 @@ function Cart() {
         window.scrollTo(0, 0)
         // get cart from local storage
         dispatch(CartSlice.actions.handleLoadCart(""))
+        dispatch(CartSlice.actions.handleTotalPrice(""))
     }, [cart.loading])
     return (
         <>
@@ -48,7 +49,7 @@ function Cart() {
                     </div>
                     <div className={styles.buy}>
                         <div className={styles.totalPrice}>
-                            Total: $ 27.96
+                            Total: $ {cart.data && cart.totalPrice}
                         </div>
                         <button onClick={()=>{navigate('/checkout')}} className={clsx('btn', 'btn_custom')}>Buy</button>
                     </div>

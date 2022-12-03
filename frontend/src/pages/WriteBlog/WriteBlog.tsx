@@ -18,9 +18,9 @@ function WriteBlog() {
     const location = useLocation()
     const [albumImage, setAlbumImage] = useState(() => {
         if (location.state)
-            return { files:[], img: location.state.img }
+            return location.state.img
         else
-            return { files:[], img: "" }
+            return { files: [], img: "" }
     });
     const [topic, setTopic] = useState(() => {
         if (location.state)
@@ -41,45 +41,52 @@ function WriteBlog() {
             return ""
     });
     function handlePreview() {
+        console.log(albumImage)
         navigate('preview', {
             state: {
                 topic: topic,
                 headline: headline,
                 content: content,
-                img: albumImage.img
+                img: albumImage
             }
         })
     }
 
     function handleSubmit(e: any) {
+        // if not empty
         e.preventDefault();
         e.stopPropagation();
-        const data = new FormData();
-        data.append('topic', topic);
-        data.append('headline', headline);
-        data.append('content', content);
-        data.append('image', albumImage.files[0]);
-        dispatch(createBlog(data))
-        .then((res: any) => {
-            if(res.payload.status === "success"){
-                dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "success" }))
-            }
-            else {
-                dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "danger" }))
-            }
-            //revoke image url
-            URL.revokeObjectURL(albumImage.img);
-            // reset state
-            setAlbumImage({ files: [], img: "" });
-            setTopic("");
-            setHeadline("");
-            setContent("");
-        })
+        if (topic && headline && content && albumImage.files[0]) {
+            const data = new FormData();
+            data.append('topic', topic);
+            data.append('headline', headline);
+            data.append('content', content);
+            data.append('image', albumImage.files[0]);
+            dispatch(createBlog(data))
+                .then((res: any) => {
+                    if (res.payload.status === "success") {
+                        dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "success" }))
+                    }
+                    else {
+                        dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "danger" }))
+                    }
+                    //revoke image url
+                    URL.revokeObjectURL(albumImage.img);
+                    // reset state
+                    setAlbumImage({ files: [], img: "" });
+                    setTopic("");
+                    setHeadline("");
+                    setContent("");
+                })
+        }
+        else {
+            dispatch(FlashSlice.actions.handleOpen({ message: "Please fill all the fields", type: "danger" }))
+        }
     }
     useEffect(() => {
         // scroll to top
         window.scrollTo(0, 0)
-    }, [])
+    }, [location.pathname])
     return (
         <>
             <div className={styles.container}>
@@ -129,8 +136,8 @@ function WriteBlog() {
                     </Button>
                     <Button onClick={handleSubmit} type="submit" variant="secondary" className="ms-3 btn_custom btn position-relative">
                         {
-                            blog.loading && 
-                            <Loading small/>
+                            blog.loading &&
+                            <Loading small />
                         }
                         Submit
                     </Button>
