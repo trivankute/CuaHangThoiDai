@@ -54,7 +54,7 @@ const navigate = useNavigate();
                     <label style={{paddingRight:5}} htmlFor="">Role: </label> Customer
                   </div>
                   <div className={styles.box}>
-                    <TransactionItem type="ordered online" onClick={()=>{navigate('/transactions/1',{ state:{
+                    {/* <TransactionItem type="ordered online" onClick={()=>{navigate('/transactions/1',{ state:{
                       type:"order_online"
                     }})}} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} total_amount={"155.000"} time={"11:22 12/12/2012"}/>
                     <TransactionItem type="ordered online" onClick={()=>{navigate('/transactions/1',{ state:{
@@ -68,7 +68,7 @@ const navigate = useNavigate();
                     }})}} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} total_amount={"155.000"} time={"11:22 12/12/2012"}/>
                     <TransactionItem type="ordered online" onClick={()=>{navigate('/transactions/1',{ state:{
                       type:"order_online"
-                    }})}} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} total_amount={"155.000"} time={"11:22 12/12/2012"}/>
+                    }})}} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} total_amount={"155.000"} time={"11:22 12/12/2012"}/> */}
                   </div>
                   </Modal.Body>
 

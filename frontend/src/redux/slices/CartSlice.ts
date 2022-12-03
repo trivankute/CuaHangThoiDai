@@ -69,11 +69,15 @@ const CartSlice = createSlice({
                 let cartItems = JSON.parse(cart)
                 let totalPrice = 0
                 cartItems.forEach((item:any) => {
-                    totalPrice = totalPrice + (item.price * item.quantity)
+                    totalPrice = totalPrice + (parseInt(item.price) * item.quantity)
                 })
                 // @ts-ignore
-                state.totalPrice = totalPrice
+                state.totalPrice = totalPrice * 1000
             }
+        },
+        handleClearCart: (state,action) => {
+            localStorage.removeItem("cart")
+            state.data = false
         }
     }
 })

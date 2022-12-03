@@ -127,6 +127,10 @@
     cursor:pointer;
 }
 
+.audio {
+    width:200px;
+}
+
 
 @media (max-width:990px){
     .navbar{
@@ -145,6 +149,9 @@
 @media (max-width:450px){
     .navbar{
         padding:var(--header-padding-400);
+    }
+    .audio {
+        width:100px;
     }
 
 }

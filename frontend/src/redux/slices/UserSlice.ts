@@ -74,9 +74,6 @@ const UserSlice = createSlice({
         })
         .addCase(updateInformation.fulfilled, (state,action) => {
             state.loading = false
-            // const {status} = action.payload
-            // if(status==="true")
-            // state.data = false
         })
     },
 })
@@ -230,10 +227,9 @@ export const updateInformation = createAsyncThunk('updateInformation', async (in
         const {data} = await axios.post(`${serverUrl}/api/users/updateInfo.php`, input,{
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json',
             }
         });
-        console.log(data)
         if(data.status === "success") {
             return {status:"success","msg":data.data.msg};
         }

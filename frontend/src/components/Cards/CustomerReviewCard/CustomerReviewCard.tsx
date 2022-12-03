@@ -4,20 +4,17 @@ import styles from './CustomerReviewCard.module.css';
 
 import CreateStars from "../../CreateStars/CreateStars"
 
-import Loading from '../../Loading/Loading'
-
-
-function CustomerReviewCard({image, review, name, rating}:{image:any, review:string, name:string, rating:any}) {
+function CustomerReviewCard({review}:{review:any}) {
     return (
         <>
             <div className={styles.box}>
-            <Loading/>
-                <img src={image} alt=""></img>
-                <p>{review}</p>
-                <h3>{name}</h3>
+                <img src={review.avatar} alt=""></img>
+                <p>{review.content}</p>
+                <h3>{review.username}</h3>
                 <div className={styles.stars}>
-                    {CreateStars(rating)}
+                    {CreateStars(review.score)}
                 </div>
+                <p>to album: {review.album.title}</p>
             </div>
         </>
     )

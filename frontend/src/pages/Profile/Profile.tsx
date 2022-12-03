@@ -25,6 +25,7 @@ function Profile() {
     const [address, setAddress] = useState("")
     const [file, setFile] = useState({ files: "", img: `https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c` })
     const [changeAvatarMode, setChangeAvatarMode] = useState(false)
+    const [dataBeforeChangeMode, setDataBeforeChangeMode] = useState<any>({})
     const [res, setRes] = useState(() => {
         if (window.innerWidth < 450) {
             return (true)
@@ -59,7 +60,7 @@ function Profile() {
             setAddress(user.data.address)
             setFile({ files: "", img: `${user.data.account.avatar}` })
         }
-    }, [])
+    }, [user.loading])
 
     function handleUpdateAvatar(e: any) {
         const data = new FormData();
@@ -77,25 +78,47 @@ function Profile() {
             })
     }
 
+    function handleChangeMode () {
+        setDataBeforeChangeMode({
+            username,
+            gender,
+            birthday,
+            address,
+            phone,
+        })
+        setChangeMode(true)
+    }
+
+    function handleCancelChangeMode () {
+        setChangeMode(false)
+        setUsername(dataBeforeChangeMode.username)
+        setGender(dataBeforeChangeMode.gender)
+        setBirthday(dataBeforeChangeMode.birthday)
+        setAddress(dataBeforeChangeMode.address)
+        setPhone(dataBeforeChangeMode.phone)
+    }
+
     function handleSave() {
         // if not empty
         if (username && gender && phone && address && birthday) {
-            dispatch(updateInformation({
-                gender: "Male",
-                phone: "phone",
-                address: "address",
-                bdate: "2002-10-30",
-                username: "username"
-            }))
-        .then((res: any) => {
-                if (res.payload.status === "success") {
-                    dispatch(FlashSlice.actions.handleOpen({ message: "Updated successfully", type: "success" }))
-                    dispatch(getMe())
-                }
-                else {
-                    dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "danger" }))
-                }
-            })
+            dispatch(updateInformation(
+                {
+                    "gender": gender,
+                    "phone": phone,
+                    "address": address,
+                    "bdate": birthday,
+                    "username": username
+                  }
+            ))
+                .then((res: any) => {
+                    if (res.payload.status === "success") {
+                        dispatch(FlashSlice.actions.handleOpen({ message: "Updated successfully", type: "success" }))
+                        dispatch(getMe())
+                    }
+                    else {
+                        dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "danger" }))
+                    }
+                })
         }
         else {
             dispatch(FlashSlice.actions.handleOpen({ message: "Please fill all fields", type: "danger" }))
@@ -158,7 +181,7 @@ function Profile() {
                             <div className={clsx(styles.footer, "mb-3")}>
                                 {changeMode ?
                                     <>
-                                        <div onClick={() => { setChangeMode(false) }} className="btn btn_custom me-3">
+                                        <div onClick={() => { handleCancelChangeMode() }} className="btn btn_custom me-3">
                                             Back
                                         </div>
                                         <div onClick={() => { setChangeMode(false); handleSave() }} className="btn btn_custom">
@@ -166,7 +189,7 @@ function Profile() {
                                         </div>
                                     </>
                                     :
-                                    <div onClick={() => { setChangeMode(true) }} className="btn btn_custom">
+                                    <div onClick={() => { handleChangeMode() }} className="btn btn_custom">
                                         Change
                                     </div>
                                 }
@@ -231,7 +254,7 @@ function Profile() {
                         <div className={styles.footer}>
                             {changeMode ?
                                 <>
-                                    <div onClick={() => { setChangeMode(false) }} className="btn btn_custom me-3">
+                                    <div onClick={() => {  handleCancelChangeMode() }} className="btn btn_custom me-3">
                                         Back
                                     </div>
                                     <div onClick={() => { setChangeMode(false); handleSave(); }} className="btn btn_custom">
@@ -239,7 +262,7 @@ function Profile() {
                                     </div>
                                 </>
                                 :
-                                <div onClick={() => { setChangeMode(true) }} className="btn btn_custom">
+                                <div onClick={() => { handleChangeMode() }} className="btn btn_custom">
                                     Change
                                 </div>
                             }

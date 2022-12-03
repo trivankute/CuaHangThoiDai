@@ -18,6 +18,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { UserStore } from '../../redux/selectors';
 import { logout } from '../../redux/slices/UserSlice'
 import FlashSlice from '../../redux/slices/FlashSlice'
+import music from "./NangTho-HoangDung-6413381.mp3"
 
 function Header() {
   const dispatch = useDispatch<any>();
@@ -69,6 +70,10 @@ function Header() {
         <Container>
           {res ? <>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            {/* audio */}
+            <audio className={styles.audio} controls loop>
+              <source src={music} type="audio/mpeg"></source>
+            </audio>
             <div className={styles.service_icons}>
               <div id="login-btn" className={clsx(styles.icon_box, styles.login_box)}>
                 {
@@ -142,11 +147,17 @@ function Header() {
           </>
             :
             <>
-              <Navbar.Brand
-                onClick={() => { navigate("/") }}
-                href="#home">
-                <Brand brand_style={styles.navbar_brand} logo_style={styles.logo_style} />
-              </Navbar.Brand>
+              <div className="d-flex flex-column align-items-center justify-content-around">
+                <Navbar.Brand
+                  onClick={() => { navigate("/") }}
+                  href="#home">
+                  <Brand brand_style={styles.navbar_brand} logo_style={styles.logo_style} />
+                </Navbar.Brand>
+                {/* audio */}
+                <audio className={styles.audio} controls>
+                  <source src={music} type="audio/mpeg"></source>
+                </audio>
+              </div>
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav" >
                 <div className="me-auto d-flex flex-column w-100 justify-content-center">

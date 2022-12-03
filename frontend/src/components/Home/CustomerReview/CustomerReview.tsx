@@ -41,9 +41,7 @@ function CustomerReview() {
         return () => {
             window.removeEventListener("resize", handleResize)
         }
-
     },[])
-
     useEffect(()=>{
         dispatch(getReviewsHightScore())
     },[])
@@ -61,14 +59,14 @@ function CustomerReview() {
             style={{padding:"20px 9%"}}
         >
             <div className={styles.box_container}>
-                {/* {
+                {
                     reviews.data && 
-                    reviews.data.map((review, index)=>(
+                    reviews.data.map((review:any, index:any)=>(
                         <SwiperSlide key={index}>
                             <CustomerReviewCard review={review}/>
                         </SwiperSlide>
                     ))
-                } */}
+                }
                 {/* <SwiperSlide>
                 <CustomerReviewCard image={image} review={"tuyet voi"}  name={"Talor trivan"} rating={4}/>
                 </SwiperSlide>
