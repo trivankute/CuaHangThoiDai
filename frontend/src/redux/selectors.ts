@@ -8,3 +8,4 @@ export const ReviewStore = (state:any) => state.review
 export const BlogStore = (state:any) => state.blog
 export const BlogsStore = (state:any) => state.blogs
 export const ArtistsStore = (state:any) => state.artists
+export const ReviewsStore = (state:any) => state.reviews

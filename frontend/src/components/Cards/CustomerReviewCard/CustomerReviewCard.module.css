@@ -28,6 +28,8 @@
     width:100px;
     height:100px;
     border-radius:50%;
+    /* make the image fit */
+    object-fit: cover;
 }
 .box p {
     padding:10px 0;
