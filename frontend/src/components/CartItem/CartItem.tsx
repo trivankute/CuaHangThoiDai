@@ -50,7 +50,7 @@ function CartItem({type, album}:{type:string, album:any}) {
                 <img src={album.image} alt=""></img>
                 <div className={styles.content}>
                     <h3>{album.title}</h3>
-                    <span>${album.price*album.quantity}</span>
+                    <span>${parseInt(album.price)*album.quantity*1000}</span>
                     {
                         type=='transaction_history'?
                         <span>Quantity: {album.quantity}</span>

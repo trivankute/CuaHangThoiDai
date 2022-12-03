@@ -8,12 +8,17 @@ import styles from "./Checkout.module.css"
 import { axiosForProvince, getProvincesArray, getWards, getDistricts } from "../../utils/axiosForProvinces"
 
 import BackNavigate from '../../components/BackNavigate/BackNavigate';
-import { useSelector } from 'react-redux';
-import { UserStore } from '../../redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { CartStore, UserStore } from '../../redux/selectors';
+import CartSlice from '../../redux/slices/CartSlice';
+import { createShippingTransaction } from '../../redux/slices/TransactionSlice';
+import FlashSlice from '../../redux/slices/FlashSlice';
 
 function Checkout() {
     const navigate = useNavigate()
+    const dispatch = useDispatch<any>()
     const user = useSelector(UserStore)
+    const cart = useSelector(CartStore)
     const [provinces, setProvinces] = useState(() => { return getProvincesArray() })
     const [districts, setDistricts] = useState([])
     const [wards, setWards] = useState([])
@@ -24,15 +29,11 @@ function Checkout() {
 
     const [defaultMode, setDefaultMode] = useState(true)
     const [username, setUsername] = useState("Van")
-    const [email, setEmail] = useState("blabla@gmail.com")
     const [phone, setPhone] = useState("0123456789")
-    const [gender, setGender] = useState("female")
-    const [birthday, setBirthday] = useState("2022-10-30")
-    console.log(user.data)
-
     // scroll to top
     useEffect(() => {
         window.scrollTo(0, 0)
+        dispatch(CartSlice.actions.handleTotalPrice(""))
     }, [])
 
     async function handleGetDistricts(provinceName: string) {
@@ -50,25 +51,58 @@ function Checkout() {
     }
 
     function handleSubmit() {
-        // const input = {
-        //     typeOfTransaction = "payment",
-        //     typeOfShipping = "shipping",
-        //     receiverAddress = "100 da lat",
-        //     deliverPartner = "",
-        //     receiverName,
-        //     receiverPhone,
-        //     totalPrice,
-        //     products
-        // }
-        // navigate('/notification', {
-        //     state: {
-        //         state: "success",
-        //         title: "Your order has been placed",
-        //         description: "Thank you for shopping with us",
-        //         btn_title: "See your order",
-        //         btn_path: "/transactions/1"
-        //     }
-        // })
+        let userInput;
+        if(defaultMode) 
+        {
+            userInput = {
+                username: user.data.account.username,
+                phone: user.data.phone,
+                address: user.data.address
+            }
+        }
+        else {
+        let fullAddress = `${address}, ${ward}, ${district}, ${province.name}` 
+        userInput = {
+            username,
+            phone,
+            address: fullAddress
+        }
+        }
+        const input = {
+            typeOfTransaction : "payment",
+            typeOfShipping : "shipping",
+            receiverAddress : userInput.address,
+            deliverPartner : null,
+            receiverName : userInput.username,
+            receiverPhone : userInput.phone,
+            totalPrice : cart.totalPrice,
+            products : cart.data.map((item:any, index:any)=>{
+                return {
+                    albumId: item.id,
+                    quantity: item.quantity
+                }
+            })
+        }
+        dispatch(createShippingTransaction(input))
+            .then((res:any)=>{
+                if(res.payload.status === "success")
+                {
+                    dispatch(FlashSlice.actions.handleOpen({message: res.payload.msg, type: "success"}))
+                    dispatch(CartSlice.actions.handleClearCart(""))
+                    navigate('/notification', {
+                        state: {
+                            state: "success",
+                            title: "Your order has been placed",
+                            description: "Thank you for shopping with us",
+                            btn_title: "See your order",
+                            btn_path: "/transactions/1"
+                        }
+                    })
+                }
+                else {
+                    dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "danger" }))
+                }
+            })
     }
     return (
         <div className={styles.container}>
@@ -129,24 +163,24 @@ function Checkout() {
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Receiver's full name:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter your full name" />
+                            <Form.Control onChange={(e:any)=>{setUsername(e.target.value)}} value={username} type="text" placeholder="Enter your full name" />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Phone</Form.Label>
-                            <Form.Control type="text" placeholder="Enter your phone number" />
+                            <Form.Control onChange={(e:any)=>{setPhone(e.target.value)}} value={phone} type="text" placeholder="Enter your phone number" />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Address</Form.Label>
-                            <Form.Control type="text" placeholder="Address" />
+                            <Form.Control onChange={(e:any)=>{setAddress(e.target.value)}} value={address} type="text" placeholder="Address" />
                         </Form.Group>
 
                         {/* form select provinces */}
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Province</Form.Label>
                             <Form.Select onChange={async (e) => {
-                                await handleGetDistricts(e.target.value);
+                                handleGetDistricts(e.target.value)
                             }} aria-label="Default select example">
                                 <option>Open this select menu</option>
                                 {provinces.map((province, index) => {

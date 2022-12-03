@@ -8,14 +8,26 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import clsx from 'clsx';
 import { Form, Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { TransactionsStore, UserStore } from '../../redux/selectors';
+import { getTransactionsByUserIdAndPageId } from '../../redux/slices/TransactionsSlice';
 function Transactions() {
+  const transactions = useSelector(TransactionsStore)
+  const user = useSelector(UserStore)
+  const dispatch = useDispatch<any>()
   const [seeTotalPriceMode, setSeeTotalPriceMode] = useState(false)
   const navigate = useNavigate();
-
   // scroll to top
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [])
+    if(user.data)
+    dispatch(getTransactionsByUserIdAndPageId({
+      transactionCount: 8,
+      userId: user.data.user_id,
+      pageId: 1
+    }))
+  }, [user.loading])
+  console.log(transactions)
   return (
     <>
       <div className={styles.container}>
@@ -66,7 +78,18 @@ function Transactions() {
               <div style={{padding:10}}>
 
               </div>
-              <TransactionItem total_amount={"123.000"} type="ordered online" onClick={() => {
+              {
+                transactions.data &&
+                transactions.data.map((transaction:any, index:any) => {
+                  return (
+                    <TransactionItem
+                      key={index}
+                      transaction={transaction}
+                    />
+                  )
+                })
+              }
+              {/* <TransactionItem total_amount={"123.000"} type="ordered online" onClick={() => {
                 navigate('/transactions/1', {
                   state: {
                     type: "order_online"
@@ -100,7 +123,7 @@ function Transactions() {
                     type: "order_online"
                   }
                 })
-              }} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"} />
+              }} state={"on the go"} transaction_id={"1212121"} delivery_parner={"Grab"} time={"11:22 12/12/2012"} /> */}
             </>
         }
       </div>

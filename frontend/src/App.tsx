@@ -109,8 +109,8 @@ function App() {
         <Route path='/products/albums/:albumName' element={<Album />} />
         {/* cart route */}
         <Route path='/cart' element={<Cart />} />
-        <Route path='/checkout' element={<Checkout />} />
         <Route element={<LoggedIn />}>
+          <Route path='/checkout' element={<Checkout />} />
           <Route path='/user' element={<User />}>
             <Route path='profile' element={<Profile />} />
             <Route path='password' element={<Password />} />

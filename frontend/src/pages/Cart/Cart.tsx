@@ -11,8 +11,10 @@ import BackNavigate from '../../components/BackNavigate/BackNavigate'
 import { useDispatch, useSelector } from 'react-redux'
 import { CartStore } from '../../redux/selectors'
 import CartSlice from '../../redux/slices/CartSlice'
+import FlashSlice from '../../redux/slices/FlashSlice'
 
 function Cart() {
+    const user = useSelector(CartStore)
     const navigate = useNavigate()
     const cart = useSelector(CartStore)
     const dispatch = useDispatch<any>()
@@ -23,6 +25,19 @@ function Cart() {
         dispatch(CartSlice.actions.handleLoadCart(""))
         dispatch(CartSlice.actions.handleTotalPrice(""))
     }, [cart.loading])
+    function handleBuy() {
+        // check if cart.data is false or cart.data.length===0
+        if(!cart.data || cart.data.length===0) {
+            dispatch(FlashSlice.actions.handleOpen({message:"No items in cart", type:"danger"}))
+        }
+        // else if check user logged in yet
+        else if(!localStorage.getItem("token") && user.data) {
+            dispatch(FlashSlice.actions.handleOpen({message:"Please login to buy", type:"danger"}))
+        }
+        else {
+            navigate('/checkout')
+        }
+    }
     return (
         <>
             <div className={styles.container}>
@@ -51,7 +66,7 @@ function Cart() {
                         <div className={styles.totalPrice}>
                             Total: $ {cart.data && cart.totalPrice}
                         </div>
-                        <button onClick={()=>{navigate('/checkout')}} className={clsx('btn', 'btn_custom')}>Buy</button>
+                        <button onClick={()=>{handleBuy()}} className={clsx('btn', 'btn_custom')}>Buy</button>
                     </div>
                 </div>
             </div>

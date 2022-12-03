@@ -62,21 +62,12 @@ export const createPickupTransaction = createAsyncThunk('createPickupTransaction
 }) 
 
 export const createShippingTransaction = createAsyncThunk('createShippingTransaction',async (input:any) => {
-    const {typeOfTransaction, typeOfShipping, receiverAddress, deliverPartner, receiverName, receiverPhone, totalPrice, products} = input
     try {
         //{{host}}/api/transactions/createShipping.php
-        const {data} = await axios.post(`${serverUrl}/api/transactions/createShipping.php`,{
-            typeOfTransaction,
-            typeOfShipping,
-            receiverAddress,
-            deliverPartner,
-            receiverName,
-            receiverPhone,
-            totalPrice,
-            products
-        },{
+        const {data} = await axios.post(`${serverUrl}/api/transactions/createShipping.php`,input,{
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                'Authorization': `Bearer ${localStorage.getItem('token')}`, 
+                'Content-Type': 'application/json'
             }
         });
         if(data.status === "success"){

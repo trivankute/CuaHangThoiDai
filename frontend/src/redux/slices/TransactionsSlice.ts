@@ -24,6 +24,15 @@ const TransactionsSlice = createSlice({
             if(status==="success")
             state.data = data
         })
+        .addCase(getTransactionsByUserIdAndPageId.pending, (state,action) => {
+            state.loading = true
+        })
+        .addCase(getTransactionsByUserIdAndPageId.fulfilled, (state,action) => {
+            state.loading = false
+            const {status, data} = action.payload
+            if(status==="success")
+            state.data = data
+        })
     }
 })
 
@@ -68,4 +77,27 @@ export const getTransactionsTotalPages = createAsyncThunk('getTransactionsTotalP
         return {status:"error","msg":error.response.data.message};
     }
 });
+
+export const getTransactionsByUserIdAndPageId = createAsyncThunk('getTransactionsByUserIdAndPageId', async (input : any) => {
+    try {
+        //{{host}}/api/pages/getTransactionByUserId.php?transactionCount=10&userId=17&id=1
+        const {transactionCount, userId, pageId} = input;
+        const {data} = await axios.get(`${serverUrl}/api/pages/getTransactionByUserId.php?
+        transactionCount=${transactionCount}&userId=${userId}&id=${pageId}`,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }}
+        );
+        if(data.status === 'success'){
+            return {status:"success","data":data.data.transactions, "msg":data.data.msg};
+        }
+        else {
+            return {status:"error", "data":data.data.transactions,"msg":data.data.msg};
+        }
+    }
+    catch (error : any) {
+        return {status:"error","msg":error.response.data.message};
+    }
+});
+
 export default TransactionsSlice;

@@ -23,7 +23,13 @@ const AlbumSlice = createSlice({
             if(status==="success")
             state.data = data
         })
-    }
+        .addCase(uploadAlbum.pending, (state,action) => {
+            state.loading = true
+        })
+        .addCase(uploadAlbum.fulfilled, (state,action) => {
+            state.loading = false
+        })
+}
 })
 
 export const getAlbumById = createAsyncThunk('getAlbumById', async (id:string) => {
@@ -38,6 +44,27 @@ export const getAlbumById = createAsyncThunk('getAlbumById', async (id:string) =
         }
         else {
             return {status:"error", "data":data.data.album,"msg":data.data.msg};
+        }
+    }
+    catch (error : any) {
+        return {status:"error","msg":error.response.data.message};
+    }
+})
+
+export const uploadAlbum = createAsyncThunk('uploadAlbum', async (input:any) => {
+    //{{host}}/api/albums/upload.php
+    try {
+        const {data} = await axios.post(`${serverUrl}/api/albums/upload.php`, input, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        if(data.status === 'success'){
+            return {status:"success","msg":data.data.msg};
+        }
+        else {
+            return {status:"error","msg":data.data.msg};
         }
     }
     catch (error : any) {
