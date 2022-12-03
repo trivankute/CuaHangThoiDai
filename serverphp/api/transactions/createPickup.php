@@ -19,7 +19,13 @@
             $products
         );
         if ($result) {
-            echo json_encode(['status'=>'success', 'data'=>['msg'=>'Create pickup transaction success']]);
+            echo json_encode([
+                'status'=>'success', 
+                'data'=>[
+                    'msg'=>'Create pickup transaction success',
+                    'transactionId' => $result
+                ]
+            ]);
             exit();
         }
         else {

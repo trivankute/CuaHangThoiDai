@@ -21,6 +21,7 @@ class Album {
         $this->price = $price;
         $this->artistName = $artistName;
         $this->albumType = $albumType;
+        $this->quantity = $quantity;
         $this->albumAvatar = $albumAvatar;
         $this->artistAvatar = $artistAvatar;
     }
@@ -42,7 +43,7 @@ class Album {
         return [
             'title' => $this->title,
             'price' => $this->price,
-            'page' => $this->page,
+            'quantity' => $this->quantity,
             'artistName' => $this->artistName,
             'albumType' => $this->albumType,
             'albumAvatar' => $this->albumAvatar,
@@ -51,7 +52,7 @@ class Album {
     }
 
     public function create() {
-        $sql = "SELECT `insert_album`(:title,:price,:page,:quantity,:artistName,:albumAvatar,:albumType,:artistAvatar) AS `insert_album`";
+        $sql = "SELECT `insert_album`(:title,:price,:artistName,:albumAvatar,:quantity,:albumType,:artistAvatar) AS `insert_album`";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':title', $this->title);
         $stmt->bindParam(':price', $this->price);
@@ -60,20 +61,6 @@ class Album {
         $stmt->bindParam(':albumAvatar', $this->albumAvatar);
         $stmt->bindParam(':albumType', $this->albumType);
         $stmt->bindParam(':artistAvatar', $this->artistAvatar);
-        $count = $this->albumsCount();
-        // pagination 
-        if($count ==0) {
-            $this->page = 1;
-        }
-        else {
-            if($count % $this->pageSize == 0) {
-                $this->page = $count / $this->pageSize + 1;
-            }
-            else {
-                $this->page = floor($count / $this->pageSize) + 1;
-            }
-        }
-        $stmt->bindParam(':page', $this->page);
         try {
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -85,7 +72,6 @@ class Album {
             }
         } catch (PDOException $e) {
             echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
-            echo json_encode(['status'=>'error', 'data'=>['msg'=>'Create album failed']]);
             exit();
         }
     }
@@ -327,6 +313,20 @@ class Album {
                 array_push($result, $album);
             }
             return $result;
+        }
+        catch (PDOException $e) {
+            echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+            exit();
+        }
+    }
+    public function getCountByType($type) {
+        $sql = "SELECT COUNT(*) FROM album WHERE album_type = :type";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':type', $type);
+        try {
+            $stmt->execute();
+            $count = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $count['COUNT(*)'];
         }
         catch (PDOException $e) {
             echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
