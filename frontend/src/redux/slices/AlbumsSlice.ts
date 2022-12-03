@@ -32,10 +32,10 @@ const AlbumsSlice = createSlice({
             if(status==="success")
             state.data = data
         })
-        .addCase(getAlbumsAllPages.pending, (state,action) => {
+        .addCase(getAlbumsTotalPages.pending, (state,action) => {
             state.loading = true
         })
-        .addCase(getAlbumsAllPages.fulfilled, (state,action) => {
+        .addCase(getAlbumsTotalPages.fulfilled, (state,action) => {
             state.loading = false
         })
     }
@@ -82,7 +82,7 @@ export const getAllAlbumsByPageId = createAsyncThunk('getAllAlbumsByPageId', asy
 }
 )
 
-export const getAlbumsAllPages = createAsyncThunk('getAlbumsAllPages', async (input:any) => {
+export const getAlbumsTotalPages = createAsyncThunk('getAlbumsTotalPages', async (input:any) => {
     const {albumCount} = input
     // {{host}}/api/pages/getTotalPageAlbum.php?albumCount=8
     try {

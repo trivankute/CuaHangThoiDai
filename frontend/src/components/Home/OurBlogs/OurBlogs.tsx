@@ -9,8 +9,13 @@ import 'swiper/css';
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import clsx from 'clsx'
+import { useDispatch, useSelector } from 'react-redux';
+import { BlogsStore } from '../../../redux/selectors';
+import { getAllBlogs } from '../../../redux/slices/BlogsSlice';
 
 function OurBlogs() {
+    const blogs = useSelector(BlogsStore)
+    const dispatch = useDispatch<any>()
     const [swiperRes, setSwiperRes] = useState(()=>{
         if(window.innerWidth<700)
         {
@@ -38,6 +43,11 @@ function OurBlogs() {
         }
 
     },[])
+
+    useEffect(()=>{
+        dispatch(getAllBlogs())
+        
+    },[])
     return (
         <>
             <Swiper
@@ -51,17 +61,18 @@ function OurBlogs() {
                 style={{padding:"20px 9%"}}
             >
             <div className={styles.box_container}>
-                <SwiperSlide>
-                <BlogCard image={image} title={"Midnight 🌟"} description={"“Midnights” has reached 100 #1's on Apple Music around the world. Itʼs Taylor’s first album to reach this milestone."}/>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                <BlogCard image={image} title={"Midnight 🌟"} description={"“Midnights” has reached 100 #1's on Apple Music around the world. Itʼs Taylor’s first album to reach this milestone."}/>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                <BlogCard image={image} title={"Midnight 🌟"} description={"“Midnights” has reached 100 #1's on Apple Music around the world. Itʼs Taylor’s first album to reach this milestone."}/>
-                </SwiperSlide>
+                {
+                    blogs.data &&
+                    <>
+                        {blogs.data.map((blog:any, index:any)=>{
+                            return(
+                                <SwiperSlide>
+                                    <BlogCard blog={blog} />
+                                </SwiperSlide>
+                            )
+                        })}
+                    </>
+                }
             </div>
             </Swiper>
         </>

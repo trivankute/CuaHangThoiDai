@@ -91,7 +91,7 @@ function Home() {
         Our <span>Blogs</span>
       </h1>
       <OurBlogs/>
-        <More urlDirection="blogs"/>
+        <More urlDirection="blogs?page=1"/>
       </section>
     </Container>
     </div>

@@ -2,14 +2,16 @@ import { memo, useEffect, useState } from 'react';
 import { Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { AlbumsStore } from '../../redux/selectors';
-import { getAlbumsAllPages } from '../../redux/slices/AlbumsSlice';
+import { AlbumsStore, BlogsStore } from '../../redux/selectors';
+import { getAlbumsTotalPages } from '../../redux/slices/AlbumsSlice';
+import { getBlogsTotalPage } from '../../redux/slices/BlogsSlice';
 
-function PaginationByTotalPage({ currPage, basicUrl }: { currPage: any, basicUrl: any }) {
+function PaginationByTotalPage({ type, currPage, basicUrl }: { type:any, currPage: any, basicUrl: any }) {
     const navigate = useNavigate();
     const dispatch = useDispatch<any>();
     const [pageTracking, setPageTracking] = useState<any>(false)
     const albums = useSelector(AlbumsStore)
+    const blogs = useSelector(BlogsStore)
     useEffect(() => {
         function loadToArray(totalPage: any) {
             if (totalPage) {
@@ -57,16 +59,23 @@ function PaginationByTotalPage({ currPage, basicUrl }: { currPage: any, basicUrl
                 }
             }
         }
-        dispatch(getAlbumsAllPages({ albumCount: 8 }))
+        if(type==="albums")
+        dispatch(getAlbumsTotalPages({ albumCount: 8 }))
             .then((res: any) => {
                 loadToArray(res.payload.totalPage)
             })
+        if(type==="blogs")
+        dispatch(getBlogsTotalPage({ blogCount: 6 }))
+            .then((res: any) => {
+                loadToArray(res.payload.totalPage)
+            })
+
     }, [currPage])
     return (
         <>
             {
                 pageTracking &&
-                <Pagination>
+                <Pagination className="w-100 offset-10">
                     {
                         pageTracking.length >= 5 && currPage != 1
                         &&
@@ -101,7 +110,14 @@ function PaginationByTotalPage({ currPage, basicUrl }: { currPage: any, basicUrl
                         pageTracking.length >= 5 && currPage != pageTracking.length
                         &&
                         <>
-                            <Pagination.Last onClick={() => navigate(`${basicUrl}${albums.data.totalPage}`)} />
+                            {
+                                type==="albums" && 
+                                <Pagination.Last onClick={() => navigate(`${basicUrl}${albums.data.totalPage}`)} />
+                            }
+                            {
+                                type==="blogs" &&
+                                <Pagination.Last onClick={() => navigate(`${basicUrl}${blogs.data.totalPage}`)} />
+                            }
                         </>
                     }
 

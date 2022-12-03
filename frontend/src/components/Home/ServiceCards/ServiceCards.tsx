@@ -1,6 +1,5 @@
 import {memo, useState, useEffect} from 'react'
 import styles from "./ServiceCards.module.css"
-import image from "./cd.png"
 import ServiceCard from '../../Cards/ServiceCard/ServiceCard'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -51,15 +50,15 @@ function ServiceCards() {
             >
         <div className={(styles.box_container)}>
             <SwiperSlide>
-            <ServiceCard image={image} title={"CD"} description={"400 products"}/>
+            <ServiceCard image="https://res.cloudinary.com/dotr7u5kq/image/upload/v1670052170/AlbumTypeCHTD/cd_wri1gs.jpg" title={"CD"} description={"400 products"}/>
             </SwiperSlide>
 
             <SwiperSlide>
-            <ServiceCard image={image} title={"CD"} description={"400 products"}/>
+            <ServiceCard image="https://res.cloudinary.com/dotr7u5kq/image/upload/v1670052161/AlbumTypeCHTD/vinyl_dnvjvp.webp" title={"Vinyl"} description={"400 products"}/>
             </SwiperSlide>
 
             <SwiperSlide>
-            <ServiceCard image={image} title={"CD"} description={"400 products"}/>
+            <ServiceCard image="https://res.cloudinary.com/dotr7u5kq/image/upload/v1670052166/AlbumTypeCHTD/cassette_n1909q.jpg" title={"Cassette"} description={"400 products"}/>
             </SwiperSlide>
         </div>
             </Swiper>

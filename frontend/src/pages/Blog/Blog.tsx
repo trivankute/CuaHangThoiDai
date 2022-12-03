@@ -1,33 +1,76 @@
 import { memo, useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import styles from './Blog.module.css'
-import { Container, Row } from "react-bootstrap"
-import image from "./cd.png"
+import { Button, Container, Form, Row } from "react-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faUser, faCalendar } from '@fortawesome/free-solid-svg-icons'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import "../../globalCss.css"
 import clsx from 'clsx'
+import { useDispatch, useSelector } from 'react-redux'
+import { BlogStore, UserStore } from '../../redux/selectors'
+import { createBlog, getBlogById } from '../../redux/slices/BlogSlice'
+import FlashSlice from '../../redux/slices/FlashSlice'
+import Loading from '../../components/Loading/Loading'
 
 function Blog() {
+    const user = useSelector(UserStore)
+    const blog = useSelector(BlogStore)
+    const dispatch = useDispatch<any>()
     const navigate = useNavigate()
     const location = useLocation()
+    // get url
+    const url = location.pathname.split("/")
+    const blogId = url[url.length - 1]
     const [topic, setTopic] = useState("")
-    const [albumImage, setAlbumImage] = useState({ file: "", img: "" });
-    const [title, setTitle] = useState("");
+    const [albumImage, setAlbumImage] = useState({ files: [], img: "" });
+    const [headline, setHeadline] = useState("");
     const [content, setContent] = useState("");
-    // scroll to top
     useEffect(() => {
         window.scrollTo(0, 0)
-    }, [])
-    useEffect(() => {
         if (location.state) {
             setTopic(location.state.topic)
-            setTitle(location.state.title)
+            setHeadline(location.state.headline)
             setContent(location.state.content)
-            setAlbumImage({ file: "", img: location.state.img })
+            setAlbumImage(location.state.img)
+            //revoke image url
+            URL.revokeObjectURL(albumImage.img);
         }
-    }, [])
+        if(!location.pathname.includes("writeblog"))
+        dispatch(getBlogById({id:blogId}))
+    }, [blogId])
+    function handleSubmit(e:any) {
+        // if not empty
+        e.preventDefault();
+        e.stopPropagation();
+        if (topic && headline && content && albumImage.files[0]) {
+        const data = new FormData();
+        data.append('topic', topic);
+        data.append('headline', headline);
+        data.append('content', content);
+        data.append('image', albumImage.files[0]);
+        dispatch(createBlog(data))
+        .then((res: any) => {
+            if(res.payload.status === "success"){
+                    navigate('/products/blogs', {state:{
+                        afterSubmitBlog: true
+                    }})
+            }
+            else {
+                dispatch(FlashSlice.actions.handleOpen({ message: res.payload.msg, type: "danger" }))
+                }
+                //revoke image url
+                URL.revokeObjectURL(albumImage.img);
+            setAlbumImage({ files: [], img: "" });
+            setTopic("");
+            setHeadline("");
+            setContent("");
+        })
+        }
+        else {
+            dispatch(FlashSlice.actions.handleOpen({ message: "Please fill all the fields", type: "danger" }))
+        }
+    }
     return (<>
         <Container fluid className={styles.container}>
             <Row >
@@ -38,18 +81,24 @@ function Blog() {
                             navigate('/user/writeblog', {
                                 state: {
                                     topic: topic,
-                                    title: title,
+                                    headline: headline,
                                     content: content,
-                                    img: albumImage.img
+                                    img: albumImage
                                 }
                             })
                         }} className={styles.turnBack}>
                             <FontAwesomeIcon icon={faArrowLeft as IconProp} className={clsx(styles.icon, 'btn btn_custom')} />
                         </div>
-                        <div onClick={() => {
-                            navigate('/user/writeblog')}} className="btn btn_custom d-flex justify-content-center align-items-center" style={{marginTop:0}}>
+                        <Form>
+                        <Button type="submit" onClick={(e:any) => {handleSubmit(e);
+                            }} className="btn btn_custom d-flex justify-content-center align-items-center position-relative" style={{marginTop:0}}>
+                                {
+                                    blog.loading &&
+                                    <Loading small/>
+                                }
                             submit
-                        </div>
+                        </Button>
+                        </Form>
                     </div>
                         :
                         <div onClick={() => { navigate('/products/blogs') }} className={styles.turnBack}>
@@ -58,32 +107,75 @@ function Blog() {
 
                 }
             </Row>
-            <Row >
-                <div className={styles.blogTitle}>
-                    <h1>{title}</h1>
-                    <h4>Topic: {topic}</h4>
-                </div>
-            </Row>
-            <Row className={styles.notes}>
-                <div className={styles.notes}>
-                    <div className={styles.icons}>
-                        <a href="#">
-                            <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} /> by user </a>
-                        <a href="#">
-                            <FontAwesomeIcon className={styles.icon} icon={faCalendar as IconProp} /> 1st may, 2021 </a>
+            {
+                !location.pathname.includes('writeblog')
+                ?
+                <>
+                {
+                    blog.data &&
+                    <>
+                    <Row >
+                        <div className={styles.blogTitle}>
+                            <h1>{blog.data.headline}</h1>
+                            <h4>Topic: {blog.data.topic}</h4>
+                        </div>
+                    </Row>
+                    <Row className={styles.notes}>
+                        <div className={styles.notes}>
+                            <div className={styles.icons}>
+                                <a href="#">
+                                    <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} /> by {blog.data.employeeName} </a>
+                                <a href="#">
+                                    <FontAwesomeIcon className={styles.icon} icon={faCalendar as IconProp} /> {blog.data.date} </a>
+                            </div>
+                        </div>
+                    </Row>
+                    <Row >
+                        <div className={styles.blogImage}>
+                            <img src={blog.data.avatar} alt="blog image" />
+                        </div>
+                    </Row>
+                    <Row>
+                        <div className={styles.blogContent}>
+                            <p>{blog.data.content}</p>
+                        </div>
+                    </Row>
+                    </>
+                }
+                </>
+                :
+                <>
+                <Row >
+                    <div className={styles.blogTitle}>
+                        <h1>{headline}</h1>
+                        <h4>Topic: {topic}</h4>
                     </div>
-                </div>
-            </Row>
-            <Row >
-                <div className={styles.blogImage}>
-                    <img src={albumImage.img} alt="blog image" />
-                </div>
-            </Row>
-            <Row>
-                <div className={styles.blogContent}>
-                    <p>{content}</p>
-                </div>
-            </Row>
+                </Row>
+                <Row className={styles.notes}>
+                    <div className={styles.notes}>
+                        <div className={styles.icons}>
+                            <a href="#">
+                                <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} /> by {user.data&&user.data.account.username} </a>
+                            <a href="#">
+                                <FontAwesomeIcon className={styles.icon} icon={faCalendar as IconProp} /> 
+                                {/* get date now */}
+                                {new Date().toLocaleDateString()}
+                                </a>
+                        </div>
+                    </div>
+                </Row>
+                <Row >
+                    <div className={styles.blogImage}>
+                        <img src={albumImage.img} alt="blog image" />
+                    </div>
+                </Row>
+                <Row>
+                    <div className={styles.blogContent}>
+                        <p>{content}</p>
+                    </div>
+                </Row>
+                </>
+            }
         </Container>
     </>)
 }

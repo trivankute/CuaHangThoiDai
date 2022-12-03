@@ -5,25 +5,23 @@ import styles from './BlogCard.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faCalendar} from '@fortawesome/free-solid-svg-icons'
-import Loading from '../../Loading/Loading'
 
-function BlogCard({image, title, description}:{image:any, title:string, description:string}) {
+function BlogCard({blog}:{blog:any}) {
     const navigate = useNavigate()
     return (
         <>
             <div className={styles.box}>
-            {/* <Loading/> */}
-                <img src={image} alt=""></img>
+                <img src={blog.avatar} alt=""></img>
                 <div className={styles.content}>
                     <div className={styles.icons}>
                         <a href="#">
-                            <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} /> by user </a>
+                            <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} /> by {blog.employeeName} </a>
                         <a href="#">
-                            <FontAwesomeIcon className={styles.icon} icon={faCalendar as IconProp} /> 1st may, 2021 </a>
+                            <FontAwesomeIcon className={styles.icon} icon={faCalendar as IconProp} /> {blog.date} </a>
                     </div>
-                    <h3>{title}</h3>
-                    <p>{description}</p>
-                    <a onClick={()=>{navigate('/products/blogs/1')}}className="btn btn_custom">read more</a>
+                    <h3>{blog.topic}</h3>
+                    <p>{blog.content}</p>
+                    <a onClick={()=>{navigate(`/products/blogs/${blog.blog_id}`)}}className="btn btn_custom">read more</a>
                 </div>
             </div>
         </>
