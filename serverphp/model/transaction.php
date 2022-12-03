@@ -50,7 +50,7 @@ class Transaction {
                     }
                 }
             }
-            return true;
+            return $transactionId;
         }
         catch (PDOException $e) {
             echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
@@ -70,7 +70,17 @@ class Transaction {
         $address = null
     ) {
         if($customerId == "") {
-            $customerId = "15";
+            $sql = "SELECT * FROM account WHERE role = 'admin'";
+            $stmt = $this->conn->prepare($sql);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                $customerId = $result['user_id'];
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+                exit();
+            }
         }
         $sql = "SELECT `insert_transaction`(:typeOfTransaction,:typeOfShipping,:customerId,:receiverName,:receiverPhone,:receiverAddress,:deliverPartner,:employeeId,:totalPrice) as `insert_transaction`";
         $stmt = $this->conn->prepare($sql);
@@ -96,7 +106,7 @@ class Transaction {
                     }
                 }
             }
-            return true;
+            return $transactionId;
         }
         catch (PDOException $e) {
             echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
@@ -207,6 +217,35 @@ class Transaction {
             $stmt->execute();
             // delete transaction
             $deleteSqlStmt->execute();
+            return true;
+        }
+        catch (PDOException $e) {
+            echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+            exit();
+        }
+    }
+    public function updateDeliverPartner($id,$deliverPartner) {
+        $sql = "SELECT * FROM shipping WHERE transaction_id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        try {
+            $stmt->execute();
+            $shipping = $stmt->fetch(PDO::FETCH_ASSOC);
+            if(!$shipping) {
+                echo json_encode(['status' => 'error', 'data' => ['msg' => 'Shipping not found']]);
+                exit();
+            }
+        }
+        catch(PDOException $e) {
+            echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+            exit();
+        }
+        $sql = "UPDATE `shipping` SET `deliver_partner` = :deliverPartner WHERE `transaction_id` = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':deliverPartner', $deliverPartner);
+        try {
+            $stmt->execute();
             return true;
         }
         catch (PDOException $e) {

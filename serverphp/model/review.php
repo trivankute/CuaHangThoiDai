@@ -71,7 +71,29 @@
             $stmt = $this->conn->prepare($sql);
             try {
                 $stmt->execute();
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $result = [];
+                foreach($reviews as $review) {
+                    $sql = "SELECT * FROM write_review WHERE review_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $review['review_id']);
+                    $stmt->execute();
+                    $write_review = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $sql = "SELECT * FROM account WHERE user_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $write_review['customer_id']);
+                    $stmt->execute();
+                    $account = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $review['username'] = $account['username'];
+                    $review['avatar'] = $account['avatar'];
+                    $sql = "SELECT * FROM album WHERE album_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $write_review['album_id']);
+                    $stmt->execute();
+                    $album = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $review['album'] = $album;
+                    array_push($result, $review);
+                }
                 return $result;
             }
             catch (PDOException $e) {

@@ -26,7 +26,12 @@
             null
         );
         if($result) {
-            echo json_encode(['status'=>'success', 'data'=>['msg'=>'Create shipping transaction success']]);
+            echo json_encode([
+                    'status'=>'success', 'data'=>[
+                        'msg'=>'Create shipping transaction success',
+                        'transactionId' => $result
+                    ]
+                ]);
             exit();
         }
         else {
