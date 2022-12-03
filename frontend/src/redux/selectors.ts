@@ -11,3 +11,4 @@ export const BlogsStore = (state:any) => state.blogs
 export const CustomersStore = (state:any) => state.customers
 export const EmployeesStore = (state:any) => state.employees
 export const ArtistsStore = (state:any) => state.artists
+export const ReviewsStore = (state:any) => state.artists
