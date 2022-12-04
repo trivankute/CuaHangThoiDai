@@ -16,6 +16,7 @@
 .box img{
     margin:10px 0;
     height: 150px;
+    width:100%;
     /* make the image fit */
     object-fit: cover;
 }

@@ -24,7 +24,7 @@ function Services() {
             setVinylCount(res.payload.count)
         }
         )
-        dispatch(getCountByType({type:"casette"}))
+        dispatch(getCountByType({type:"cassette"}))
         .then((res:any)=>{
             setCassetteCount(res.payload.count)
         }

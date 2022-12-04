@@ -95,7 +95,7 @@ function Checkout() {
                             title: "Your order has been placed",
                             description: "Thank you for shopping with us",
                             btn_title: "See your order",
-                            btn_path: "/transactions/1"
+                            btn_path: "/user/transactions?page=1"
                         }
                     })
                 }
