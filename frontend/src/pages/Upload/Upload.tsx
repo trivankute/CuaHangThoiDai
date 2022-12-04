@@ -124,7 +124,7 @@ function Upload() {
                             <div className="d-flex w-100 mt-3 mb-3" style={{ height: 100 }}>
                                 <img src={artistAvatar.img} />
                         </div>}
-                        <Button variant="primary" type="submit" className="position-relative">
+                        <Button variant="secondary" type="submit" className="position-relative btn btn_custom">
                             {
                                 album.loading &&
                                 <Loading small/>

@@ -90,7 +90,7 @@ function Blog() {
                             <FontAwesomeIcon icon={faArrowLeft as IconProp} className={clsx(styles.icon, 'btn btn_custom')} />
                         </div>
                         <Form>
-                        <Button type="submit" onClick={(e:any) => {handleSubmit(e);
+                        <Button type="submit" variant="secondary" onClick={(e:any) => {handleSubmit(e);
                             }} className="btn btn_custom d-flex justify-content-center align-items-center position-relative" style={{marginTop:0}}>
                                 {
                                     blog.loading &&
