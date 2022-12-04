@@ -12,3 +12,4 @@ export const CustomersStore = (state:any) => state.customers
 export const EmployeesStore = (state:any) => state.employees
 export const ArtistsStore = (state:any) => state.artists
 export const ReviewsStore = (state:any) => state.reviews
+export const ServiceStore = (state:any) => state.service

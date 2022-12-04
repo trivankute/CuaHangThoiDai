@@ -8,7 +8,13 @@ import 'swiper/css';
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import clsx from 'clsx'
+import { useDispatch } from 'react-redux';
+import { getCountByType } from '../../../redux/slices/ServiceSlice';
 function ServiceCards() {
+    const [cdCount, setCdCount] = useState(false)
+    const [vinylCount, setVinylCount] = useState(false)
+    const [cassetteCount, setCassetteCount] = useState(false)
+    const dispatch = useDispatch<any>()
     const [swiperRes, setSwiperRes] = useState(()=>{
         if(window.innerWidth<700)
         {
@@ -36,6 +42,23 @@ function ServiceCards() {
         }
 
     },[])
+    useEffect(() => {
+        dispatch(getCountByType({type:"cd"}))
+        .then((res:any)=>{
+            setCdCount(res.payload.count)
+        }
+        )
+        dispatch(getCountByType({type:"vinyl"}))
+        .then((res:any)=>{
+            setVinylCount(res.payload.count)
+        }
+        )
+        dispatch(getCountByType({type:"casette"}))
+        .then((res:any)=>{
+            setCassetteCount(res.payload.count)
+        }
+        )
+    },[])
     return (
         <>
         <Swiper
@@ -49,17 +72,17 @@ function ServiceCards() {
                 style={{padding:"20px 9%"}}
             >
         <div className={(styles.box_container)}>
-            <SwiperSlide>
-            <ServiceCard image="https://res.cloudinary.com/dotr7u5kq/image/upload/v1670052170/AlbumTypeCHTD/cd_wri1gs.jpg" title={"CD"} description={"400 products"}/>
-            </SwiperSlide>
+                <SwiperSlide>
+                <ServiceCard image="https://res.cloudinary.com/dotr7u5kq/image/upload/v1670052170/AlbumTypeCHTD/cd_wri1gs.jpg" title={"CD"} description={cdCount + " products"}/>
+                </SwiperSlide>
 
-            <SwiperSlide>
-            <ServiceCard image="https://res.cloudinary.com/dotr7u5kq/image/upload/v1670052161/AlbumTypeCHTD/vinyl_dnvjvp.webp" title={"Vinyl"} description={"400 products"}/>
-            </SwiperSlide>
+                <SwiperSlide>
+                <ServiceCard image="https://res.cloudinary.com/dotr7u5kq/image/upload/v1670052161/AlbumTypeCHTD/vinyl_dnvjvp.webp" title={"Vinyl"} description={vinylCount + " products"}/>
+                </SwiperSlide>
 
-            <SwiperSlide>
-            <ServiceCard image="https://res.cloudinary.com/dotr7u5kq/image/upload/v1670052166/AlbumTypeCHTD/cassette_n1909q.jpg" title={"Cassette"} description={"400 products"}/>
-            </SwiperSlide>
+                <SwiperSlide>
+                <ServiceCard image="https://res.cloudinary.com/dotr7u5kq/image/upload/v1670052166/AlbumTypeCHTD/cassette_n1909q.jpg" title={"Cassette"} description={cassetteCount + " products"}/>
+                </SwiperSlide>
         </div>
             </Swiper>
         </>
