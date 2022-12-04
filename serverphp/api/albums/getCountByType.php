@@ -4,8 +4,8 @@
     $user_request_method = $_SERVER['REQUEST_METHOD'];
     if($user_request_method == "GET") {
         $type = $_GET['type'];
-        if($type != 'cd' && $type != 'vinyl' && $type != 'casette') {
-            echo json_encode(['status'=>'error', 'data'=>['msg'=>'Type must be cd or vinyl, casette']]);
+        if($type != 'cd' && $type != 'vinyl' && $type != 'cassette') {
+            echo json_encode(['status'=>'error', 'data'=>['msg'=>'Type must be cd or vinyl, cassette']]);
             exit();
         }
         $result = $global_album->getCountByType($type);
