@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 
 import styles from './ArtistCard.module.css';
 
-function ArtistCard({image, name, description}:{image:any, name:string, description:string}) {
+function ArtistCard({id, image, name, description}:{id:any, image:any, name:string, description:string}) {
     const navigate = useNavigate()
     return (
         <>
@@ -11,7 +11,7 @@ function ArtistCard({image, name, description}:{image:any, name:string, descript
                 <img src={image} alt=""></img>
                 <h3>{name}</h3>
                 <p>{description}</p>
-                <a onClick={()=>{navigate('/products/albums?artist=Trivan')}} className="btn btn_custom">shop now</a>
+                <a onClick={()=>{navigate(`/products/albums?artist=${name}&&artistId=${id}&&page=1`)}} className="btn btn_custom">shop now</a>
             </div>
         </>
     )

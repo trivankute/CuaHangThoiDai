@@ -11,6 +11,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { TransactionsStore, UserStore } from '../../redux/selectors';
 import { getTransactionsByUserIdAndPageId } from '../../redux/slices/TransactionsSlice';
+import PaginationByTotalPage from '../../components/PaginationByTotalPage/PaginationByTotalPage';
 function Transactions() {
   const transactions = useSelector(TransactionsStore)
   const user = useSelector(UserStore)
@@ -27,7 +28,6 @@ function Transactions() {
       pageId: 1
     }))
   }, [user.loading])
-  console.log(transactions)
   return (
     <>
       <div className={styles.container}>
@@ -89,6 +89,7 @@ function Transactions() {
                   )
                 })
               }
+              {/* <PaginationByTotalPage /> */}
               {/* <TransactionItem total_amount={"123.000"} type="ordered online" onClick={() => {
                 navigate('/transactions/1', {
                   state: {

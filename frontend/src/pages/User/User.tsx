@@ -86,7 +86,7 @@ function User() {
                         }} button_style={currentPath == 'password' ? styles.cate_button_style : ""} title={"Password"} icon={faKey}></ListItem>
                         <ListItem onClick={() => {
                             handleClose();
-                            navigate('/user/transactions')
+                            navigate('/user/transactions?page=1')
                         }} button_style={currentPath == 'transactions' ? styles.cate_button_style : ""} title={"Transactions"} icon={faClockRotateLeft}></ListItem>
                         {/* <ListItem onClick={() => {
                             handleClose();
@@ -131,7 +131,7 @@ function User() {
                         }} button_style={currentPath == 'writeblog' ? styles.cate_button_style : ""} title={"Write Blog"} icon={faBlog}></ListItem>
                         <ListItem onClick={() => {
                             handleClose();
-                            navigate('/user/transactions')
+                            navigate('/user/transactions?page=1')
                         }} button_style={currentPath == 'transactions' ? styles.cate_button_style : ""} title={"Transactions"} icon={faClockRotateLeft}></ListItem>
                     </>
                 )
@@ -173,7 +173,7 @@ function User() {
                         }} button_style={currentPath == 'writeblog' ? styles.cate_button_style : ""} title={"Write Blog"} icon={faBlog}></ListItem> */}
                         <ListItem onClick={() => {
                             handleClose();
-                            navigate('/user/transactions')
+                            navigate('/user/transactions?page=1')
                         }} button_style={currentPath == 'transactions' ? styles.cate_button_style : ""} title={"Transactions"} icon={faClockRotateLeft}></ListItem>
                     </>
                 )

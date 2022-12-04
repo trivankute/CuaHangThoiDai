@@ -17,14 +17,14 @@ function Artists() {
     useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(getAllArtistsByPageId({id:pageId, artistCount:8}))
-    }, [pageId])
+    }, [url])
     return (<>
         <Container fluid className={styles.container}>
             {
                 artists.data && 
                 artists.data.map((artist:any)=>{
                     return(
-                        <ArtistCard image={artist.avatar} name={artist.name} description={artist.description}></ArtistCard>
+                        <ArtistCard id={artist.artist_id} image={artist.avatar} name={artist.name} description={artist.description}></ArtistCard>
                     )
                 })
             }

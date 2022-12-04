@@ -29,7 +29,7 @@ function Blogs() {
                 dispatch(FlashSlice.actions.handleOpen({message:"Submitted successfully", type:"success"}))
             }
         }
-    }, [pageId])
+    }, [url])
     return (<>
         <Container fluid className={styles.container}>
             {

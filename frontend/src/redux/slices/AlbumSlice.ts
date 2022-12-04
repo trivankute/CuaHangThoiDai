@@ -8,7 +8,8 @@ const AlbumSlice = createSlice({
     name:"AlbumSlice",
     initialState:{
         loading:false,
-        data:false
+        data:false,
+        totalPage:false
     },
     reducers:{
     },

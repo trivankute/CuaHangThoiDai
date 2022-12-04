@@ -2,17 +2,18 @@ import { memo, useEffect, useState } from 'react';
 import { Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { AlbumsStore, ArtistsStore, BlogsStore } from '../../redux/selectors';
+import { AlbumsStore, ArtistsStore, BlogsStore, TransactionsStore } from '../../redux/selectors';
 import { getAlbumsTotalPages } from '../../redux/slices/AlbumsSlice';
 import { getArtistsTotalPages } from '../../redux/slices/ArtistsSlice';
 import { getBlogsTotalPages } from '../../redux/slices/BlogsSlice';
-function PaginationByTotalPage({ type, currPage, basicUrl }: { type:any, currPage: any, basicUrl: any }) {
+function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPage: any, basicUrl: any }) {
     const navigate = useNavigate();
     const dispatch = useDispatch<any>();
     const [pageTracking, setPageTracking] = useState<any>(false)
     const albums = useSelector(AlbumsStore)
     const blogs = useSelector(BlogsStore)
     const artists = useSelector(ArtistsStore)
+    const transactions = useSelector(TransactionsStore)
     useEffect(() => {
         function loadToArray(totalPage: any) {
             if (totalPage) {
@@ -60,22 +61,28 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type:any, currPag
                 }
             }
         }
-
-        if (type === "albums")
+        if (type === "albumsWithSearch")
+            loadToArray(albums.totalPages)
+        else if (type === "albums")
             dispatch(getAlbumsTotalPages({ albumCount: 8 }))
                 .then((res: any) => {
                     loadToArray(res.payload.totalPage)
                 })
-        if (type === "blogs")
+        else if (type === "blogs")
             dispatch(getBlogsTotalPages({ blogCount: 6 }))
                 .then((res: any) => {
                     loadToArray(res.payload.totalPage)
                 })
-        if (type === "artists")
+        else if (type === "artists")
             dispatch(getArtistsTotalPages({ artistCount: 8 }))
                 .then((res: any) => {
                     loadToArray(res.payload.totalPage)
                 })
+        // if (type === "transactions")
+        //     dispatch(getArtistsTotalPages({ artistCount: 8 }))
+        //         .then((res: any) => {
+        //             loadToArray(res.payload.totalPage)
+        //         })
     }, [currPage])
     return (
         <>

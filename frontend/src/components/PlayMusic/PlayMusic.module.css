@@ -1,0 +1,38 @@
+.box {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+.box a {
+    position:absolute;
+    top:40px;
+    font-size:16px;
+    cursor:pointer;
+}
+.box a:hover {
+    color:var(--orange)!important;
+}
+.audio {
+    width:250px;
+}
+.item {
+    margin:10px;
+    width:100%;
+    cursor: pointer;
+}
+.item:hover {
+    color:var(--orange);
+}
+.currMusic{
+    color:var(--orange);
+}
+@media (max-width:450px){
+    .audio {
+        max-width:140px;
+    }
+    .box a {
+        font-size:12px;
+    }
+}

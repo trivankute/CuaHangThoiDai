@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import clsx from 'clsx'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllArtists } from '../../../redux/slices/ArtistsSlice';
+import { getAllArtistsByPageId } from '../../../redux/slices/ArtistsSlice';
 import { ArtistsStore } from '../../../redux/selectors';
 
 function OutstandingArtist() {
@@ -43,15 +43,13 @@ function OutstandingArtist() {
 
     },[])
     useEffect(()=>{
-        dispatch(getAllArtists())
-            .then((res:any)=>{
-            })
+        dispatch(getAllArtistsByPageId({id:1, artistCount:5}))
     },[])
     return (
         <>
         <Swiper
                 slidesPerView={swiperRes}
-                spaceBetween={30}
+                spaceBetween={30}   
                 pagination={{
                 clickable: true,
                 }}
@@ -61,9 +59,9 @@ function OutstandingArtist() {
             >
             <div className={styles.box_container}>
                 {
-                    artists.data && artists.data.slice(0,5).map((artist:any, index:number)=>(
+                    artists.data && artists.data.map((artist:any, index:number)=>(
                         <SwiperSlide key={index}>
-                            <ArtistCard image={artist.avatar} name={artist.name} description="Super famous"/>
+                            <ArtistCard id={artist.artist_id} image={artist.avatar} name={artist.name} description="Super famous"/>
                         </SwiperSlide>
                     ))
                 }

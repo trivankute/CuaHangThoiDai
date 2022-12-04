@@ -18,10 +18,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { UserStore } from '../../redux/selectors';
 import { logout } from '../../redux/slices/UserSlice'
 import FlashSlice from '../../redux/slices/FlashSlice'
-import music from "./NangTho-HoangDung-6413381.mp3"
-
+import PlayMusic from '../PlayMusic/PlayMusic';
 function Header() {
   const dispatch = useDispatch<any>();
+  const [search, setSearch] = useState("")
   const user = useSelector(UserStore)
   // navigate
   const navigate = useNavigate();
@@ -64,6 +64,10 @@ function Header() {
         }
       })
   }
+  function handleSearch() {
+    navigate(`/products/albums?title=${search}&&page=1`)
+    setSearch("")
+  }
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className={styles.navbar}>
@@ -71,9 +75,7 @@ function Header() {
           {res ? <>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             {/* audio */}
-            <audio className={styles.audio} controls loop>
-              <source src={music} type="audio/mpeg"></source>
-            </audio>
+            <PlayMusic />
             <div className={styles.service_icons}>
               <div id="login-btn" className={clsx(styles.icon_box, styles.login_box)}>
                 {
@@ -82,7 +84,7 @@ function Header() {
                       <img className={styles.icon_loggedIn} src={user.data.account.avatar} alt="" />
                       <div className={clsx(styles.login_box_hover, styles.loggedIn)}>
                         <a onClick={() => { navigate('/user/profile') }} className={styles.login_box_hover_link}>Profile</a>
-                        <a onClick={() => { navigate('/user/transactions') }} className={styles.login_box_hover_link}> Transaction history</a>
+                        <a onClick={() => { navigate('/user/transactions?page=1') }} className={styles.login_box_hover_link}> Transaction history</a>
                         <a className={styles.login_box_hover_link} onClick={handleLogout} > Log out</a>
                       </div>
                     </>
@@ -109,17 +111,24 @@ function Header() {
             <Navbar.Collapse id="responsive-navbar-nav" >
               <div className="me-auto d-flex flex-column w-100 justify-content-center">
                 <div className="d-flex justify-content-center align-items-center">
-                  <Form className={styles.search}>
+                  <Form 
+                      onSubmit={(e:any)=>{
+                        e.preventDefault()
+                        e.stopPropagation()
+                        handleSearch()
+                      }} className={styles.search}>
                     <Form.Control
                       type="search"
                       placeholder="Search"
                       className="me-2"
                       aria-label="Search"
+                      value={search}
+                      onChange={(e) => { setSearch(e.target.value) }}
                       style={{ margin: "0px", textTransform: "none" }}
                     />
                   </Form>
                   <div id="search-btn" className={clsx(styles.icon_box, styles.search_box)}>
-                    <FontAwesomeIcon className={styles.icon} icon={faSearch as IconProp} />
+                    <FontAwesomeIcon onClick={handleSearch} className={styles.icon} icon={faSearch as IconProp} />
                   </div>
                 </div>
                 <Nav className="w-100 d-flex justify-content-center">
@@ -153,26 +162,30 @@ function Header() {
                   href="#home">
                   <Brand brand_style={styles.navbar_brand} logo_style={styles.logo_style} />
                 </Navbar.Brand>
-                {/* audio */}
-                <audio className={styles.audio} controls>
-                  <source src={music} type="audio/mpeg"></source>
-                </audio>
+                <PlayMusic />
               </div>
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav" >
                 <div className="me-auto d-flex flex-column w-100 justify-content-center">
                   <div className="d-flex justify-content-center align-items-center">
-                    <Form className={styles.search}>
+                    <Form 
+                      onSubmit={(e:any)=>{
+                        e.preventDefault()
+                        e.stopPropagation()
+                        handleSearch()
+                      }} className={styles.search}>
                       <Form.Control
                         type="search"
                         placeholder="Search"
                         className="me-2"
                         aria-label="Search"
+                        value={search}
+                        onChange={(e) => { setSearch(e.target.value) }}
                         style={{ margin: "0px", textTransform: "none" }}
                       />
                     </Form>
                     <div id="search-btn" className={clsx(styles.icon_box, styles.search_box)}>
-                      <FontAwesomeIcon className={styles.icon} icon={faSearch as IconProp} />
+                      <FontAwesomeIcon onClick={handleSearch} className={styles.icon} icon={faSearch as IconProp} />
                     </div>
                   </div>
                   <Nav className="w-100 d-flex justify-content-center">
@@ -201,7 +214,7 @@ function Header() {
                         <img className={styles.icon_loggedIn} src={user.data.account.avatar} alt="" />
                         <div className={clsx(styles.login_box_hover, styles.loggedIn)}>
                           <a onClick={() => { navigate('/user/profile') }} className={styles.login_box_hover_link}>Profile</a>
-                          <a onClick={() => { navigate('/user/transactions') }} className={styles.login_box_hover_link}> Transaction history</a>
+                          <a onClick={() => { navigate('/user/transactions?page=1') }} className={styles.login_box_hover_link}> Transaction history</a>
                           <a className={styles.login_box_hover_link} onClick={handleLogout} > Log out</a>
                         </div>
                       </>

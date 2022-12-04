@@ -10,7 +10,7 @@ import { Pagination } from "swiper";
 import clsx from 'clsx'
 import { useDispatch, useSelector } from 'react-redux';
 import { BlogsStore } from '../../../redux/selectors';
-import { getAllBlogs } from '../../../redux/slices/BlogsSlice';
+import { getAllBlogsByPageId } from '../../../redux/slices/BlogsSlice';
 
 function OurBlogs() {
     const blogs = useSelector(BlogsStore)
@@ -44,7 +44,7 @@ function OurBlogs() {
     },[])
 
     useEffect(()=>{
-        dispatch(getAllBlogs())
+        dispatch(getAllBlogsByPageId({id:1, blogCount:5}))
         
     },[])
     return (
