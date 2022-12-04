@@ -253,5 +253,69 @@ class Transaction {
             exit();
         }
     }
+    public function getTransactionById($id) {
+        $sql = "SELECT * FROM `transaction` WHERE `transaction_id` = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        try {
+            $stmt->execute();
+            $transaction = $stmt->fetch(PDO::FETCH_ASSOC);
+            if(!$transaction) {
+                echo json_encode(['status' => 'error', 'data' => ['msg' => 'Transaction not found']]);
+                exit();
+            }
+            else {
+                if($transaction['type_of_shipping'] == 'shipping' || $transaction['type_of_shipping'] == 'Shipping') {
+                    $sql = "SELECT * FROM `shipping` WHERE `transaction_id` = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $id);
+                    $stmt->execute();
+                    $shipping = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $transaction['shipping'] = $shipping;
+                }
+                else if ($transaction['type_of_shipping'] == 'pick_up') {
+                    $sql = "SELECT * FROM `pick_up_at_store` WHERE `transaction_id` = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $id);
+                    $stmt->execute();
+                    $pickup = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $sql = "SELECT * FROM account WHERE user_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $pickup['employee_id']);
+                    $stmt->execute();
+                    $employee = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $transaction['employee'] = $employee;
+                    unset($transaction['employee']['password']);
+                }
+                $sql = "SELECT * FROM account WHERE user_id = :id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':id', $transaction['customer_id']);
+                $stmt->execute();
+                $account = $stmt->fetch(PDO::FETCH_ASSOC);
+                if($account['role'] === 'admin') {
+                    $transaction['customer'] = false;
+                }
+                else {
+                    $transaction['customer'] = $account;
+                    unset($transaction['customer']['password']);
+                }
+                $sql = "SELECT * FROM `transaction_items` WHERE `transaction_id` = :id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':id', $id);
+                $stmt->execute();
+                $transactionItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                // omit transaction id in transaction items
+                foreach($transactionItems as &$transactionItem) {
+                    unset($transactionItem['transaction_id']);
+                }
+                $transaction['transaction_items'] = $transactionItems;
+                return $transaction;
+            }
+        }
+        catch (PDOException $e) {
+            echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+            exit();
+        }
+    }
 }
 ?>

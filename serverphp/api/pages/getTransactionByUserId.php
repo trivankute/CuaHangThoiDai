@@ -6,8 +6,25 @@
         $transactionId = $_GET['id'];
         $transactionCount = $_GET['transactionCount'];
         $userId = $_GET['userId'];
-        $result = $global_page->getTransactionByUserId($transactionId,$userId,$transactionCount);
-        echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get transactions by page id success', 'transactions'=>$result]]);
+        $currentUser = $global_account->getInformation();
+        if($currentUser['role'] == 'customer') {
+            if($currentUser['id'] == $userId) {
+                $result = $global_page->getTransactionByUserId($transactionId,$userId,$transactionCount);
+                echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get transactions by user id success (user)', 'transactions'=>$result]]);
+            }
+            else {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>'You are not allowed to access this page']]);
+                exit();
+            }
+        }
+        else if($currentUser['role'] == 'employee' || $currentUser['role'] == 'admin') {
+            $result = $global_page->getTransactionByUserId($transactionId,$userId,$transactionCount);
+            echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get transactions by user id success (employee)', 'transactions'=>$result]]);
+        }
+        else {
+            echo json_encode(['status'=>'error', 'data'=>['msg'=>'You are not allowed to access this page']]);
+            exit();
+        }
     }
     else {
         echo json_encode(['status'=>'error', 'data'=>['msg'=>'Method not allowed']]);
