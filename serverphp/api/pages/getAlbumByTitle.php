@@ -4,9 +4,9 @@
     if ($user_request_method == 'GET') {
         $id = $_GET['id'];
         $albumCount = $_GET['albumCount'];
-        $type = $_GET['type'];
-        $result = $global_page->getAlbumByPageIdAndType($id,$albumCount,$type);
-        echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get albums by page id success', 'totalPage'=>$result['totalPage'],'albums'=>$result['albums']]]);
+        $title = $_GET['title'];
+        $result = $global_page->getAlbumByPageIdAndTitle($id,$albumCount,$title);
+        echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get albums by page id success','totalPage' => $result['totalPage'] ,'albums'=>$result['albums']]]);
     }
     else {
         echo json_encode(['status'=>'error', 'data'=>['msg'=>'Method not allowed']]);
