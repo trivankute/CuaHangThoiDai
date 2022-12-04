@@ -78,7 +78,7 @@ function Profile() {
             })
     }
 
-    function handleChangeMode () {
+    function handleChangeMode() {
         setDataBeforeChangeMode({
             username,
             gender,
@@ -89,7 +89,7 @@ function Profile() {
         setChangeMode(true)
     }
 
-    function handleCancelChangeMode () {
+    function handleCancelChangeMode() {
         setChangeMode(false)
         setUsername(dataBeforeChangeMode.username)
         setGender(dataBeforeChangeMode.gender)
@@ -108,7 +108,7 @@ function Profile() {
                     "address": address,
                     "bdate": birthday,
                     "username": username
-                  }
+                }
             ))
                 .then((res: any) => {
                     if (res.payload.status === "success") {
@@ -201,16 +201,6 @@ function Profile() {
                         <div className={styles.img}>
                             <img src={file.img} alt="" />
                         </div>
-                        {/* input file */}
-                        <Form.Group className={clsx("position-relative mb-3 mt-3")}>
-                            <Form.Control
-                                type="file"
-                                required
-                                name="file"
-                                // @ts-ignore
-                                onChange={(e) => { setFile(() => ({ files: e.target.files, img: URL.createObjectURL(e.target.files[0]) })) }}
-                            />
-                        </Form.Group>
                         <div className={styles.notes}>
                             <div className={styles.note}>
                                 File size: maximum 1 MB
@@ -222,7 +212,7 @@ function Profile() {
                         {
                             !changeAvatarMode &&
                             <div onClick={() => { setChangeAvatarMode(true) }} className="btn btn_custom">
-                                New avatar
+                                update avatar
                             </div>
                         }
                         {changeAvatarMode && file.img &&
@@ -234,15 +224,25 @@ function Profile() {
                                     New avatar
                                 </div>
                                 <div className="d-flex flex-column">
+                                    {/* input file */}
+                                    {
+                                        changeAvatarMode &&
+                                        <Form.Group className={clsx("position-relative mb-3 mt-3")}>
+                                            <Form.Control
+                                                type="file"
+                                                required
+                                                name="file"
+                                                // @ts-ignore
+                                                onChange={(e) => { setFile(() => ({ files: e.target.files, img: URL.createObjectURL(e.target.files[0]) })) }}
+                                            />
+                                        </Form.Group>}
                                     <div onClick={handleUpdateAvatar} className="btn btn_custom d-flex justify-content-center align-items-center position-relative" style={{ height: 50 }}>
                                         <LoadingLogic small>
                                             Set
                                         </LoadingLogic>
                                     </div>
-                                    <div onClick={handleUpdateAvatar} className="btn btn_custom d-flex justify-content-center align-items-center position-relative" style={{ height: 50 }}>
-                                        <LoadingLogic small>
-                                            Back
-                                        </LoadingLogic>
+                                    <div onClick={() => { setChangeAvatarMode(false) }} className="btn btn_custom d-flex justify-content-center align-items-center" style={{ height: 50 }}>
+                                        Back
                                     </div>
                                 </div>
                             </div>}
@@ -254,7 +254,7 @@ function Profile() {
                         <div className={styles.footer}>
                             {changeMode ?
                                 <>
-                                    <div onClick={() => {  handleCancelChangeMode() }} className="btn btn_custom me-3">
+                                    <div onClick={() => { handleCancelChangeMode() }} className="btn btn_custom me-3">
                                         Back
                                     </div>
                                     <div onClick={() => { setChangeMode(false); handleSave(); }} className="btn btn_custom">
