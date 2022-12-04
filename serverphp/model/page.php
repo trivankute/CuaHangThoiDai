@@ -248,18 +248,17 @@
                     $stmt = $this->conn->prepare($sql);
                     $stmt->bindParam(':id', $blog['blog_id']);
                     $stmt->execute();
-                    $employees = [];
-                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    foreach($result as $employee) {
-                        $employee_id = $employee['employee_id'];
-                        $sql = "SELECT * FROM account WHERE user_id = :employee_id";
-                        $stmt = $this->conn->prepare($sql);
-                        $stmt->bindParam(':employee_id', $employee_id);
-                        $stmt->execute();
-                        $employee = $stmt->fetch(PDO::FETCH_ASSOC);
-                        array_push($employees, $employee);
-                    }
-                    $blog['employee'] = $employees[0];
+                    $write_blog = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $employeeId = $write_blog['employee_id'];
+                    $sql = "SELECT * FROM account WHERE user_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $employeeId);
+                    $stmt->execute();
+                    $employee = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $blog['date'] = $write_blog['date'];
+                    $blog['time'] = $write_blog['time'];
+                    $blog['employeeName'] = $employee['username'];
+                    $blog['employeeAvatar'] = $employee['avatar'];
                     array_push($blogs, $blog);
                 }
                 return $blogs;
@@ -272,21 +271,28 @@
         public function getCustomerByPageId($id,$customerCount) {
             $this->customerCount = $customerCount;
             $offset = ($id-1) * $this->customerCount;
-            $sql = "SELECT * FROM `customer` LIMIT $offset, $this->customerCount";
+            $sql = "SELECT * FROM account WHERE role = 'customer' LIMIT $offset, $this->customerCount";
             $stmt = $this->conn->prepare($sql);
             try {
                 $customers = [];
                 $stmt->execute();
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach($result as $customer) {
-                    $sql = "SELECT * FROM account WHERE user_id = :id";
+                    $sql = "SELECT * FROM customer WHERE customer_id = :id";
                     $stmt = $this->conn->prepare($sql);
-                    $stmt->bindParam(':id', $customer['customer_id']);
+                    $stmt->bindParam(':id', $customer['user_id']);
                     $stmt->execute();
-                    $account = $stmt->fetch(PDO::FETCH_ASSOC);
-                    $customer['account'] = $account;
-                    //omit password
-                    unset($customer['account']['password']);
+                    $stateQuery = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $customer['state'] = $stateQuery['state'];
+                    unset($customer['password']);
+                    $sql = "SELECT * FROM user WHERE user_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $customer['user_id']);
+                    $stmt->execute();
+                    $info = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $customer['information'] = $info;
+                    // unset
+                    unset($customer['information']['user_id']);
                     array_push($customers, $customer);
                 }
                 return $customers;
@@ -345,24 +351,35 @@
         public function getEmployeeByPageId($id,$employeeCount) {
             $this->employeeCount = $employeeCount;
             $offset = ($id-1) * $this->employeeCount;
-            $sql = "SELECT * FROM `employee` LIMIT $offset, $this->employeeCount";
+            $sql = "SELECT * FROM account WHERE role = 'employee' LIMIT $offset, $this->employeeCount";
             $stmt = $this->conn->prepare($sql);
             try {
                 $employees = [];
                 $stmt->execute();
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach($result as $employee) {
-                    $sql = "SELECT * FROM account WHERE user_id = :id";
+                    $sql = "SELECT * FROM employee WHERE employee_id = :id";
                     $stmt = $this->conn->prepare($sql);
-                    $stmt->bindParam(':id', $employee['employee_id']);
+                    $stmt->bindParam(':id', $employee['user_id']);
                     $stmt->execute();
-                    $account = $stmt->fetch(PDO::FETCH_ASSOC);
-                    $employee['account'] = $account;
-                    //omit password
-                    unset($employee['account']['password']);
+                    $stateQuery = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $employee['state'] = $stateQuery['state'];
+                    unset($employee['password']);
+                    $sql = "SELECT * FROM user WHERE user_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $employee['user_id']);
+                    $stmt->execute();
+                    $info = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $employee['information'] = $info;
+                    // unset
+                    unset($employee['information']['user_id']);
                     array_push($employees, $employee);
                 }
                 return $employees;
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
             }
             catch (PDOException $e) {
                 echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
