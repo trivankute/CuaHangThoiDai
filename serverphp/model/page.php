@@ -534,7 +534,14 @@
                     }
                     array_push($transactions, $transaction);
                 }
-                return $transactions;
+                //total page
+                $sql = "SELECT COUNT(*) FROM `transaction` WHERE customer_id = :id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':id', $userId);
+                $stmt->execute();
+                $total = $stmt->fetch(PDO::FETCH_ASSOC);
+                $totalPage = ceil($total['COUNT(*)'] / $this->transactionCount);
+                return ['transactions'=>$transactions, 'totalPage'=>$totalPage];
             }
             catch (PDOException $e) {
                 echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
