@@ -9,7 +9,8 @@ const TransactionsSlice = createSlice({
     name:"TransactionsSlice",
     initialState:{
         loading:false,
-        data:false
+        data:false,
+        totalPage:false
     },
     reducers:{
     },
@@ -29,9 +30,13 @@ const TransactionsSlice = createSlice({
         })
         .addCase(getTransactionsByUserIdAndPageId.fulfilled, (state,action) => {
             state.loading = false
-            const {status, data} = action.payload
+            const {status, data, totalPage} = action.payload
             if(status==="success")
-            state.data = data
+            {
+                state.data = data
+                state.totalPage = totalPage
+
+            }
         })
     }
 })
@@ -89,7 +94,7 @@ export const getTransactionsByUserIdAndPageId = createAsyncThunk('getTransaction
             }}
         );
         if(data.status === 'success'){
-            return {status:"success","data":data.data.transactions, "msg":data.data.msg};
+            return {status:"success","data":data.data.transactions, "totalPage":data.data.totalPage,"msg":data.data.msg};
         }
         else {
             return {status:"error", "data":data.data.transactions,"msg":data.data.msg};

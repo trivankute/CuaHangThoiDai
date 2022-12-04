@@ -120,7 +120,7 @@ export const getTransactionById = createAsyncThunk('getTransactionById', async (
     const {id} = input
     try {
         // {{host}}/api/transactions/getById.php?id=61
-        const {data} = await axios.get(`${serverUrl}/api/transactions/getById.php?id=61`,{
+        const {data} = await axios.get(`${serverUrl}/api/transactions/getById.php?id=${id}`,{
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }

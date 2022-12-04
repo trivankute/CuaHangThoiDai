@@ -47,13 +47,13 @@ function CartItem({type, album}:{type:string, album:any}) {
     return (
         <>
             <div className={styles.box}>
-                <img src={album.image} alt=""></img>
+                <img src={album.image||album.album.avatar} alt=""></img>
                 <div className={styles.content}>
-                    <h3>{album.title}</h3>
-                    <span>${parseInt(album.price)*album.quantity*1000}</span>
+                    <h3>{album.title||album.album.title}</h3>
+                    <span>${(parseInt(album.price)*album.quantity)||(parseInt(album.album.price)*album.quanity)}{"KVND"}</span>
                     {
                         type=='transaction_history'?
-                        <span>Quantity: {album.quantity}</span>
+                        <span>Quantity: {album.quanity}</span>
                         :
                         <div className={styles.quantity}>
                             <div onClick={handleMinusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>-</div>
