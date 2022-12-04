@@ -13,7 +13,7 @@ function ServiceCard({image, title, description}:{image:any, title:string, descr
                 </img>
                 <h3>{title}</h3>
                 <p>{description}</p>
-                <a onClick={()=>{navigate('/products/albums?service=Vinyl')}} className="btn btn_custom">Watch now</a>
+                <a onClick={()=>{navigate(`/products/albums?service=${title.toLowerCase()}&&page=1`)}} className="btn btn_custom">Watch now</a>
             </div>
         </>
     )

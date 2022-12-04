@@ -9,9 +9,8 @@ import clsx from "clsx"
 // import album Card
 import AlbumCard from "../../Cards/AlbumCard/AlbumCard"
 
-import image from "./cd.png"
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllAlbums } from '../../../redux/slices/AlbumsSlice';
+import { getAllAlbumsByPageId } from '../../../redux/slices/AlbumsSlice';
 import { AlbumsStore } from '../../../redux/selectors';
 import AlbumsLoadingLogic from '../../../middlewares/LoadingLogic/AlbumsLoadingLogic';
 function FavoriteAlbums() {
@@ -45,7 +44,7 @@ function FavoriteAlbums() {
     },[])
 
     useEffect(()=>{
-        dispatch(getAllAlbums())
+        dispatch(getAllAlbumsByPageId({id:1, albumCount:5}))
     },[])
     return (
         <>
@@ -64,7 +63,7 @@ function FavoriteAlbums() {
                     {
                         albums.data ?
                         <>
-                        {albums.data.slice(0,4).map((album:any,index:any)=>{
+                        {albums.data.map((album:any,index:any)=>{
                             return (
                                 <SwiperSlide key={index}>
                                     <AlbumsLoadingLogic>

@@ -35,6 +35,12 @@ const BlogsSlice = createSlice({
                 state.data = data
             }
         })
+        .addCase(getBlogsTotalPages.pending, (state, action)=>{
+            state.loading = true
+        })
+        .addCase(getBlogsTotalPages.fulfilled, (state, action)=>{
+            state.loading = false
+        })
     }
 })
 export const getAllBlogs = createAsyncThunk('getAllBlogs', async () => {
@@ -64,10 +70,10 @@ export const getAllBlogsByPageId = createAsyncThunk('getAllBlogsByPageId', async
             }
         });
         if(data.status === 'success'){
-            return {status:"success","data":data.data.blogs, "msg":data.data.msg};
+            return {status:"success","data":data.data.albums, "msg":data.data.msg};
         }
         else {
-            return {status:"error", "data":data.data.blogs,"msg":data.data.msg};
+            return {status:"error", "data":data.data.albums,"msg":data.data.msg};
         }
     }
     catch (error : any) {
