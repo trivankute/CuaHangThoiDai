@@ -1,4 +1,5 @@
 <?php 
+include_once __DIR__ .'/album.php';
 class Transaction {
     private $typeOfTransaction;
     private $typeOfShipping;
@@ -307,6 +308,9 @@ class Transaction {
                 // omit transaction id in transaction items
                 foreach($transactionItems as &$transactionItem) {
                     unset($transactionItem['transaction_id']);
+                    $album = new Album($this->conn);
+                    $transactionItem['album'] = $album->getAlbumById($transactionItem['album_id']);
+                    unset($transactionItem['album_id']);
                 }
                 $transaction['transaction_items'] = $transactionItems;
                 return $transaction;

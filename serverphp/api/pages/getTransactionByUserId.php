@@ -10,7 +10,7 @@
         if($currentUser['role'] == 'customer') {
             if($currentUser['id'] == $userId) {
                 $result = $global_page->getTransactionByUserId($transactionId,$userId,$transactionCount);
-                echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get transactions by user id success (user)', 'transactions'=>$result]]);
+                echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get transactions by user id success (user)', 'totalPage' => $result['totalPage'],'transactions'=>$result['transactions']]]);
             }
             else {
                 echo json_encode(['status'=>'error', 'data'=>['msg'=>'You are not allowed to access this page']]);
@@ -19,7 +19,7 @@
         }
         else if($currentUser['role'] == 'employee' || $currentUser['role'] == 'admin') {
             $result = $global_page->getTransactionByUserId($transactionId,$userId,$transactionCount);
-            echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get transactions by user id success (employee)', 'transactions'=>$result]]);
+            echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get transactions by user id success (employee)', 'totalPage' => $result['totalPage'],'transactions'=>$result['transactions']]]);
         }
         else {
             echo json_encode(['status'=>'error', 'data'=>['msg'=>'You are not allowed to access this page']]);
