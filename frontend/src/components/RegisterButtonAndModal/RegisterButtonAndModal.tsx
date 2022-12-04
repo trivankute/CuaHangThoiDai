@@ -23,6 +23,8 @@ function RegisterButtonAndModal({ linkStyle, showRegister, handleShowRegister, h
     const [confirmPassword, setConfirmPassword] = useState("");
     const [avatar, setAvatar] = useState({ files: [], img: "" });
     const handleRegisterCustomer = async (event: any) => {
+        event.preventDefault();
+        event.stopPropagation();
         const data = new FormData();
         data.append("email", email);
         data.append("password", password);

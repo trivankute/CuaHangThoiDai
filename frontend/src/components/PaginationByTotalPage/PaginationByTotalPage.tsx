@@ -78,17 +78,14 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPa
                 .then((res: any) => {
                     loadToArray(res.payload.totalPage)
                 })
-        // if (type === "transactions")
-        //     dispatch(getArtistsTotalPages({ artistCount: 8 }))
-        //         .then((res: any) => {
-        //             loadToArray(res.payload.totalPage)
-        //         })
+        if (type === "transactions")
+            loadToArray(transactions.totalPage)
     }, [currPage])
     return (
         <>
             {
                 pageTracking &&
-                <Pagination className="w-100 offset-10">
+                <Pagination className="w-100 offset-10 mt-3">
                     {
                         pageTracking.length >= 5 && currPage != 1
                         &&
@@ -134,6 +131,14 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPa
                             {
                                 type === "artists" &&
                                 <Pagination.Last onClick={() => navigate(`${basicUrl}${artists.data.totalPage}`)} />
+                            }
+                            {
+                                type === "albumsWithSearch" &&
+                                <Pagination.Last onClick={() => navigate(`${basicUrl}${albums.totalPages}`)} />
+                            }
+                            {
+                                type === "transactions" &&
+                                <Pagination.Last onClick={() => navigate(`${basicUrl}${transactions.totalPage}`)} />
                             }
                         </>
                     }

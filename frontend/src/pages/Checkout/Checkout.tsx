@@ -28,8 +28,8 @@ function Checkout() {
     const [address, setAddress] = useState<any>(null)
 
     const [defaultMode, setDefaultMode] = useState(true)
-    const [username, setUsername] = useState("Van")
-    const [phone, setPhone] = useState("0123456789")
+    const [username, setUsername] = useState("")
+    const [phone, setPhone] = useState("")
     // scroll to top
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -61,7 +61,7 @@ function Checkout() {
             }
         }
         else {
-        let fullAddress = `${address}, ${ward}, ${district}, ${province.name}` 
+        let fullAddress = `${address}, ${ward}, ${district}, ${province.data.name}` 
         userInput = {
             username,
             phone,
