@@ -155,7 +155,7 @@ function Album() {
                         Type: {album.data.album_type}
                     </h1>
                     <span className={styles.price}>
-                        ${album.data.price}
+                        {album.data.price} KVND
                     </span>
                     <div className={styles.quantity}>
                         <div onClick={handleMinusQuanity} className={clsx("btn btn_custom", styles.box)}>-</div>

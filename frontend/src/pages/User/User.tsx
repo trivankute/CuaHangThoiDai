@@ -37,7 +37,7 @@ function User() {
         const pathArray = path.split("/");
         setCurrentPath(pathArray[2])
     }, [window.location.pathname])
-
+    
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])

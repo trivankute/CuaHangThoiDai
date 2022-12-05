@@ -72,7 +72,7 @@ const CartSlice = createSlice({
                     totalPrice = totalPrice + (parseInt(item.price) * item.quantity)
                 })
                 // @ts-ignore
-                state.totalPrice = totalPrice * 1000
+                state.totalPrice = totalPrice
             }
         },
         handleClearCart: (state,action) => {

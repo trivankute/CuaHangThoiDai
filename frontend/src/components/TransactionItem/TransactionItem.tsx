@@ -22,7 +22,7 @@ function TransactionItem({transaction, pageId}:{transaction:any, pageId:any}) {
             <div className={styles.box}>
               <div className={styles.box1}>
                 <div>Delivery <span className={styles.id}>{transaction.transaction_id}</span> is {transaction.shipping.state}</div>
-                <div className={styles.total}>Total {transaction.total_price}</div>
+                <div className={styles.total}>Total {transaction.total_price} KVND</div>
                 <div>By {transaction.shipping.delivery_partner || "Your shipping is not accepted"} at {transaction.shipping.date_arrive || "..."} {transaction.shipping.time_arrive|| "..."}</div>
               </div>
               <div className={styles.box2}>

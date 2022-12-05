@@ -60,7 +60,7 @@ function Upload() {
     }
     return (
         <>
-            <Container className={clsx("mt-3 mb-3")} style={{ minWidth: 300, maxWidth: 500 }}>
+            <Container className={clsx("mt-3 mb-3")} style={{ minWidth: 300, maxWidth: 500, textTransform:"none" }}>
                 <div className={clsx("text-center", styles.topic)}>
                     New album
                 </div>
@@ -68,24 +68,24 @@ function Upload() {
                     <Form className="w-100" onSubmit={(e) => {handleSubmit(e)}}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Title:</Form.Label>
-                            <Form.Control required type="text" placeholder="Album's title" onChange={(e) => { setTitle(e.target.value) }} value={title}/>
+                            <Form.Control style={{textTransform:"none"}} required type="text" placeholder="Album's title" onChange={(e) => { setTitle(e.target.value) }} value={title}/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Price:</Form.Label>
                             <InputGroup className="mb-3">
-                                <InputGroup.Text>Đ</InputGroup.Text>
-                                <Form.Control required type="number" aria-label="Amount (to the nearest dollar)" onChange={(e) => { setPrice(e.target.value) }} value={price}/>
+                                <InputGroup.Text>KVNĐ</InputGroup.Text>
+                                <Form.Control style={{textTransform:"none"}} required type="number" aria-label="Amount (to the nearest dollar)" onChange={(e) => { setPrice(e.target.value) }} value={price}/>
                             </InputGroup>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Quantity:</Form.Label>
                             <InputGroup className="mb-3">
-                                <Form.Control required type="number" aria-label="Amount (to the nearest dollar)" onChange={(e) => { setQuantity(e.target.value) }} value={quantity}/>
+                                <Form.Control style={{textTransform:"none"}} required type="number" aria-label="Amount (to the nearest dollar)" onChange={(e) => { setQuantity(e.target.value) }} value={quantity}/>
                             </InputGroup>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Artist name:</Form.Label>
-                            <Form.Control required type="text" placeholder="Artist name" onChange={(e) => { setArtistName(e.target.value) }} value={artistName}/>
+                            <Form.Control style={{textTransform:"none"}} required type="text" placeholder="Artist name" onChange={(e) => { setArtistName(e.target.value) }} value={artistName}/>
                         </Form.Group>
                         <Form.Group className="position-relative mb-3">
                             <Form.Label>Album Type:</Form.Label>

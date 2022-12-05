@@ -96,7 +96,7 @@ function Blog() {
                                     blog.loading &&
                                     <Loading small/>
                                 }
-                            submit
+                            Submit
                         </Button>
                         </Form>
                     </div>

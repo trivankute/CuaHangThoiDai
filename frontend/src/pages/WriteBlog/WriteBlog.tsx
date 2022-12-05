@@ -90,20 +90,20 @@ function WriteBlog() {
     return (
         <>
             <div className={styles.container}>
-                <Form>
+                <Form >
                     <FloatingLabel
                         controlId="floatingTextarea"
                         label="Topic"
                         className="mb-3"
                     >
-                        <Form.Control value={topic} onChange={(e) => { setTopic(e.target.value) }} as="textarea" placeholder="Topic" />
+                        <Form.Control style={{textTransform:"none"}} value={topic} onChange={(e) => { setTopic(e.target.value) }} as="textarea" placeholder="Topic" />
                     </FloatingLabel>
                     <FloatingLabel
                         controlId="floatingTextarea"
                         label="Headline"
                         className="mb-3"
                     >
-                        <Form.Control value={headline} onChange={(e) => { setHeadline(e.target.value) }} as="textarea" placeholder="Leave a comment here" />
+                        <Form.Control style={{textTransform:"none"}} value={headline} onChange={(e) => { setHeadline(e.target.value) }} as="textarea" placeholder="Leave a comment here" />
                     </FloatingLabel>
                     <Form.Group className="position-relative mb-3">
 
@@ -124,11 +124,11 @@ function WriteBlog() {
                     <FloatingLabel controlId="floatingTextarea2" label="content">
 
                         <Form.Control
+                        style={{textTransform:"none"}}
                             as="textarea"
                             placeholder="Content"
                             value={content}
                             onChange={(e) => { setContent(e.target.value) }}
-                            style={{ height: '100px' }}
                         />
                     </FloatingLabel>
                     <Button onClick={handlePreview} type="submit" variant="secondary" className="btn_custom btn">

@@ -64,7 +64,7 @@ function Cart() {
                     </div>
                     <div className={styles.buy}>
                         <div className={styles.totalPrice}>
-                            Total: $ {cart.data && cart.totalPrice}
+                            Total: {cart.data && cart.totalPrice} KVND
                         </div>
                         <button onClick={()=>{handleBuy()}} className={clsx('btn', 'btn_custom')}>Buy</button>
                     </div>

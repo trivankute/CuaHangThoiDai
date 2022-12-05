@@ -13,7 +13,7 @@ function AlbumCard({ album_id, image, title, price }: { album_id:any, image: any
                 <>
                     <img src={image} alt=""></img>
                     <h3 >{title}</h3>
-                    <div > ${price} </div>
+                    <div > {price} KVND </div>
                     {/* <div className={styles.stars}>
                         {CreateStars(rating)}
                     </div> */}

@@ -70,9 +70,9 @@ function Transaction() {
             }
             <div className={styles.buy}>
               <div className={styles.totalPrice}>
-                <p>Subtotal: $ {transaction.data.total_price + " kVND"}</p>
-                <p>Shipping: $ 0</p>
-                <p>Total to pay : $ {transaction.data.total_price + " kVND"}</p>
+                <p>Subtotal: {transaction.data.total_price + " kVND"}</p>
+                <p>Shipping: 0 KVND</p>
+                <p>Total to pay : {transaction.data.total_price + " kVND"}</p>
               </div>
             </div>
           </>
