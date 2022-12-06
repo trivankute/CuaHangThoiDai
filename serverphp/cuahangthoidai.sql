@@ -2,9 +2,9 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 30, 2022 at 12:19 PM
--- Server version: 10.4.21-MariaDB
+-- Host: 127.0.0.1
+-- Generation Time: Dec 06, 2022 at 09:30 AM
+-- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -485,13 +485,18 @@ CREATE TABLE `account` (
 INSERT INTO `account` (`user_id`, `email`, `password`, `avatar`, `username`, `role`) VALUES
 (15, 'phong@gmail.com', '$2y$10$BJHXPYjoYoZSxEd7.oaNheZUiEQ7OjE4qTQ15Hxpn/k35e0ob75ba', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669795569/cuahangthoidai/ymrlhopvlrflgcj8k5k1.png', 'Jillian Gay', 'admin'),
 (16, 'van@gmail.com', '$2y$10$O7qD.faJH7DoQKruY9l3/eSCE245QtWv702b/su.fyIWBUQ3QQM.q', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775550/cuahangthoidai/suppmp9mjqdk7hb6fgeh.png', 'Theo Keaton', 'employee'),
-(17, 'phat@gmail.com', '$2y$10$dU9LSsFyEN62TUTphbebLO6sOQLDTL7KhaF4gLrUHOIjAagPp4RWy', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775571/cuahangthoidai/hn0bn1hsrbjrybrjeayg.png', 'Tressie Laurence', 'customer'),
+(17, 'phat@gmail.com', '$2y$10$dU9LSsFyEN62TUTphbebLO6sOQLDTL7KhaF4gLrUHOIjAagPp4RWy', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775571/cuahangthoidai/hn0bn1hsrbjrybrjeayg.png', 'Glen asd', 'customer'),
 (18, 'eloise.earlene@example.com', '$2y$10$5jmWWDm5P7osp196H2nonu5XVxTyqV74HT.HMbvFf7pmutxhclBsO', 'https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c', 'Eloise Earlene', 'customer'),
 (19, 'shany.hildegard@example.com', '$2y$10$XsDVY09bFtmMEVLAGj/WeOCmQpVlSRvWvbI31DpKZoQkDPIaa96nq', 'https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c', 'Shany Hildegard', 'customer'),
 (20, 'brandy.adolph@example.com', '$2y$10$xMa3JJXQFU9fEhl85lNZreHC8BaBotr0ohzccuBFEzXv64P2uF/gW', 'https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c', 'Brandy Adolph', 'customer'),
 (21, 'kelley.misty@example.com', '$2y$10$RnuuGPCquOC6WT0aYCPjCuMfWGMGAgYRlYKFXBneZjYN.8lTEUura', 'https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c', 'Kelley Misty', 'customer'),
 (22, 'vallie.brannon@example.com', '$2y$10$fT9QQ.EtWh09RNT72WvjLOLi1mHOfMDKiCnuogxvYpOrbGkV9hNkq', 'https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c', 'Vallie Brannon', 'customer'),
-(23, 'jillian.gay@example.com', '$2y$10$mlHoScVUfMamlxo31uSzSOX1BPWGvoKmCKK4hwF2egs2lyijURmku', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669776184/cuahangthoidai/biiw4rv3w2dhsz6nwzhs.png', 'Jillian Gay', 'customer');
+(23, 'jillian.gay@example.com', '$2y$10$mlHoScVUfMamlxo31uSzSOX1BPWGvoKmCKK4hwF2egs2lyijURmku', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669776184/cuahangthoidai/biiw4rv3w2dhsz6nwzhs.png', 'Jillian Gay', 'customer'),
+(24, 'son@gmail.com', '$2y$10$9.ZDgrQ9zXGQvqwx.DWBEucSOnl21Uo2VmebS4TsyPWoweCt7RVMy', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670159249/cuahangthoidai/zh2wcqxhdxj2pdgbff2s.png', 'Nguyen Chung Son', 'customer'),
+(25, 'chow@gmail.com', '$2y$10$lwXU2fIFv7PGl9ts4oyrpOARcX6kaJ8DpzTNu5MOuJzOe85LI7KpO', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670159503/cuahangthoidai/i9j9f46qxnbym1zc9zoo.png', 'Nguyen Chow chow', 'customer'),
+(26, 'hi@gmail.com', '$2y$10$ie9d6Bd98rF.su7b/tLdnONzTVOpPr9DUyyY9rb7PuIbXdGKMvhxm', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670174670/cuahangthoidai/ozhyonyq0ow099vaqx2y.jpg', 'hihihi', 'customer'),
+(27, 'hello@gmail.com', '$2y$10$h1PCAwpuc6K7sy2Y6pIYle7BXMYF2c0mlxACFvFMxquR0EieKpT3y', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670175052/cuahangthoidai/qlin4zrgivyw62tfdxr2.jpg', 'hello', 'customer'),
+(28, 'dsa@g.c', '$2y$10$rrc28.l0uaLvHgC.V/aVfuTEwcKPycWGmdcsS7QATiVdOZJNZUgpO', 'https://preview.redd.it/jzowkv34ujz81.gif?format=png8&s=8ab0338eb9b1443603e85a5642af20c534f1dd0c', 'dsa', 'customer');
 
 -- --------------------------------------------------------
 
@@ -530,15 +535,20 @@ CREATE TABLE `album` (
 --
 
 INSERT INTO `album` (`album_id`, `title`, `price`, `avatar`, `album_type`, `quanity`) VALUES
-(21, 'Monica Crona', '874', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669778419/cuahangthoidai/gzlovlq45tb8jqtnte2c.png', 'cd', 492),
-(22, 'Darryl Armstrong', '371', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775661/cuahangthoidai/b71x4n3fyf9lxjkinyuz.png', 'cd', 428),
-(23, 'Archie Cormier', '968', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775667/cuahangthoidai/ghlpuorblxd02issuntj.png', 'cd', 901),
-(24, 'Clinton DuBuque', '92', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775673/cuahangthoidai/t7qihc0q9luvhtmpxftw.png', 'cd', 910),
-(25, 'Christie Smitham DVM', '961', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775679/cuahangthoidai/okcgtxldwfjrqzjfiech.png', 'cd', 164),
+(21, 'NOTE BUỒN TRÊN CÁT', '280,000', 'https://product.hstatic.net/1000304920/product/khoi-note-buon-tren-cat-dia-cd_5a5b70e365fe44a0a37cebf02ad0d040_grande.jpg', 'cd', 410),
+(22, 'ULTIMATE AALIYAH (VINYL 3LP)', '950,000', 'https://product.hstatic.net/1000304920/product/aaliyah-ultimate-aaliyah-vinyl-3lp-dia-than_6c071110ba944191ab5fffc201d2de4a_grande.jpg', 'vinyl', 406),
+(23, 'ONE IN A MILLION (VINYL 2LP)', '850,000', 'https://product.hstatic.net/1000304920/product/aaliyah-one-in-a-million-vinyl-2lp-dia-than_85ff30d15d8b4481bc743c9772235bc9_grande.png', 'vinyl', 889),
+(24, 'I CARE 4 U (VINYL 2LP)', '850,000', 'https://product.hstatic.net/1000304920/product/aaliyah-i-care-4-u-vinyl-2lp-dia-than_b6baaa308e754edab15ecc8b0f990810_grande.jpeg', 'vinyl', 910),
+(25, 'MR. MORALE & THE BIG STEPPERS (VINYL 2LP)', '1,300,000', 'https://product.hstatic.net/1000304920/product/kendrick-lamar-mr-morale-the-big-steppers-vinyl-2lp-dia-than_fd769ad4e69e4b7ba33ab130fb5894ff_grande.png', 'vinyl', 164),
 (26, 'Ted Steuber', '164', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775686/cuahangthoidai/qmhxabwh2pcsj4ulbydv.png', 'cd', 774),
-(27, 'Edith Lemke', '862', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775692/cuahangthoidai/ettbl1itacqypep7vkmh.png', 'cd', 401),
+(27, 'Edith Lemke', '862', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775692/cuahangthoidai/ettbl1itacqypep7vkmh.png', 'cd', 397),
 (28, 'Melody Heathcote', '169', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775698/cuahangthoidai/woihqgyi6rbs0kyif3b9.png', 'cd', 415),
-(29, 'Regina Stiedemann I', '299', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775721/cuahangthoidai/cn6wyickpscwhlmzrrmy.png', 'cd', 446);
+(29, 'Regina Stiedemann I', '299', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775721/cuahangthoidai/cn6wyickpscwhlmzrrmy.png', 'cassette', 446),
+(30, 'Ms. Crystal Gutmann', '451', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670086223/cuahangthoidai/azqtrqrhftmokbfxxbqf.jpg', 'vinyl', 266),
+(31, 'trivan', '20000', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670086288/cuahangthoidai/fm3pqzorbmuhinhvyd2b.jpg', 'vinyl', 4),
+(32, 'Tuyet voi', '50000', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670086662/cuahangthoidai/rdjlptrb1xllzobm0n4b.jpg', 'cd', 200),
+(33, 'Minh Phat', '60000', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670086797/cuahangthoidai/h6xlnutvo36gb3ky6biw.webp', 'vinyl', 96),
+(34, 'hihihi', '123', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670176223/cuahangthoidai/udpb9rl8akdwvopm7uig.jpg', 'cassette', 7);
 
 -- --------------------------------------------------------
 
@@ -557,15 +567,20 @@ CREATE TABLE `artist` (
 --
 
 INSERT INTO `artist` (`artist_id`, `name`, `avatar`) VALUES
-(18, 'Sherry Shields', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775652/cuahangthoidai/uzlpqgtc7wpqxjip2ezj.png'),
-(19, 'Nicolas Goyette PhD', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775657/cuahangthoidai/htnhbn4wk0si6t4b45tk.png'),
-(20, 'Melba Bogisich', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775663/cuahangthoidai/odtpxrzt0ig7lnlwuzm4.png'),
-(21, 'Alejandro Lubowitz', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775669/cuahangthoidai/kipbl9avsa8iybuvcgka.png'),
-(22, 'Gwen Rodriguez', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775675/cuahangthoidai/avefuf11oozirepp69pc.png'),
-(23, 'Steve Turner', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775682/cuahangthoidai/lk4lm0mpno9bkoxmaxx4.png'),
-(24, 'Lynn Murazik', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775688/cuahangthoidai/vhfe1ybarj8pam3nrixe.png'),
-(25, 'Shelly Dibbert', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775694/cuahangthoidai/nwblptzcicqtc0dqvyor.png'),
-(26, 'Billy Cummings', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775718/cuahangthoidai/jfowusj3neztxtpacmfj.png');
+(18, 'Sherry Shields', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173847/AlbumTypeCHTD/cloud_jj1rjz.jpg'),
+(19, 'Nicolas Goyette PhD', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173847/AlbumTypeCHTD/cloud_jj1rjz.jpg'),
+(20, 'Melba Bogisich', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173847/AlbumTypeCHTD/cloud_jj1rjz.jpg'),
+(21, 'Alejandro Lubowitz', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173847/AlbumTypeCHTD/cloud_jj1rjz.jpg'),
+(22, 'Gwen Rodriguez', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173847/AlbumTypeCHTD/cloud_jj1rjz.jpg'),
+(23, 'Steve Turner', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173847/AlbumTypeCHTD/cloud_jj1rjz.jpg'),
+(24, 'Lynn Murazik', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173847/AlbumTypeCHTD/cloud_jj1rjz.jpg'),
+(25, 'Shelly Dibbert', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173847/AlbumTypeCHTD/cloud_jj1rjz.jpg'),
+(26, 'Billy Cummings', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173847/AlbumTypeCHTD/cloud_jj1rjz.jpg'),
+(27, 'Jean Von', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173847/AlbumTypeCHTD/cloud_jj1rjz.jpg'),
+(28, 'dasfasdfdasf', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173847/AlbumTypeCHTD/cloud_jj1rjz.jpg'),
+(29, 'Chung Son', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173847/AlbumTypeCHTD/cloud_jj1rjz.jpg'),
+(30, 'Tri van dep trai', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173847/AlbumTypeCHTD/cloud_jj1rjz.jpg'),
+(31, 'HIhi', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670176222/cuahangthoidai/e0cf0xdbp6hupravlyg2.jpg');
 
 -- --------------------------------------------------------
 
@@ -586,11 +601,12 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`blog_id`, `topic`, `headline`, `content`, `avatar`) VALUES
-(12, 'withdrawal', 'transform Account Fresh', 'Ut vero ut autem. Accusantium sint in ea dolorum minima et ut omnis alias. Nulla cupiditate dicta et possimus in. Nihil doloribus ut et laborum consectetur. Ea cumque iste corrupti error blanditiis. Quas est et placeat iure.', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775752/cuahangthoidai/qjbcm8fe2eujle2lkpbl.png'),
-(13, 'Barbados', 'payment index compelling compelling', 'Sequi delectus rem eius quod rem. Assumenda voluptatibus rerum molestias cumque et. Autem nemo ratione sint doloremque laboriosam.', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775754/cuahangthoidai/dyvmyviswhmbrgbsivqm.png'),
-(14, 'compress', 'teal programming Function-based', 'Qui dolorum dicta velit quo. Ut quo aut quos porro officiis saepe sunt impedit dolor. Qui facere ipsam id eius. Dolorem velit aut aliquam aspernatur ullam laudantium et a. Voluptatum deserunt esse et.', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775756/cuahangthoidai/qqdtrprz502fxsal3uel.png'),
-(15, '24', 'Intelligent Account Plastic Wall Mouse', 'Possimus at dignissimos libero et impedit deleniti ullam. Consequuntur eum quibusdam quas velit voluptas ut adipisci quis. Et ducimus et sapiente rem et.', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775759/cuahangthoidai/b9omovlqr5bkqoiahcyt.png'),
-(16, 'redundant', 'Ergonomic Bedfordshire Spain Interactions', 'Optio voluptates aut omnis quos. Provident eos praesentium ut accusantium id. Aut ea voluptatem molestiae consequatur molestiae ipsam voluptas numquam. Eos est et et quidem consequuntur aut distinctio facilis. Id iste ea tenetur qui alias. Modi voluptatibus autem fuga totam in accusamus officiis quo.', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1669775837/cuahangthoidai/ciyyw6ughbolq98zat4b.png');
+(12, 'withdrawal', 'transform Account Fresh', 'Ut vero ut autem. Accusantium sint in ea dolorum minima et ut omnis alias. Nulla cupiditate dicta et possimus in. Nihil doloribus ut et laborum consectetur. Ea cumque iste corrupti error blanditiis. Quas est et placeat iure.', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173705/AlbumTypeCHTD/cay_gl2czy.jpg'),
+(13, 'Barbados', 'payment index compelling compelling', 'Sequi delectus rem eius quod rem. Assumenda voluptatibus rerum molestias cumque et. Autem nemo ratione sint doloremque laboriosam.', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173705/AlbumTypeCHTD/cay_gl2czy.jpg'),
+(14, 'compress', 'teal programming Function-based', 'Qui dolorum dicta velit quo. Ut quo aut quos porro officiis saepe sunt impedit dolor. Qui facere ipsam id eius. Dolorem velit aut aliquam aspernatur ullam laudantium et a. Voluptatum deserunt esse et.', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173705/AlbumTypeCHTD/cay_gl2czy.jpg'),
+(15, '24', 'Intelligent Account Plastic Wall Mouse', 'Possimus at dignissimos libero et impedit deleniti ullam. Consequuntur eum quibusdam quas velit voluptas ut adipisci quis. Et ducimus et sapiente rem et.', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173705/AlbumTypeCHTD/cay_gl2czy.jpg'),
+(16, 'redundant', 'Ergonomic Bedfordshire Spain Interactions', 'Optio voluptates aut omnis quos. Provident eos praesentium ut accusantium id. Aut ea voluptatem molestiae consequatur molestiae ipsam voluptas numquam. Eos est et et quidem consequuntur aut distinctio facilis. Id iste ea tenetur qui alias. Modi voluptatibus autem fuga totam in accusamus officiis quo.', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670173705/AlbumTypeCHTD/cay_gl2czy.jpg'),
+(17, 'Hihihi', 'hohoho', 'huhuhu', 'https://res.cloudinary.com/dotr7u5kq/image/upload/v1670176256/cuahangthoidai/petsnfdfod5kicurmdtg.jpg');
 
 -- --------------------------------------------------------
 
@@ -616,7 +632,12 @@ INSERT INTO `compose` (`artist_id`, `album_id`) VALUES
 (23, 26),
 (24, 27),
 (25, 28),
-(26, 29);
+(26, 29),
+(27, 30),
+(28, 31),
+(29, 32),
+(30, 33),
+(31, 34);
 
 -- --------------------------------------------------------
 
@@ -640,7 +661,12 @@ INSERT INTO `customer` (`customer_id`, `state`) VALUES
 (20, 'new'),
 (21, 'new'),
 (22, 'new'),
-(23, 'new');
+(23, 'new'),
+(24, 'new'),
+(25, 'new'),
+(26, 'new'),
+(27, 'new'),
+(28, 'new');
 
 -- --------------------------------------------------------
 
@@ -671,17 +697,6 @@ CREATE TABLE `pick_up_at_store` (
   `employee_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `pick_up_at_store`
---
-
-INSERT INTO `pick_up_at_store` (`transaction_id`, `employee_id`) VALUES
-(53, 16),
-(54, 16),
-(55, 16),
-(56, 16),
-(57, 16);
-
 -- --------------------------------------------------------
 
 --
@@ -699,10 +714,13 @@ CREATE TABLE `review` (
 --
 
 INSERT INTO `review` (`review_id`, `score`, `content`) VALUES
-(15, 9, 'Nihil velit quaerat repellat deserunt. Odit et officiis corrupti beatae qui voluptas quas. Autem molestiae tempore est incidunt fuga quos expedita architecto. Autem porro beatae enim blanditiis quia nam et qui. Minus esse dolore quisquam. Nihil voluptatibus nulla natus qui.'),
-(16, 9, 'Minus ex sed aut commodi ullam sunt est consequatur. Facere quia labore dolorem rerum non saepe non. Repellat minima quam odit. Et voluptatem aut aut.'),
-(17, 9, 'Qui quidem facere et voluptatem. Veniam voluptatum quidem doloremque alias. Sapiente et ipsam quae asperiores magnam est sapiente.'),
-(18, 9, 'Quasi ut soluta enim rerum quia similique. Explicabo harum dignissimos tempora rerum reprehenderit fugiat dolorem. Quo ut porro et maiores quas minima est porro consequatur. Similique non et ex quos dolorem doloribus quis. Est est exercitationem autem et quibusdam quo eos ex sunt.');
+(15, 5, 'Nihil velit quaerat repellat deserunt. Odit et officiis corrupti beatae qui voluptas quas. Autem molestiae tempore est incidunt fuga quos expedita architecto. Autem porro beatae enim blanditiis quia nam et qui. Minus esse dolore quisquam. Nihil voluptatibus nulla natus qui.'),
+(16, 5, 'Minus ex sed aut commodi ullam sunt est consequatur. Facere quia labore dolorem rerum non saepe non. Repellat minima quam odit. Et voluptatem aut aut.'),
+(17, 5, 'Qui quidem facere et voluptatem. Veniam voluptatum quidem doloremque alias. Sapiente et ipsam quae asperiores magnam est sapiente.'),
+(18, 5, 'Quasi ut soluta enim rerum quia similique. Explicabo harum dignissimos tempora rerum reprehenderit fugiat dolorem. Quo ut porro et maiores quas minima est porro consequatur. Similique non et ex quos dolorem doloribus quis. Est est exercitationem autem et quibusdam quo eos ex sunt.'),
+(19, 4, 'San pham rat tot'),
+(20, 5, 'San Pham rat tuyet voi'),
+(21, 3, 'tuyet voi');
 
 -- --------------------------------------------------------
 
@@ -726,55 +744,24 @@ CREATE TABLE `shipping` (
 --
 
 INSERT INTO `shipping` (`transaction_id`, `date_arrive`, `time_arrive`, `state`, `receiver_name`, `receiver_phone`, `receiver_address`, `deliver_partner`) VALUES
-(2, '2022-11-30', '18:12:20', 'delivered', 'calculating_ivory_multi_byte.sgl', '482-373-9765', '3323 Dickinson Green', 'mesh'),
-(3, NULL, NULL, 'NEW', 'granite.sxd', '262-982-6818', '147 Markus Stravenue', 'monitoring'),
-(4, '2022-11-30', '18:15:40', 'delivered', 'neural_deposit_idaho.inkml', '916-442-1145', '54927 Bradtke Overpass', 'grey'),
-(5, NULL, NULL, 'NEW', 'yellow_ib_driver.wspolicy', '393-808-7375', '0002 Raina Brook', 'Plaza'),
-(6, NULL, NULL, 'NEW', 'credit_decentralized.ufdl', '229-263-2167', '3025 Gutkowski Summit', 'Fresh'),
-(7, NULL, NULL, 'NEW', 'frozen.scs', '515-592-5504', '305 Wuckert Passage', 'Dinar'),
-(8, NULL, NULL, 'NEW', 'line.ipk', '918-513-4284', '41412 Rosanna Glens', 'Pass'),
-(9, NULL, NULL, 'NEW', 'ergonomic.cap', '511-759-6347', '0910 Denesik Pines', 'Steel'),
-(10, '2022-11-30', '18:12:55', 'delivered', 'consultant.uvvv', '810-596-5207', '99131 Johnston Road', 'Practical'),
-(11, '2022-11-30', '18:13:05', 'delivering', 'accounts_specialist.ttl', '384-378-2346', '5589 Melisa Ways', '3rd'),
-(12, NULL, NULL, 'NEW', 'plastic.arc', '828-832-5184', '36228 Asa Bypass', 'drive'),
-(13, NULL, NULL, 'NEW', 'courts_north_guilder.spq', '872-919-9555', '3364 Bartoletti Green', 'invoice'),
-(14, NULL, NULL, 'NEW', 'eyeballs_switzerland.p7s', '905-840-4918', '6421 Gerlach Walk', 'synthesizing'),
-(15, NULL, NULL, 'NEW', 'mississippi_tuna.xfdl', '269-686-8047', '65670 Coby Field', 'compressing'),
-(16, NULL, NULL, 'NEW', 'eco_centric.sxc', '259-281-3478', '2032 Jeffry Mountain', 'Generic'),
-(17, NULL, NULL, 'NEW', 'mission_critical_e_commerce.les', '489-512-5560', '16596 Tobin Brooks', 'Concrete'),
-(18, NULL, NULL, 'NEW', 'capacitor.nsc', '326-305-7216', '4717 Glover Mountain', 'metrics'),
-(19, NULL, NULL, 'NEW', 'explicit_killer_regional.xlm', '256-477-1135', '784 Ratke Plain', 'Kina'),
-(20, NULL, NULL, 'NEW', 'australia_refined.lostxml', '604-266-6928', '22863 Pouros Motorway', 'Small'),
-(21, NULL, NULL, 'NEW', 'outdoors.skt', '357-317-8464', '3932 Delta Brooks', 'RAM'),
-(22, NULL, NULL, 'NEW', 'face_secondary_agent.portpkg', '579-607-3928', '155 Gerlach Heights', 'Unbranded'),
-(23, NULL, NULL, 'NEW', '24_7_e_tailers.pcl', '236-700-6260', '7968 Green Place', 'Borders'),
-(24, NULL, NULL, 'NEW', 'e_business_revolutionary.rif', '627-433-0668', '587 Leffler Groves', 'Handcrafted'),
-(25, NULL, NULL, 'NEW', 'grocery_zloty_microchip.hqx', '683-857-5963', '750 Murazik Branch', 'Steel'),
-(26, NULL, NULL, 'NEW', 'global_bedfordshire.dot', '810-386-2043', '52554 Simonis Island', 'Technician'),
-(27, NULL, NULL, 'NEW', 'index_architecture_account.spl', '573-966-9137', '0652 Milan Trail', 'Mississippi'),
-(28, NULL, NULL, 'NEW', 'capability_frozen.list', '506-352-7209', '2254 Allie Fort', 'orchid'),
-(29, NULL, NULL, 'NEW', 'berkshire_wyoming.pl', '987-492-1641', '457 Hodkiewicz Key', 'Vermont'),
-(30, NULL, NULL, 'NEW', 'response.wbmp', '509-881-5921', '72396 Zechariah Meadow', 'incremental'),
-(31, NULL, NULL, 'NEW', 'actuating_end_to_end.war', '656-427-8197', '8850 Tamara Island', 'Metal'),
-(32, NULL, NULL, 'NEW', 'proactive.kia', '260-821-3050', '6920 Abshire Skyway', 'hack'),
-(33, NULL, NULL, 'NEW', 'awesome_empowering_concrete.lrf', '217-242-7754', '4027 Schulist Mills', 'Chief'),
-(34, NULL, NULL, 'NEW', 'chicken_jbod_throughput.wbs', '263-202-9415', '40736 Larson Estate', 'withdrawal'),
-(35, NULL, NULL, 'NEW', 'back_end_navigating_scale.application', '551-540-3584', '846 Maggio Summit', 'Producer'),
-(36, NULL, NULL, 'NEW', 'red_corporate_course.igl', '511-298-1889', '83099 Lucious Trafficway', 'Principe'),
-(37, NULL, NULL, 'NEW', 'account.sm', '467-318-5992', '331 Francis Corners', 'Paradigm'),
-(38, NULL, NULL, 'NEW', 'programming.ra', '648-248-0525', '097 Edwin Cape', 'Albania'),
-(39, NULL, NULL, 'NEW', 'white.tcl', '240-728-9069', '32771 Wolf Mills', 'Table'),
-(40, NULL, NULL, 'NEW', 'reboot_jbod_mobile.dotm', '690-708-0746', '1398 Reynold Turnpike', 'payment'),
-(41, NULL, NULL, 'NEW', 'input_synthesize_olive.ez3', '567-857-8563', '25515 Crona Falls', 'synergize'),
-(42, NULL, NULL, 'NEW', 'gb_small_books.ecma', '307-494-5988', '293 Gerlach Path', 'Chips'),
-(43, NULL, NULL, 'NEW', 'account.mp4', '467-788-7564', '7660 Bednar Pine', 'magenta'),
-(44, NULL, NULL, 'NEW', 'redundant_hard.bz2', '522-940-3984', '0248 Zackery Fords', 'end-to-end'),
-(45, NULL, NULL, 'NEW', 'withdrawal.fg5', '750-280-3613', '02029 Dusty Path', 'model'),
-(46, NULL, NULL, 'NEW', 'mission_critical_indexing_data_warehouse.aas', '948-407-3397', '2726 Connor Mount', 'Small'),
-(47, NULL, NULL, 'NEW', 'synchronised_future_open_source.trm', '819-829-0119', '5240 Raphaelle Passage', 'sensor'),
-(48, NULL, NULL, 'NEW', 'baby.clkt', '729-219-0108', '90554 Jamey Key', 'Market'),
 (58, NULL, NULL, 'NEW', 'cloned.n-gage', '603-407-8128', '020 Berta Dale', 'Handmade'),
-(59, NULL, NULL, 'NEW', 'scalable_compressing_strategic.imp', '302-253-0677', '0152 Altenwerth Bypass', 'International');
+(59, NULL, NULL, 'NEW', 'scalable_compressing_strategic.imp', '302-253-0677', '0152 Altenwerth Bypass', 'International'),
+(60, NULL, NULL, 'NEW', 'handmade.dwg', '289-927-5826', '5186 Mario Club', 'connecting'),
+(61, NULL, NULL, 'NEW', 'Glen asd', '369-441-2240đá', '8705 Marquardt Burgádasd', NULL),
+(62, NULL, NULL, 'NEW', 'Glen asd', '369-441-2240đá', '8705 Marquardt Burgádasd', NULL),
+(63, NULL, NULL, 'NEW', 'america.vob', '248-650-1788', '7078 Treutel Turnpike', 'core'),
+(64, NULL, NULL, 'NEW', 'Glen asd', '369-441-2240đá', '8705 Marquardt Burgádasd', NULL),
+(65, NULL, NULL, 'NEW', 'Nguyen Chow chow', NULL, NULL, NULL),
+(66, NULL, NULL, 'NEW', 'hello', 'asd', 'asd', NULL),
+(67, NULL, NULL, 'NEW', 'hello', 'asd', 'asd', NULL),
+(68, NULL, NULL, 'NEW', 'hello', 'asd', 'asd', NULL),
+(69, NULL, NULL, 'NEW', 'hello', 'asd', 'asd', NULL),
+(70, NULL, NULL, 'NEW', 'hello', 'asd', 'asd', NULL),
+(71, NULL, NULL, 'NEW', 'hello', 'asd', 'asd', NULL),
+(72, NULL, NULL, 'NEW', 'hello', 'asd', 'asd', NULL),
+(73, NULL, NULL, 'NEW', 'Theo Keaton', '256-242-4281', '055 Gibson Green', NULL),
+(74, NULL, NULL, 'NEW', 'Glen asd', '369-441-2240đá', '8705 Marquardt Burgádasd', NULL),
+(75, NULL, NULL, 'NEW', 'Theo Keaton', '256-242-4281', '055 Gibson Green', NULL);
 
 -- --------------------------------------------------------
 
@@ -809,60 +796,24 @@ CREATE TABLE `transaction` (
 --
 
 INSERT INTO `transaction` (`transaction_id`, `type_of_transaction`, `date`, `time`, `type_of_shipping`, `customer_id`, `total_price`) VALUES
-(2, 'withdrawal', NULL, NULL, 'Shipping', 17, '0.00'),
-(3, 'deposit', NULL, NULL, 'Shipping', 17, '0.00'),
-(4, 'withdrawal', NULL, NULL, 'Shipping', 17, '0.00'),
-(5, 'withdrawal', NULL, NULL, 'Shipping', 17, '0.00'),
-(6, 'payment', NULL, NULL, 'Shipping', 17, '0.00'),
-(7, 'deposit', NULL, NULL, 'Shipping', 17, '0.00'),
-(8, 'deposit', NULL, NULL, 'Shipping', 17, '0.00'),
-(9, 'withdrawal', NULL, NULL, 'Shipping', 17, '0.00'),
-(10, 'deposit', NULL, NULL, 'Shipping', 17, '0.00'),
-(11, 'invoice', NULL, NULL, 'Shipping', 17, '0.00'),
-(12, 'payment', NULL, NULL, 'Shipping', 17, '0.00'),
-(13, 'payment', NULL, NULL, 'Shipping', 17, '0.00'),
-(14, 'withdrawal', NULL, NULL, 'Shipping', 17, '0.00'),
-(15, 'invoice', NULL, NULL, 'Shipping', 17, '0.00'),
-(16, 'deposit', NULL, NULL, 'Shipping', 17, '0.00'),
-(17, 'invoice', NULL, NULL, 'Shipping', 17, '0.00'),
-(18, 'payment', NULL, NULL, 'Shipping', 17, '0.00'),
-(19, 'invoice', NULL, NULL, 'Shipping', 17, '0.00'),
-(20, 'deposit', NULL, NULL, 'Shipping', 17, '0.00'),
-(21, 'payment', NULL, NULL, 'Shipping', 17, '0.00'),
-(22, 'deposit', NULL, NULL, 'Shipping', 17, '0.00'),
-(23, 'deposit', NULL, NULL, 'Shipping', 17, '0.00'),
-(24, 'invoice', NULL, NULL, 'Shipping', 17, '0.00'),
-(25, 'payment', NULL, NULL, 'Shipping', 17, '0.00'),
-(26, 'withdrawal', NULL, NULL, 'Shipping', 17, '0.00'),
-(27, 'deposit', NULL, NULL, 'Shipping', 17, '0.00'),
-(28, 'payment', NULL, NULL, 'Shipping', 17, '0.00'),
-(29, 'withdrawal', NULL, NULL, 'Shipping', 17, '0.00'),
-(30, 'invoice', NULL, NULL, 'Shipping', 17, '0.00'),
-(31, 'invoice', NULL, NULL, 'Shipping', 17, '0.00'),
-(32, 'deposit', NULL, NULL, 'Shipping', 17, '0.00'),
-(33, 'deposit', NULL, NULL, 'Shipping', 17, '0.00'),
-(34, 'payment', NULL, NULL, 'Shipping', 17, '0.00'),
-(35, 'payment', NULL, NULL, 'Shipping', 17, '0.00'),
-(36, 'withdrawal', NULL, NULL, 'Shipping', 17, '0.00'),
-(37, 'withdrawal', NULL, NULL, 'Shipping', 17, '0.00'),
-(38, 'withdrawal', NULL, NULL, 'Shipping', 17, '0.00'),
-(39, 'payment', NULL, NULL, 'Shipping', 17, '0.00'),
-(40, 'deposit', NULL, NULL, 'Shipping', 17, '0.00'),
-(41, 'invoice', NULL, NULL, 'Shipping', 17, '0.00'),
-(42, 'payment', NULL, NULL, 'Shipping', 17, '0.00'),
-(43, 'withdrawal', NULL, NULL, 'Shipping', 17, '0.00'),
-(44, 'deposit', NULL, NULL, 'Shipping', 17, '0.00'),
-(45, 'invoice', NULL, NULL, 'Shipping', 17, '0.00'),
-(46, 'payment', NULL, NULL, 'Shipping', 17, '0.00'),
-(47, 'invoice', NULL, NULL, 'Shipping', 17, '0.00'),
-(48, 'deposit', NULL, NULL, 'Shipping', 17, '0.00'),
-(53, 'invoice', NULL, NULL, 'pick_up', 2, '0.00'),
-(54, 'payment', NULL, NULL, 'pick_up', 2, '0.00'),
-(55, 'withdrawal', NULL, NULL, 'pick_up', 2, '0.00'),
-(56, 'payment', NULL, NULL, 'pick_up', 2, '0.00'),
-(57, 'withdrawal', NULL, NULL, 'pick_up', 15, '0.00'),
 (58, 'invoice', '2022-11-30', '18:18:41', 'shipping', 17, '0.00'),
-(59, 'payment', '2022-11-30', '18:18:41', 'shipping', 17, '0.00');
+(59, 'payment', '2022-11-30', '18:18:41', 'shipping', 17, '0.00'),
+(60, 'deposit', '2022-12-03', '16:02:51', 'shipping', 17, '0.00'),
+(61, 'payment', '2022-12-03', '20:04:53', 'shipping', 17, '57796.00'),
+(62, 'payment', '2022-12-03', '20:09:18', 'shipping', 17, '560000.00'),
+(63, 'invoice', '2022-12-03', '20:12:34', 'shipping', 17, '0.00'),
+(64, 'payment', '2022-12-03', '23:34:56', 'shipping', 17, '840000.00'),
+(65, 'payment', '2022-12-04', '20:16:11', 'shipping', 25, '2850000.00'),
+(66, 'payment', '2022-12-05', '00:34:38', 'shipping', 27, '4640000.00'),
+(67, 'payment', '2022-12-05', '00:36:27', 'shipping', 27, '1900000.00'),
+(68, 'payment', '2022-12-05', '00:39:09', 'shipping', 27, '850000.00'),
+(69, 'payment', '2022-12-05', '00:41:01', 'shipping', 27, '4008000.00'),
+(70, 'payment', '2022-12-05', '00:45:15', 'shipping', 27, '99999999.99'),
+(71, 'payment', '2022-12-05', '00:46:39', 'shipping', 27, '5590000.00'),
+(72, 'payment', '2022-12-05', '00:48:04', 'shipping', 27, '2550000.00'),
+(73, 'payment', '2022-12-05', '00:54:04', 'shipping', 16, '369000.00'),
+(74, 'payment', '2022-12-05', '16:37:39', 'shipping', 17, '20000000.00'),
+(75, 'payment', '2022-12-05', '16:54:07', 'shipping', 16, '560.00');
 
 -- --------------------------------------------------------
 
@@ -907,7 +858,33 @@ INSERT INTO `transaction_items` (`transaction_id`, `album_id`, `quanity`) VALUES
 (58, 23, 2),
 (59, 21, 2),
 (59, 22, 2),
-(59, 23, 2);
+(59, 23, 2),
+(60, 21, 2),
+(60, 22, 2),
+(60, 23, 2),
+(61, 23, 4),
+(61, 22, 4),
+(61, 21, 60),
+(62, 21, 2),
+(63, 21, 2),
+(63, 22, 2),
+(63, 23, 2),
+(64, 21, 3),
+(65, 22, 3),
+(66, 21, 3),
+(66, 22, 4),
+(67, 22, 2),
+(68, 23, 1),
+(69, 21, 2),
+(69, 27, 4),
+(70, 21, 3),
+(70, 33, 4),
+(71, 21, 3),
+(71, 22, 5),
+(72, 23, 3),
+(73, 34, 3),
+(74, 31, 1),
+(75, 21, 2);
 
 -- --------------------------------------------------------
 
@@ -930,13 +907,18 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `gender`, `phone`, `address`, `Bdate`) VALUES
 (15, 'Female', '538-578-4527', '2291 Ulises Ford', '2002-10-30'),
 (16, 'Female', '256-242-4281', '055 Gibson Green', '2002-10-30'),
-(17, NULL, NULL, NULL, NULL),
+(17, 'Female', '369-441-2240đá', '8705 Marquardt Burgádasd', '2002-10-30'),
 (18, NULL, NULL, NULL, NULL),
 (19, NULL, NULL, NULL, NULL),
 (20, NULL, NULL, NULL, NULL),
 (21, NULL, NULL, NULL, NULL),
 (22, NULL, NULL, NULL, NULL),
-(23, NULL, NULL, NULL, NULL);
+(23, NULL, NULL, NULL, NULL),
+(24, NULL, NULL, NULL, NULL),
+(25, NULL, NULL, NULL, NULL),
+(26, 'Female', '113', '123 p123 q123 tphcm', '0000-00-00'),
+(27, 'Female', 'asd', 'asd', '0000-00-00'),
+(28, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -960,7 +942,8 @@ INSERT INTO `write_blog` (`employee_id`, `blog_id`, `date`, `time`) VALUES
 (16, 13, '2022-11-30', '09:35:53'),
 (16, 14, '2022-11-30', '09:35:55'),
 (16, 15, '2022-11-30', '09:35:57'),
-(16, 16, '2022-11-30', '09:37:16');
+(16, 16, '2022-11-30', '09:37:16'),
+(16, 17, '2022-12-05', '00:50:55');
 
 -- --------------------------------------------------------
 
@@ -984,7 +967,10 @@ INSERT INTO `write_review` (`review_id`, `album_id`, `customer_id`, `date`, `tim
 (15, 21, 17, '2022-11-30', '09:37:48'),
 (16, 21, 17, '2022-11-30', '09:37:49'),
 (17, 21, 17, '2022-11-30', '09:37:49'),
-(18, 21, 17, '2022-11-30', '09:37:50');
+(18, 21, 17, '2022-11-30', '09:37:50'),
+(19, 21, 27, '2022-12-05', '00:35:06'),
+(20, 21, 27, '2022-12-05', '00:45:36'),
+(21, 21, 27, '2022-12-05', '00:47:16');
 
 --
 -- Indexes for dumped tables
@@ -1107,37 +1093,37 @@ ALTER TABLE `write_review`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `album`
 --
 ALTER TABLE `album`
-  MODIFY `album_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `album_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `artist`
 --
 ALTER TABLE `artist`
-  MODIFY `artist_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `artist_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `blog_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `blog_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `review_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `review_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transaction_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `transaction_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- Constraints for dumped tables
