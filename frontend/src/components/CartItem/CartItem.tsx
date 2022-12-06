@@ -1,4 +1,4 @@
-import {memo, useState,useEffect} from 'react';
+import { memo, useState, useEffect } from 'react';
 
 import styles from './CartItem.module.css';
 
@@ -10,7 +10,7 @@ import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch } from 'react-redux';
 import CartSlice from '../../redux/slices/CartSlice';
 
-function CartItem({type, album}:{type:string, album:any}) {
+function CartItem({ type, album }: { type: string, album: any }) {
     // type 1 in_cart, type 2 is in transaction_history, type3 is in sell_mode
     const [quantity, setQuantity] = useState(1)
     const [price, setPrice] = useState(6.99)
@@ -22,7 +22,7 @@ function CartItem({type, album}:{type:string, album:any}) {
         //         return 0
         //     else return prev
         // })
-        dispatch(CartSlice.actions.handleMinusQuantity({id: album.id}))
+        dispatch(CartSlice.actions.handleMinusQuantity({ id: album.id }))
     }
     function handlePlusQuanity() {
         // setQuantity(prev => {
@@ -35,9 +35,9 @@ function CartItem({type, album}:{type:string, album:any}) {
     }
 
     function handleRemoveCartItem() {
-        dispatch(CartSlice.actions.handleRemoveCartItem({id: album.id}))
+        dispatch(CartSlice.actions.handleRemoveCartItem({ id: album.id }))
     }
-
+    console.log(album.price)
 
     useEffect(() => {
         setPrice(quantity * 6.99)
@@ -47,31 +47,52 @@ function CartItem({type, album}:{type:string, album:any}) {
     return (
         <>
             <div className={styles.box}>
-                <img src={album.image||album.album.avatar} alt=""></img>
+                <img src={album.image || album.avatar || album.album.avatar} alt=""></img>
                 <div className={styles.content}>
-                    <h3>{album.title||album.album.title}</h3>
-                    <span>{(parseInt(album.price)*album.quantity)||(parseInt(album.album.price)*album.quanity)}{" KVND"}</span>
+                    <h3>{album.title || album.album.title}</h3>
                     {
-                        type=='transaction_history'?
+                        type === "transaction_history" &&
+                        <span>{(parseInt(album.album.price) * album.quanity)}{" KVND"}</span>
+                    }
+                    {
+                        type === "in_cart" &&
+                        <span>{(parseInt(album.price) * album.quantity)}{" KVND"}</span>
+                    }
+                    {
+                        type === "sell_mode" &&
+                        <span>{album.price}{" KVND"}</span>
+                    }
+                    {
+                        type === 'transaction_history' &&
                         <span>Quantity: {album.quanity}</span>
-                        :
+                    }
+                    {
+                        type === "in_cart" &&
                         <div className={styles.quantity}>
                             <div onClick={handleMinusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>-</div>
                             <div className={styles.quantity_box}>{album.quantity}</div>
                             <div onClick={handlePlusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>+</div>
                         </div>
                     }
+                    {
+                        type === "sell_mode" &&
+                        <div className={styles.quantity}>
+                            <div onClick={handleMinusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>-</div>
+                            <div className={styles.quantity_box}>{album.quanity}</div>
+                            <div onClick={handlePlusQuanity} className={clsx("btn btn_custom", styles.quantity_box)}>+</div>
+                        </div>
+                    }
                 </div>
                 {
-                    type=="in_cart"&&
+                    type == "in_cart" &&
                     <FontAwesomeIcon onClick={handleRemoveCartItem} className={clsx(styles.icon, "ms-3")} icon={faTrash as IconProp} />
                 }
                 {
-                    type=='transaction_history' && <></>
+                    type == 'transaction_history' && <></>
                 }
                 {
-                    type=='sell_mode' && <>
-                    <FontAwesomeIcon className={clsx(styles.icon, "ms-3")} icon={faPlus as IconProp} />
+                    type == 'sell_mode' && <>
+                        <FontAwesomeIcon className={clsx(styles.icon, "ms-3")} icon={faPlus as IconProp} />
                     </>
                 }
             </div>
@@ -79,4 +100,4 @@ function CartItem({type, album}:{type:string, album:any}) {
     )
 }
 
-export default memo (CartItem)
+export default memo(CartItem)

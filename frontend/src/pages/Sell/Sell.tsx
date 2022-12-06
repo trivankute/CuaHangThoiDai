@@ -9,19 +9,30 @@ import Header from "../../components/User/Header/Header"
 import CartItem from "../../components/CartItem/CartItem"
 
 import { Form, Button } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import {getAllAlbumsByPageIdAndTitle} from '../../redux/slices/AlbumsSlice'
+import { AlbumsStore } from '../../redux/selectors'
 
 function Sell() {
     const navigate = useNavigate();
+    const dispatch = useDispatch<any>()
+    const albums = useSelector(AlbumsStore)
+
     // scroll to top
     useEffect(() => {
         window.scrollTo(0, 0)
+        dispatch(getAllAlbumsByPageIdAndTitle({id:1, albumCount:5, title:"trivan"}))
     }, [])
+    console.log(albums)
     return (
         <>
             <div className={styles.container}>
                 <Header title="Sell your albums" content="Sell albums for customers picking up at store" />
                 <div>
-                    <Form className="d-flex mt-3">
+                    <Form onSubmit={(e:any)=>{
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }} className="d-flex mt-3">
                         <Form.Control
                             type="search"
                             placeholder="Search"
@@ -32,6 +43,12 @@ function Sell() {
                     </Form>
                 </div>
                 <div className={styles.searchResults}>
+                    {
+                        albums.data && 
+                        albums.data.map((album:any, index:number) => {
+                            return <CartItem key={index} type="sell_mode" album={album} />
+                        })
+                    }
                     {/* <CartItem type="sell_mode" />
                     <CartItem type="sell_mode" />
                     <CartItem type="sell_mode" />

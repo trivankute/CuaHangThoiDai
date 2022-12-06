@@ -73,4 +73,25 @@ export const uploadAlbum = createAsyncThunk('uploadAlbum', async (input:any) => 
     }
 })
 
+export const updateAlbum = createAsyncThunk('updateAlbum', async (totalInput:any) => {
+    const {id, input} = totalInput
+    //{{host}}/api/albums/update.php?id=21
+    try {
+        const {data} = await axios.post(`${serverUrl}/api/albums/update.php?id=${id}`, input, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        if(data.status === 'success'){
+            return {status:"success","msg":data.data.msg};
+        }
+        else {
+            return {status:"error","msg":data.data.msg};
+        }
+    }
+    catch (error : any) {
+        return {status:"error","msg":error.response.data.message};
+    }
+})
+
 export default AlbumSlice
