@@ -100,6 +100,12 @@ class Album {
             exit();
         }
     }
+    public function setAlbumAvatarForUpdate($title, $albumType, $albumAvatar) {
+        $this->title = $title;
+        $this->albumType = $albumType;
+        $this->albumAvatar = $albumAvatar;
+        $this->updateAlbumAvatar();
+    }
     public function updateAlbumAvatar() {
         $sql = "UPDATE album SET avatar = :albumAvatar WHERE title = :title AND album_type = :albumType";
         $stmt = $this->conn->prepare($sql);
@@ -329,6 +335,24 @@ class Album {
             return $count['COUNT(*)'];
         }
         catch (PDOException $e) {
+            echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+            exit();
+        }
+    }
+    public function updateAlbumById($albumId, $title, $price, $avatar, $albumType, $quantity) {
+        $sql = "SELECT `update_album`(:album_id, :title, :price, :avatar, :album_type, :quantity) AS `update_album`";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':album_id', $albumId);
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':avatar', $avatar);
+        $stmt->bindParam(':album_type', $albumType);
+        $stmt->bindParam(':quantity', $quantity);
+        try {
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['update_album'];
+        } catch (PDOException $e) {
             echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
             exit();
         }
