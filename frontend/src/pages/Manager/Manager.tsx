@@ -72,7 +72,7 @@ function Manager() {
                 <div>
                     Search for "{title}":
                 </div>
-                <div>
+                <div className={styles.searchResults}>
                     {
                         albums.data &&
                         <>
