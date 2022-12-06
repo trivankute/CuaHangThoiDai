@@ -40,7 +40,7 @@ function Employees() {
   return (
     <>
       <div className={styles.container}>
-        <Warning show={isWarning} handleShow={handleWarningShow} handleClose={handleWarningClose} />
+        <Warning type="account" id="1" title="Are you sure to delete this customer" action="delete" show={isWarning}  handleClose={handleWarningClose} />
         <EmployeeModal show={seeDetail} handleShow={handleSeeDetailShow} handleClose={handleSeeDetailClose} />
         <Header title="Manages your employee" content="Here you can manage your employees." />
         <div>

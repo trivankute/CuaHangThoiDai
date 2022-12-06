@@ -18,10 +18,12 @@ function Manager() {
     const albums = useSelector(AlbumsStore)
     const [isWarning, setIsWarning] = useState(false)
     const [editMode, setEditMode] = useState(false)
-    const [albumSelected, setAlbumSelected] = useState(false)
+    const [albumSelected, setAlbumSelected] = useState<any>(false)
+    const [forReloadPay, setForReloadPay] = useState(false)
     const [title, setTitle] = useState("")
-    function handleWarningShow() {
+    function handleWarningShow(album:any) {
         setIsWarning(true);
+        setAlbumSelected(album);
     }
     function handleWarningClose() {
         setIsWarning(false);
@@ -40,15 +42,23 @@ function Manager() {
         // scroll to top
         window.scrollTo(0, 0)
     }, [])
+    useEffect(()=>{
+        if(forReloadPay)
+        dispatch(getAllAlbumsByPageIdAndTitle({id:1, albumCount:5, title:title}))
+            .then(()=>{
+                setForReloadPay(false)
+            })
+    },[forReloadPay])
+    console.log(albumSelected.album_id)
     return (
         <>
             <div className={styles.container}>
                 <Header title="Store Manager" content="Manage your products" />
-                <Warning show={isWarning} handleShow={handleWarningShow} handleClose={handleWarningClose} />
+                    <Warning type="album" id={albumSelected.album_id} title="Are you sure to delete this album" action="delete" show={isWarning} setForReloadPay={setForReloadPay} handleClose={handleWarningClose} />
                 {
                     editMode &&
                     <ProductModal show={editMode}
-                        handleClose={handleEditClose} album={albumSelected}/>
+                        handleClose={handleEditClose} album={albumSelected} setForReloadPay={setForReloadPay}/>
                 }
                 <div>
                     <Form onSubmit={(e:any)=>{

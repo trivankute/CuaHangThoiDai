@@ -34,7 +34,7 @@ function Customers() {
 
     <>
       <div className={styles.container}>
-        <Warning show={isWarning} handleShow={handleWarningShow} handleClose={handleWarningClose} />
+        <Warning type="account" id="1" title="Are you sure to delete this customer" action="delete" show={isWarning} handleClose={handleWarningClose} />
         <CustomerModal show={seeDetail} handleShow={handleSeeDetailShow} handleClose={handleSeeDetailClose} />
         <Header title="Manages your customers" content="Here you can manage your customers." />
         <div>

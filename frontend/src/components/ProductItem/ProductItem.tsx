@@ -18,7 +18,7 @@ function ProductItem({handleWarningShow, handleEditShow, album}:{handleWarningSh
                     <span>{album.price} KVND</span>
                     <span>Quantity: {album.quanity}</span>
                 </div>
-                <FontAwesomeIcon onClick={()=>{handleWarningShow();}}className={clsx(styles.icon, styles.icon_trash, "ms-3")} icon={faTrash as IconProp} />
+                <FontAwesomeIcon onClick={()=>{handleWarningShow(()=>{return album});}}className={clsx(styles.icon, styles.icon_trash, "ms-3")} icon={faTrash as IconProp} />
                 <FontAwesomeIcon onClick={()=>{handleEditShow(()=>{return album})}} className={clsx(styles.icon, styles.icon_edit, "ms-3")} icon={faPenSquare as IconProp} />
             </div>
         </>

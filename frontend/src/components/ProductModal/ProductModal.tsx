@@ -1,17 +1,50 @@
 import clsx from 'clsx';
 import { memo, useState, useEffect } from 'react';
 import { Button, Form, InputGroup, Modal } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { AlbumStore } from '../../redux/selectors';
+import { updateAlbum } from '../../redux/slices/AlbumSlice';
+import FlashSlice from '../../redux/slices/FlashSlice';
+import Loading from '../Loading/Loading';
 
 import styles from './ProductModal.module.css';
 
-function ProductModal({ show, handleClose, album }: { show: any, handleClose: any, album:any }) {
+function ProductModal({ show, handleClose, album, setForReloadPay }: { show: any, handleClose: any, album:any, setForReloadPay:any }) {
     const [title, setTitle] = useState("");
     const [albumType, setAlbumType] = useState("")
     const [price, setPrice] = useState("")
     const [quantity, setQuantity] = useState("")
     const [albumImage, setAlbumImage] = useState({files:[], img:""})
+    const albumFromStore = useSelector(AlbumStore)
+    const dispatch = useDispatch<any>()
     function handleSubmit(e:any) {
-        console.log(title, albumType, price, quantity, albumImage)
+        // check all fields are filled
+        if(title === "" || albumType === "" || price === "" || quantity === "" || albumImage.files.length === 0)
+        {
+            dispatch(FlashSlice.actions.handleOpen({ message:"Please fill all fields", type:"danger" }))
+            return;
+        }
+        e.preventDefault();
+        e.stopPropagation();
+        const data = new FormData();
+        data.append("title", title);
+        data.append("price", price);
+        data.append("quantity", quantity);
+        data.append("albumType", albumType);
+        data.append("albumAvatar", albumImage.files[0]);
+        dispatch(updateAlbum({id:album.album_id, input:data}))
+            .then((res:any)=>{
+                if(res.payload.status === "success")
+                {
+                    handleClose()
+                    dispatch(FlashSlice.actions.handleOpen({ message:"Album updated successfully", type:"success" }))
+                    setForReloadPay(true)
+                }
+                else
+                {
+                    dispatch(FlashSlice.actions.handleOpen({ message:"Album update failed", type:"danger" }))
+                }
+            })
     }
     useEffect(()=>{
         setTitle(album.title)
@@ -76,7 +109,11 @@ function ProductModal({ show, handleClose, album }: { show: any, handleClose: an
                     </section>
                 </Modal.Body>
                 <Modal.Footer>
-                        <Button onClick={handleSubmit} variant="primary" className="btn btn_custom" type="submit">
+                        <Button onClick={handleSubmit} variant="secondary" className="btn btn_custom" type="submit">
+                            {
+                                albumFromStore.loading &&
+                                <Loading small/>
+                            }
                             Submit
                         </Button>
                 </Modal.Footer>
