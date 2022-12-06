@@ -36,7 +36,7 @@ function ProductModal({ show, handleClose, album }: { show: any, handleClose: an
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Price:</Form.Label>
                                 <InputGroup className="mb-3">
-                                    <InputGroup.Text>Đ</InputGroup.Text>
+                                    <InputGroup.Text>KVNĐ</InputGroup.Text>
                                     <Form.Control value={price} required type="text" aria-label="Amount" onChange={(e) => { setPrice(e.target.value) }} />
                                 </InputGroup>
                             </Form.Group>
