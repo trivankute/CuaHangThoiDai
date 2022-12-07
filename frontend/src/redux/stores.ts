@@ -15,6 +15,7 @@ import CustomersSlice from './slices/CustomersSlice'
 import EmployeesSlice from './slices/EmployeesSlice'
 import ArtistsSlice from './slices/ArtistsSlice'
 import ServiceSlice from './slices/ServiceSlice'
+import SellSlice from './slices/SellSlice'
 const store = configureStore({
     reducer:{
         user:UserSlice.reducer,
@@ -31,7 +32,8 @@ const store = configureStore({
         reviews:ReviewsSlice.reducer,
         customers:CustomersSlice.reducer,
         employees:EmployeesSlice.reducer,
-        service:ServiceSlice.reducer
+        service:ServiceSlice.reducer,
+        sell:SellSlice.reducer
     }
 })
 

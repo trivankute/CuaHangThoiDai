@@ -38,6 +38,17 @@ const TransactionsSlice = createSlice({
 
             }
         })
+        .addCase(getTransactionsTotalPage.pending, (state,action) => {
+            state.loading = true
+        })
+        .addCase(getTransactionsTotalPage.fulfilled, (state,action) => {
+            state.loading = false
+            const {status, totalPage} = action.payload
+            if(status==="success")
+            {
+                state.totalPage = totalPage
+            }
+        })
     }
 })
 
@@ -98,6 +109,27 @@ export const getTransactionsByUserIdAndPageId = createAsyncThunk('getTransaction
         }
         else {
             return {status:"error", "data":data.data.transactions,"msg":data.data.msg};
+        }
+    }
+    catch (error : any) {
+        return {status:"error","msg":error.response.data.message};
+    }
+});
+
+export const getTransactionsTotalPage = createAsyncThunk('getTransactionsTotalPage', async (input : any) => {
+    try {
+        // {{host}}/api/pages/getTotalPageTransaction.php?transactionCount=10
+        const {transactionCount} = input;
+        const {data} = await axios.get(`${serverUrl}/api/pages/getTotalPageTransaction.php?transactionCount=${transactionCount}`,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }}
+        );
+        if(data.status === 'success'){
+            return {status:"success","totalPage":data.data.totalPage,"msg":data.data.msg};
+        }
+        else {
+            return {status:"error","msg":data.data.msg};
         }
     }
     catch (error : any) {

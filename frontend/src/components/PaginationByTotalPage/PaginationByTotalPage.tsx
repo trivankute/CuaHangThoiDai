@@ -6,6 +6,7 @@ import { AlbumsStore, ArtistsStore, BlogsStore, TransactionsStore } from '../../
 import { getAlbumsTotalPages } from '../../redux/slices/AlbumsSlice';
 import { getArtistsTotalPages } from '../../redux/slices/ArtistsSlice';
 import { getBlogsTotalPages } from '../../redux/slices/BlogsSlice';
+import { getTransactionsTotalPage } from '../../redux/slices/TransactionsSlice';
 function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPage: any, basicUrl: any }) {
     const navigate = useNavigate();
     const dispatch = useDispatch<any>();
@@ -17,7 +18,6 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPa
     useEffect(() => {
         function loadToArray(totalPage: any) {
             if (totalPage) {
-                console.log(totalPage)
                 if (totalPage == 1)
                     setPageTracking(["active"])
                 else if (totalPage == 2) {
@@ -78,8 +78,18 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPa
                 .then((res: any) => {
                     loadToArray(res.payload.totalPage)
                 })
-        if (type === "transactions")
+        else if (type === "transactions")
             loadToArray(transactions.totalPage)
+        else if (type="transactions_employee")
+        {
+            dispatch(getTransactionsTotalPage({
+                transactionCount: 10,
+            }))
+                .then((res: any) => {
+                    loadToArray(res.payload.totalPage)
+                })
+        }
+            
     }, [currPage])
     return (
         <>
@@ -138,6 +148,10 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPa
                             }
                             {
                                 type === "transactions" &&
+                                <Pagination.Last onClick={() => navigate(`${basicUrl}${transactions.totalPage}`)} />
+                            }
+                            {
+                                type === "transactions_employee" &&
                                 <Pagination.Last onClick={() => navigate(`${basicUrl}${transactions.totalPage}`)} />
                             }
                         </>

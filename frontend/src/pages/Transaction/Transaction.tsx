@@ -75,6 +75,18 @@ function Transaction() {
                 <p>Total to pay : {transaction.data.total_price + " kVND"}</p>
               </div>
             </div>
+            <div className={styles.buy}>
+              <div className={styles.totalPrice}>
+                {
+                  transaction.data.type_of_shipping === "shipping" && 
+                  <>
+                  <p>Delivering state: {transaction.data.shipping.state}</p>
+                  <p>Delivered by: {transaction.data.shipping.deliver_partner||"..."} </p>
+                  </>
+                }
+                <p>At: {transaction.data.time||"..."} {transaction.data.date||"..."}</p>
+              </div>
+            </div>
           </>
         }
       </div>

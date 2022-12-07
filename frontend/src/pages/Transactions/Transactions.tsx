@@ -6,31 +6,40 @@ import TransactionItem from '../../components/TransactionItem/TransactionItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import clsx from 'clsx';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { TransactionsStore, UserStore } from '../../redux/selectors';
-import { getTransactionsByUserIdAndPageId } from '../../redux/slices/TransactionsSlice';
+import { getAllTransactionsByPageId, getTransactionsByUserIdAndPageId } from '../../redux/slices/TransactionsSlice';
 import PaginationByTotalPage from '../../components/PaginationByTotalPage/PaginationByTotalPage';
 function Transactions() {
   const transactions = useSelector(TransactionsStore)
   const user = useSelector(UserStore)
   const dispatch = useDispatch<any>()
   const [seeTotalPriceMode, setSeeTotalPriceMode] = useState(false)
+  const [forReloadPage, setForReloadPage] = useState(false)
   const navigate = useNavigate();
   // get params from url
   const [url] = useSearchParams()
   let pageId = url.get("page")
   // scroll to top
-  useEffect(() => {
+  useEffect(()=>{
     window.scrollTo(0, 0)
-    if (user.data && pageId)
+  },[user.loading, url])
+  useEffect(() => {
+    if (user.data && user.data.account.role==='customer'&& pageId)
       dispatch(getTransactionsByUserIdAndPageId({
         transactionCount: 5,
         userId: user.data.user_id,
         pageId: pageId
       }))
-  }, [user.loading, url])
+      else if(user.data && user.data.account.role!=='customer' && pageId)
+      {
+        dispatch(getAllTransactionsByPageId({
+          id:pageId,
+          transactionCount:10
+        }))
+      }
+  }, [user.loading, url, forReloadPage])
   return (
     <>
       <div className={styles.container}>
@@ -89,14 +98,19 @@ function Transactions() {
                       key={index}
                       transaction={transaction}
                       pageId={pageId}
+                      setForReloadPage={setForReloadPage}
                     />
                   )
                 })
               }
               {/* <PaginationByTotalPage /> */}
               {
-                transactions.data && transactions.data.length > 0 &&
+                user.data && user.data.account.role==='customer'&&transactions.data && transactions.data.length > 0 &&
                 <PaginationByTotalPage type="transactions" currPage={pageId} basicUrl={`/user/transactions?page=`} />
+              }
+              {
+                user.data && user.data.account.role!=='customer'&&transactions.data && transactions.data.length > 0 &&
+                <PaginationByTotalPage type="transactions_employee" currPage={pageId} basicUrl={`/user/transactions?page=`} />
               }
             </>
         }

@@ -37,7 +37,6 @@ function CartItem({ type, album }: { type: string, album: any }) {
     function handleRemoveCartItem() {
         dispatch(CartSlice.actions.handleRemoveCartItem({ id: album.id }))
     }
-    console.log(album.price)
 
     useEffect(() => {
         setPrice(quantity * 6.99)

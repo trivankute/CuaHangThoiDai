@@ -6,25 +6,71 @@ import styles from './Sell.module.css'
 
 import Header from "../../components/User/Header/Header"
 
-import CartItem from "../../components/CartItem/CartItem"
-
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllAlbumsByPageIdAndTitle } from '../../redux/slices/AlbumsSlice'
-import { AlbumsStore } from '../../redux/selectors'
+import { AlbumsStore, SellStore } from '../../redux/selectors'
+import SellItem from '../../components/SellItem/SellItem'
+import SellSlice from '../../redux/slices/SellSlice'
+import { createPickupTransaction } from '../../redux/slices/TransactionSlice'
+import FlashSlice from '../../redux/slices/FlashSlice'
 
 function Sell() {
     const navigate = useNavigate();
     const dispatch = useDispatch<any>()
     const albums = useSelector(AlbumsStore)
     const [title, setTitle] = useState("")
+    const sell = useSelector(SellStore)
 
     function handleSearch() {
         dispatch(getAllAlbumsByPageIdAndTitle({ id: 1, albumCount: 5, title: title }))
     }
+    function handleClearAll() {
+        dispatch(SellSlice.actions.handleClearAllSellItem(""))
+        dispatch(SellSlice.actions.handleLoadSellCart(""))
+        dispatch(SellSlice.actions.handleTotalPrice(""))
+    }
+    function handleSell() {
+        if(sell.data && sell.totalPrice)
+        {
+            const input = {
+                typeOfTransaction : "payment",
+                typeOfShipping : "pick_up",
+                customerId: "",
+                totalPrice : sell.totalPrice,
+                products : sell.data.map((item:any, index:any)=>{
+                    return {
+                        albumId: item.id,
+                        quantity: item.quantity
+                    }
+                })
+            }
+            dispatch(createPickupTransaction(input))
+            .then((res:any)=>{
+                if(res.payload.status === 'success')
+                {
+                    navigate('/notification', {
+                        state: {
+                            state: "success",
+                            title: "Your sell has been placed",
+                            description: "You can see your order in transaction history",
+                            btn_title: "Go to transaction history",
+                            btn_path: "/user/transactions?page=1"
+                        }
+                    })
+                    dispatch(SellSlice.actions.handleClearAllSellItem(""))
+                }
+            })
+        }
+        else {
+            dispatch(FlashSlice.actions.handleOpen({ message: "Your submit has led to error", type: "danger" }))
+        }
+    }
     // scroll to top
     useEffect(() => {
         window.scrollTo(0, 0)
+        dispatch(SellSlice.actions.handleLoadSellCart(""))
+        dispatch(SellSlice.actions.handleTotalPrice(""))
     }, [])
     return (
         <>
@@ -49,7 +95,7 @@ function Sell() {
                         <Button onClick={handleSearch} variant="outline-success">Search</Button>
                     </Form>
                 </div>
-                <div>
+                <div className="mt-3">
                     Search for "{title}":
                 </div>
                 <div className={styles.searchResults}>
@@ -63,41 +109,37 @@ function Sell() {
                                 </div>
                                 :
                                 albums.data.map((album: any, index: number) => {
-                                    return <CartItem key={index} type="sell_mode" album={album} />
+                                    return <SellItem key={index} type="in_cart" album={album} />
                                 })
                             }
                         </>
                     }
-                    {/* <CartItem type="sell_mode" />
-                    <CartItem type="sell_mode" />
-                    <CartItem type="sell_mode" />
-                    <CartItem type="sell_mode" />
-                    <CartItem type="sell_mode" />
-                    <CartItem type="sell_mode" />
-                    <CartItem type="sell_mode" /> */}
                 </div>
                 <Header title="Add to order" content="Sell albums for customers picking up at store" />
                 <div className={styles.searchResults}>
-                    {/* <CartItem type="transaction_history" />
-                    <CartItem type="transaction_history" />
-                    <CartItem type="transaction_history" />
-                    <CartItem type="transaction_history" />
-                    <CartItem type="transaction_history" />
-                    <CartItem type="transaction_history" />
-                    <CartItem type="transaction_history" /> */}
+                    {
+                        sell.data && 
+                        sell.data.map((sellItem:any, index:any)=>{
+                            return <SellItem key={index} type="transaction_history" album={sellItem} />
+                        })
+                    }
                 </div>
                 <div className={styles.totalPrice}>
-                    <p>Subtotal: $ 27.99</p>
-                    <p>Shipping: $ 0</p>
-                    <p>Total to pay : $ 27.99</p>
+                    <p>Subtotal: {sell.data && sell.totalPrice} KVND</p>
+                    <p>Shipping: 0</p>
+                    <p>Total to pay : {sell.data && sell.totalPrice} KVND</p>
                 </div>
                 <div className={styles.btn}>
+                    <div onClick={handleClearAll} className="btn btn_custom me-3">
+                        Clear All
+                    </div>
                     <div onClick={() => {
-                        navigate('/transactions/1', {
-                            state: {
-                                type: 'pickup_at_store'
-                            }
-                        })
+                        handleSell()
+                        // navigate('/transactions/1', {
+                        //     state: {
+                        //         type: 'pickup_at_store'
+                        //     }
+                        // })
                     }} className="btn btn_custom">
                         submit
                     </div>

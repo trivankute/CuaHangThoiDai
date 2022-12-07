@@ -41,6 +41,12 @@ const TransactionSlice = createSlice({
                 state.data = data
             }
         })
+        .addCase(updateShippingTransactionShippingPartner.pending, (state,action) => {
+            state.loading = true
+        })
+        .addCase(updateShippingTransactionShippingPartner.fulfilled, (state,action) => {
+            state.loading = false
+        })
     }
 })
 
@@ -98,6 +104,29 @@ export const updateShippingTransactionState = createAsyncThunk('updateShippingTr
         //{{host}}/api/transactions/updateShippingState.php?id=4
         const {data} = await axios.post(`${serverUrl}/api/transactions/updateShippingState.php?id=${id}`,{
             state
+        },{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        if(data.status === "success"){
+            return {status:"success","msg":data.data.msg};
+        }
+        else {
+            return {status:"error","msg":data.data.msg};
+        }
+    }
+    catch (error : any) {
+        return {status:"error","msg":error.response.data.message};
+    }
+}) 
+
+export const updateShippingTransactionShippingPartner = createAsyncThunk('updateShippingTransactionShippingPartner', async (input:any) => {
+    const {id, deliverPartner} = input
+    try {
+        //{{host}}/api/transactions/updateShippingPartner.php?id=59
+        const {data} = await axios.post(`${serverUrl}/api/transactions/updateShippingPartner.php?id=${id}`,{
+            deliverPartner:deliverPartner
         },{
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`

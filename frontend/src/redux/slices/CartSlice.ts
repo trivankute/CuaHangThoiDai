@@ -78,6 +78,7 @@ const CartSlice = createSlice({
         handleClearCart: (state,action) => {
             localStorage.removeItem("cart")
             state.data = false
+            state.totalPrice = false
         }
     }
 })
