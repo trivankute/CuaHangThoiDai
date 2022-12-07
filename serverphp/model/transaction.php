@@ -102,7 +102,7 @@ class Transaction {
                 foreach($products as $product) {
                     $result = $this->createTransactionDetail($transactionId, $product);
                     if(!$result) {
-                        $this->deleteTransaction($transactionId);
+                        $this->deleteTransactionAndRestoreQuantity($transactionId);
                         return false;
                     }
                 }
@@ -193,7 +193,7 @@ class Transaction {
             exit();
         }
     }
-    public function deleteTransaction($id) {
+    public function deleteTransactionAndRestoreQuantity($id) {
         $sql = "DELETE FROM `transaction` WHERE `transaction_id` = :id";
         $deleteSqlStmt = $this->conn->prepare($sql);
         $deleteSqlStmt->bindParam(':id', $id);
@@ -211,6 +211,39 @@ class Transaction {
                 $stmt->bindParam(':albumId', $transactionItem['album_id']);
                 $stmt->execute();
             }
+            // delete transaction detail
+            $sql = "DELETE FROM `transaction_items` WHERE `transaction_id` = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            // delete transaction
+            $deleteSqlStmt->execute();
+            return true;
+        }
+        catch (PDOException $e) {
+            echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+            exit();
+        }
+    }
+    public function getTransactionState($id) {
+        $sql = "SELECT `state` FROM `shipping` WHERE `transaction_id` = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        try {
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['state'];
+        }
+        catch (PDOException $e) {
+            echo json_encode(['status' => 'error', 'data' => ['msg' => $e->getMessage()]]);
+            exit();
+        }
+    }
+    public function deleteTransactionById($id) {
+        $sql = "DELETE FROM `transaction` WHERE `transaction_id` = :id";
+        $deleteSqlStmt = $this->conn->prepare($sql);
+        $deleteSqlStmt->bindParam(':id', $id);
+        try {
             // delete transaction detail
             $sql = "DELETE FROM `transaction_items` WHERE `transaction_id` = :id";
             $stmt = $this->conn->prepare($sql);
