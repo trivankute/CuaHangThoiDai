@@ -4,7 +4,7 @@ import { Container, Pagination } from "react-bootstrap"
 import BlogCard from "../../components/Cards/BlogCard/BlogCard"
 import { useDispatch, useSelector } from 'react-redux'
 import { BlogsStore } from '../../redux/selectors'
-import { getAllBlogs } from '../../redux/slices/BlogsSlice'
+import { getAllBlogsByPageId } from '../../redux/slices/BlogsSlice'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import FlashSlice from '../../redux/slices/FlashSlice'
 import PaginationByTotalPage from '../../components/PaginationByTotalPage/PaginationByTotalPage'
@@ -18,7 +18,10 @@ function Blogs() {
     // scroll to top
     useEffect(() => {
         window.scrollTo(0, 0)
-        dispatch(getAllBlogs())
+        dispatch(getAllBlogsByPageId({
+            id: pageId,
+            blogCount: 4
+        }))
         .then((res:any)=>{
         });
         // get state from location

@@ -63,7 +63,7 @@ export const getAllBlogs = createAsyncThunk('getAllBlogs', async () => {
 })
 export const getAllBlogsByPageId = createAsyncThunk('getAllBlogsByPageId', async (input:any) => {
     const {id, blogCount} = input
-    // {{host}}/api/pages/getBlog.php?id=1&blogCount=8
+    // {{host}}}/api/pages/getBlog.php?id=1&blogCount=4
     try {
         const {data} = await axios.get(`${serverUrl}/api/pages/getBlog.php?id=${id}&blogCount=${blogCount}`,{
             headers: {

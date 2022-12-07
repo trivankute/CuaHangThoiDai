@@ -7,17 +7,25 @@ import { Form, Button, Pagination } from 'react-bootstrap'
 
 import Warning from '../../components/Warning/Warning'
 import CustomerModal from '../../components/CustomerModal/CustomerModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { CustomersStore } from '../../redux/selectors';
+import { getCustomersByName } from '../../redux/slices/CustomersSlice';
 
 function Customers() {
   const [isWarning, setIsWarning] = useState(false)
   const [seeDetail, setSeeDetail] = useState(false)
+  const [searchName, setSearchName] = useState("")
+  const [customerSelected, setCustomerSelected] = useState<any>(false)
+  const customers = useSelector(CustomersStore)
+  const dispatch = useDispatch<any>()
   function handleWarningShow() {
     setIsWarning(true);
   }
   function handleWarningClose() {
     setIsWarning(false);
   }
-  function handleSeeDetailShow() {
+  function handleSeeDetailShow(customer:any) {
+    setCustomerSelected(customer);
     setSeeDetail(true);
   }
   function handleSeeDetailClose() {
@@ -28,50 +36,62 @@ function Customers() {
     window.scrollTo(0, 0)
   }, [])
 
-
+  function handleSearch()
+  {
+    dispatch(getCustomersByName({
+      id:1, customerCount:8, name:searchName
+    }))
+  }
   
   return (
 
     <>
       <div className={styles.container}>
         <Warning type="account" id="1" title="Are you sure to delete this customer" action="delete" show={isWarning} handleClose={handleWarningClose} />
-        <CustomerModal show={seeDetail} handleShow={handleSeeDetailShow} handleClose={handleSeeDetailClose} />
+        {
+          customerSelected && 
+          <CustomerModal customer={customerSelected} show={seeDetail} handleShow={handleSeeDetailShow} handleClose={handleSeeDetailClose} />
+        }
         <Header title="Manages your customers" content="Here you can manage your customers." />
         <div>
-          <Form className="d-flex mt-3 mb-3">
+          <Form onSubmit={(e:any)=>{
+            e.preventDefault()
+            handleSearch()
+          }} className="d-flex mt-3 mb-3">
             <Form.Control
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              value={searchName}
+              onChange={(e:any)=>{
+                setSearchName(e.target.value)
+              }}
+
             />
-            <Button variant="outline-success">Search</Button>
+            <Button onClick={handleSearch} variant="outline-success">Search</Button>
           </Form>
         </div>
         <div>
-          Search for "trivan":
+          Search for "{searchName}":
         </div>
-        <div className="mt-3" style={{ color: "var(--light-color)" }}>
-          Nothing
-        </div>
-        <div>
-          <CustomerItem handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} />
-          <CustomerItem handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} />
-          <CustomerItem handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} />
-        </div>
-
-
-        <Pagination className={styles.pagination}>
-          <Pagination.First />
-          <Pagination.Prev />
-          <Pagination.Item active>{1}</Pagination.Item>
-          <Pagination.Item >{2}</Pagination.Item>
-          <Pagination.Item >{3}</Pagination.Item>
-          <Pagination.Ellipsis />
-          <Pagination.Item>{6}</Pagination.Item>
-          <Pagination.Next />
-          <Pagination.Last />
-        </Pagination>
+        {
+          customers.data && customers.data.length===0 ?
+          <div className="mt-3" style={{ color: "var(--light-color)" }}>
+            Nothing
+          </div>
+          :
+          <div className={styles.searchResults}>
+            {
+              customers.data && customers.data.map((customer:any)=>{
+                return <CustomerItem customer={customer} handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} />
+              })
+            }
+            {/* <CustomerItem handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} />
+            <CustomerItem handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} />
+            <CustomerItem handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} /> */}
+          </div>
+        }
       </div>
     </>
   )

@@ -47,6 +47,12 @@ const TransactionSlice = createSlice({
         .addCase(updateShippingTransactionShippingPartner.fulfilled, (state,action) => {
             state.loading = false
         })
+        .addCase(cancelShippingTransaction.pending, (state,action) => {
+            state.loading = true
+        })
+        .addCase(cancelShippingTransaction.fulfilled, (state,action) => {
+            state.loading = false
+        })
     }
 })
 
@@ -144,6 +150,26 @@ export const updateShippingTransactionShippingPartner = createAsyncThunk('update
     }
 }) 
 
+export const cancelShippingTransaction = createAsyncThunk('cancelShippingTransaction', async (input:any) => {
+    const {id} = input
+    try {
+        //{{host}}/api/transactions/cancel.php?id=59
+        const {data} = await axios.get(`${serverUrl}/api/transactions/cancel.php?id=${id}`,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        if(data.status === "success"){
+            return {status:"success","msg":data.data.msg};
+        }
+        else {
+            return {status:"error","msg":data.data.msg};
+        }
+    }
+    catch (error : any) {
+        return {status:"error","msg":error.response.data.message};
+    }
+}) 
 
 export const getTransactionById = createAsyncThunk('getTransactionById', async (input:any) => {
     const {id} = input

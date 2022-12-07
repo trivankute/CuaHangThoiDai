@@ -8,7 +8,8 @@ import styles from "./TransactionItem.module.css"
 
 
 // function TransactionItem({type, state,transaction_id, delivery_parner, time,onClick,total_amount}:{type:any,onClick:any,state:any,transaction_id:any,delivery_parner:any,time:any,total_amount:any}) {
-function TransactionItem({ transaction, pageId, setForReloadPage }: { setForReloadPage:any, transaction: any, pageId: any }) {
+function TransactionItem({ transaction, pageId, setForReloadPage, handleWarningOpen }: { handleWarningOpen:any,
+  setForReloadPage:any, transaction: any, pageId: any }) {
   // type1 is order_online, type2 is pickup_at_store
   const navigate = useNavigate();
   const dispatch = useDispatch<any>()
@@ -21,7 +22,7 @@ function TransactionItem({ transaction, pageId, setForReloadPage }: { setForRelo
     })
   }
   function handleCancel() {
-
+    handleWarningOpen(transaction)
   }
   function handleShip() {
     dispatch(updateShippingTransactionShippingPartner({

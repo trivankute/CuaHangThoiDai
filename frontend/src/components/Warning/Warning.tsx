@@ -8,12 +8,25 @@ import { deleteAlbum } from '../../redux/slices/AlbumSlice';
 import FlashSlice from '../../redux/slices/FlashSlice';
 import { AlbumStore } from '../../redux/selectors';
 import Loading from '../Loading/Loading';
+import { cancelShippingTransaction } from '../../redux/slices/TransactionSlice';
 
 function Warning({show, handleClose, title, action, type, id, setForReloadPay}:{show:any, handleClose:any, title:any, action:any, type:any, id:any, setForReloadPay?:any}) {
   const dispatch = useDispatch<any>()
   const album = useSelector(AlbumStore)
   function handleDelete(){
-    if(type==='account')
+    if(type==="transaction")
+    {
+      dispatch(cancelShippingTransaction({
+        id:id
+      }))
+      .then((res:any)=>{
+        if(res.payload.status === 'success'){
+          setForReloadPay((prev:boolean)=>!prev)
+          handleClose()
+        }
+      })
+    }
+    else if(type==='account')
       console.log('account')
     else if(type==='album')
       {

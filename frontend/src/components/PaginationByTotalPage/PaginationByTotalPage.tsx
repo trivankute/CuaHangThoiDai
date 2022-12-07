@@ -69,7 +69,7 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPa
                     loadToArray(res.payload.totalPage)
                 })
         else if (type === "blogs")
-            dispatch(getBlogsTotalPages({ blogCount: 6 }))
+            dispatch(getBlogsTotalPages({ blogCount: 4 }))
                 .then((res: any) => {
                     loadToArray(res.payload.totalPage)
                 })
@@ -80,7 +80,7 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPa
                 })
         else if (type === "transactions")
             loadToArray(transactions.totalPage)
-        else if (type="transactions_employee")
+        else if (type==="transactions_employee")
         {
             dispatch(getTransactionsTotalPage({
                 transactionCount: 10,
@@ -88,6 +88,10 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPa
                 .then((res: any) => {
                     loadToArray(res.payload.totalPage)
                 })
+        }
+        else if (type==="transactions_employee_filter")
+        {
+            loadToArray(transactions.totalPage)
         }
             
     }, [currPage])
@@ -152,6 +156,10 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPa
                             }
                             {
                                 type === "transactions_employee" &&
+                                <Pagination.Last onClick={() => navigate(`${basicUrl}${transactions.totalPage}`)} />
+                            }
+                            {
+                                type === "transactions_employee_filter" &&
                                 <Pagination.Last onClick={() => navigate(`${basicUrl}${transactions.totalPage}`)} />
                             }
                         </>

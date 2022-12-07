@@ -38,6 +38,18 @@ const TransactionsSlice = createSlice({
 
             }
         })
+        .addCase(getTransactionsByEmployeePageIdAndType.pending, (state,action) => {
+            state.loading = true
+        })
+        .addCase(getTransactionsByEmployeePageIdAndType.fulfilled, (state,action) => {
+            state.loading = false
+            const {status, data, totalPage} = action.payload
+            if(status==="success")
+            {
+                state.data = data
+                state.totalPage = totalPage
+            }
+        })
         .addCase(getTransactionsTotalPage.pending, (state,action) => {
             state.loading = true
         })
@@ -130,6 +142,27 @@ export const getTransactionsTotalPage = createAsyncThunk('getTransactionsTotalPa
         }
         else {
             return {status:"error","msg":data.data.msg};
+        }
+    }
+    catch (error : any) {
+        return {status:"error","msg":error.response.data.message};
+    }
+});
+
+export const getTransactionsByEmployeePageIdAndType = createAsyncThunk('getTransactionsByEmployeePageIdAndType', async (input : any) => {
+    try {
+        //{{host}}/api/pages/getTransactionByType.php?id=1&transactionCount=10&type=all
+        const {transactionCount, id, type} = input;
+        const {data} = await axios.get(`${serverUrl}/api/pages/getTransactionByType.php?id=${id}&transactionCount=${transactionCount}&type=${type}`,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }}
+        );
+        if(data.status === 'success'){
+            return {status:"success","data":data.data.transactions, "totalPage":data.data.totalPage,"msg":data.data.msg};
+        }
+        else {
+            return {status:"error", "data":data.data.transactions,"msg":data.data.msg};
         }
     }
     catch (error : any) {
