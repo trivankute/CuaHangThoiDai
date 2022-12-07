@@ -132,11 +132,22 @@
         }
         public function deleteAccount($id) {
             $sql = "SELECT `delete_account`(:id) as `delete_account`";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':id', $id);
+            $deleteQuery = $this->conn->prepare($sql);
+            $deleteQuery->bindParam(':id', $id);
             try {
+                $sql = "SELECT * FROM write_review WHERE customer_id = :id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':id', $id);
                 $stmt->execute();
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                $writeReviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach($writeReviews as $writeReview) {
+                    $sql = "DELETE FROM review WHERE review_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $writeReview['review_id']);
+                    $stmt->execute();
+                }
+                $deleteQuery->execute();
+                $result = $deleteQuery->fetch(PDO::FETCH_ASSOC);
                 return $result['delete_account'];
             } catch (PDOException $e) {
                 echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
