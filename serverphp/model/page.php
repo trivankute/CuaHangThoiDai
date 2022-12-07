@@ -548,6 +548,132 @@
                 exit();
             }
         }
+        public function getTransactionByUserIdAndType($id,$userId,$transactionCount,$type) {
+            $this->transactionCount = $transactionCount;
+            $offset = ($id-1) * $this->transactionCount;
+            $sql = "SELECT * FROM `transaction` WHERE customer_id = :id AND type_of_shipping = :type LIMIT $offset, $this->transactionCount";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $userId);
+            $stmt->bindParam(':type', $type);
+            try {
+                $transactions = [];
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach($result as $transaction) {
+                    if($transaction['type_of_shipping'] === 'shipping' || $transaction['type_of_shipping'] === 'Shipping' ) {
+                        $sql = "SELECT * FROM shipping WHERE transaction_id = :id";
+                        $stmt = $this->conn->prepare($sql);
+                        $stmt->bindParam(':id', $transaction['transaction_id']);
+                        $stmt->execute();
+                        $shipping = $stmt->fetch(PDO::FETCH_ASSOC);
+                        $transaction['shipping'] = $shipping;
+                        unset($transaction['shipping']['transaction_id']);
+                    }
+                    else if($transaction['type_of_shipping'] === 'pick_up' || $transaction['type_of_shipping'] === 'Pick_up' ) {
+                        $sql = "SELECT * FROM pick_up_at_store WHERE transaction_id = :id";
+                        $stmt = $this->conn->prepare($sql);
+                        $stmt->bindParam(':id', $transaction['transaction_id']);
+                        $stmt->execute();
+                        $pickup = $stmt->fetch(PDO::FETCH_ASSOC);
+                        $sql = "SELECT * FROM account WHERE user_id = :id";
+                        $stmt = $this->conn->prepare($sql);
+                        $stmt->bindParam(':id', $pickup['employee_id']);
+                        $stmt->execute();
+                        $employee = $stmt->fetch(PDO::FETCH_ASSOC);
+                        $transaction['employee'] = $employee;
+                        unset($transaction['employee']['password']);
+                    }
+                    $sql = "SELECT * FROM account WHERE user_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $transaction['customer_id']);
+                    $stmt->execute();
+                    $account = $stmt->fetch(PDO::FETCH_ASSOC);
+                    if($account['role'] === 'admin') {
+                        $transaction['customer'] = false;
+                    }
+                    else {
+                        $transaction['customer'] = $account;
+                        unset($transaction['customer']['password']);
+                    }
+                    array_push($transactions, $transaction);
+                }
+                //total page
+                $sql = "SELECT COUNT(*) FROM `transaction` WHERE customer_id = :id AND type_of_shipping = :type";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':id', $userId);
+                $stmt->bindParam(':type', $type);
+                $stmt->execute();
+                $total = $stmt->fetch(PDO::FETCH_ASSOC);
+                $totalPage = ceil($total['COUNT(*)'] / $this->transactionCount);
+                return ['transactions'=>$transactions, 'totalPage'=>$totalPage];
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
+        public function getTransactionByType($id,$transactionCount,$type) {
+            $this->transactionCount = $transactionCount;
+            $offset = ($id-1) * $this->transactionCount;
+            $sql = "SELECT * FROM `transaction` WHERE type_of_shipping = :type LIMIT $offset, $this->transactionCount";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':type', $type);
+            try {
+                $transactions = [];
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach($result as $transaction) {
+                    if($transaction['type_of_shipping'] === 'shipping' || $transaction['type_of_shipping'] === 'Shipping' ) {
+                        $sql = "SELECT * FROM shipping WHERE transaction_id = :id";
+                        $stmt = $this->conn->prepare($sql);
+                        $stmt->bindParam(':id', $transaction['transaction_id']);
+                        $stmt->execute();
+                        $shipping = $stmt->fetch(PDO::FETCH_ASSOC);
+                        $transaction['shipping'] = $shipping;
+                        unset($transaction['shipping']['transaction_id']);
+                    }
+                    else if($transaction['type_of_shipping'] === 'pick_up' || $transaction['type_of_shipping'] === 'Pick_up' ) {
+                        $sql = "SELECT * FROM pick_up_at_store WHERE transaction_id = :id";
+                        $stmt = $this->conn->prepare($sql);
+                        $stmt->bindParam(':id', $transaction['transaction_id']);
+                        $stmt->execute();
+                        $pickup = $stmt->fetch(PDO::FETCH_ASSOC);
+                        $sql = "SELECT * FROM account WHERE user_id = :id";
+                        $stmt = $this->conn->prepare($sql);
+                        $stmt->bindParam(':id', $pickup['employee_id']);
+                        $stmt->execute();
+                        $employee = $stmt->fetch(PDO::FETCH_ASSOC);
+                        $transaction['employee'] = $employee;
+                        unset($transaction['employee']['password']);
+                    }
+                    $sql = "SELECT * FROM account WHERE user_id = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bindParam(':id', $transaction['customer_id']);
+                    $stmt->execute();
+                    $account = $stmt->fetch(PDO::FETCH_ASSOC);
+                    if($account['role'] === 'admin') {
+                        $transaction['customer'] = false;
+                    }
+                    else {
+                        $transaction['customer'] = $account;
+                        unset($transaction['customer']['password']);
+                    }
+                    array_push($transactions, $transaction);
+                }
+                //total page
+                $sql = "SELECT COUNT(*) FROM `transaction` WHERE type_of_shipping = :type";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':type', $type);
+                $stmt->execute();
+                $total = $stmt->fetch(PDO::FETCH_ASSOC);
+                $totalPage = ceil($total['COUNT(*)'] / $this->transactionCount);
+                return ['transactions'=>$transactions, 'totalPage'=>$totalPage];
+            }
+            catch (PDOException $e) {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                exit();
+            }
+        }
         public function getArtistByPageId($id, $artistCount) {
             $this->artistCount = $artistCount;
             $offset = ($id-1) * $this->artistCount;
