@@ -5,11 +5,14 @@ import styles from './Review.module.css';
 import CreateStars from '../../components/CreateStars/CreateStars';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faUser, faCalendar } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faCalendar, faWrench, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import clsx from 'clsx'
+import { useSelector } from 'react-redux';
+import { UserStore } from '../../redux/selectors';
 
-function Review({review}:{review:any}) {
+function Review({review, handleShowAdjustReview}:{handleShowAdjustReview:any, review:any}) {
+    const user = useSelector(UserStore)
     const [rating, setRating] = useState(5);
     return (
         <>
@@ -28,6 +31,13 @@ function Review({review}:{review:any}) {
                             {review.date}
                         </div>
                     </div>
+                    {
+                        user.data && user.data.account.role!=="customer" &&
+                        <>
+                        <FontAwesomeIcon onClick={()=>{handleShowAdjustReview(review)}} className={clsx(styles.icon, styles.icon_wrench, "ms-auto")} icon={faWrench as IconProp} />
+                        </>
+                    }
+                    
                 </div>
                 <div className={styles.review}>
                     <div className={styles.rating}>

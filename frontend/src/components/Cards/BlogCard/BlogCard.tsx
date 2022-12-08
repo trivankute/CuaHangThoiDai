@@ -4,10 +4,14 @@ import styles from './BlogCard.module.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faUser, faCalendar} from '@fortawesome/free-solid-svg-icons'
+import { faUser, faCalendar, faWrench} from '@fortawesome/free-solid-svg-icons'
+import { useSelector } from 'react-redux';
+import { UserStore } from '../../../redux/selectors';
+import clsx from 'clsx';
 
-function BlogCard({blog}:{blog:any}) {
+function BlogCard({blog, handleShowAdjustBlog, oldPageId}:{oldPageId?:any, blog:any, handleShowAdjustBlog?:any}) {
     const navigate = useNavigate()
+    const user = useSelector(UserStore)
     return (
         <>
             <div className={styles.box}>
@@ -21,7 +25,19 @@ function BlogCard({blog}:{blog:any}) {
                     </div>
                     <h3>{blog.topic}</h3>
                     <p>{blog.content}</p>
-                    <a onClick={()=>{navigate(`/products/blogs/${blog.blog_id}`)}}className="btn btn_custom">read more</a>
+                    <div className="w-100 d-flex justify-content-between align-items-center">
+                    <a onClick={()=>{navigate(`/products/blogs/${blog.blog_id}`,{state:{
+                        oldPageId:oldPageId
+                    }})}}className="btn btn_custom">read more</a>
+                    {
+                        user.data && user.data.account.role!=="customer" &&
+                        <>
+                        <FontAwesomeIcon 
+                        onClick={()=>{handleShowAdjustBlog(blog)}} 
+                        className={clsx(styles.icon, styles.icon_wrench)} icon={faWrench as IconProp} />
+                        </>
+                    }
+                    </div>
                 </div>
             </div>
         </>

@@ -115,7 +115,7 @@ export const deleteBlog = createAsyncThunk('deleteBlog', async (input : any) => 
     try {
         //{{host}}/api/blogs/update.php?id=11
         const {id} = input;
-        const {data} = await axios.delete(`${serverUrl}/api/blogs/delete.php?id=${id}`,{
+        const {data} = await axios.get(`${serverUrl}/api/blogs/delete.php?id=${id}`,{
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }

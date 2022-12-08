@@ -18,6 +18,7 @@ function Customers() {
   const [searchName, setSearchName] = useState("")
   const [customerSelected, setCustomerSelected] = useState<any>(false)
   const [forReloadPay, setForReloadPay] = useState(false)
+  const [filter, setFilter] = useState("all")
   const customers = useSelector(CustomersStore)
   const dispatch = useDispatch<any>()
   function handleWarningShow(customer: any) {
@@ -115,6 +116,20 @@ function Customers() {
             />
             <Button onClick={handleSearch} variant="outline-success">Search</Button>
           </Form>
+          {/* filter */}
+          <div className="d-flex justify-content-between mt-3 mb-3">
+            <div className="d-flex">
+              <Form.Select onChange={
+                (e: any) => {
+                  setFilter(e.target.value)
+                }
+              } style={{ cursor: "pointer" }} aria-label="Default select example" className="me-2">
+                <option value="all">All</option>
+                <option value="in use">In use</option>
+                <option value="new">New</option>
+              </Form.Select>
+            </div>
+          </div>
         </div>
         <div>
           Search for "{searchName}":
@@ -134,6 +149,11 @@ function Customers() {
             <div className={styles.searchResults}>
               {
                 customers.data && customers.data.map((customer: any) => {
+                  if (filter === "all")
+                  return <CustomerItem customer={customer} handleWarningShow={handleWarningShow} handleWarningBanShow={handleWarningBanShow} handleSeeDetailShow={handleSeeDetailShow} />
+                  else if (filter === "in use" && customer.state === "in use")
+                  return <CustomerItem customer={customer} handleWarningShow={handleWarningShow} handleWarningBanShow={handleWarningBanShow} handleSeeDetailShow={handleSeeDetailShow} />
+                  else if (filter === "new" && customer.state === "new")
                   return <CustomerItem customer={customer} handleWarningShow={handleWarningShow} handleWarningBanShow={handleWarningBanShow} handleSeeDetailShow={handleSeeDetailShow} />
                 })
               }

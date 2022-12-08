@@ -99,6 +99,12 @@ function RegisterButtonAndModal({ type, linkStyle, showRegister, handleShowRegis
                         <Form.Control type="password" placeholder="Your confirm password" className={clsx(styles.box, "mb-3")} onChange={(e) => setConfirmPassword(e.target.value)} />
                         </>
                     }
+                    {
+                        type === "employee" &&
+                        <>
+                        <Form.Label>Password is default 123456</Form.Label><br></br>
+                        </>
+                    }
                     <Form.Label>Avatar :</Form.Label>
                     <Form.Control
                         type="file"

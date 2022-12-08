@@ -2,7 +2,6 @@ import { memo, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap';
 import styles from "./Album.module.css"
-import image from "./cd.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -25,6 +24,7 @@ import { getAllAlbums } from '../../redux/slices/AlbumsSlice';
 import FlashSlice from '../../redux/slices/FlashSlice';
 import AlbumsLoadingLogic from '../../middlewares/LoadingLogic/AlbumsLoadingLogic';
 import CartSlice from '../../redux/slices/CartSlice';
+import ReviewModal from '../../components/ReviewModal/ReviewModal';
 function Album() {
     // get params from url
     const { albumName } = useParams();
@@ -46,6 +46,15 @@ function Album() {
         }
         else return 3;
     })
+    const [showAdjustReview, setShowAdjustReview] = useState(false)
+    const [reviewSelected, setReviewSelected] = useState<any>(false)
+    function handleShowAdjustReview(review: any) {
+        setReviewSelected(review)
+        setShowAdjustReview(true)
+    }
+    function handleCloseAdjustReview() {
+        setShowAdjustReview(false)
+    }
 
     function swiperStartpoint() {
         let result = 0;
@@ -139,6 +148,12 @@ function Album() {
 
     return (
         <Container fluid className={styles.container}>
+            {
+                reviewSelected &&
+                <>
+                <ReviewModal review={reviewSelected} show={showAdjustReview} handleClose={handleCloseAdjustReview} setForReloadPage={setForReload}/>
+                </>
+            }
             <Row className={styles.row_1}>
                 <BackNavigate backPath="/products/albums" backPage="Products" currentPage="Album" />
                 <Col className={styles.col_1}>
@@ -262,7 +277,7 @@ function Album() {
                 {
                     album.data &&
                     <div style={{ width: "100%" }}>
-                            <Reviews album={album}/>
+                            <Reviews album={album} handleShowAdjustReview={handleShowAdjustReview}/>
                     </div>
                 }
             </Row>

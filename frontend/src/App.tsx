@@ -49,6 +49,7 @@ import { UserStore } from './redux/selectors'
 import AdminOnly from './middlewares/AdminOnly'
 import AdminAndEmployeeOnly from './middlewares/AdminAndEmployeeOnly'
 import CheckBanned from './middlewares/CheckBanned'
+import Configweb from './pages/Configweb/Configweb'
 
 // Private route
 
@@ -120,6 +121,7 @@ function App() {
               <Route element={<AdminOnly />}>
                 <Route path='employees' element={<Employees />} />
                 <Route path='registerEmployee' element={<RegisterEmployee />} />
+                <Route path='configweb' element={<Configweb />} />
               </Route>
               <Route element={<AdminAndEmployeeOnly />}>
                 <Route path='upload' element={<Upload />} />
@@ -136,6 +138,7 @@ function App() {
           </Route>
         </Route>
         <Route path='/notification' element={<PageForNotification />} />
+        <Route path='/maintenance' element={<Maintenance />} />
         <Route path="/*" element={<PageNotFound />}></Route>
       </Routes>
       <ChatAppHome />

@@ -99,7 +99,7 @@ function PaginationByTotalPage({ type, currPage, basicUrl }: { type: any, currPa
         <>
             {
                 pageTracking &&
-                <Pagination className="w-100 offset-10 mt-3">
+                <Pagination className="offset-5 mt-3">
                     {
                         pageTracking.length >= 5 && currPage != 1
                         &&

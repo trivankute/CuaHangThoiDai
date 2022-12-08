@@ -43,5 +43,20 @@
     color:var(--light-color);
     font-size: 15px;
     padding:5px 0;
+    /* end line with ... */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 
+}
+
+.icon.icon_wrench{
+    color:var(--orange);
+    padding-right: 2px;
+    cursor:pointer;
+}
+.icon.icon_wrench:hover{
+    color:var(--light-color);
 }
