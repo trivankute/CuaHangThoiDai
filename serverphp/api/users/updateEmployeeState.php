@@ -8,11 +8,11 @@
         $state = $body->state;
         $result = $global_account->updateEmployeeState($id,$state);
         if($result) {
-            echo json_encode(['status'=>'success', 'data'=>['msg'=>'Update customer state success']]);
+            echo json_encode(['status'=>'success', 'data'=>['msg'=>'Update employee state success']]);
             exit();
         }
         else {
-            echo json_encode(['status'=>'error', 'data'=>['msg'=>'Update customer state failed']]);
+            echo json_encode(['status'=>'error', 'data'=>['msg'=>'Update employee state failed']]);
             exit();
         }
         exit();
