@@ -21,6 +21,21 @@ const EmployeesSlice = createSlice({
             if(status==="success")
             state.data = data
         })
+        .addCase(deleteEmployeeById.pending, (state, action) => {
+            state.loading = true
+        })
+        .addCase(deleteEmployeeById.fulfilled, (state, action) => {
+            state.loading = false
+        })
+        .addCase(getEmployeesByName.pending, (state, action) => {
+            state.loading = true
+        })
+        .addCase(getEmployeesByName.fulfilled, (state, action) => {
+            state.loading = false
+            const {status, data} = action.payload
+            if(status==="success")
+            state.data = data
+        })
     }   
 })
 
@@ -65,4 +80,48 @@ export const getEmployeesTotalPages = createAsyncThunk('getEmployeesTotalPages',
         return {status:"error","msg":error.response.data.message};
     }
 })
+
+
+export const deleteEmployeeById = createAsyncThunk('deleteEmployeeById', async (input: any) => {
+    try {
+        //{{host}}{{host}}/api/users/delete.php?id=12
+        const { id } = input;
+        const { data } = await axios.get(`${serverUrl}/api/users/delete.php?id=${id}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        if (data.status === 'success') {
+            return { status: "success","msg": data.data.msg };
+        }
+        else {
+            return { status: "error","msg": data.data.msg };
+        }
+    }
+    catch (error: any) {
+        return { status: "error", "msg": error.response.data.message };
+    }
+})
+
+export const getEmployeesByName= createAsyncThunk('getEmployeesByName', async (input: any) => {
+    try {
+        // {{host}}/api/pages/getEmployeeByName.php?id=1&employeeCount=6&name=theo
+        const { id, employeeCount, name } = input;
+        const { data } = await axios.get(`${serverUrl}/api/pages/getEmployeeByName.php?id=${id}&employeeCount=${employeeCount}&name=${name}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        if (data.status === 'success') {
+            return { status: "success", "data": data.data.employees, "msg": data.data.msg };
+        }
+        else {
+            return { status: "error", "data": data.data.employees, "msg": data.data.msg };
+        }
+    }
+    catch (error: any) {
+        return { status: "error", "msg": error.response.data.message };
+    }
+})
+
 export default EmployeesSlice;

@@ -30,6 +30,18 @@ const CustomersSlice = createSlice({
                 if (status === "success")
                     state.data = data
             })
+            .addCase(deleteCustomerById.pending, (state, action) => {
+                state.loading = true
+            })
+            .addCase(deleteCustomerById.fulfilled, (state, action) => {
+                state.loading = false
+            })
+            .addCase(updateCustomerStateById.pending, (state, action) => {
+                state.loading = true
+            })
+            .addCase(updateCustomerStateById.fulfilled, (state, action) => {
+                state.loading = false
+            })
     }
 })
 
@@ -90,6 +102,49 @@ export const getCustomersTotalPages = createAsyncThunk('getCustomersTotalPages',
         }
         else {
             return { status: "error", "totalPage": data.data.totalPages, "msg": data.data.msg };
+        }
+    }
+    catch (error: any) {
+        return { status: "error", "msg": error.response.data.message };
+    }
+})
+
+export const deleteCustomerById = createAsyncThunk('deleteCustomerById', async (input: any) => {
+    try {
+        //{{host}}{{host}}/api/users/delete.php?id=12
+        const { id } = input;
+        const { data } = await axios.get(`${serverUrl}/api/users/delete.php?id=${id}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        if (data.status === 'success') {
+            return { status: "success","msg": data.data.msg };
+        }
+        else {
+            return { status: "error","msg": data.data.msg };
+        }
+    }
+    catch (error: any) {
+        return { status: "error", "msg": error.response.data.message };
+    }
+})
+
+export const updateCustomerStateById = createAsyncThunk('updateCustomerStateById', async (input: any) => {
+    try {
+        // {{host}}/api/users/updateCustomerState.php?id=17
+        const { id, state } = input;
+        const { data } = await axios.post(`${serverUrl}/api/users/updateCustomerState.php?id=${id}`,{state:state}, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        if (data.status === 'success') {
+            return { status: "success","msg": data.data.msg };
+        }
+        else {
+            return { status: "error","msg": data.data.msg };
         }
     }
     catch (error: any) {

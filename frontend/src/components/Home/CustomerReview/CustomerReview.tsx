@@ -45,6 +45,7 @@ function CustomerReview() {
     useEffect(()=>{
         dispatch(getReviewsHightScore())
     },[])
+    console.log(reviews)
 
     return (
         <>

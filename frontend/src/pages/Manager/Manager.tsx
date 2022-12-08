@@ -11,7 +11,7 @@ import Warning from '../../components/Warning/Warning'
 import ProductModal from '../../components/ProductModal/ProductModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { AlbumsStore } from '../../redux/selectors'
-import { getAllAlbumsByPageIdAndTitle } from '../../redux/slices/AlbumsSlice'
+import { getAllAlbums, getAllAlbumsByPageIdAndTitle } from '../../redux/slices/AlbumsSlice'
 
 function Manager() {
     const dispatch = useDispatch<any>()
@@ -21,14 +21,14 @@ function Manager() {
     const [albumSelected, setAlbumSelected] = useState<any>(false)
     const [forReloadPay, setForReloadPay] = useState(false)
     const [title, setTitle] = useState("")
-    function handleWarningShow(album:any) {
+    function handleWarningShow(album: any) {
         setIsWarning(true);
         setAlbumSelected(album);
     }
     function handleWarningClose() {
         setIsWarning(false);
     }
-    function handleEditShow(album:any) {
+    function handleEditShow(album: any) {
         setEditMode(true);
         setAlbumSelected(album);
     }
@@ -36,32 +36,41 @@ function Manager() {
         setEditMode(false);
     }
     function handleSearch() {
-        dispatch(getAllAlbumsByPageIdAndTitle({id:1, albumCount:5, title:title}))
+        if (title !== "")
+            dispatch(getAllAlbumsByPageIdAndTitle({ id: 1, albumCount: 20, title: title }))
+        else {
+            dispatch(getAllAlbums())
+        }
     }
     useEffect(() => {
         // scroll to top
         window.scrollTo(0, 0)
     }, [])
-    useEffect(()=>{
-        if(forReloadPay)
-        dispatch(getAllAlbumsByPageIdAndTitle({id:1, albumCount:5, title:title}))
-            .then(()=>{
-                setForReloadPay(false)
-            })
-    },[forReloadPay])
+    useEffect(() => {
+        if (forReloadPay) {
+            if (title !== "")
+                dispatch(getAllAlbumsByPageIdAndTitle({ id: 1, albumCount: 20, title: title }))
+                    .then(() => {
+                        setForReloadPay(false)
+                    })
+            else {
+                dispatch(getAllAlbums())
+            }
+        }
+    }, [forReloadPay])
     console.log(albumSelected.album_id)
     return (
         <>
             <div className={styles.container}>
                 <Header title="Store Manager" content="Manage your products" />
-                    <Warning type="album" id={albumSelected.album_id} title="Are you sure to delete this album" action="delete" show={isWarning} setForReloadPay={setForReloadPay} handleClose={handleWarningClose} />
+                <Warning type="album" id={albumSelected.album_id} title="Are you sure to delete this album" action="delete" show={isWarning} setForReloadPay={setForReloadPay} handleClose={handleWarningClose} />
                 {
                     editMode &&
                     <ProductModal show={editMode}
-                        handleClose={handleEditClose} album={albumSelected} setForReloadPay={setForReloadPay}/>
+                        handleClose={handleEditClose} album={albumSelected} setForReloadPay={setForReloadPay} />
                 }
                 <div>
-                    <Form onSubmit={(e:any)=>{
+                    <Form onSubmit={(e: any) => {
                         e.preventDefault();
                         e.stopPropagation();
                         handleSearch()
@@ -72,7 +81,7 @@ function Manager() {
                             className="me-2"
                             aria-label="Search"
                             value={title}
-                            onChange={(e:any)=>{
+                            onChange={(e: any) => {
                                 setTitle(e.target.value)
                             }}
                         />
@@ -98,7 +107,7 @@ function Manager() {
                             }
                         </>
                     }
-                    
+
                 </div>
             </div>
         </>

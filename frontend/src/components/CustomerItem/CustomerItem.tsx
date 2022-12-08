@@ -8,7 +8,7 @@ import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 import { UserStore } from '../../redux/selectors';
 
-function CustomerItem({ handleWarningShow, handleSeeDetailShow, customer }: { customer: any, handleWarningShow?: any, handleSeeDetailShow?: any }) {
+function CustomerItem({ handleWarningShow, handleSeeDetailShow, customer, handleWarningBanShow }: { handleWarningBanShow:any, customer: any, handleWarningShow?: any, handleSeeDetailShow?: any }) {
     const user = useSelector(UserStore)
     return (
         <>
@@ -25,6 +25,12 @@ function CustomerItem({ handleWarningShow, handleSeeDetailShow, customer }: { cu
                         <div className={styles.date}>
                             ID: {customer.user_id}
                         </div>
+                        <div className={styles.date}>
+                            state: <span className={clsx({
+                                [styles.banned]: customer.state === "banned",
+                                [styles.notBanned]: customer.state !== "banned"
+                            })}>{customer.state}</span>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.serviceIcons}>
@@ -32,8 +38,8 @@ function CustomerItem({ handleWarningShow, handleSeeDetailShow, customer }: { cu
                     {
                         user.data && user.data.account.role === "admin" &&
                         <>
-                            <FontAwesomeIcon className={clsx(styles.icon, styles.icon_ban)} icon={faBan as IconProp} />
-                            <FontAwesomeIcon onClick={handleWarningShow} className={clsx(styles.icon, styles.icon_trash)} icon={faTrash as IconProp} />
+                            <FontAwesomeIcon onClick={() => {handleWarningBanShow(customer)}} className={clsx(styles.icon, styles.icon_ban)} icon={faBan as IconProp} />
+                            <FontAwesomeIcon onClick={() => {handleWarningShow(customer)}} className={clsx(styles.icon, styles.icon_trash)} icon={faTrash as IconProp} />
                         </>
                     }
                     <FontAwesomeIcon onClick={() => { handleSeeDetailShow(customer) }} className={clsx(styles.icon, styles.icon_eye)} icon={faEye as IconProp} />

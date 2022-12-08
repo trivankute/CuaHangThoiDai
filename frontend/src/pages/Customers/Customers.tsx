@@ -3,7 +3,7 @@ import CustomerItem from '../../components/CustomerItem/CustomerItem'
 import Header from '../../components/User/Header/Header'
 
 import styles from "./Customers.module.css"
-import { Form, Button, Pagination } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 
 import Warning from '../../components/Warning/Warning'
 import CustomerModal from '../../components/CustomerModal/CustomerModal';
@@ -13,12 +13,15 @@ import { getCustomersByName } from '../../redux/slices/CustomersSlice';
 
 function Customers() {
   const [isWarning, setIsWarning] = useState(false)
+  const [isWarningBan, setIsWarningBan] = useState(false)
   const [seeDetail, setSeeDetail] = useState(false)
   const [searchName, setSearchName] = useState("")
   const [customerSelected, setCustomerSelected] = useState<any>(false)
+  const [forReloadPay, setForReloadPay] = useState(false)
   const customers = useSelector(CustomersStore)
   const dispatch = useDispatch<any>()
-  function handleWarningShow() {
+  function handleWarningShow(customer:any) {
+    setCustomerSelected(customer);
     setIsWarning(true);
   }
   function handleWarningClose() {
@@ -31,26 +34,69 @@ function Customers() {
   function handleSeeDetailClose() {
     setSeeDetail(false);
   }
+  function handleWarningBanShow(customer:any) {
+    setCustomerSelected(customer);
+    setIsWarningBan(true);
+  }
+  function handleWarningBanClose() {
+    setIsWarningBan(false);
+  }
   // scroll to top
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
+  useEffect(()=>{
+    if(forReloadPay)
+    {
+      if(searchName!=="")
+      dispatch(getCustomersByName({
+        id:1, customerCount:8, name:searchName
+      }))
+        .then(()=>{
+          setForReloadPay(false)
+        })
+      else {
+        dispatch(getCustomersByName({
+        id:1, customerCount:1000, name:searchName
+      }))
+        .then(()=>{
+          setForReloadPay(false)
+        })
+
+      }
+    }
+
+  }, [forReloadPay])
+
   function handleSearch()
   {
+    if(searchName!=="")
     dispatch(getCustomersByName({
-      id:1, customerCount:8, name:searchName
+      id:1, customerCount:20, name:searchName
     }))
+    else {
+      dispatch(getCustomersByName({
+      id:1, customerCount:1000, name:searchName
+    }))
+      .then(()=>{
+        setForReloadPay(false)
+      })
+
+    }
   }
   
   return (
 
     <>
       <div className={styles.container}>
-        <Warning type="account" id="1" title="Are you sure to delete this customer" action="delete" show={isWarning} handleClose={handleWarningClose} />
         {
           customerSelected && 
+          <>
+          <Warning type="customer_ban" id={customerSelected.user_id} curState={customerSelected.state} title="Are you sure to ban/unbanned this customer" action={customerSelected.state==="banned"?"Unban":"Ban"} show={isWarningBan} handleClose={handleWarningBanClose} setForReloadPay={setForReloadPay} />
+          <Warning type="customer" id={customerSelected.user_id} title="Are you sure to delete this customer" action="Delete" show={isWarning} handleClose={handleWarningClose} setForReloadPay={setForReloadPay} />
           <CustomerModal customer={customerSelected} show={seeDetail} handleShow={handleSeeDetailShow} handleClose={handleSeeDetailClose} />
+          </>
         }
         <Header title="Manages your customers" content="Here you can manage your customers." />
         <div>
@@ -84,12 +130,9 @@ function Customers() {
           <div className={styles.searchResults}>
             {
               customers.data && customers.data.map((customer:any)=>{
-                return <CustomerItem customer={customer} handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} />
+                return <CustomerItem customer={customer} handleWarningShow={handleWarningShow} handleWarningBanShow={handleWarningBanShow} handleSeeDetailShow={handleSeeDetailShow} />
               })
             }
-            {/* <CustomerItem handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} />
-            <CustomerItem handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} />
-            <CustomerItem handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} /> */}
           </div>
         }
       </div>
