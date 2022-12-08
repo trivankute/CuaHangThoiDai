@@ -8,18 +8,17 @@ function CheckBanned() {
     const user = useSelector(UserStore)
     const navigate = useNavigate()
     function handleNavigate() {
-        console.log(user)
-        // if (user.data.account.role !== 'admin') {
-        //     navigate('/notification', {
-        //         state: {
-        //             title: "Your account has been banned",
-        //             description: "Please contact admin to get more information",
-        //             state: "error",
-        //             btn_title: "Go back",
-        //             btn_path: "/"
-        //         }
-        //     })
-        // }
+        if (user.data.state === 'banned') {
+            navigate('/notification', {
+                state: {
+                    title: "Your account has been banned",
+                    description: "Please contact admin to get more information",
+                    state: "error",
+                    btn_title: "Go back",
+                    btn_path: "/"
+                }
+            })
+        }
     }
     useEffect(()=>{
         if(user.data)

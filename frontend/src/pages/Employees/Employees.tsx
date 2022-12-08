@@ -23,6 +23,7 @@ function Employees() {
   const [searchName, setSearchName] = useState("")
   const [forReloadPay, setForReloadPay] = useState(false)
   const [employeeSelected, setEmployeeSelected] = useState<any>(false)
+  const [filter, setFilter] = useState("all")
 
   function handleSeeDetailShow(employee: any) {
     setEmployeeSelected(employee);
@@ -53,28 +54,46 @@ function Employees() {
   }
 
   function handleSearch() {
+    if(searchName!=="")
     dispatch(getEmployeesByName({
       id: 1, employeeCount: 20, name: searchName
     }))
+    else {
+      dispatch(getEmployeesByName({
+        id: 1,
+        employeeCount: 1000,
+        name: ""
+      }))
+    }
   }
   // scroll to top
   useEffect(() => {
     window.scrollTo(0, 0)
+  }, [])
+  useEffect(() => {
+    if(searchName!=="")
     dispatch(getEmployeesByName({
       id: 1,
       employeeCount: 20,
       name: searchName
     }))
-  }, [forReloadPay])
+    else {
+      dispatch(getEmployeesByName({
+        id: 1,
+        employeeCount: 1000,
+        name: ""
+      }))
+    }
+  }, [forReloadPay, filter])
   return (
     <>
       <div className={styles.container}>
         {
           employeeSelected &&
           <>
-            <Warning type="employee_ban" id={employeeSelected.user_id} curState={employeeSelected.state} title="Are you sure to ban/unbanned this customer" action={employeeSelected.state === "banned" ? "Unban" : "Ban"} show={isWarningBan} handleClose={handleWarningBanClose} setForReloadPay={setForReloadPay} />
-            <Warning type="employee" id="1" title="Are you sure to delete this customer" action="delete" show={isWarning} handleClose={handleWarningClose} />
-            <EmployeeModal show={seeDetail} handleShow={handleSeeDetailShow} handleClose={handleSeeDetailClose} />
+            <Warning type="employee_ban" id={employeeSelected.user_id} curState={employeeSelected.state} title="Are you sure to ban/unbanned this employee" action={employeeSelected.state === "banned" ? "Unban" : "Ban"} show={isWarningBan} handleClose={handleWarningBanClose} setForReloadPay={setForReloadPay} />
+            <Warning type="employee" id={employeeSelected.user_id} title="Are you sure to delete this employee" action="delete" show={isWarning} handleClose={handleWarningClose} setForReloadPay={setForReloadPay}/>
+            <EmployeeModal employee={employeeSelected} show={seeDetail} handleClose={handleSeeDetailClose} />
           </>
         }
         <Header title="Manages your employee" content="Here you can manage your employees." />
@@ -100,14 +119,18 @@ function Employees() {
           {/* filter */}
           <div className="d-flex justify-content-between mt-3 mb-3">
             <div className="d-flex">
-              <Form.Select style={{ cursor: "pointer" }} aria-label="Default select example" className="me-2">
-                <option>Sort by state</option>
-                <option value="1">In used</option>
-                <option value="2">Not in used</option>
+              <Form.Select onChange={
+                (e: any) => {
+                  setFilter(e.target.value)
+                }
+              } style={{ cursor: "pointer" }} aria-label="Default select example" className="me-2">
+                <option value="all">All</option>
+                <option value="in use">In use</option>
+                <option value="new">New</option>
               </Form.Select>
             </div>
           </div>
-          <RegisterButtonAndModal linkStyle={clsx("btn btn_custom", styles.register_btn)}
+          <RegisterButtonAndModal type="employee" linkStyle={clsx("btn btn_custom", styles.register_btn)}
             showRegister={showRegister} handleShowRegister={handleShowRegister}
             handleCloseRegister={handleCloseRegister}
           />
@@ -115,6 +138,12 @@ function Employees() {
         <div>
           Search for "{searchName}":
         </div>
+        {
+          employees.data &&
+          <div>
+            {employees.data.length} Results
+          </div>
+        }
         {
           employees.data && employees.data.length === 0 ?
             <div className="mt-3" style={{ color: "var(--light-color)" }}>
@@ -124,14 +153,16 @@ function Employees() {
             <div className={styles.searchResults}>
               {
                 employees.data && employees.data.map((employee: any, index: any) => {
+                  if(filter==="all")
+                  return (
+                    <EmployeeItem key={index} employee={employee} handleWarningBanShow={handleWarningBanShow} handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} />
+                  )
+                  else if(employee.state===filter)
                   return (
                     <EmployeeItem key={index} employee={employee} handleWarningBanShow={handleWarningBanShow} handleWarningShow={handleWarningShow} handleSeeDetailShow={handleSeeDetailShow} />
                   )
                 })
               }
-              {/* <EmployeeItem customer={customer} handleWarningShow={handleWarningShow} handleWarningBanShow={handleWarningBanShow} handleSeeDetailShow={handleSeeDetailShow} /> */}
-              {/* <EmployeeItem customer={customer} handleWarningShow={handleWarningShow} handleWarningBanShow={handleWarningBanShow} handleSeeDetailShow={handleSeeDetailShow} /> */}
-              {/* <EmployeeItem customer={customer} handleWarningShow={handleWarningShow} handleWarningBanShow={handleWarningBanShow} handleSeeDetailShow={handleSeeDetailShow} /> */}
             </div>
         }
 

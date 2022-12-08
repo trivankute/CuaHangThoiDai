@@ -91,6 +91,12 @@ function Manager() {
                 <div>
                     Search for "{title}":
                 </div>
+                {
+                    albums.data &&
+                    <div>
+                        {albums.data.length} Results
+                    </div>
+                }
                 <div className={styles.searchResults}>
                     {
                         albums.data &&

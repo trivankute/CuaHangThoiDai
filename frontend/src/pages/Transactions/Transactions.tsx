@@ -66,7 +66,7 @@ function Transactions() {
       if (filter === 'all') {
         dispatch(getTransactionsTotalPage(
           { transactionCount: 10 }
-          ))
+        ))
           .then((res: any) => {
             if (res.payload.status === "success") {
               dispatch(getAllTransactionsByPageId({
@@ -163,21 +163,21 @@ function Transactions() {
               {
                 user.data && user.data.account.role !== "customer" &&
                 <>
-                <Button onClick={() => { setSeeTotalPriceMode(true) }}>
-                  Statistics
-                </Button>
-                <div className="d-flex justify-content-between mt-3 mb-3">
-                  <div className="d-flex">
-                    <Form.Select onChange={(e: any) => {
-                      setFilter(e.target.value)
-                      navigate("/user/transactions?page=1")
-                    }} aria-label="Default select example" className="me-2">
-                      <option value="all">all</option>
-                      <option value="shipping">shipping</option>
-                      <option value="pick_up">pick_up</option>
-                    </Form.Select>
+                  <Button onClick={() => { setSeeTotalPriceMode(true) }}>
+                    Statistics
+                  </Button>
+                  <div className="d-flex justify-content-between mt-3 mb-3">
+                    <div className="d-flex">
+                      <Form.Select onChange={(e: any) => {
+                        setFilter(e.target.value)
+                        navigate("/user/transactions?page=1")
+                      }} aria-label="Default select example" className="me-2">
+                        <option value="all">all</option>
+                        <option value="shipping">shipping</option>
+                        <option value="pick_up">pick_up</option>
+                      </Form.Select>
+                    </div>
                   </div>
-                </div>
                 </>
               }
               <div style={{ padding: 10 }}>

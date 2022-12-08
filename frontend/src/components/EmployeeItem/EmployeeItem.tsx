@@ -8,7 +8,7 @@ import { faUser, faCalendar, faMessage, faTrash, faBan, faEye } from '@fortaweso
 import clsx from 'clsx'
 
 function EmployeeItem({ handleWarningShow, handleSeeDetailShow, employee, handleWarningBanShow }: { handleWarningBanShow: any, employee: any, handleWarningShow?: any, handleSeeDetailShow?: any }) {
-    console.log(employee)
+    // console.log(employee)
     return (
         <>
             <div className={styles.box}>

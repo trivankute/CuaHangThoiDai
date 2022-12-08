@@ -18,11 +18,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { UserStore } from '../../redux/selectors';
 import { logout } from '../../redux/slices/UserSlice'
 import FlashSlice from '../../redux/slices/FlashSlice'
+import CartSlice from '../../redux/slices/CartSlice'
+import SellSlice from '../../redux/slices/SellSlice'
 import PlayMusic from '../PlayMusic/PlayMusic';
+
 function Header() {
   const dispatch = useDispatch<any>();
   const [search, setSearch] = useState("")
   const user = useSelector(UserStore)
+
   // navigate
   const navigate = useNavigate();
 
@@ -61,6 +65,11 @@ function Header() {
         if (res.payload.status === "success") {
           dispatch(FlashSlice.actions.handleOpen({ message: "Logout successfully", type: "success" }))
           navigate('/')
+          // clear cart
+          dispatch(CartSlice.actions.handleClearCart(""))
+          // clear sell
+          dispatch(SellSlice.actions.handleClearAllSellItem(""))
+
         }
       })
   }
@@ -92,7 +101,7 @@ function Header() {
                     <>
                       <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} />
                       <div className={styles.login_box_hover}>
-                        <RegisterButtonAndModal linkStyle={styles.login_box_hover_link}
+                        <RegisterButtonAndModal type="customer" linkStyle={styles.login_box_hover_link}
                           showRegister={showRegister} handleShowRegister={handleShowRegister}
                           handleCloseRegister={handleCloseRegister} handleShowLogin={handleShowLogin}
                         />
@@ -222,7 +231,7 @@ function Header() {
                       <>
                         <FontAwesomeIcon className={styles.icon} icon={faUser as IconProp} />
                         <div className={styles.login_box_hover}>
-                          <RegisterButtonAndModal linkStyle={styles.login_box_hover_link}
+                          <RegisterButtonAndModal type="customer" linkStyle={styles.login_box_hover_link}
                             showRegister={showRegister} handleShowRegister={handleShowRegister}
                             handleCloseRegister={handleCloseRegister} handleShowLogin={handleShowLogin}
                           />

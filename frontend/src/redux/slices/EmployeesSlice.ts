@@ -36,6 +36,12 @@ const EmployeesSlice = createSlice({
             if(status==="success")
             state.data = data
         })
+        .addCase(updateEmployeeStateById.pending, (state, action) => {
+            state.loading = true
+        })
+        .addCase(updateEmployeeStateById.fulfilled, (state, action) => {
+            state.loading = false
+        })
     }   
 })
 
@@ -117,6 +123,28 @@ export const getEmployeesByName= createAsyncThunk('getEmployeesByName', async (i
         }
         else {
             return { status: "error", "data": data.data.employees, "msg": data.data.msg };
+        }
+    }
+    catch (error: any) {
+        return { status: "error", "msg": error.response.data.message };
+    }
+})
+
+export const updateEmployeeStateById = createAsyncThunk('updateEmployeeStateById', async (input: any) => {
+    try {
+        // {{host}}/api/users/updateEmployeeState.php?id=17
+        const { id, state } = input;
+        const { data } = await axios.post(`${serverUrl}/api/users/updateEmployeeState.php?id=${id}`,{state:state}, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        if (data.status === 'success') {
+            return { status: "success","msg": data.data.msg };
+        }
+        else {
+            return { status: "error","msg": data.data.msg };
         }
     }
     catch (error: any) {

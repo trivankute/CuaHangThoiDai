@@ -1,16 +1,14 @@
-import { memo, useState, useEffect } from 'react'
+import { memo } from 'react'
 import { Modal, Button } from 'react-bootstrap';
-import {useNavigate} from 'react-router-dom'
 
 import styles from './CustomerModal.module.css'
-import TransactionItem from '../../components/TransactionItem/TransactionItem'
 
-function CustomerModal({ show, handleShow, handleClose, customer }: { customer:any, show: any, handleShow: any, handleClose: any }) {
+function CustomerModal({ show, handleClose, customer }: { customer:any, show: any, handleClose: any }) {
     return (
         <>
             <Modal size="lg" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Customer Detail
+                    <Modal.Title>CustomerID {customer.user_id} Detail
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
@@ -39,7 +37,7 @@ function CustomerModal({ show, handleShow, handleClose, customer }: { customer:a
                     <>{customer.information.address}</>
                   </div>
                   <div style={{paddingBottom:10, paddingLeft:30}}>
-                    <label style={{paddingRight:5}} htmlFor="">Role: </label> Customer
+                    <label style={{paddingRight:5}} htmlFor="">Role: </label>Customer
                   </div>
                   <div style={{paddingBottom:10, paddingLeft:30}}>
                     <label style={{paddingRight:5}} htmlFor="">State: </label>

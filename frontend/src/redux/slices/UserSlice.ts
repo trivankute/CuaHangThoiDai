@@ -177,6 +177,27 @@ export const register = createAsyncThunk('register', async (input : any) => {
     }
 })
 
+export const registerEmployee = createAsyncThunk('registerEmployee', async (input : any) => {
+    //{{host}}/api/users/registerEmployee.php
+    try {
+        const {data} = await axios.post(`${serverUrl}/api/users/registerEmployee.php`, input,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'multipart/form-data',
+            }
+        });
+        if(data.status === "success") {
+            return {status:"success","msg":data.data.msg};
+        }
+        else {
+            return {status:"error","msg":data.data.msg};
+        }
+    }
+    catch (error : any) {
+        return{status:"error","msg":error.response.data.message};
+    }
+})
+
 export const changePassword = createAsyncThunk('changePassword', async (input : any) => {
     // {{host}}/api/users/updatePassword.php
     try {

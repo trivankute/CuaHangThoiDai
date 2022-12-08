@@ -20,21 +20,21 @@ function Customers() {
   const [forReloadPay, setForReloadPay] = useState(false)
   const customers = useSelector(CustomersStore)
   const dispatch = useDispatch<any>()
-  function handleWarningShow(customer:any) {
+  function handleWarningShow(customer: any) {
     setCustomerSelected(customer);
     setIsWarning(true);
   }
   function handleWarningClose() {
     setIsWarning(false);
   }
-  function handleSeeDetailShow(customer:any) {
+  function handleSeeDetailShow(customer: any) {
     setCustomerSelected(customer);
     setSeeDetail(true);
   }
   function handleSeeDetailClose() {
     setSeeDetail(false);
   }
-  function handleWarningBanShow(customer:any) {
+  function handleWarningBanShow(customer: any) {
     setCustomerSelected(customer);
     setIsWarningBan(true);
   }
@@ -46,61 +46,59 @@ function Customers() {
     window.scrollTo(0, 0)
   }, [])
 
-  useEffect(()=>{
-    if(forReloadPay)
-    {
-      if(searchName!=="")
-      dispatch(getCustomersByName({
-        id:1, customerCount:8, name:searchName
-      }))
-        .then(()=>{
-          setForReloadPay(false)
-        })
+  useEffect(() => {
+    if (forReloadPay) {
+      if (searchName !== "")
+        dispatch(getCustomersByName({
+          id: 1, customerCount: 8, name: searchName
+        }))
+          .then(() => {
+            setForReloadPay(false)
+          })
       else {
         dispatch(getCustomersByName({
-        id:1, customerCount:1000, name:searchName
-      }))
-        .then(()=>{
-          setForReloadPay(false)
-        })
+          id: 1, customerCount: 1000, name: searchName
+        }))
+          .then(() => {
+            setForReloadPay(false)
+          })
 
       }
     }
 
   }, [forReloadPay])
 
-  function handleSearch()
-  {
-    if(searchName!=="")
-    dispatch(getCustomersByName({
-      id:1, customerCount:20, name:searchName
-    }))
+  function handleSearch() {
+    if (searchName !== "")
+      dispatch(getCustomersByName({
+        id: 1, customerCount: 20, name: searchName
+      }))
     else {
       dispatch(getCustomersByName({
-      id:1, customerCount:1000, name:searchName
-    }))
-      .then(()=>{
-        setForReloadPay(false)
-      })
+        id: 1, customerCount: 1000, name: searchName
+      }))
+        .then(() => {
+          setForReloadPay(false)
+        })
 
     }
   }
-  
+
   return (
 
     <>
       <div className={styles.container}>
         {
-          customerSelected && 
+          customerSelected &&
           <>
-          <Warning type="customer_ban" id={customerSelected.user_id} curState={customerSelected.state} title="Are you sure to ban/unbanned this customer" action={customerSelected.state==="banned"?"Unban":"Ban"} show={isWarningBan} handleClose={handleWarningBanClose} setForReloadPay={setForReloadPay} />
-          <Warning type="customer" id={customerSelected.user_id} title="Are you sure to delete this customer" action="Delete" show={isWarning} handleClose={handleWarningClose} setForReloadPay={setForReloadPay} />
-          <CustomerModal customer={customerSelected} show={seeDetail} handleShow={handleSeeDetailShow} handleClose={handleSeeDetailClose} />
+            <Warning type="customer_ban" id={customerSelected.user_id} curState={customerSelected.state} title="Are you sure to ban/unbanned this customer" action={customerSelected.state === "banned" ? "Unban" : "Ban"} show={isWarningBan} handleClose={handleWarningBanClose} setForReloadPay={setForReloadPay} />
+            <Warning type="customer" id={customerSelected.user_id} title="Are you sure to delete this customer" action="Delete" show={isWarning} handleClose={handleWarningClose} setForReloadPay={setForReloadPay} />
+            <CustomerModal customer={customerSelected} show={seeDetail} handleClose={handleSeeDetailClose} />
           </>
         }
         <Header title="Manages your customers" content="Here you can manage your customers." />
         <div>
-          <Form onSubmit={(e:any)=>{
+          <Form onSubmit={(e: any) => {
             e.preventDefault()
             handleSearch()
           }} className="d-flex mt-3 mb-3">
@@ -110,7 +108,7 @@ function Customers() {
               className="me-2"
               aria-label="Search"
               value={searchName}
-              onChange={(e:any)=>{
+              onChange={(e: any) => {
                 setSearchName(e.target.value)
               }}
 
@@ -122,18 +120,24 @@ function Customers() {
           Search for "{searchName}":
         </div>
         {
-          customers.data && customers.data.length===0 ?
-          <div className="mt-3" style={{ color: "var(--light-color)" }}>
-            Nothing
+          customers.data &&
+          <div>
+            {customers.data.length} Results
           </div>
-          :
-          <div className={styles.searchResults}>
-            {
-              customers.data && customers.data.map((customer:any)=>{
-                return <CustomerItem customer={customer} handleWarningShow={handleWarningShow} handleWarningBanShow={handleWarningBanShow} handleSeeDetailShow={handleSeeDetailShow} />
-              })
-            }
-          </div>
+        }
+        {
+          customers.data && customers.data.length === 0 ?
+            <div className="mt-3" style={{ color: "var(--light-color)" }}>
+              Nothing
+            </div>
+            :
+            <div className={styles.searchResults}>
+              {
+                customers.data && customers.data.map((customer: any) => {
+                  return <CustomerItem customer={customer} handleWarningShow={handleWarningShow} handleWarningBanShow={handleWarningBanShow} handleSeeDetailShow={handleSeeDetailShow} />
+                })
+              }
+            </div>
         }
       </div>
     </>
