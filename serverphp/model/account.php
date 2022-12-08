@@ -98,6 +98,64 @@
                         //exclude password from token
                         unset($user['password']);
                         $token = $jwt->createToken($user);
+                        if($user['role'] == 'customer') {
+                            //check state != banned
+                            $sql = "SELECT state FROM customer WHERE customer_id = :id";
+                            $stmt = $this->conn->prepare($sql);
+                            $stmt->bindParam(':id', $user['user_id']);
+                            try {
+                                $stmt->execute();
+                                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                                if($result['state'] == 'banned') {
+                                    echo json_encode(['status'=>'error', 'data'=>['msg'=>'Your account has been banned']]);
+                                    exit();
+                                }
+                            }
+                            catch (PDOException $e) {
+                                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                                exit();
+                            }
+                            // update state 'in use' for customer
+                            $sql = "UPDATE customer SET state = 'in use' WHERE customer_id = :id";
+                            $stmt = $this->conn->prepare($sql);
+                            $stmt->bindParam(':id', $user['user_id']);
+                            try {
+                                $stmt->execute();
+                            }
+                            catch (PDOException $e) {
+                                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                                exit();
+                            }
+                        }
+                        else if($user['role'] == 'employee') {
+                            // check state != banned
+                            $sql = "SELECT state FROM employee WHERE employee_id = :id";
+                            $stmt = $this->conn->prepare($sql);
+                            $stmt->bindParam(':id', $user['user_id']);
+                            try {
+                                $stmt->execute();
+                                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                                if($result['state'] == 'banned') {
+                                    echo json_encode(['status'=>'error', 'data'=>['msg'=>'Your account has been banned']]);
+                                    exit();
+                                }
+                            }
+                            catch (PDOException $e) {
+                                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                                exit();
+                            }
+                            // update state 'in use' for employee
+                            $sql = "UPDATE employee SET state = 'in use' WHERE employee_id = :id";
+                            $stmt = $this->conn->prepare($sql);
+                            $stmt->bindParam(':id', $user['user_id']);
+                            try {
+                                $stmt->execute();
+                            }
+                            catch (PDOException $e) {
+                                echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                                exit();
+                            }
+                        }
                         return $token;
                     }
                     else {
