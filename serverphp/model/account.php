@@ -258,5 +258,40 @@
                 exit();
             }
         }
+        public function getState() {
+            if($this->role == 'admin') {
+                return 'admin';
+            }
+            else if($this->role == 'employee') {
+                $sql = "SELECT state FROM employee WHERE employee_id = :user_id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':user_id', $this->id);
+                try {
+                    $stmt->execute();
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    return $result['state'];
+                } catch (PDOException $e) {
+                    echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                    exit();
+                }
+            }
+            else if($this->role == 'customer') {
+                $sql = "SELECT state FROM customer WHERE customer_id = :user_id";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':user_id', $this->id);
+                try {
+                    $stmt->execute();
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    return $result['state'];
+                } catch (PDOException $e) {
+                    echo json_encode(['status'=>'error', 'data'=>['msg'=>$e->getMessage()]]);
+                    exit();
+                }
+            }
+            else {
+                echo json_encode(['status'=>'error', 'data'=>['msg'=>'User not found']]);
+                exit();
+            }
+        }
     }
 ?>

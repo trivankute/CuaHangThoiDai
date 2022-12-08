@@ -5,6 +5,8 @@
     if($user_request_method == 'GET'){
         $id = $global_account->getInformation()['id'];
         $result = $global_user->getUserInformationById($id);
+        $state = $global_account->getState();
+        $result['state'] = $state;
         echo json_encode(['status'=>'success', 'data'=>['msg'=>'Get user information success', 'user'=>$result]]);
     }
     else {

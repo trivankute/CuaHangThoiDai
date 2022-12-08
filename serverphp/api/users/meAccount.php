@@ -7,6 +7,8 @@
             $result = $global_account->getInformation();
             // omit password 
             unset($result['password']);
+            $state = $global_account->getState();
+            $result['state'] = $state;
             echo json_encode([
                 'status'=>'success',
                 'data'=>[
