@@ -84,3 +84,11 @@
 .icon_chat:hover {
     color:var(--blue)
 }
+
+.banned {
+    color:var(--red);
+}
+
+.notBanned {
+    color:var(--green);
+}

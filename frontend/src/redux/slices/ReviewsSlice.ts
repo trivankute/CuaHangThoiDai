@@ -32,10 +32,11 @@ const ReviewsSlice = createSlice({
 export const getReviewsHightScore = createAsyncThunk('getReviewsHightScore', async () => {
     try {
         //{{host}}/api/reviews/getHighestScore.php?count=4
-        const {data} = await axios.get(`${serverUrl}/api/reviews/getHighestScore.php?count=5`,{
+        const {data} = await axios.get(`${serverUrl}/api/reviews/getHighestScore.php?count=4`,{
             headers: {
             }
         });
+        console.log(data);
         if(data.status === "success"){
             return {status:"success","data":data.data.reviews, "msg":data.data.msg};
         }

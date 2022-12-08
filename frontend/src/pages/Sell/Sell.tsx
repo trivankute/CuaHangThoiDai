@@ -23,7 +23,11 @@ function Sell() {
     const sell = useSelector(SellStore)
 
     function handleSearch() {
+        if (title !== "")
         dispatch(getAllAlbumsByPageIdAndTitle({ id: 1, albumCount: 5, title: title }))
+        else
+        dispatch(getAllAlbumsByPageIdAndTitle({ id: 1, albumCount: 1000, title: title }))
+
     }
     function handleClearAll() {
         dispatch(SellSlice.actions.handleClearAllSellItem(""))

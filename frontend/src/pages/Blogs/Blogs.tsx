@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useState } from 'react'
 import styles from './Blogs.module.css'
 import { Container, Pagination } from "react-bootstrap"
 import BlogCard from "../../components/Cards/BlogCard/BlogCard"
@@ -8,9 +8,11 @@ import { getAllBlogsByPageId } from '../../redux/slices/BlogsSlice'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import FlashSlice from '../../redux/slices/FlashSlice'
 import PaginationByTotalPage from '../../components/PaginationByTotalPage/PaginationByTotalPage'
+import BlogModal from '../../components/BlogModal/BlogModal'
 function Blogs() {
     const dispatch = useDispatch<any>();
     const blogs = useSelector(BlogsStore);
+    const [forReload, setForReload] = useState(false)
     const location = useLocation()
     // get params from url
     const [url] = useSearchParams()
@@ -32,14 +34,27 @@ function Blogs() {
                 dispatch(FlashSlice.actions.handleOpen({message:"Submitted successfully", type:"success"}))
             }
         }
-    }, [url])
+    }, [url, forReload])
+    const [showAdjustBlog, setShowAdjustBlog] = useState(false)
+    const [blogSelected, setBlogSelected] = useState<any>(false)
+    function handleShowAdjustBlog(blog: any) {
+        setBlogSelected(blog)
+        setShowAdjustBlog(true)
+    }
+    function handleCloseAdjustBlog() {
+        setShowAdjustBlog(false)
+    }
     return (<>
         <Container fluid className={styles.container}>
+            {
+                blogSelected && 
+                <BlogModal blog={blogSelected} show={showAdjustBlog} handleClose={handleCloseAdjustBlog} setForReloadPage={setForReload}  />
+            }
             {
                 blogs.data ? 
                 blogs.data.map((blog:any, index:any)=>{
                     return(
-                        <BlogCard blog={blog} />
+                        <BlogCard oldPageId={pageId} blog={blog} handleShowAdjustBlog={handleShowAdjustBlog}/>
                     )
                 })
                 : null

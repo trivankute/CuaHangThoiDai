@@ -9,12 +9,77 @@ import FlashSlice from '../../redux/slices/FlashSlice';
 import { AlbumStore } from '../../redux/selectors';
 import Loading from '../Loading/Loading';
 import { cancelShippingTransaction } from '../../redux/slices/TransactionSlice';
+import { deleteCustomerById, updateCustomerStateById } from '../../redux/slices/CustomersSlice';
+import { deleteEmployeeById, updateEmployeeStateById } from '../../redux/slices/EmployeesSlice';
 
-function Warning({show, handleClose, title, action, type, id, setForReloadPay}:{show:any, handleClose:any, title:any, action:any, type:any, id:any, setForReloadPay?:any}) {
+function Warning({curState, show, handleClose, title, action, type, id, setForReloadPay}:{curState?:any, show:any, handleClose:any, title:any, action:any, type:any, id:any, setForReloadPay?:any}) {
   const dispatch = useDispatch<any>()
   const album = useSelector(AlbumStore)
+  console.log(id)
   function handleDelete(){
-    if(type==="transaction")
+    if(type==="employee")
+    {
+      dispatch(deleteEmployeeById({id:id}))
+      .then((res:any)=>{
+        if(res.payload.status === 'success'){
+          setForReloadPay((prev:boolean)=>!prev)
+          handleClose()
+        }
+      })
+    }
+    else if(type==="employee_ban")
+    {
+      if(curState==="banned")
+      dispatch(updateEmployeeStateById({
+        id:id,
+        state:"in use"
+      }))
+      .then((res:any)=>{
+        if(res.payload.status === 'success'){
+          setForReloadPay((prev:boolean)=>!prev)
+          handleClose()
+        }
+      })
+      else {
+        dispatch(updateEmployeeStateById({
+          id:id,
+          state:"banned"
+        }))
+        .then((res:any)=>{
+          if(res.payload.status === 'success'){
+            setForReloadPay((prev:boolean)=>!prev)
+            handleClose()
+          }
+        })
+      }
+    }
+    else if(type==="customer_ban")
+    {
+      if(curState==="banned")
+      dispatch(updateCustomerStateById({
+        id:id,
+        state:"in use"
+      }))
+      .then((res:any)=>{
+        if(res.payload.status === 'success'){
+          setForReloadPay((prev:boolean)=>!prev)
+          handleClose()
+        }
+      })
+      else {
+        dispatch(updateCustomerStateById({
+          id:id,
+          state:"banned"
+        }))
+        .then((res:any)=>{
+          if(res.payload.status === 'success'){
+            setForReloadPay((prev:boolean)=>!prev)
+            handleClose()
+          }
+        })
+      }
+    }
+    else if(type==="transaction")
     {
       dispatch(cancelShippingTransaction({
         id:id
@@ -26,8 +91,16 @@ function Warning({show, handleClose, title, action, type, id, setForReloadPay}:{
         }
       })
     }
-    else if(type==='account')
-      console.log('account')
+    else if(type==='customer')
+    {
+      dispatch(deleteCustomerById({id:id}))
+      .then((res:any)=>{
+        if(res.payload.status === 'success'){
+          setForReloadPay((prev:boolean)=>!prev)
+          handleClose()
+        }
+      })
+    }
     else if(type==='album')
       {
         dispatch(deleteAlbum({id:id}))

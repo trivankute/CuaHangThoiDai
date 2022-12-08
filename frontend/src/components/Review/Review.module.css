@@ -34,7 +34,6 @@
 
 }
 .name .icon{
-    
     color:var(--orange);
     padding-right: 2px;
 }
@@ -58,6 +57,15 @@
 }
 .rating{
 
+}
+
+.icon.icon_wrench{
+    color:var(--orange);
+    padding-right: 2px;
+    cursor:pointer;
+}
+.icon.icon_wrench:hover{
+    color:var(--light-color);
 }
 .reviewText{
     text-transform:none;

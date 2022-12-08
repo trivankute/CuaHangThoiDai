@@ -52,7 +52,7 @@ function Blog() {
         dispatch(createBlog(data))
         .then((res: any) => {
             if(res.payload.status === "success"){
-                    navigate('/products/blogs', {state:{
+                    navigate('/products/blogs?page=1', {state:{
                         afterSubmitBlog: true
                     }})
             }
@@ -101,7 +101,7 @@ function Blog() {
                         </Form>
                     </div>
                         :
-                        <div onClick={() => { navigate('/products/blogs') }} className={styles.turnBack}>
+                        <div onClick={() => { navigate(`/products/blogs?page=${location.state.oldPageId}`) }} className={styles.turnBack}>
                             <FontAwesomeIcon icon={faArrowLeft as IconProp} className={clsx(styles.icon, 'btn btn_custom')} />
                         </div>
 

@@ -48,6 +48,8 @@ import LoggedIn from './middlewares/LoggedIn'
 import { UserStore } from './redux/selectors'
 import AdminOnly from './middlewares/AdminOnly'
 import AdminAndEmployeeOnly from './middlewares/AdminAndEmployeeOnly'
+import CheckBanned from './middlewares/CheckBanned'
+import Configweb from './pages/Configweb/Configweb'
 
 // Private route
 
@@ -110,29 +112,33 @@ function App() {
         {/* cart route */}
         <Route path='/cart' element={<Cart />} />
         <Route element={<LoggedIn />}>
-          <Route path='/checkout' element={<Checkout />} />
-          <Route path='/user' element={<User />}>
-            <Route path='profile' element={<Profile />} />
-            <Route path='password' element={<Password />} />
-            <Route path='transactions' element={<Transactions />} />
-            <Route element={<AdminOnly />}>
-              <Route path='employees' element={<Employees />} />
-              <Route path='registerEmployee' element={<RegisterEmployee />} />
+          <Route element={<CheckBanned />}>
+            <Route path='/checkout' element={<Checkout />} />
+            <Route path='/user' element={<User />}>
+              <Route path='profile' element={<Profile />} />
+              <Route path='password' element={<Password />} />
+              <Route path='transactions' element={<Transactions />} />
+              <Route element={<AdminOnly />}>
+                <Route path='employees' element={<Employees />} />
+                <Route path='registerEmployee' element={<RegisterEmployee />} />
+                <Route path='configweb' element={<Configweb />} />
+              </Route>
+              <Route element={<AdminAndEmployeeOnly />}>
+                <Route path='upload' element={<Upload />} />
+                <Route path='customers' element={<Customers />} />
+                <Route path='manager' element={<Manager />} />
+                <Route path='sell' element={<Sell />} />
+              </Route>
+              <Route element={<EmployeeOnly />}>
+                <Route path='writeblog' element={<WriteBlog />} />
+                <Route path='writeblog/preview' element={<Blog />} />
+              </Route>
             </Route>
-            <Route element={<AdminAndEmployeeOnly />}>
-              <Route path='upload' element={<Upload />} />
-              <Route path='customers' element={<Customers />} />
-              <Route path='manager' element={<Manager />} />
-              <Route path='sell' element={<Sell />} />
-            </Route>
-            <Route element={<EmployeeOnly />}>
-              <Route path='writeblog' element={<WriteBlog />} />
-              <Route path='writeblog/preview' element={<Blog />} />
-            </Route>
+            <Route path='/transactions/:id' element={<Transaction />} />
           </Route>
-          <Route path='/transactions/:id' element={<Transaction />} />
         </Route>
         <Route path='/notification' element={<PageForNotification />} />
+        <Route path='/maintenance' element={<Maintenance />} />
         <Route path="/*" element={<PageNotFound />}></Route>
       </Routes>
       <ChatAppHome />

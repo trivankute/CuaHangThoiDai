@@ -36,12 +36,11 @@
     line-height: 1.8;
     color:var(--light-color);
     font-size: 15px;
+    max-height:110px;
     /* overflow 3 dots at the end */
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
-
-
 }

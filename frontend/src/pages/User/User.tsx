@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
     faList, faArrowLeft, faArrowRight, faUser, faBell, faKey, faUsers, faHelmetSafety
-    , faUpload, faStore, faBlog, faMoneyBill, faClockRotateLeft
+    , faUpload, faStore, faBlog, faMoneyBill, faClockRotateLeft, faScrewdriver
 } from '@fortawesome/free-solid-svg-icons'
 
 import { Container, Row, Col, Offcanvas } from 'react-bootstrap'
@@ -167,14 +167,14 @@ function User() {
                             handleClose();
                             navigate('/user/upload')
                         }} button_style={currentPath == 'upload' ? styles.cate_button_style : ""} title={"Upload"} icon={faUpload}></ListItem>
-                        {/* <ListItem onClick={() => {
-                            handleClose();
-                            navigate('/user/writeblog')
-                        }} button_style={currentPath == 'writeblog' ? styles.cate_button_style : ""} title={"Write Blog"} icon={faBlog}></ListItem> */}
                         <ListItem onClick={() => {
                             handleClose();
                             navigate('/user/transactions?page=1')
                         }} button_style={currentPath == 'transactions' ? styles.cate_button_style : ""} title={"Transactions"} icon={faClockRotateLeft}></ListItem>
+                        <ListItem onClick={() => {
+                            handleClose();
+                            navigate('/user/configweb')
+                        }} button_style={currentPath == 'configweb' ? styles.cate_button_style : ""} title={"config web"} icon={faScrewdriver}></ListItem>
                     </>
                 )
             default: break;
