@@ -2,7 +2,7 @@
     include_once __DIR__ .'/../../global/index.php';
     include_once __DIR__ .'/../../middlewares/requireEmployee.php';
     $user_request_method = $_SERVER['REQUEST_METHOD'];
-    if ($user_request_method == "DELETE") {
+    if ($user_request_method == "GET") {
         $id = $_GET['id'];
         $result = $global_review->deleteReview($id);
         if($result) {
