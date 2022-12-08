@@ -14,3 +14,6 @@ export const ArtistsStore = (state:any) => state.artists
 export const ReviewsStore = (state:any) => state.reviews
 export const ServiceStore = (state:any) => state.service
 export const SellStore = (state:any) => state.sell
+export const FooterStore = (state:any) => state.footer
+export const CarouselStore = (state:any) => state.carousel
+export const MusicStore = (state:any) => state.music

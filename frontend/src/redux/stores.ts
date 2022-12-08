@@ -16,6 +16,9 @@ import EmployeesSlice from './slices/EmployeesSlice'
 import ArtistsSlice from './slices/ArtistsSlice'
 import ServiceSlice from './slices/ServiceSlice'
 import SellSlice from './slices/SellSlice'
+import FooterSlice from './slices/FooterSlice'
+import CarouselSlice from './slices/CarouselSlice'
+import MusicSlice from './slices/MusicSlice'
 const store = configureStore({
     reducer:{
         user:UserSlice.reducer,
@@ -33,7 +36,10 @@ const store = configureStore({
         customers:CustomersSlice.reducer,
         employees:EmployeesSlice.reducer,
         service:ServiceSlice.reducer,
-        sell:SellSlice.reducer
+        sell:SellSlice.reducer,
+        footer:FooterSlice.reducer,
+        carousel:CarouselSlice.reducer,
+        music:MusicSlice.reducer
     }
 })
 
