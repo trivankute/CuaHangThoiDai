@@ -5,7 +5,8 @@
     if($user_request_method == 'POST') {
         $body = json_decode(file_get_contents('php://input'));
         $musicLink = $body->musicLink;
-        $result = $global_music->createMusic($musicLink);
+        $title = $body->title;
+        $result = $global_music->createMusic($musicLink,$title);
         if ($result) {
             echo json_encode(['status'=>'success', 'data'=>['msg'=>'Create music success']]);
             exit();

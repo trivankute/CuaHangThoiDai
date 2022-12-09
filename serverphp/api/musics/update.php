@@ -6,7 +6,8 @@
         $body = json_decode(file_get_contents('php://input'));
         $id = $_GET['id'];
         $musicLink = $body->musicLink;
-        $result = $global_music->updateMusic($id,$musicLink);
+        $title = $body->title;
+        $result = $global_music->updateMusic($id,$musicLink,$title);
         if ($result) {
             echo json_encode(['status'=>'success', 'data'=>['msg'=>'Update music success']]);
             exit();
