@@ -85,7 +85,7 @@ export const getAllCarousel = createAsyncThunk('getAllCarousel', async () => {
 export const updateCarousel = createAsyncThunk('updateCarousel', async (input : any) => {
     try {
         const {id,carouselLink} = input;
-        const {data} = await axios.put(`${serverUrl}/api/carousels/update.php?id=${id}`,{
+        const {data} = await axios.post(`${serverUrl}/api/carousels/update.php?id=${id}`,{
             carouselLink
         },{
             headers: {

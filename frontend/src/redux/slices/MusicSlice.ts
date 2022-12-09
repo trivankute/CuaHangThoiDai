@@ -86,7 +86,7 @@ export const updateMusic = createAsyncThunk('updateMusic', async (input : any) =
     try {
         // {{host}}/api/musics/update.php?id=1
         const {id, musicLink, title} = input;
-        const {data} = await axios.put(`${serverUrl}/api/musics/update.php?id=${id}`,{
+        const {data} = await axios.post(`${serverUrl}/api/musics/update.php?id=${id}`,{
             musicLink,
             title
         },{
@@ -94,6 +94,7 @@ export const updateMusic = createAsyncThunk('updateMusic', async (input : any) =
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         });
+        console.log(data)
         if(data.status === 'success'){
             return {status:"success", "msg":data.data.msg};
         }

@@ -50,6 +50,7 @@ import AdminOnly from './middlewares/AdminOnly'
 import AdminAndEmployeeOnly from './middlewares/AdminAndEmployeeOnly'
 import CheckBanned from './middlewares/CheckBanned'
 import Configweb from './pages/Configweb/Configweb'
+import AboutUs from './pages/AboutUs/AboutUs'
 
 // Private route
 
@@ -139,7 +140,7 @@ function App() {
         </Route>
         <Route path='/notification' element={<PageForNotification />} />
         <Route path='/maintenance' element={<Maintenance />} />
-        <Route path='/aboutus' element={<Maintenance />} />
+        <Route path='/aboutus' element={<AboutUs />} />
         <Route path="/*" element={<PageNotFound />}></Route>
       </Routes>
       <ChatAppHome />
