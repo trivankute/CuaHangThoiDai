@@ -139,6 +139,7 @@ function App() {
         </Route>
         <Route path='/notification' element={<PageForNotification />} />
         <Route path='/maintenance' element={<Maintenance />} />
+        <Route path='/aboutus' element={<Maintenance />} />
         <Route path="/*" element={<PageNotFound />}></Route>
       </Routes>
       <ChatAppHome />

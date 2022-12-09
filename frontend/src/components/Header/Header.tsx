@@ -143,17 +143,19 @@ function Header() {
                 <Nav className="w-100 d-flex justify-content-center">
                   <Nav.Link
                     onClick={() => { navigate('/') }}
-                    className={styles.navbar_item} href="#home">Home</Nav.Link>
+                    className={styles.navbar_item} href="/#home">Home</Nav.Link>
                   <Nav.Link
-                    onClick={() => { navigate('/') }} className={styles.navbar_item} href="#service">Service</Nav.Link>
+                    onClick={() => { navigate('/') }} className={styles.navbar_item} href="/#service">Service</Nav.Link>
                   <Nav.Link
-                    onClick={() => { navigate('/') }} className={styles.navbar_item} href="#products">Products</Nav.Link>
+                    onClick={() => { navigate('/') }} className={styles.navbar_item} href="/#products">Products</Nav.Link>
                   <Nav.Link
-                    onClick={() => { navigate('/') }} className={styles.navbar_item} href="#categories">Categories</Nav.Link>
+                    onClick={() => { navigate('/') }} className={styles.navbar_item} href="/#categories">Categories</Nav.Link>
                   <Nav.Link
-                    onClick={() => { navigate('/') }} className={styles.navbar_item} href="#review">Review</Nav.Link>
+                    onClick={() => { navigate('/') }} className={styles.navbar_item} href="/#review">Review</Nav.Link>
                   <Nav.Link
-                    onClick={() => { navigate('/') }} className={styles.navbar_item} href="#blogs">Blogs</Nav.Link>
+                    onClick={() => { navigate('/') }} className={styles.navbar_item} href="/#blogs">Blogs</Nav.Link>
+                    <Nav.Link
+                      onClick={() => { navigate('/aboutus') }} className={styles.navbar_item} >AboutUs</Nav.Link>
                 </Nav>
               </div>
               <Navbar.Brand
@@ -200,17 +202,19 @@ function Header() {
                   <Nav className="w-100 d-flex justify-content-center">
                     <Nav.Link
                       onClick={() => { navigate('/') }}
-                      className={styles.navbar_item} href="#home">Home</Nav.Link>
+                      className={styles.navbar_item} href="/#home">Home</Nav.Link>
                     <Nav.Link
-                      onClick={() => { navigate('/') }} className={styles.navbar_item} href="#service">Service</Nav.Link>
+                      onClick={() => { navigate('/') }} className={styles.navbar_item} href="/#service">Service</Nav.Link>
                     <Nav.Link
-                      onClick={() => { navigate('/') }} className={styles.navbar_item} href="#products">Products</Nav.Link>
+                      onClick={() => { navigate('/') }} className={styles.navbar_item} href="/#products">Products</Nav.Link>
                     <Nav.Link
-                      onClick={() => { navigate('/') }} className={styles.navbar_item} href="#categories">Categories</Nav.Link>
+                      onClick={() => { navigate('/') }} className={styles.navbar_item} href="/#categories">Categories</Nav.Link>
                     <Nav.Link
-                      onClick={() => { navigate('/') }} className={styles.navbar_item} href="#review">Review</Nav.Link>
+                      onClick={() => { navigate('/') }} className={styles.navbar_item} href="/#review">Review</Nav.Link>
                     <Nav.Link
-                      onClick={() => { navigate('/') }} className={styles.navbar_item} href="#blogs">Blogs</Nav.Link>
+                      onClick={() => { navigate('/') }} className={styles.navbar_item} href="/#blogs">Blogs</Nav.Link>
+                      <Nav.Link
+                        onClick={() => { navigate('/aboutus') }} className={styles.navbar_item} >AboutUs</Nav.Link>
                   </Nav>
                 </div>
               </Navbar.Collapse>

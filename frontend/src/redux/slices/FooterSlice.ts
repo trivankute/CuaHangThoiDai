@@ -87,7 +87,7 @@ export const updateFooter = createAsyncThunk('updateFooter', async (input : any)
     try {
         // {{host}}/api/footers/update.php
         const {phone , email, address} = input;
-        const {data} = await axios.put(`${serverUrl}/api/footers/update.php`,{
+        const {data} = await axios.post(`${serverUrl}/api/footers/update.php`,{
             phone,
             email,
             address

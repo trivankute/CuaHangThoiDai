@@ -58,7 +58,6 @@ function Manager() {
             }
         }
     }, [forReloadPay])
-    console.log(albumSelected.album_id)
     return (
         <>
             <div className={styles.container}>

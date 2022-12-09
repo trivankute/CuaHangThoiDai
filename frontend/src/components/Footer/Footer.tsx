@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import styles from "./Footer.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -6,9 +6,19 @@ import {faCompactDisc, faPhone, faEnvelope, faMapMarkerAlt,
     faArrowRight} from '@fortawesome/free-solid-svg-icons'
 import { faFacebookF, faTwitter, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons"
 import anImage from "./payment.png"
-import {Container} from "react-bootstrap"
+import {Container, Nav} from "react-bootstrap"
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { FooterStore } from '../../redux/selectors';
+import { getFooter } from '../../redux/slices/FooterSlice';
 
 function Footer() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch<any>()
+    const footer = useSelector(FooterStore)
+    useEffect(()=>{
+        dispatch(getFooter())
+    },[])
     return (
         <Container fluid style={{margin:0, padding:0}}>
             <section className={styles.footer}>
@@ -35,40 +45,45 @@ function Footer() {
 
                 <div className={styles.box}>
                     <h3>contact info</h3>
-                    <a href="#" className={styles.links}> 
-                    <FontAwesomeIcon className={styles.icon} icon={faPhone as IconProp}/>
-                     +123-456-7890 </a>
-                    <a href="#" className={styles.links}> 
-                    <FontAwesomeIcon className={styles.icon} icon={faPhone as IconProp}/>
-                     +111-222-3333 </a>
-                    <a href="#" className={styles.links}> 
-                    <FontAwesomeIcon className={styles.icon} icon={faEnvelope as IconProp}/>
-                     hibecung123@gmail.com </a>
-                    <a href="#" className={styles.links}> 
-                    <FontAwesomeIcon className={styles.icon} icon={faMapMarkerAlt as IconProp}/>
-                     H6-HCMUT </a>
+                    {
+                        footer.data &&
+                        <>
+                        <a className={styles.links}> 
+                        <FontAwesomeIcon className={styles.icon} icon={faPhone as IconProp}/>
+                        {footer.data.phone} </a>
+                        <a className={styles.links}> 
+                        <FontAwesomeIcon className={styles.icon} icon={faEnvelope as IconProp}/>
+                        {footer.data.email} </a>
+                        <a className={styles.links}> 
+                        <FontAwesomeIcon className={styles.icon} icon={faMapMarkerAlt as IconProp}/>
+                        {footer.data.address} </a>
+                        </>
+                    }
                 </div>
 
                 <div className={styles.box}>
                     <h3>quick links</h3>
-                    <a href="#" className={styles.links}> 
+                    <Nav.Link onClick={()=>{navigate("/#home")}} href="/#home"  className={styles.links}> 
                     <FontAwesomeIcon className={styles.icon} icon={faArrowRight as IconProp}/>
-                     home </a>
-                    <a href="#" className={styles.links}> 
+                     home </Nav.Link>
+                    <Nav.Link onClick={()=>{navigate("/#service")}} href="/#service" className={styles.links}> 
                     <FontAwesomeIcon className={styles.icon} icon={faArrowRight as IconProp}/>
-                     Services </a>
-                    <a href="#" className={styles.links}> 
+                     Services </Nav.Link>
+                    <Nav.Link onClick={()=>{navigate("/#products")}} href="/#products" className={styles.links}> 
                     <FontAwesomeIcon className={styles.icon} icon={faArrowRight as IconProp}/>
-                     products </a>
-                    <a href="#" className={styles.links}> 
+                     products </Nav.Link>
+                    <Nav.Link onClick={()=>{navigate("/#categories")}} href="/#categories" className={styles.links}> 
                     <FontAwesomeIcon className={styles.icon} icon={faArrowRight as IconProp}/>
-                     categories </a>
-                    <a href="#" className={styles.links}> 
+                     categories </Nav.Link>
+                    <Nav.Link onClick={()=>{navigate("/#review")}} href="/#review" className={styles.links}> 
                     <FontAwesomeIcon className={styles.icon} icon={faArrowRight as IconProp}/>
-                     review </a>
-                    <a href="#" className={styles.links}> 
+                     review </Nav.Link>
+                    <Nav.Link onClick={()=>{navigate("/#blogs")}} href="/#blogs" className={styles.links}> 
                     <FontAwesomeIcon className={styles.icon} icon={faArrowRight as IconProp}/>
-                     blogs </a>
+                     blogs </Nav.Link>
+                    <Nav.Link onClick={()=>{navigate("/aboutus")}} className={styles.links}> 
+                    <FontAwesomeIcon className={styles.icon} icon={faArrowRight as IconProp}/>
+                     about us </Nav.Link>
                 </div>
 
                 <div className={styles.box}>
