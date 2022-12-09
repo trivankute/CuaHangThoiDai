@@ -41,31 +41,13 @@ const MusicSlice = createSlice({
         })
     }   
 })
-export const createCarousel = createAsyncThunk('createCarousel', async (input : any) => {
-    //{{host}}/api/carousels/create.php
-    try {
-        const {data} = await axios.post(`${serverUrl}/api/carousels/create.php`,input,{
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        });
-        if(data.status === 'success'){
-            return {status:"success", "msg":data.data.msg};
-        }
-        else {
-            return {status:"error","msg":data.data.msg};
-        }
-    }
-    catch(error : any) {
-        return {status:"error","msg":error.response.data.message};
-    }
-})
 export const createMusic = createAsyncThunk('createMusic', async (input : any) => {
     try {
         // {{host}}/api/musics/create.php
-        const {musicLink} = input;
+        const {musicLink,title} = input;
         const {data} = await axios.post(`${serverUrl}/api/musics/create.php`,{
-            musicLink
+            musicLink,
+            title
         },{
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -103,9 +85,10 @@ export const getAllMusic = createAsyncThunk('getAllMusic', async () => {
 export const updateMusic = createAsyncThunk('updateMusic', async (input : any) => {
     try {
         // {{host}}/api/musics/update.php?id=1
-        const {id, musicLink} = input;
+        const {id, musicLink, title} = input;
         const {data} = await axios.put(`${serverUrl}/api/musics/update.php?id=${id}`,{
-            musicLink
+            musicLink,
+            title
         },{
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
