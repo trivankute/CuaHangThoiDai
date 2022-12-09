@@ -127,6 +127,7 @@ function Employees() {
                 <option value="all">All</option>
                 <option value="in use">In use</option>
                 <option value="new">New</option>
+                <option value="banned">Banned</option>
               </Form.Select>
             </div>
           </div>

@@ -28,16 +28,16 @@ function Footer() {
                          </h3>
                     <p>Your music your life.</p>
                     <div className={styles.share}>
-                        <a href="#" className={styles.share_a}>
+                        <a href="https://www.facebook.com/profile.php?id=100007026762373" className={styles.share_a}>
                             <FontAwesomeIcon className={styles.brand_icon} icon={faFacebookF as IconProp}/>
                         </a>
-                        <a href="#" className={styles.share_a}>
+                        <a href="https://www.facebook.com/profile.php?id=100007026762373" className={styles.share_a}>
                             <FontAwesomeIcon className={styles.brand_icon} icon={faTwitter as IconProp}/>
                         </a>
-                        <a href="#" className={styles.share_a}>
+                        <a href="https://www.facebook.com/profile.php?id=100007026762373" className={styles.share_a}>
                             <FontAwesomeIcon className={styles.brand_icon} icon={faInstagram as IconProp}/>      
                         </a>
-                        <a href="#" className={styles.share_a}>
+                        <a href="https://www.facebook.com/profile.php?id=100007026762373" className={styles.share_a}>
                             <FontAwesomeIcon className={styles.brand_icon} icon={faLinkedin as IconProp}/>
                         </a>
                     </div>
@@ -48,13 +48,13 @@ function Footer() {
                     {
                         footer.data &&
                         <>
-                        <a className={styles.links}> 
+                        <a style={{textTransform:"none", marginRight:5}} className={styles.links}> 
                         <FontAwesomeIcon className={styles.icon} icon={faPhone as IconProp}/>
                         {footer.data.phone} </a>
-                        <a className={styles.links}> 
+                        <a style={{textTransform:"none", marginRight:5}} className={styles.links}> 
                         <FontAwesomeIcon className={styles.icon} icon={faEnvelope as IconProp}/>
                         {footer.data.email} </a>
-                        <a className={styles.links}> 
+                        <a style={{textTransform:"none", marginRight:5}} className={styles.links}> 
                         <FontAwesomeIcon className={styles.icon} icon={faMapMarkerAlt as IconProp}/>
                         {footer.data.address} </a>
                         </>

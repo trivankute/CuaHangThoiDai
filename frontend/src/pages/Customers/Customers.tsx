@@ -127,6 +127,7 @@ function Customers() {
                 <option value="all">All</option>
                 <option value="in use">In use</option>
                 <option value="new">New</option>
+                <option value="banned">Banned</option>
               </Form.Select>
             </div>
           </div>
@@ -154,6 +155,8 @@ function Customers() {
                   else if (filter === "in use" && customer.state === "in use")
                   return <CustomerItem customer={customer} handleWarningShow={handleWarningShow} handleWarningBanShow={handleWarningBanShow} handleSeeDetailShow={handleSeeDetailShow} />
                   else if (filter === "new" && customer.state === "new")
+                  return <CustomerItem customer={customer} handleWarningShow={handleWarningShow} handleWarningBanShow={handleWarningBanShow} handleSeeDetailShow={handleSeeDetailShow} />
+                  else if (filter === "banned" && customer.state === "banned")
                   return <CustomerItem customer={customer} handleWarningShow={handleWarningShow} handleWarningBanShow={handleWarningBanShow} handleSeeDetailShow={handleSeeDetailShow} />
                 })
               }

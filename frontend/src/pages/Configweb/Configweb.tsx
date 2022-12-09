@@ -342,15 +342,15 @@ function Configweb() {
                     <Form>
                         <Form.Group controlId="formBasicEmail" className="mt-3">
                             <Form.Label>Phone</Form.Label>
-                            <Form.Control value={footerPhone === "" ? footer.data.phone : footerPhone} onChange={(e) => { setFooterPhone(e.target.value) }} type="text" />
+                            <Form.Control style={{textTransform:"none"}} value={footerPhone === "" ? footer.data.phone : footerPhone} onChange={(e) => { setFooterPhone(e.target.value) }} type="text" />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail" className="mt-3">
                             <Form.Label>Email</Form.Label>
-                            <Form.Control value={footerEmail === "" ? footer.data.email : footerEmail} onChange={(e) => { setFooterEmail(e.target.value) }} type="text" />
+                            <Form.Control style={{textTransform:"none"}} value={footerEmail === "" ? footer.data.email : footerEmail} onChange={(e) => { setFooterEmail(e.target.value) }} type="text" />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail" className="mt-3">
                             <Form.Label>Address</Form.Label>
-                            <Form.Control value={footerAddress === "" ? footer.data.address : footerAddress} onChange={(e) => { setFooterAddress(e.target.value) }} type="text" />
+                            <Form.Control style={{textTransform:"none"}} value={footerAddress === "" ? footer.data.address : footerAddress} onChange={(e) => { setFooterAddress(e.target.value) }} type="text" />
                         </Form.Group>
                         <Button onClick={handleUpdateFooter} className="mt-3 position-relative">
                             {
